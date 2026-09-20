@@ -41,7 +41,8 @@
 				if (lang.indexOf('zh') !== -1) {
 					var d = new Date();
 					d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-					document.cookie = "config=" + encodeURIComponent(JSON.stringify({ language: 'zh' })) + ";path=/;expires=" + d.toUTCString();
+					// miniPaint 原生 Helpers._setCookie 是直接写入未转义的 JSON 字符串并用 JSON.parse 还原
+					document.cookie = "config=" + JSON.stringify({ language: 'zh' }) + ";path=/;expires=" + d.toUTCString();
 				}
 			}
 		})();
