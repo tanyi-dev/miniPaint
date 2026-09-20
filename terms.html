@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务条款 (Terms of Service) - Web PSEditor</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.75;
+            color: var(--text-main);
+            background-color: var(--bg-page);
+            margin: 0;
+            padding: 30px 20px 60px;
+        }
+        .container {
+            max-width: 840px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            padding: 40px 48px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04), 0 2px 4px -1px rgba(0,0,0,0.02);
+            border: 1px solid var(--border);
+        }
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .back-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+        }
+        .back-link:hover { text-decoration: underline; }
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            background: #f1f5f9;
+            padding: 3px;
+            border-radius: 6px;
+        }
+        .lang-btn {
+            border: none;
+            background: transparent;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-sub);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-btn.active {
+            background: #ffffff;
+            color: var(--primary);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+        }
+        h1 {
+            color: #0f172a;
+            font-size: 26px;
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+        .updated-date {
+            color: var(--text-sub);
+            font-size: 13px;
+            margin-bottom: 24px;
+        }
+        h2 {
+            color: #0f172a;
+            font-size: 18px;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        p, li {
+            font-size: 15px;
+            color: #334155;
+        }
+        ul { padding-left: 20px; }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-sub);
+            text-align: center;
+        }
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <a href="/" class="back-link" id="back_link">← 返回在线编辑器</a>
+            <div class="lang-switch">
+                <button class="lang-btn active" id="btn_zh" onclick="setLang('zh')">中文</button>
+                <button class="lang-btn" id="btn_en" onclick="setLang('en')">English</button>
+            </div>
+        </div>
+
+        <!-- 中文内容 -->
+        <div id="content_zh" class="lang-content active">
+            <h1>服务条款</h1>
+            <div class="updated-date">最近更新日期：2026年9月20日</div>
+
+            <p>欢迎使用 <strong>Web PSEditor</strong>。在您访问或使用本在线服务之前，请仔细阅读以下条款。通过使用本网站，即表示您已阅读、理解并同意遵守以下所有规定。</p>
+
+            <h2>1. 服务许可与开源协议</h2>
+            <p>Web PSEditor 的核心底层基于开源项目 <strong>miniPaint</strong> 开发构建，该项目基于广泛认可的 <strong>MIT 开源许可证</strong> 发布。您可以完全免费地使用本工具进行个人创作、商业设计、学习研究以及各种形式的合法图像后期处理。</p>
+
+            <h2>2. 用户资产所有权声明</h2>
+            <p><strong>您对在 Web PSEditor 中创建、修改、合成的任何图像拥有 100% 的版权与所有权。</strong> 本平台不主张对您的任何生成物享有任何知识产权权利，亦不会以任何形式在未授权的情况下使用您的作品。</p>
+
+            <h2>3. 用户行为准则</h2>
+            <p>您同意遵守所有适用的法律法规，承诺不得利用本工具制作、编辑或传播任何包含违法、违规、侵害他人肖像权与著作权或散布恶意的图像内容。</p>
+
+            <h2>4. 免责声明</h2>
+            <p>本服务按“现状”（AS IS）提供，不提供任何明示或暗示的保证。对于因浏览器兼容性、硬件故障或意外刷新导致的数据未能保存，Web PSEditor 概不承担直接或间接的赔偿责任。建议用户在进行复杂图像处理时，定期通过菜单保存工程文件（.json）到本地。</p>
+
+            <h2>5. 条款修改</h2>
+            <p>我们保留根据业务发展与合规需求随时修订本条款的权利，修改后的版本将在本页面及时公布。</p>
+        </div>
+
+        <!-- 英文内容 -->
+        <div id="content_en" class="lang-content">
+            <h1>Terms of Service</h1>
+            <div class="updated-date">Last updated: September 20, 2026</div>
+
+            <p>Welcome to <strong>Web PSEditor</strong>. By accessing or using our website, you agree to be bound by these Terms of Service. If you do not agree with any of these terms, you are prohibited from using the service.</p>
+
+            <h2>1. Open Source License</h2>
+            <p>The core image manipulation engine of Web PSEditor is powered by the open-source software <strong>miniPaint</strong>, distributed under the <strong>MIT License</strong>. You are permitted to use this application for personal, educational, and commercial purposes.</p>
+
+            <h2>2. User Content Ownership</h2>
+            <p><strong>You retain full ownership and intellectual property rights over all images processed using Web PSEditor.</strong> We do not claim any copyright on works created, edited, or exported through this tool.</p>
+
+            <h2>3. Acceptable Use Policy</h2>
+            <p>You agree not to use Web PSEditor to create, distribute, or modify content that violates any applicable local, national, or international laws, or infringes on third-party intellectual property or privacy rights.</p>
+
+            <h2>4. Disclaimer of Warranties</h2>
+            <p>This service is provided "as is", without warranty of any kind, express or implied. We shall not be held liable for any loss of unsaved work resulting from browser crashes, accidental page reloads, or device errors. Users are encouraged to save project files frequently.</p>
+
+            <h2>5. Changes to Terms</h2>
+            <p>We reserve the right to modify these Terms of Service at any time. Continued use of the website following any changes signifies acceptance of the updated terms.</p>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 Web PSEditor. Powered by open-source miniPaint. All rights reserved.
+        </div>
+    </div>
+
+    <script>
+        function setLang(lang) {
+            var isZh = (lang === 'zh');
+            document.getElementById('content_zh').className = 'lang-content' + (isZh ? ' active' : '');
+            document.getElementById('content_en').className = 'lang-content' + (!isZh ? ' active' : '');
+            document.getElementById('btn_zh').className = 'lang-btn' + (isZh ? ' active' : '');
+            document.getElementById('btn_en').className = 'lang-btn' + (!isZh ? ' active' : '');
+            document.getElementById('back_link').innerText = isZh ? '← 返回在线编辑器' : '← Back to Editor';
+            document.title = isZh ? '服务条款 (Terms of Service) - Web PSEditor' : 'Terms of Service - Web PSEditor';
+        }
+
+        (function init() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var langParam = urlParams.get('lang');
+            var isZh = true;
+            if (langParam) {
+                isZh = (langParam.toLowerCase().indexOf('zh') !== -1);
+            } else if (document.cookie.indexOf('language=en') !== -1 || document.cookie.indexOf('%22en%22') !== -1) {
+                isZh = false;
+            } else {
+                var browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+                isZh = (browserLang.indexOf('zh') !== -1);
+            }
+            setLang(isZh ? 'zh' : 'en');
+        })();
+    </script>
+</body>
+</html>
