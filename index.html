@@ -3,6 +3,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="x-ua-compatible" content="IE=edge" />
+	<!-- 强制禁止旧版本强缓存，保证所有用户每次发布秒级同步最新代码 -->
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
 	<title>Web PSEditor - 在线PS图片编辑器 (Free Online Image Editor)</title>
 	<meta name="description" content="Web PSEditor is a free, privacy-first online image and photo editor using HTML5. Edit, adjust your images, add layers and effects online in your browser without installing anything..." />
 	<meta name="keywords" content="photo, image, picture, transparent, layers, free, edit, html5, canvas, javascript, online, photoshop, gimp, effects, sharpen, blur, magic eraser tool, clone tool, rotate, resize, photoshop online, 在线PS, 网页PS, 免费修图" />
@@ -144,7 +148,7 @@
 			}
 		})();
 	</script>
-	<script src="dist/bundle.js"></script>
+	<script src="dist/bundle.js?v=1789911000"></script>
 </head>
 <body>
 	<div class="wrapper">
