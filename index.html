@@ -47,6 +47,21 @@
 			background: rgba(255, 255, 255, 0.08);
 			color: #38bdf8;
 		}
+		.top_brand_bar .brand-icon-box {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 20px;
+			height: 20px;
+			margin-right: 7px;
+			vertical-align: middle;
+			flex-shrink: 0;
+		}
+		.top_brand_bar .brand-icon-box svg {
+			width: 100%;
+			height: 100%;
+			display: block;
+		}
 		.top_brand_bar img {
 			width: 20px;
 			height: 20px;
@@ -60,6 +75,14 @@
 			height: 30px !important;
 			padding-left: 4px !important;
 			background: transparent !important;
+		}
+
+		
+		/* 无论在任何地方出现 logo 原生 class，均强制替换为最新 PS 矢量图标 */
+		.logo:after, .submenu .logo:after {
+			background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4IiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj4NCiAgPGRlZnM+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZ0dyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzI1NjNlYiIgLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzA2YjZkNCIgLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KICAgIDxmaWx0ZXIgaWQ9InNoYWRvdyIgeD0iLTIwJSIgeT0iLTIwJSIgd2lkdGg9IjE0MCUiIGhlaWdodD0iMTQwJSI+DQogICAgICA8ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iNCIgc3RkRGV2aWF0aW9uPSI2IiBmbG9vZC1jb2xvcj0iIzAwMCIgZmxvb2Qtb3BhY2l0eT0iMC4yNSIgLz4NCiAgICA8L2ZpbHRlcj4NCiAgPC9kZWZzPg0KDQogIDwhLS0g56eR5oqA6LSo5oSf5ZyG6KeS5aSW5qGGIC0tPg0KICA8cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMTEyIiBoZWlnaHQ9IjExMiIgcng9IjI2IiBmaWxsPSJ1cmwoI2JnR3JhZCkiIGZpbHRlcj0idXJsKCNzaGFkb3cpIiAvPg0KDQogIDwhLS0g6Im65pyv5a+56KeS5riQ5Y+Y5oqY5YWJ6KOF6aWwIC0tPg0KICA8cGF0aCBkPSJNOCAzNCBRIDggOCAzNCA4IEwgMTIwIDk0IFEgMTIwIDEyMCA5NCAxMjAgWiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA4KSIgLz4NCg0KICA8IS0tIOWxheS4rSBQUyDkuJPlsZ7lrZfnrKbmoIfor4YgLS0+DQogIDwhLS0g5a2X5q+NIFAgLS0+DQogIDxwYXRoIGQ9Ik0zNCAzOCBMIDU2IDM4IEMgNjYgMzggNzIgNDMgNzIgNTIgQyA3MiA2MSA2NiA2NiA1NiA2NiBMIDQ2IDY2IEwgNDYgOTAgTCAzNCA5MCBaIE0gNDYgNDkgTCA0NiA1NiBMIDU1IDU2IEMgNTggNTYgNjAgNTQgNjAgNTIgQyA2MCA1MCA1OCA0OSA1NSA0OSBaIiBmaWxsPSIjZmZmZmZmIiAvPg0KDQogIDwhLS0g5a2X5q+NIFMgLS0+DQogIDxwYXRoIGQ9Ik03NCA3NiBDIDc1IDc5IDc4IDgxIDgzIDgxIEMgODggODEgOTEgNzkgOTEgNzYgQyA5MSA3MiA4NyA3MCA4MCA2OCBDIDcyIDY2IDY1IDYyIDY1IDUzIEMgNjUgNDQgNzMgMzggODMgMzggQyA5MyAzOCA5OSA0MyAxMDAgNTEgTCA4OSA1MSBDIDg4IDQ4IDg2IDQ2IDgzIDQ2IEMgODAgNDYgNzYgNDggNzYgNTEgQyA3NiA1NCA3OSA1NiA4NiA1OCBDIDk1IDYxIDEwMiA2NCAxMDIgNzMgQyAxMDIgODMgOTQgOTAgODMgOTAgQyA3MSA5MCA2NCA4NCA2MyA3NiBaIiBmaWxsPSIjMzhiZGY4IiAvPg0KDQogIDwhLS0g5Yib5L2c6ICF54G15oSf5YWJ6IqS54K557yA77yI5Y+z5LiL6KeS5b6u5pif5qCH77yJIC0tPg0KICA8cG9seWdvbiBwb2ludHM9IjEwMiwyOCAxMDUsMzQgMTExLDM3IDEwNSw0MCAxMDIsNDYgOTksNDAgOTMsMzcgOTksMzQiIGZpbGw9IiNmZWYwOGEiIC8+DQo8L3N2Zz4NCg==") !important;
+			filter: none !important;
+			background-size: 26px 26px !important;
 		}
 
 		/* 隐藏第二行原有的奇怪 logo，让属性栏扩展为完整工具栏 */
@@ -253,7 +276,7 @@
 					brand.className = 'top_brand_bar';
 					brand.href = '#';
 					brand.title = 'Web PSEditor - 在线图片编辑器';
-					brand.innerHTML = '<img src="images/logo.svg" alt="PS Logo"><span>Web PSEditor</span>';
+					brand.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="20" height="20" style="vertical-align:middle;display:inline-block;"><defs><linearGradient id="psBg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient></defs><rect x="4" y="4" width="120" height="120" rx="24" fill="url(#psBg)"/><path d="M8 32 Q 8 8 32 8 L 120 96 Q 120 120 96 120 Z" fill="rgba(255,255,255,0.12)"/><path d="M34 38 L 56 38 C 66 38 72 43 72 52 C 72 61 66 66 56 66 L 46 66 L 46 90 L 34 90 Z M 46 49 L 46 56 L 55 56 C 58 56 60 54 60 52 C 60 50 58 49 55 49 Z" fill="#ffffff"/><path d="M74 76 C 75 79 78 81 83 81 C 88 81 91 79 91 76 C 91 72 87 70 80 68 C 72 66 65 62 65 53 C 65 44 73 38 83 38 C 93 38 99 43 100 51 L 89 51 C 88 48 86 46 83 46 C 80 46 76 48 76 51 C 76 54 79 56 86 58 C 95 61 102 64 102 73 C 102 83 94 90 83 90 C 71 90 64 84 63 76 Z" fill="#38bdf8"/><polygon points="102,26 105,32 111,35 105,38 102,44 99,38 93,35 99,32" fill="#fef08a"/></svg><span style="margin-left:7px;">Web PSEditor</span>';
 					brand.onclick = function(e) { e.preventDefault(); location.reload(); };
 					menu.insertBefore(brand, menu.firstChild);
 				}
