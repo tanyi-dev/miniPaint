@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>零基础在线更换证件照底色教程 (ID Photo Background) - Web PSEditor</title>
+    <meta name="description" content="无需下载安装Photoshop，使用免费纯网页在线PS工具Web PSEditor，3分钟轻松将证件照白底换成蓝底、红底或透明背景，保护隐私不上传服务器。" />
+    <meta name="keywords" content="证件照换底色,在线换背景,白底转蓝底,红底转蓝底,证件照排版,在线PS,网页版Photoshop,免费抠图" />
+    <link rel="icon" sizes="192x192" href="../images/favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <style>
+        :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fef3c7; border-radius: 8px; padding: 14px 18px; color: #92400e; font-size: 14px; margin: 20px 0; }
+        .color-badge { display: inline-block; width: 12px; height: 12px; border-radius: 2px; vertical-align: middle; margin-right: 4px; border: 1px solid rgba(0,0,0,0.1); }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <a href="../guide.html" class="back-link">← <span class="trn" data-zh="返回教程目录" data-en="Back to Tutorials">返回教程目录</span></a>
+            <div class="lang-switch">
+                <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+            </div>
+        </div>
+
+        <div id="content-zh">
+            <h1>实战教程：如何在线将证件照白底换成蓝底/红底</h1>
+            <div class="meta-bar">
+                <span>难度：入门小白</span> • <span>耗时：3 分钟</span> • <span>工具：Web PSEditor (纯本地运行)</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">边看边做，快速搞定！</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">无需安装任何软件，浏览器内本地运算，照片绝不上传服务器。</div>
+                </div>
+                <a href="../index.html" class="cta-btn" target="_blank">打开 Web PSEditor 立即实操 →</a>
+            </div>
+
+            <p>在日常求职、考试报名或办理证件时，我们经常遇到手头只有白色底色照片，而报名系统明确要求提交蓝底（或红底）照片的情况。去照相馆费时费力，安装庞大的 Photoshop 更是繁琐。本文将指导你使用免费在线修图工具 <strong>Web PSEditor</strong>，只需简单的 4 个步骤快速更换底色。</p>
+
+            <h2>标准证件照常见背景色参考：</h2>
+            <ul>
+                <li><strong>标准蓝底：</strong>RGB(67, 142, 219) 或十六进制 <code>#438EDB</code>（常用于毕业证、工作证、简历、驾照）</li>
+                <li><strong>标准红底：</strong>RGB(255, 0, 0) 或十六进制 <code>#FF0000</code>（常用于保险、医保、重要认证）</li>
+                <li><strong>白底照片：</strong>RGB(255, 255, 255) 或十六进制 <code>#FFFFFF</code>（常用于护照、身份证、签证）</li>
+            </ul>
+
+            <div class="step-card">
+                <div class="step-title">步骤 1：导入需要修改的照片</div>
+                <p>进入 Web PSEditor 编辑器首页，点击顶部菜单 <strong>【文件】 -> 【打开】</strong>（或快捷键 <code>Ctrl + O</code>），选择你电脑中的证件照导入；也可以直接将图片文件拖放到画板中间。</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">步骤 2：使用“魔棒工具”快速选中背景</div>
+                <p>在左侧工具栏中找到 <strong>魔棒工具（Magic Wand）</strong>。在顶部属性栏中，将 <strong>容差（Tolerance）</strong> 设为 <code>25 ~ 35</code>。然后在白色背景区域点击一下，此时白色背景周围会出现一圈闪烁的选区虚线（若部分边缘未选中，可按住 <code>Shift</code> 键继续点击未选区域）。</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">步骤 3：羽化边缘，避免发丝产生生硬白边</div>
+                <p>点击顶部菜单栏 <strong>【选择】 -> 【羽化（Feather）】</strong>，将羽化半径设为 <code>1 ~ 2 像素</code>。这一步非常关键，它能让人物边缘与新底色自然过渡，不会产生突兀的锯齿或白色边缘。</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">步骤 4：填充目标底色并导出</div>
+                <p>在左侧颜色选择器中，设置前景色为你想要的颜色（例如标准蓝底 <code>#438EDB</code>），然后直接按键盘上的 <code>Delete</code> 键删除原背景，或者使用 <strong>油漆桶工具（Fill Tool）</strong> 往选区内轻轻一点，背景瞬间变色！<br>
+                完成后，点击顶部菜单 <strong>【文件】 -> 【另存为】</strong>，格式选择 <strong>JPG</strong>（普通报名推荐）或 <strong>PNG</strong> 保存到本地即可。</p>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 隐私安全小提示：</strong><br>
+                Web PSEditor 所有图像处理全部在您本机的浏览器内存中通过 HTML5 Canvas 完成，<strong>零数据上传、零云端存储</strong>，您的私人肖像照片绝不会泄漏，安全合规。
+            </div>
+        </div>
+
+        <div id="content-en" style="display:none;">
+            <h1>How to Change ID Photo Background Color Online</h1>
+            <div class="meta-bar">
+                <span>Difficulty: Beginner</span> • <span>Time: 3 Mins</span> • <span>Tool: Web PSEditor (100% In-Browser)</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">Try It Right Now!</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Zero installation, 100% private, your photos never leave your device.</div>
+                </div>
+                <a href="../index.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
+            </div>
+
+            <p>Need a blue or red background ID photo in a hurry, but only have a white one? You don't need to install heavy desktop software. Here is a step-by-step tutorial on how to quickly swap your passport/ID photo background using <strong>Web PSEditor</strong>.</p>
+
+            <div class="step-card">
+                <div class="step-title">Step 1: Open Your Photo</div>
+                <p>Navigate to Web PSEditor, click <strong>File -> Open</strong> (or press <code>Ctrl + O</code>) to load your picture, or drag and drop it onto the canvas.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">Step 2: Select the Background with Magic Wand</div>
+                <p>Pick the <strong>Magic Wand Tool</strong> from the left toolbar. Set Tolerance to around <code>25-35</code> in the top attributes bar, and click on the white background.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">Step 3: Feather Selection</div>
+                <p>Go to <strong>Selection -> Feather</strong>, enter <code>1 or 2 px</code>. This smoothens the edges and avoids artificial harsh outlines around your hair.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">Step 4: Fill New Color and Save</div>
+                <p>Select your desired background color (e.g. Standard Blue <code>#438EDB</code>) and use the <strong>Fill Tool</strong> (or Delete key), then click <strong>File -> Save As</strong> to export your updated photo.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setLang(lang) {
+            document.getElementById("content-zh").style.display = (lang === "zh") ? "block" : "none";
+            document.getElementById("content-en").style.display = (lang === "en") ? "block" : "none";
+            document.getElementById("btn-zh").className = "lang-btn" + (lang === "zh" ? " active" : "");
+            document.getElementById("btn-en").className = "lang-btn" + (lang === "en" ? " active" : "");
+            document.querySelectorAll(".trn").forEach(el => {
+                el.innerText = el.getAttribute("data-" + lang) || el.innerText;
+            });
+        }
+        (function() {
+            var isZh = (navigator.language || "").toLowerCase().indexOf("zh") !== -1;
+            setLang(isZh ? "zh" : "en");
+        })();
+    </script>
+</body>
+</html>

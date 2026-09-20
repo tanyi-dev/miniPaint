@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隐私保护必备：如何在线给截图敏感信息打马赛克与高斯模糊 - Web PSEditor</title>
+    <meta name="description" content="分享发帖防泄密！教你使用纯本地Web PSEditor网页版PS，为身份证、银行卡、订单截图快速添加马赛克与局部模糊，零上传100%安全。" />
+    <meta name="keywords" content="在线打马赛克,截图打码,局部高斯模糊,隐私保护,身份证遮挡,网页PS打码" />
+    <link rel="icon" sizes="192x192" href="../images/favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <style>
+        :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <a href="../guide.html" class="back-link">← <span class="trn" data-zh="返回教程目录" data-en="Back to Tutorials">返回教程目录</span></a>
+            <div class="lang-switch">
+                <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+            </div>
+        </div>
+
+        <div id="content-zh">
+            <h1>实战教程：如何在线为敏感信息打马赛克与高斯模糊</h1>
+            <div class="meta-bar">
+                <span>难度：极简入门</span> • <span>耗时：1 分钟</span> • <span>安全等级：最高 (客户端本地脱敏)</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">敏感图片绝不上云！</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">纯本地浏览器 Canvas 算力脱敏，绝对防泄漏。</div>
+                </div>
+                <a href="../index.html" class="cta-btn" target="_blank">打开 Web PSEditor 立即打码 →</a>
+            </div>
+
+            <p>在社交平台晒图、给客户发订单凭据或汇报工作时，如果不慎泄露手机号、身份证号、家庭住址或财务数字，后果不堪设想。很多在线打码工具会偷偷将你的图片上传到他们服务器，存在极大安全隐患。使用 <strong>Web PSEditor</strong>，数据自始至终停留在你本地电脑。</p>
+
+            <div class="step-card">
+                <div class="step-title">方法一：经典像素马赛克（Mosaic / Pixelate）</div>
+                <p>
+                    1. 导入你的截图，选择左侧 <strong>矩形选区工具（Selection Tool）</strong>。<br>
+                    2. 用鼠标框选出需要遮挡的敏感文字或头像区域。<br>
+                    3. 点击顶部菜单 <strong>【特效 (Effects)】 -> 【像素化 (Mosaic / Pixelate)】</strong>，拖动滑块调整像素块大小（建议 10~20 像素），点击确定！
+                </p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">方法二：柔和高级的高斯模糊（Gaussian Blur）</div>
+                <p>
+                    如果你觉得像素马赛克太生硬影响美观，可以使用高斯模糊：<br>
+                    1. 同样先用选区工具框选目标敏感区域。<br>
+                    2. 点击顶部菜单 <strong>【特效 (Effects)】 -> 【模糊 (Blur)】 -> 【高斯模糊 (Gaussian Blur)】</strong>。<br>
+                    3. 将模糊半径设为 <code>8 ~ 15 像素</code>，文字即可化作柔和的磨砂雾化效果，既防识别又极其精致美观。
+                </p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">方法三：加盖文字防盗水印（仅供某机构审核专用）</div>
+                <p>
+                    点击左侧 <strong>文字工具（Text Tool）</strong>，在画面上输入如：<code>仅供办理XX业务使用 他用无效</code>，设置颜色为浅灰色，并在右侧图层面板将该文字图层的不透明度（Opacity）调至 <code>40%</code>，完美防盗用！
+                </p>
+            </div>
+        </div>
+
+        <div id="content-en" style="display:none;">
+            <h1>How to Pixelate & Blur Sensitive Information Online</h1>
+            <div class="meta-bar">
+                <span>Difficulty: Easy</span> • <span>Time: 1 Min</span> • <span>Security: 100% In-Browser</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">Zero Cloud Uploads</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Process sensitive financial/ID photos safely on your device.</div>
+                </div>
+                <a href="../index.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
+            </div>
+
+            <p>Sharing screenshots without redacting private details can lead to identity theft. <strong>Web PSEditor</strong> operates purely inside your local browser memory, ensuring your private data never touches any remote server.</p>
+
+            <div class="step-card">
+                <div class="step-title">Method 1: Pixelate / Mosaic Effect</div>
+                <p>Select the region with the <strong>Selection Tool</strong>. Click <strong>Effects -> Mosaic / Pixelate</strong>, adjust strength, and apply.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">Method 2: Smooth Gaussian Blur</div>
+                <p>Box the sensitive text, then choose <strong>Effects -> Blur -> Gaussian Blur</strong> (8-15px radius) for an aesthetic frosted-glass look.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setLang(lang) {
+            document.getElementById("content-zh").style.display = (lang === "zh") ? "block" : "none";
+            document.getElementById("content-en").style.display = (lang === "en") ? "block" : "none";
+            document.getElementById("btn-zh").className = "lang-btn" + (lang === "zh" ? " active" : "");
+            document.getElementById("btn-en").className = "lang-btn" + (lang === "en" ? " active" : "");
+        }
+        (function() {
+            var isZh = (navigator.language || "").toLowerCase().indexOf("zh") !== -1;
+            setLang(isZh ? "zh" : "en");
+        })();
+    </script>
+</body>
+</html>

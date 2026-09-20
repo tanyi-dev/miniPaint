@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3步搞定！在线抠图并导出透明背景PNG教程 - Web PSEditor</title>
+    <meta name="description" content="无需下载安装软件，使用网页版PS工具Web PSEditor，利用魔棒工具与选区反选，3步快速抠图并无损导出透明底PNG图片。" />
+    <meta name="keywords" content="在线抠图,透明背景,抠图导出PNG,网页抠图,免费在线PS,魔棒抠图,反选选区" />
+    <link rel="icon" sizes="192x192" href="../images/favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <style>
+        :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fef3c7; border-radius: 8px; padding: 14px 18px; color: #92400e; font-size: 14px; margin: 20px 0; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <a href="../guide.html" class="back-link">← <span class="trn" data-zh="返回教程目录" data-en="Back to Tutorials">返回教程目录</span></a>
+            <div class="lang-switch">
+                <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+            </div>
+        </div>
+
+        <div id="content-zh">
+            <h1>实战教程：3步轻松在线抠图并导出透明底PNG</h1>
+            <div class="meta-bar">
+                <span>难度：入门小白</span> • <span>耗时：2 分钟</span> • <span>输出格式：透明 PNG</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">随时随地，纯浏览器极速抠图</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">零依赖，零插件，打开即用。</div>
+                </div>
+                <a href="../index.html" class="cta-btn" target="_blank">打开 Web PSEditor 开始抠图 →</a>
+            </div>
+
+            <p>制作电商商品图、PPT 配图或专属表情包时，提取纯净透明的主体是最高频的需求。传统的 JPG 格式不支持透明度，必须将背景彻底剥离并保存为 PNG 格式。下面教你用 <strong>Web PSEditor</strong> 快速抠图的实用工作流。</p>
+
+            <div class="step-card">
+                <div class="step-title">第一步：导入并解锁基础图层</div>
+                <p>打开 Web PSEditor，将图片拖入画板。右侧图层面板（Layers）会默认生成一个基础图层。确保右侧图层处于选中状态（点击图层高亮）。</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">第二步：使用魔棒或多边形套索精准圈定背景</div>
+                <p>
+                    <strong>针对纯色/简单背景：</strong>点击左侧 <strong>魔棒工具</strong>，点击背景区域，配合顶部 <strong>容差（Tolerance）</strong> 微调即可完整框选背景。<br>
+                    <strong>针对复杂背景：</strong>推荐使用 <strong>套索工具（Lasso）</strong> 或 <strong>多边形选区</strong>，沿着主体边缘打点圈出轮廓。
+                </p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">第三步：一键清除背景并无损保存为 PNG</div>
+                <p>
+                    选区建立完成后，直接按下键盘的 <code>Delete</code>（或 <code>Backspace</code>）按键，背景瞬间被擦除！此时背景会呈现经典黑白灰的<strong>棋盘方格纹理</strong>（代表绝对透明）。<br>
+                    点击 <strong>【文件】 -> 【另存为】</strong>，**务必选择 PNG 格式**（JPG 不支持透明背景，存为 JPG 背景会自动变白）。
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 为什么我的背景存下来还是白色？</strong><br>
+                请务必检查导出时的格式设置。JPG 图片协议本身没有 Alpha 透明通道，只有 **PNG** 或 **WebP** 才能完美保留抠出来的透明图层！
+            </div>
+        </div>
+
+        <div id="content-en" style="display:none;">
+            <h1>How to Cut Out Image & Export Transparent PNG Online</h1>
+            <div class="meta-bar">
+                <span>Difficulty: Beginner</span> • <span>Time: 2 Mins</span> • <span>Format: Transparent PNG</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">Quick In-Browser Cutout Tool</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">No plugins, no subscriptions, completely private.</div>
+                </div>
+                <a href="../index.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
+            </div>
+
+            <p>Creating product cards, logos, or stickers requires isolated transparent backgrounds. Follow this 3-step guide using <strong>Web PSEditor</strong> to create transparent PNG graphics easily.</p>
+
+            <div class="step-card">
+                <div class="step-title">Step 1: Open Image</div>
+                <p>Drag and drop your file into Web PSEditor. Ensure the layer is selected in the right-hand layer dock.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">Step 2: Select the Background</div>
+                <p>Choose the <strong>Magic Wand Tool</strong> for uniform colors or <strong>Lasso / Polygonal Select</strong> for detailed edges.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">Step 3: Clear and Export as PNG</div>
+                <p>Press <code>Delete</code> to remove selected pixels. You will see the checkered transparency grid. Click <strong>File -> Save As</strong> and pick <strong>PNG</strong>.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setLang(lang) {
+            document.getElementById("content-zh").style.display = (lang === "zh") ? "block" : "none";
+            document.getElementById("content-en").style.display = (lang === "en") ? "block" : "none";
+            document.getElementById("btn-zh").className = "lang-btn" + (lang === "zh" ? " active" : "");
+            document.getElementById("btn-en").className = "lang-btn" + (lang === "en" ? " active" : "");
+        }
+        (function() {
+            var isZh = (navigator.language || "").toLowerCase().indexOf("zh") !== -1;
+            setLang(isZh ? "zh" : "en");
+        })();
+    </script>
+</body>
+</html>

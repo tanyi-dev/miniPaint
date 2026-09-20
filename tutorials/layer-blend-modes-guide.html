@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>进阶修图：网页版PS多图层合成与混合模式入门指南 - Web PSEditor</title>
+    <meta name="description" content="零基础掌握类似Photoshop的图层系统！讲解正片叠底、滤色、柔光等混合模式在网页端Web PSEditor中的实战应用。" />
+    <meta name="keywords" content="图层合成,混合模式,正片叠底,滤色,双重曝光,在线PS图层,网页修图技巧" />
+    <link rel="icon" sizes="192x192" href="../images/favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <style>
+        :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <a href="../guide.html" class="back-link">← <span class="trn" data-zh="返回教程目录" data-en="Back to Tutorials">返回教程目录</span></a>
+            <div class="lang-switch">
+                <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+            </div>
+        </div>
+
+        <div id="content-zh">
+            <h1>进阶实战：图层系统与混合模式（合成双重曝光）</h1>
+            <div class="meta-bar">
+                <span>难度：进阶修图</span> • <span>耗时：5 分钟</span> • <span>核心理念：非破坏性编辑</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">解锁 Photoshop 级图层魔法</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">纯网页端完整支持独立图层顺序、不透明度与混合模式。</div>
+                </div>
+                <a href="../index.html" class="cta-btn" target="_blank">打开 Web PSEditor 开启创作 →</a>
+            </div>
+
+            <p>专业图片编辑与普通简易画图工具的核心区别，就在于<strong>图层（Layers）系统</strong>。在 <strong>Web PSEditor</strong> 中，每一个文字、贴图、背景都可以是独立的图层，随时可以上下拖动排序、调节半透明度，或通过混合模式产生艺术级视觉效果。</p>
+
+            <div class="step-card">
+                <div class="step-title">三大最常用混合模式速记指南：</div>
+                <p>
+                    • <strong>正片叠底（Multiply）：</strong>过滤白色、保留暗色。常用于把白底线稿、白底签名快速融入背景，免去抠图烦恼！<br>
+                    • <strong>滤色（Screen）：</strong>过滤黑色、保留亮色。常用于给照片叠加星光、光斑、火焰、烟雾等黑色背景特效素材！<br>
+                    • <strong>叠加 / 柔光（Overlay / Soft Light）：</strong>增强对比度与氛围感。常用于将复古纹理纸张或光影质感无缝贴合在画面上。
+                </p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">实操演练：把黑底光斑特效合成到人物照片上</div>
+                <p>
+                    1. 打开人物底图。<br>
+                    2. 点击顶部菜单 <strong>【图层 (Layer)】 -> 【新建图层 (New Layer)】</strong>，或直接拖拽一张带有炫酷光斑的黑底图片进画布。<br>
+                    3. 在右侧图层面板选中光斑图层，将混合模式（Composition Mode）由 <code>Source-Over (正常)</code> 改为 <code>Screen (滤色)</code>。<br>
+                    4. 黑色背景瞬间消失，璀璨的光斑自然融入人像之中，电影感大片一秒生成！
+                </p>
+            </div>
+        </div>
+
+        <div id="content-en" style="display:none;">
+            <h1>Advanced: Mastering Layers & Blend Modes Online</h1>
+            <div class="meta-bar">
+                <span>Difficulty: Intermediate</span> • <span>Time: 5 Mins</span> • <span>Core: Non-destructive Editing</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">Photoshop-Level Multi-layer Magic</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Full support for layer hierarchies, opacities, and blend modes in your browser.</div>
+                </div>
+                <a href="../index.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
+            </div>
+
+            <p>The hallmark of serious image editing is non-destructive layering. <strong>Web PSEditor</strong> gives you Photoshop-style layer stack flexibility.</p>
+
+            <div class="step-card">
+                <div class="step-title">Key Blend Modes:</div>
+                <p>
+                    • <strong>Multiply:</strong> Discards pure white, keeps dark areas. Perfect for signatures or sketches.<br>
+                    • <strong>Screen:</strong> Discards pitch black, keeps luminous highlights. Great for sparks, flares, and smoke.<br>
+                    • <strong>Overlay:</strong> Enhances dynamic contrast and cinematic textures.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setLang(lang) {
+            document.getElementById("content-zh").style.display = (lang === "zh") ? "block" : "none";
+            document.getElementById("content-en").style.display = (lang === "en") ? "block" : "none";
+            document.getElementById("btn-zh").className = "lang-btn" + (lang === "zh" ? " active" : "");
+            document.getElementById("btn-en").className = "lang-btn" + (lang === "en" ? " active" : "");
+        }
+        (function() {
+            var isZh = (navigator.language || "").toLowerCase().indexOf("zh") !== -1;
+            setLang(isZh ? "zh" : "en");
+        })();
+    </script>
+</body>
+</html>

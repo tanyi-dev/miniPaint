@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Allow: /guide.html
+Allow: /tutorials/
 Allow: /privacy.html
 Allow: /terms.html
 

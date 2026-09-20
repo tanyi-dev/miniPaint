@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>使用教程与功能指南 (User Guide) - Web PSEditor</title>
+    <title>使用教程与实战修图指南 (User Guide & Tutorials) - Web PSEditor</title>
+    <meta name="description" content="Web PSEditor 在线PS修图学堂：提供证件照换底色、一键抠图导出透明PNG、尺寸压缩、敏感信息打码、图层混合模式等丰富实战图文教程。" />
+    <meta name="keywords" content="在线PS教程,证件照换底色,在线抠图教程,图片压缩,敏感信息打码,图层混合模式,Web PSEditor教程" />
+    <link rel="icon" sizes="192x192" href="images/favicon.png">
+    <link rel="shortcut icon" href="favicon.ico">
     <style>
         :root {
             --primary: #2563eb;
+            --primary-hover: #1d4ed8;
             --text-main: #1e293b;
             --text-sub: #64748b;
             --bg-page: #f8fafc;
@@ -22,7 +27,7 @@
             padding: 30px 20px 60px;
         }
         .container {
-            max-width: 840px;
+            max-width: 900px;
             margin: 0 auto;
             background: var(--bg-card);
             padding: 40px 48px;
@@ -83,170 +88,346 @@
         }
         h2 {
             color: #0f172a;
-            font-size: 18px;
-            margin-top: 32px;
-            margin-bottom: 12px;
-            padding-bottom: 6px;
+            font-size: 20px;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
             border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         p, li {
             font-size: 15px;
             color: #334155;
         }
+
+        /* 热门实战教程卡片矩阵 (SEO / 流量核心) */
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0 36px;
+        }
+        .tutorial-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            background: #ffffff;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .tutorial-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px -4px rgba(37,99,235,0.12);
+        }
+        .tut-tag {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 4px;
+            width: fit-content;
+            margin-bottom: 10px;
+        }
+        .tag-blue { background: #eff6ff; color: #2563eb; }
+        .tag-green { background: #f0fdf4; color: #16a34a; }
+        .tag-amber { background: #fffbeb; color: #d97706; }
+        .tag-purple { background: #faf5ff; color: #9333ea; }
+        .tut-title {
+            color: #0f172a;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 8px;
+            line-height: 1.4;
+        }
+        .tut-desc {
+            color: var(--text-sub);
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 0 0 14px;
+            flex-grow: 1;
+        }
+        .tut-meta {
+            font-size: 12px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 10px;
+            border-top: 1px dashed #f1f5f9;
+        }
+
+        .cta-banner {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #ffffff;
+            border-radius: 10px;
+            padding: 24px;
+            margin: 32px 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .cta-banner a {
+            background: #38bdf8;
+            color: #0f172a;
+            padding: 10px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        .cta-banner a:hover { background: #7dd3fc; }
+
         .feature-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
             margin: 20px 0;
         }
-        @media (max-width: 640px) {
-            .feature-grid { grid-template-columns: 1fr; }
-            .container { padding: 24px 20px; }
-        }
         .feature-card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            padding: 18px;
+            border: 1px solid var(--border);
             border-radius: 8px;
-            border-left: 4px solid var(--primary);
+            padding: 18px;
+            background: #f8fafc;
         }
         .feature-card h3 {
             margin-top: 0;
-            font-size: 16px;
+            margin-bottom: 6px;
+            font-size: 15px;
             color: #0f172a;
-            margin-bottom: 8px;
         }
-        .feature-card p {
-            margin: 0;
+        .shortcut-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
             font-size: 14px;
-            color: #475569;
         }
-        ol { padding-left: 20px; }
-        ol li { margin-bottom: 8px; }
-        .step-num { font-weight: 600; color: var(--primary); }
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-            font-size: 13px;
-            color: var(--text-sub);
-            text-align: center;
+        .shortcut-table th, .shortcut-table td {
+            border: 1px solid var(--border);
+            padding: 8px 14px;
+            text-align: left;
         }
-        .lang-content { display: none; }
-        .lang-content.active { display: block; }
+        .shortcut-table th { background: #f1f5f9; color: #475569; }
+        kbd {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 12px;
+            font-family: monospace;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+        }
+        @media (max-width: 680px) {
+            .container { padding: 24px 18px; }
+            .tutorial-grid, .feature-grid { grid-template-columns: 1fr; }
+            .cta-banner { flex-direction: column; gap: 14px; align-items: flex-start; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header-nav">
-            <a href="/" class="back-link" id="back_link">← 返回在线编辑器</a>
+            <a href="index.html" class="back-link">← <span class="trn" data-zh="返回编辑器" data-en="Back to Editor">返回编辑器</span></a>
             <div class="lang-switch">
-                <button class="lang-btn active" id="btn_zh" onclick="setLang('zh')">中文</button>
-                <button class="lang-btn" id="btn_en" onclick="setLang('en')">English</button>
+                <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
             </div>
         </div>
 
-        <!-- 中文内容 -->
-        <div id="content_zh" class="lang-content active">
-            <h1>使用教程与功能指南</h1>
-            <div class="updated-date">最近更新日期：2026年9月20日</div>
+        <div id="content-zh">
+            <h1>Web PSEditor 使用教程与实战修图学堂</h1>
+            <div class="updated-date">更新日期：2026年9月20日 • 官方权威指南</div>
 
-            <p><strong>Web PSEditor</strong> 是一款轻量、免安装的高性能在线图像编辑工具。依托现代浏览器 HTML5 Canvas 技术，为您带来媲美桌面端图像处理软件的创作体验。</p>
+            <div class="cta-banner">
+                <div>
+                    <h3 style="margin:0 0 4px; font-size:17px;">想边看教程边动手实操？</h3>
+                    <p style="margin:0; font-size:13px; color:#94a3b8;">无需安装庞大的软件，浏览器打开即用，全功能纯免费。</p>
+                </div>
+                <a href="index.html">打开 Web PSEditor 画布 →</a>
+            </div>
 
-            <h2>核心功能模块</h2>
+            <h2>🔥 经典高频实战教程（推荐速查）</h2>
+            <div class="tutorial-grid">
+                <a href="tutorials/id-photo-background.html" class="tutorial-card">
+                    <div>
+                        <span class="tut-tag tag-blue">刚需必备</span>
+                        <div class="tut-title">证件照换底色全攻略（白底转蓝底/红底）</div>
+                        <div class="tut-desc">求职、考研、出国报名必备！使用魔棒与边缘羽化，3分钟在线精准更换底色，绝不产生毛糙白边。</div>
+                    </div>
+                    <div class="tut-meta">
+                        <span>难度：入门小白</span>
+                        <span style="color:#2563eb;font-weight:600;">阅读教程 →</span>
+                    </div>
+                </a>
+
+                <a href="tutorials/how-to-cutout-png.html" class="tutorial-card">
+                    <div>
+                        <span class="tut-tag tag-green">效率设计</span>
+                        <div class="tut-title">3步在线抠图并无损导出透明背景 PNG</div>
+                        <div class="tut-desc">制作商品图、PPT配图与表情包。详解选区反选、消除背景残留及正确保存透明通道的方法。</div>
+                    </div>
+                    <div class="tut-meta">
+                        <span>难度：入门小白</span>
+                        <span style="color:#2563eb;font-weight:600;">阅读教程 →</span>
+                    </div>
+                </a>
+
+                <a href="tutorials/mosaic-and-blur-privacy.html" class="tutorial-card">
+                    <div>
+                        <span class="tut-tag tag-amber">隐私安全</span>
+                        <div class="tut-title">敏感信息打码：在线局部马赛克与高斯模糊</div>
+                        <div class="tut-desc">发帖与报销截图防泄密！纯本地 Canvas 脱敏，手机号、身份证、订单号一键打码，零云端上传风险。</div>
+                    </div>
+                    <div class="tut-meta">
+                        <span>难度：极简入门</span>
+                        <span style="color:#2563eb;font-weight:600;">阅读教程 →</span>
+                    </div>
+                </a>
+
+                <a href="tutorials/image-resize-and-compression.html" class="tutorial-card">
+                    <div>
+                        <span class="tut-tag tag-purple">规格达标</span>
+                        <div class="tut-title">图片裁剪、等比缩放与指定 KB 体积压缩</div>
+                        <div class="tut-desc">针对报名系统“小于100KB”、“指定长宽比”等严苛限制，详解等比缩放、精准裁切与高质量压缩技巧。</div>
+                    </div>
+                    <div class="tut-meta">
+                        <span>难度：基础必备</span>
+                        <span style="color:#2563eb;font-weight:600;">阅读教程 →</span>
+                    </div>
+                </a>
+
+                <a href="tutorials/layer-blend-modes-guide.html" class="tutorial-card" style="grid-column: 1 / -1;">
+                    <div>
+                        <span class="tut-tag tag-blue">进阶设计</span>
+                        <div class="tut-title">进阶实战：掌握图层系统与混合模式（合成电影感双重曝光）</div>
+                        <div class="tut-desc">像 Photoshop 一样驾驭多图层！掌握“正片叠底”（过滤白色免抠签名）、“滤色”（叠加星光光效）等核心技法。</div>
+                    </div>
+                    <div class="tut-meta">
+                        <span>难度：进阶必修</span>
+                        <span style="color:#2563eb;font-weight:600;">阅读教程 →</span>
+                    </div>
+                </a>
+            </div>
+
+            <h2>🛠️ 基础界面与核心工具指南</h2>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <h3>图层管理与混合模式</h3>
-                    <p>支持多图层自由叠加、调整不透明度、修改图层顺序，并提供正片叠底、滤色、叠加等多种专业混合模式。</p>
+                    <h3>1. 导入与新建画布</h3>
+                    <p>支持从电脑打开常用图片（JPG/PNG/WEBP/SVG/GIF 等），也可直接按 <kbd>Ctrl+V</kbd> 粘贴剪贴板中的截图开始修图。</p>
                 </div>
                 <div class="feature-card">
-                    <h3>丰富的绘图与选区工具</h3>
-                    <p>涵盖魔棒选区、套索工具、矩形与椭圆选择、画笔、仿制图章、渐变填充及文本编辑工具。</p>
+                    <h3>2. 选区与抠图工具箱</h3>
+                    <p>提供矩形、椭圆选区、套索工具、魔棒工具（Magic Wand），支持容差调节与按住 <kbd>Shift</kbd> 连续追加选区。</p>
                 </div>
                 <div class="feature-card">
-                    <h3>滤镜与特效增强</h3>
-                    <p>内置高斯模糊、锐化、色彩平衡、曲线色阶调整、晕影、黑白胶片、移轴摄影等多种视觉滤镜。</p>
+                    <h3>3. 多图层与混合体系</h3>
+                    <p>支持无限图层叠加、自由调整不透明度、锁定图层、复制图层，以及正片叠底、滤色、柔光等几十种专业混合效果。</p>
                 </div>
                 <div class="feature-card">
-                    <h3>本地零网络隐私保护</h3>
-                    <p>所有图像计算 100% 在本地设备内存中实时完成，不上传、不上云，最大化保障您的资产隐私安全。</p>
+                    <h3>4. 丰富特效与滤镜</h3>
+                    <p>内置锐化、高斯模糊、色相饱和度调节、曲线、色阶、黑白转换、反色及马赛克像素化等主流调色滤镜。</p>
                 </div>
             </div>
 
-            <h2>四步快速上手</h2>
-            <ol>
-                <li><span class="step-num">打开图片：</span>点击顶部菜单 <code>文件 → 打开</code>，或直接将电脑上的图片拖拽至中间画布区域。</li>
-                <li><span class="step-num">选择工具：</span>在左侧工具箱中选择您需要的画笔、橡皮擦、裁剪、选区或魔棒工具。</li>
-                <li><span class="step-num">精细调节：</span>通过顶部菜单的 <code>图像</code> 与 <code>效果</code> 应用滤镜、色彩校正，并在右侧面板管理图层与图层属性。</li>
-                <li><span class="step-num">导出成果：</span>点击 <code>文件 → 保存</code>，支持导出 PNG（支持透明背景）、JPG、WEBP 格式或保存为方便二次修改的 JSON 工程文件。</li>
-            </ol>
+            <h2>⚡ 常用快捷键速查表</h2>
+            <table class="shortcut-table">
+                <thead><tr><th>快捷键</th><th>功能说明</th></tr></thead>
+                <tbody>
+                    <tr><td><kbd>Ctrl</kbd> + <kbd>Z</kbd></td><td>撤销上一步操作 (Undo)</td></tr>
+                    <tr><td><kbd>Ctrl</kbd> + <kbd>O</kbd></td><td>打开本地图片文件</td></tr>
+                    <tr><td><kbd>Ctrl</kbd> + <kbd>S</kbd></td><td>保存并导出当前作品</td></tr>
+                    <tr><td><kbd>Delete</kbd> / <kbd>Backspace</kbd></td><td>删除当前选区内的像素内容</td></tr>
+                    <tr><td><kbd>Ctrl</kbd> + <kbd>D</kbd></td><td>取消当前选区</td></tr>
+                    <tr><td><kbd>Space</kbd> + 鼠标拖拽</td><td>快速抓手平移画布</td></tr>
+                </tbody>
+            </table>
         </div>
 
-        <!-- 英文内容 -->
-        <div id="content_en" class="lang-content">
-            <h1>User Guide & Overview</h1>
-            <div class="updated-date">Last updated: September 20, 2026</div>
+        <div id="content-en" style="display:none;">
+            <h1>Web PSEditor User Guide & Academy</h1>
+            <div class="updated-date">Last Updated: September 20, 2026 • Official Guide</div>
 
-            <p><strong>Web PSEditor</strong> is a lightweight, responsive online image editor powered by HTML5 and Canvas. It provides powerful editing tools right in your web browser without requiring plugins or desktop installations.</p>
-
-            <h2>Key Capabilities</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>Layers & Transparency</h3>
-                    <p>Full support for multiple layers, blend modes, opacity control, and layer sorting for complex graphic compositions.</p>
+            <div class="cta-banner">
+                <div>
+                    <h3 style="margin:0 0 4px; font-size:17px;">Ready to create right now?</h3>
+                    <p style="margin:0; font-size:13px; color:#94a3b8;">Zero installation, lightweight, browser-based professional editor.</p>
                 </div>
-                <div class="feature-card">
-                    <h3>Rich Toolset</h3>
-                    <p>Includes Selection, Magic Eraser, Brush, Pencil, Clone Tool, Gradient, Text, Color Picker, and Shape Drawing tools.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Image Effects & Filters</h3>
-                    <p>Sharpen, Blur, Vignette, Tilt Shift, Color Adjustments, Brightness/Contrast, Invert, Black & White, and Noise filters.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Privacy by Default</h3>
-                    <p>100% of calculations happen on your local device. Your pictures are never sent across the network or stored on remote servers.</p>
-                </div>
+                <a href="index.html">Open Web PSEditor Canvas →</a>
             </div>
 
-            <h2>How to Start</h2>
-            <ol>
-                <li><span class="step-num">Open Image:</span> Click <code>File → Open</code> or drag-and-drop any image file directly into the browser canvas.</li>
-                <li><span class="step-num">Choose Tool:</span> Select your desired tool from the left toolbar (e.g., Brush, Eraser, Crop, Text).</li>
-                <li><span class="step-num">Apply Effects:</span> Use the top navigation bar to apply Filters, Layer adjustments, or Color transformations.</li>
-                <li><span class="step-num">Export:</span> Click <code>File → Save</code> to export as PNG, JPG, WEBP, or save as a reusable JSON project file.</li>
-            </ol>
-        </div>
+            <h2>🔥 Popular Practical Tutorials</h2>
+            <div class="tutorial-grid">
+                <a href="tutorials/id-photo-background.html" class="tutorial-card">
+                    <div>
+                        <span class="tut-tag tag-blue">Essential</span>
+                        <div class="tut-title">How to Change ID Photo Background Color</div>
+                        <div class="tut-desc">Swap white background to blue or red cleanly within 3 minutes without edge artifacts.</div>
+                    </div>
+                    <div class="tut-meta">
+                        <span>Beginner</span>
+                        <span style="color:#2563eb;font-weight:600;">Read Tutorial →</span>
+                    </div>
+                </a>
 
-        <div class="footer">
-            &copy; 2026 Web PSEditor. Powered by open-source miniPaint. All rights reserved.
+                <a href="tutorials/how-to-cutout-png.html" class="tutorial-card">
+                    <div>
+                        <span class="tut-tag tag-green">Cutout</span>
+                        <div class="tut-title">3 Steps to Cut Out Image & Export Transparent PNG</div>
+                        <div class="tut-desc">Extract subjects cleanly and preserve full alpha transparency for eCommerce & presentations.</div>
+                    </div>
+                    <div class="tut-meta">
+                        <span>Beginner</span>
+                        <span style="color:#2563eb;font-weight:600;">Read Tutorial →</span>
+                    </div>
+                </a>
+
+                <a href="tutorials/mosaic-and-blur-privacy.html" class="tutorial-card">
+                    <div>
+                        <span class="tut-tag tag-amber">Privacy</span>
+                        <div class="tut-title">Pixelate & Gaussian Blur for Sensitive Information</div>
+                        <div class="tut-desc">Mask credit cards, IDs, and order numbers safely using 100% in-browser client computation.</div>
+                    </div>
+                    <div class="tut-meta">
+                        <span>Beginner</span>
+                        <span style="color:#2563eb;font-weight:600;">Read Tutorial →</span>
+                    </div>
+                </a>
+
+                <a href="tutorials/image-resize-and-compression.html" class="tutorial-card">
+                    <div>
+                        <span class="tut-tag tag-purple">Utility</span>
+                        <div class="tut-title">Resize, Crop & Compress Images to Target KB Size</div>
+                        <div class="tut-desc">Meet strict portal submission rules easily with proportional scaling and quality adjustment.</div>
+                    </div>
+                    <div class="tut-meta">
+                        <span>Beginner</span>
+                        <span style="color:#2563eb;font-weight:600;">Read Tutorial →</span>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 
     <script>
         function setLang(lang) {
-            var isZh = (lang === 'zh');
-            document.getElementById('content_zh').className = 'lang-content' + (isZh ? ' active' : '');
-            document.getElementById('content_en').className = 'lang-content' + (!isZh ? ' active' : '');
-            document.getElementById('btn_zh').className = 'lang-btn' + (isZh ? ' active' : '');
-            document.getElementById('btn_en').className = 'lang-btn' + (!isZh ? ' active' : '');
-            document.getElementById('back_link').innerText = isZh ? '← 返回在线编辑器' : '← Back to Editor';
-            document.title = isZh ? '使用教程与功能指南 (User Guide) - Web PSEditor' : 'User Guide & Overview - Web PSEditor';
+            document.getElementById("content-zh").style.display = (lang === "zh") ? "block" : "none";
+            document.getElementById("content-en").style.display = (lang === "en") ? "block" : "none";
+            document.getElementById("btn-zh").className = "lang-btn" + (lang === "zh" ? " active" : "");
+            document.getElementById("btn-en").className = "lang-btn" + (lang === "en" ? " active" : "");
+            document.querySelectorAll(".trn").forEach(el => {
+                el.innerText = el.getAttribute("data-" + lang) || el.innerText;
+            });
         }
-
-        (function init() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var langParam = urlParams.get('lang');
-            var isZh = true;
-            if (langParam) {
-                isZh = (langParam.toLowerCase().indexOf('zh') !== -1);
-            } else if (document.cookie.indexOf('language=en') !== -1 || document.cookie.indexOf('%22en%22') !== -1) {
-                isZh = false;
-            } else {
-                var browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-                isZh = (browserLang.indexOf('zh') !== -1);
-            }
-            setLang(isZh ? 'zh' : 'en');
+        (function() {
+            var isZh = (navigator.language || "").toLowerCase().indexOf("zh") !== -1;
+            setLang(isZh ? "zh" : "en");
         })();
     </script>
 </body>
