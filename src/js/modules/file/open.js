@@ -81,7 +81,8 @@ class File_open_class {
 	open_file() {
 		var _this = this;
 
-		alertify.success('You can also drag and drop items into browser.');
+		var tipMsg = (config.LANG === 'zh') ? '您也可以直接将图片拖拽到浏览器窗口中打开。' : 'You can also drag and drop items into browser.';
+		alertify.success(tipMsg);
 
 		document.getElementById("tmp").innerHTML = '';
 		var a = document.createElement('input');
