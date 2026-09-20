@@ -3,35 +3,43 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="x-ua-compatible" content="IE=edge" />
-	<title>miniPaint - image editor</title>
-	<meta name="description" content="miniPaint is free online image editor using HTML5. Edit, adjust your images, add effects online in your browser, without installing anything..." />
-	<meta name="keywords" content="photo, image, picture, transparent, layers, free, edit, html5, canvas, javascript, online, photoshop, gimp, effects, sharpen, blur, magic eraser tool, clone tool, rotate, resize, photoshop online, online tools, tilt shift, sprites, keypoints" />
+	<title>Web PSEditor - 在线PS图片编辑器 (Free Online Image Editor)</title>
+	<meta name="description" content="Web PSEditor is a free, privacy-first online image and photo editor using HTML5. Edit, adjust your images, add layers and effects online in your browser without installing anything..." />
+	<meta name="keywords" content="photo, image, picture, transparent, layers, free, edit, html5, canvas, javascript, online, photoshop, gimp, effects, sharpen, blur, magic eraser tool, clone tool, rotate, resize, photoshop online, 在线PS, 网页PS, 免费修图" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
 	<link rel="icon" sizes="192x192" href="images/favicon.png">
+	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <link rel="manifest" href="dist/manifest.json"> -->
 	<style>
 		/* 为底部常驻合规条预留空间，避免任何面板遮挡 */
 		.wrapper {
 			bottom: 26px !important;
 		}
+		/* 独立品牌 Logo 样式适配 */
+		.submenu .logo {
+			width: 145px !important;
+			padding-left: 36px !important;
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+			letter-spacing: -0.2px;
+		}
+		.submenu .logo:after {
+			filter: none !important; /* 保持专业科技原色 */
+			background-size: 26px 26px !important;
+		}
 	</style>
 	<!-- Google -->
-	<meta itemprop="name" content="miniPaint" />
-	<meta itemprop="description" content="miniPaint is free online image editor using HTML5. Edit, adjust your images, add effects online in your browser, without installing anything..." />
-	<meta itemprop="image" content="https://viliusle.github.io/miniPaint/images/preview.jpg" />
+	<meta itemprop="name" content="Web PSEditor" />
+	<meta itemprop="description" content="Web PSEditor is a free online image editor using HTML5. Edit, adjust your images, add effects online in your browser without installing anything..." />
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="miniPaint" />
-	<meta name="twitter:description" content="miniPaint is free online image editor using HTML5. Edit, adjust your images, add effects online in your browser, without installing anything..." />
-	<meta name="twitter:image" content="https://viliusle.github.io/miniPaint/images/preview.jpg" />
-	<meta name="twitter:image:alt" content="miniPaint is free online image editor using HTML5. Edit, adjust your images, add effects online in your browser, without installing anything..." />
+	<meta name="twitter:title" content="Web PSEditor - 在线图片编辑器" />
+	<meta name="twitter:description" content="Web PSEditor is a free online image editor using HTML5. Edit, adjust your images, add effects online in your browser without installing anything..." />
 	<!-- Facebook, Pinterest -->
-	<meta property="og:title" content="miniPaint" />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://viliusle.github.io/miniPaint/" />
-	<meta property="og:image" content="https://viliusle.github.io/miniPaint/images/preview.jpg" />
-	<meta property="og:description" content="miniPaint is free online image editor using HTML5. Edit, adjust your images, add effects online in your browser, without installing anything..." />
-	<meta property="og:site_name" content="miniPaint" />
+	<meta property="og:title" content="Web PSEditor - 在线图片编辑器" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://webpseditor.com/" />
+	<meta property="og:description" content="Web PSEditor is a free online image editor using HTML5. Edit, adjust your images, add effects online in your browser without installing anything..." />
+	<meta property="og:site_name" content="Web PSEditor" />
 	
 	<script>
 		// 自动清理与自适应语言嗅探
@@ -78,7 +86,7 @@
 		<nav aria-label="Main Menu" class="main_menu" id="main_menu"></nav>
 		
 		<div class="submenu">
-			<a class="logo" href="#">miniPaint</a>
+			<a class="logo" href="#">Web PSEditor</a>
 			<div class="block attributes" id="action_attributes"></div>
 			<button class="undo_button" id="undo_button" type="button">
 				<span class="sr_only">Undo</span>
@@ -146,12 +154,14 @@
 
 	<!-- AdSense Compliance Bar: Centered in canvas bottom margin (safe from tools & layers) -->
 	<footer id="adsense_compliance_bar" style="position: fixed; bottom: 0; left: 0; right: 0; height: 26px; line-height: 26px; z-index: 99; background: #25282a; border-top: 1px solid #383c40; text-align: center; font-size: 11px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-		<span style="color: #777; margin-right: 15px;">&copy; 2026 Web PSEditor</span>
+		<span style="color: #777; margin-right: 15px;">&copy; 2026 Web PSEditor (Powered by miniPaint under MIT)</span>
 		<a id="footer_link_guide" href="guide.html" target="_blank" style="color: #4da3ff; text-decoration: none; margin: 0 10px; font-weight: 500;">User Guide</a>
 		<span style="color: #444;">|</span>
 		<a id="footer_link_privacy" href="privacy.html" target="_blank" style="color: #aaa; text-decoration: none; margin: 0 10px;">Privacy Policy</a>
 		<span style="color: #444;">|</span>
 		<a id="footer_link_terms" href="terms.html" target="_blank" style="color: #aaa; text-decoration: none; margin: 0 10px;">Terms of Service</a>
+		<span style="color: #444;">|</span>
+		<a id="footer_link_donate" href="https://www.buymeacoffee.com" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: none; margin-left: 10px; font-weight: 500;">☕ Buy Me a Coffee</a>
 	</footer>
 
 	<script>
@@ -171,16 +181,19 @@
 				var guideEl = document.getElementById('footer_link_guide');
 				var privacyEl = document.getElementById('footer_link_privacy');
 				var termsEl = document.getElementById('footer_link_terms');
+				var donateEl = document.getElementById('footer_link_donate');
 
 				if (guideEl && privacyEl && termsEl) {
 					if (isZh) {
 						guideEl.innerText = '使用教程';
 						privacyEl.innerText = '隐私政策';
 						termsEl.innerText = '服务条款';
+						if (donateEl) donateEl.innerText = '☕ 赞助支持';
 					} else {
 						guideEl.innerText = 'User Guide';
 						privacyEl.innerText = 'Privacy Policy';
 						termsEl.innerText = 'Terms of Service';
+						if (donateEl) donateEl.innerText = '☕ Buy Me a Coffee';
 					}
 				}
 			}
