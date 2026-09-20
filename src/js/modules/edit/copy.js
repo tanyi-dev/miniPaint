@@ -56,7 +56,8 @@ class Copy_class {
 			});
 		}
 		else{
-			alertify.error('Missing permissions to write to Clipboard.cc');
+			var msg = (config.LANG === 'zh') ? '缺少写入剪贴板的权限。' : 'Missing permissions to write to Clipboard.cc';
+			alertify.error(msg);
 		}
 	}
 

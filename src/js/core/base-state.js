@@ -131,7 +131,8 @@ class Base_state_class {
 			await action.do();
 			this.action_history_index++;
 		} else {
-			alertify.success('There\'s nothing to redo', 3);
+			const msg = (config.LANG === 'zh') ? '没有可重做的操作' : 'There\'s nothing to redo';
+			alertify.success(msg, 3);
 		}
 	}
 
@@ -140,7 +141,8 @@ class Base_state_class {
 			this.action_history_index--;
 			await this.action_history[this.action_history_index].undo();
 		} else {
-			alertify.success('There\'s nothing to undo', 3);
+			const msg = (config.LANG === 'zh') ? '没有可撤销的操作' : 'There\'s nothing to undo';
+			alertify.success(msg, 3);
 		}
 	}
 
