@@ -11,21 +11,63 @@
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <link rel="manifest" href="dist/manifest.json"> -->
 	<style>
-		/* 为底部常驻合规条预留空间，避免任何面板遮挡 */
+		/* 底部常驻合规条 */
 		.wrapper {
 			bottom: 26px !important;
 		}
-		/* 独立品牌 Logo 样式适配 */
-		.submenu .logo {
-			width: 145px !important;
-			padding-left: 36px !important;
-			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-			letter-spacing: -0.2px;
+
+		/* 顶部菜单栏与品牌整合（Photoshop 专业化经典布局） */
+		.main_menu {
+			display: flex !important;
+			align-items: center !important;
+			background: var(--menu-background-color, #2b2b2b) !important;
+			height: 30px !important;
+			padding: 0 !important;
+			border-bottom: 1px solid #1a1a1a;
 		}
-		.submenu .logo:after {
-			filter: none !important; /* 保持专业科技原色 */
-			background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4IiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj4NCiAgPGRlZnM+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZ0dyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzI1NjNlYiIgLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzA2YjZkNCIgLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KICAgIDxmaWx0ZXIgaWQ9InNoYWRvdyIgeD0iLTIwJSIgeT0iLTIwJSIgd2lkdGg9IjE0MCUiIGhlaWdodD0iMTQwJSI+DQogICAgICA8ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iNCIgc3RkRGV2aWF0aW9uPSI2IiBmbG9vZC1jb2xvcj0iIzAwMCIgZmxvb2Qtb3BhY2l0eT0iMC4yNSIgLz4NCiAgICA8L2ZpbHRlcj4NCiAgPC9kZWZzPg0KDQogIDwhLS0g56eR5oqA6LSo5oSf5ZyG6KeS5aSW5qGGIC0tPg0KICA8cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMTEyIiBoZWlnaHQ9IjExMiIgcng9IjI2IiBmaWxsPSJ1cmwoI2JnR3JhZCkiIGZpbHRlcj0idXJsKCNzaGFkb3cpIiAvPg0KDQogIDwhLS0g6Im65pyv5a+56KeS5riQ5Y+Y5oqY5YWJ6KOF6aWwIC0tPg0KICA8cGF0aCBkPSJNOCAzNCBRIDggOCAzNCA4IEwgMTIwIDk0IFEgMTIwIDEyMCA5NCAxMjAgWiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA4KSIgLz4NCg0KICA8IS0tIOWxheS4rSBQUyDkuJPlsZ7lrZfnrKbmoIfor4YgLS0+DQogIDwhLS0g5a2X5q+NIFAgLS0+DQogIDxwYXRoIGQ9Ik0zNCAzOCBMIDU2IDM4IEMgNjYgMzggNzIgNDMgNzIgNTIgQyA3MiA2MSA2NiA2NiA1NiA2NiBMIDQ2IDY2IEwgNDYgOTAgTCAzNCA5MCBaIE0gNDYgNDkgTCA0NiA1NiBMIDU1IDU2IEMgNTggNTYgNjAgNTQgNjAgNTIgQyA2MCA1MCA1OCA0OSA1NSA0OSBaIiBmaWxsPSIjZmZmZmZmIiAvPg0KDQogIDwhLS0g5a2X5q+NIFMgLS0+DQogIDxwYXRoIGQ9Ik03NCA3NiBDIDc1IDc5IDc4IDgxIDgzIDgxIEMgODggODEgOTEgNzkgOTEgNzYgQyA5MSA3MiA4NyA3MCA4MCA2OCBDIDcyIDY2IDY1IDYyIDY1IDUzIEMgNjUgNDQgNzMgMzggODMgMzggQyA5MyAzOCA5OSA0MyAxMDAgNTEgTCA4OSA1MSBDIDg4IDQ4IDg2IDQ2IDgzIDQ2IEMgODAgNDYgNzYgNDggNzYgNTEgQyA3NiA1NCA3OSA1NiA4NiA1OCBDIDk1IDYxIDEwMiA2NCAxMDIgNzMgQyAxMDIgODMgOTQgOTAgODMgOTAgQyA3MSA5MCA2NCA4NCA2MyA3NiBaIiBmaWxsPSIjMzhiZGY4IiAvPg0KDQogIDwhLS0g5Yib5L2c6ICF54G15oSf5YWJ6IqS54K557yA77yI5Y+z5LiL6KeS5b6u5pif5qCH77yJIC0tPg0KICA8cG9seWdvbiBwb2ludHM9IjEwMiwyOCAxMDUsMzQgMTExLDM3IDEwNSw0MCAxMDIsNDYgOTksNDAgOTMsMzcgOTksMzQiIGZpbGw9IiNmZWYwOGEiIC8+DQo8L3N2Zz4NCg==") !important;
-			background-size: 26px 26px !important;
+
+		/* 顶部左侧品牌 Logo */
+		.top_brand_bar {
+			display: inline-flex;
+			align-items: center;
+			height: 100%;
+			padding: 0 12px 0 8px;
+			text-decoration: none;
+			color: #ffffff;
+			font-weight: 600;
+			font-size: 13px;
+			letter-spacing: -0.2px;
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+			user-select: none;
+			border-right: 1px solid rgba(255, 255, 255, 0.08);
+			background: rgba(255, 255, 255, 0.03);
+			flex-shrink: 0;
+		}
+		.top_brand_bar:hover {
+			background: rgba(255, 255, 255, 0.08);
+			color: #38bdf8;
+		}
+		.top_brand_bar img {
+			width: 20px;
+			height: 20px;
+			margin-right: 7px;
+			vertical-align: middle;
+		}
+
+		/* 菜单项容器向右自然排布 */
+		.main_menu > ul.menu_bar {
+			flex: 1 !important;
+			height: 30px !important;
+			padding-left: 4px !important;
+			background: transparent !important;
+		}
+
+		/* 隐藏第二行原有的奇怪 logo，让属性栏扩展为完整工具栏 */
+		.submenu .logo {
+			display: none !important;
+		}
+		.attributes {
+			width: calc(100% - 50px) !important; /* 原为 calc(100% - 125px)，大幅释放空间 */
 		}
 	</style>
 	<!-- Google -->
@@ -200,6 +242,27 @@
 			}
 
 			// 页面加载和语言切换时同步更新
+			
+			// 确保顶部品牌 Bar 插入到 main_menu 最前列
+			function ensureTopBrandBar() {
+				var menu = document.getElementById('main_menu');
+				if (!menu) return;
+				if (!document.getElementById('top_brand_bar')) {
+					var brand = document.createElement('a');
+					brand.id = 'top_brand_bar';
+					brand.className = 'top_brand_bar';
+					brand.href = '#';
+					brand.title = 'Web PSEditor - 在线图片编辑器';
+					brand.innerHTML = '<img src="images/logo.svg" alt="PS Logo"><span>Web PSEditor</span>';
+					brand.onclick = function(e) { e.preventDefault(); location.reload(); };
+					menu.insertBefore(brand, menu.firstChild);
+				}
+			}
+			ensureTopBrandBar();
+			window.addEventListener('DOMContentLoaded', ensureTopBrandBar);
+			window.addEventListener('load', ensureTopBrandBar);
+			setInterval(ensureTopBrandBar, 500);
+
 			window.addEventListener('DOMContentLoaded', updateFooterLanguage);
 			window.addEventListener('load', updateFooterLanguage);
 			setInterval(updateFooterLanguage, 800);
