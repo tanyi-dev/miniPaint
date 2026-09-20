@@ -34,14 +34,37 @@
 	<meta property="og:site_name" content="miniPaint" />
 	
 	<script>
-		// 自适应语言嗅探：若用户尚未手动设置语言，且首选语言为中文，则默认载入中文环境
+		// 自动清理与自适应语言嗅探
 		(function() {
+			// 1. 若检测到旧的损坏 Cookie（带编码字符 %7B 等），立即自动清除并重写，防止普通模式老访客报错
+			var match = document.cookie.match(/(?:^|;\s*)config=([^;]+)/);
+			if (match && match[1]) {
+				var rawVal = match[1];
+				try {
+					JSON.parse(rawVal);
+				} catch (e) {
+					// 旧 Cookie 已损坏，先清除
+					document.cookie = "config=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+					try {
+						// 尝试解码并修复，或直接设为正常中文
+						var fixed = JSON.stringify(JSON.parse(decodeURIComponent(rawVal)));
+						var d = new Date();
+						d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+						document.cookie = "config=" + fixed + ";path=/;expires=" + d.toUTCString();
+					} catch (err) {
+						var d = new Date();
+						d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
+						document.cookie = "config=" + JSON.stringify({ language: 'zh' }) + ";path=/;expires=" + d.toUTCString();
+					}
+				}
+			}
+
+			// 2. 新访客：若未设置语言，且首选为中文，默认设为中文环境
 			if (document.cookie.indexOf('config=') === -1 && window.location.search.indexOf('lang=') === -1) {
 				var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
 				if (lang.indexOf('zh') !== -1) {
 					var d = new Date();
 					d.setTime(d.getTime() + (180 * 24 * 60 * 60 * 1000));
-					// miniPaint 原生 Helpers._setCookie 是直接写入未转义的 JSON 字符串并用 JSON.parse 还原
 					document.cookie = "config=" + JSON.stringify({ language: 'zh' }) + ";path=/;expires=" + d.toUTCString();
 				}
 			}
