@@ -270,10 +270,10 @@
 
 			// 页面加载和语言切换时同步更新
 			
-			// 确保顶部品牌 Bar 插入到 main_menu 最前列
+			// 1. 确保顶部品牌 Bar 插入到 main_menu 最前列（事件驱动 + 单次执行）
 			function ensureTopBrandBar() {
 				var menu = document.getElementById('main_menu');
-				if (!menu) return;
+				if (!menu) return false;
 				if (!document.getElementById('top_brand_bar')) {
 					var brand = document.createElement('a');
 					brand.id = 'top_brand_bar';
@@ -283,16 +283,42 @@
 					brand.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="20" height="20" style="vertical-align:middle;display:inline-block;"><defs><linearGradient id="psBg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#2563eb"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient></defs><rect x="4" y="4" width="120" height="120" rx="24" fill="url(#psBg)"/><path d="M8 32 Q 8 8 32 8 L 120 96 Q 120 120 96 120 Z" fill="rgba(255,255,255,0.12)"/><path d="M34 38 L 56 38 C 66 38 72 43 72 52 C 72 61 66 66 56 66 L 46 66 L 46 90 L 34 90 Z M 46 49 L 46 56 L 55 56 C 58 56 60 54 60 52 C 60 50 58 49 55 49 Z" fill="#ffffff"/><path d="M74 76 C 75 79 78 81 83 81 C 88 81 91 79 91 76 C 91 72 87 70 80 68 C 72 66 65 62 65 53 C 65 44 73 38 83 38 C 93 38 99 43 100 51 L 89 51 C 88 48 86 46 83 46 C 80 46 76 48 76 51 C 76 54 79 56 86 58 C 95 61 102 64 102 73 C 102 83 94 90 83 90 C 71 90 64 84 63 76 Z" fill="#38bdf8"/><polygon points="102,26 105,32 111,35 105,38 102,44 99,38 93,35 99,32" fill="#fef08a"/></svg><span style="margin-left:7px;">Web PSEditor</span>';
 					brand.onclick = function(e) { e.preventDefault(); location.reload(); };
 					menu.insertBefore(brand, menu.firstChild);
+					return true;
 				}
+				return true;
 			}
-			ensureTopBrandBar();
-			window.addEventListener('DOMContentLoaded', ensureTopBrandBar);
-			window.addEventListener('load', ensureTopBrandBar);
-			setInterval(ensureTopBrandBar, 500);
 
-			window.addEventListener('DOMContentLoaded', updateFooterLanguage);
-			window.addEventListener('load', updateFooterLanguage);
-			setInterval(updateFooterLanguage, 800);
+			// 2. 初始化执行与 MutationObserver 监听（替代原死循环 setInterval）
+			ensureTopBrandBar();
+			updateFooterLanguage();
+
+			window.addEventListener('DOMContentLoaded', function() {
+				ensureTopBrandBar();
+				updateFooterLanguage();
+			});
+
+			window.addEventListener('load', function() {
+				ensureTopBrandBar();
+				updateFooterLanguage();
+			});
+
+			// 使用 MutationObserver 监听 main_menu 渲染，插入完成后即断开，零 CPU 持续消耗
+			var menuContainer = document.getElementById('main_menu');
+			if (menuContainer) {
+				var menuObserver = new MutationObserver(function() {
+					if (ensureTopBrandBar()) {
+						menuObserver.disconnect();
+					}
+				});
+				menuObserver.observe(menuContainer, { childList: true, subtree: true });
+			}
+
+			// 监听语言变更事件与点击交互，按需触发底栏翻译更新
+			document.addEventListener('click', function(e) {
+				if (e.target && (e.target.closest('#main_menu') || e.target.closest('#popups'))) {
+					setTimeout(updateFooterLanguage, 100);
+				}
+			});
 		})();
 	</script>
 </body>

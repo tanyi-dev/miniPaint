@@ -45,7 +45,7 @@ module.exports = {
 			VERSION: JSON.stringify(require("./package.json").version)
 		}),
 	],
-	devtool: "cheap-module-source-map",
+	devtool: false,
 	devServer: {
 		// host: '0.0.0.0',
 		//contentBase: "./",
