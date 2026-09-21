@@ -1,8 +1,8 @@
 User-agent: *
 Allow: /
-Allow: /guide.html
+Allow: /guide
 Allow: /tutorials/
-Allow: /privacy.html
-Allow: /terms.html
+Allow: /privacy
+Allow: /terms
 
 Sitemap: https://webpseditor.com/sitemap.xml
