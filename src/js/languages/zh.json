@@ -534,5 +534,16 @@
     "Zoom:": "缩放：",
     "There's nothing to undo": "没有可撤销的操作",
     "There's nothing to redo": "没有可重做的操作",
-    "A problem occurred while removing undo history. It's suggested you save your work and refresh the page in order to free up memory.": "清除撤销历史记录时出错。建议您保存作品并刷新页面以释放内存。"
+    "A problem occurred while removing undo history. It's suggested you save your work and refresh the page in order to free up memory.": "清除撤销历史记录时出错。建议您保存作品并刷新页面以释放内存。",
+    "Error: can not load image.": "错误：无法加载图片。",
+    "Error: layer must be image.": "错误：图层必须是图像。",
+    "Error: wrong key: ": "错误：键名错误：",
+    "Layer must be vector or image (convert it to raster).": "图层必须是矢量或图像（请先转换为栅格）。",
+    "Module function not found. ": "未找到模块功能：",
+    "Modules class not found: ": "未找到模块类：",
+    "Size is too big, max ": "尺寸过大，最大限制为 ",
+    "Sorry, cold not load getUserMedia() data: ": "抱歉，无法获取 getUserMedia() 摄像头数据：",
+    "Tools class not found: ": "未找到工具类：",
+    "Translate error, can not find dictionary: ": "翻译错误，找不到语言字典：",
+    "key points: ": "关键点数："
 }
