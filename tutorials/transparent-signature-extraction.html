@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电子签名背景透明化全攻略：免抠图提取签名图片 - Web PSEditor</title>
+    <meta name="description" content="无需下载专业修图软件，使用网页版PS工具Web PSEditor，利用色彩曲线压黑提白与图层正片叠底/透明通道提取，3步搞定合同电子签名免抠透明化导出。" />
+    <meta name="keywords" content="电子签名透明化,透明签名提取,合同签名抠图,手写签名透明背景,在线修图,正片叠底,免抠签名" />
+    <link rel="icon" sizes="192x192" href="../images/favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <style>
+        :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fef3c7; border-radius: 8px; padding: 14px 18px; color: #92400e; font-size: 14px; margin: 20px 0; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } }
+    </style>
+    <link rel="canonical" href="https://webpseditor.com/tutorials/transparent-signature-extraction" />
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <a href="../guide.html" class="back-link">← <span class="trn" data-zh="返回教程目录" data-en="Back to Tutorials">返回教程目录</span></a>
+            <div class="lang-switch">
+                <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+            </div>
+        </div>
+
+        <!-- 🔒 隐私信任安全背书 -->
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% Client-Side · No Image Uploads · Zero Privacy Risk</span>
+        </div>
+
+        <div id="content-zh">
+            <h1>实战教程：手写电子签名背景透明化提取全攻略</h1>
+            <div class="meta-bar">
+                <span>难度：日常必备</span> • <span>耗时：2 分钟</span> • <span>核心技术：黑白压阶与透明通道</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">公文合同签署，手机白纸拍照秒变透明签名</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">纯前端本地处理，签名绝不上云，捍卫商务隐私。</div>
+                </div>
+                <a href="../editor.html" class="cta-btn" target="_blank">打开 Web PSEditor 提取签名 →</a>
+            </div>
+
+            <p>在远程办公与电子化办公普及的今天，PDF 合同、发票报销单及电子证明经常需要附上个人真实手写签名。很多朋友用手机拍下白纸上的签名后，往往因为光线不均、纸张泛黄、带有阴影而无法直接贴入文档。本篇指南将教你使用 <strong>Web PSEditor</strong> 快速将拍照签名转为纯净、无阴影的透明背景 PNG 图章。</p>
+
+            <!-- AdSense Compliant Banner Container -->
+            <div class="ads-container" style="margin: 24px 0; text-align: center; min-height: 90px; background: rgba(0,0,0,0.02); border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999;">Advertisement Placeholder</div>
+
+            <div class="step-card">
+                <div class="step-title">第一步：导入签名照片并裁剪有效区域</div>
+                <p>
+                    在白纸上用黑色签字笔手写签名，手机正面平拍后，将照片直接拖入 <strong>Web PSEditor</strong> 画布。<br>
+                    使用左侧工具栏的 <strong>裁剪工具（Crop）</strong>，框选出签名主体区域并按回车确认，去除四周不必要的多余桌面和阴影边缘。
+                </p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">第二步：黑白化与亮暗对比压阶（提白底、压黑字）</div>
+                <p>
+                    手机拍出的白纸通常呈灰色或带有渐变色，必须先让纸张变成纯白（#FFFFFF）：<br>
+                    1. 点击顶部菜单 <strong>【图像】 -> 【色彩调整】 -> 【黑白（Grayscale）】</strong>，去除纸张泛黄色差；<br>
+                    2. 打开 <strong>【图像】 -> 【色彩调整】 -> 【亮度/对比度】</strong> 或 <strong>【色阶/曲线】</strong>：适当拉高亮度和对比度，直到<strong>字迹变得极其黝黑纯粹，背景白纸完全变为纯白色</strong>。
+                </p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">第三步：一键提取透明通道并导出 PNG</div>
+                <p>
+                    要将纯白背景转为透明，有两种极其高效的方法：<br>
+                    <strong>方法 A（魔棒透明化）：</strong>使用 <strong>魔棒工具（Magic Wand）</strong>，设置容差（Tolerance）为 30~50，勾选或不勾选连续选区（Contiguous），点击白色背景后按 <code>Delete</code>，白底瞬间消失，呈现棋盘状透明格。<br>
+                    <strong>方法 B（正片叠底无损使用）：</strong>如果签名是直接嵌入到 Word 或具备白底的 PDF 中，直接在图层混合模式中选择 <strong>正片叠底（Multiply）</strong>，白色会被算法自动忽略成透明！<br>
+                    完成后点击 <strong>【文件】 -> 【另存为】 -> 【PNG 格式】</strong>，即可得到通用的透明电子签名图片。
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 为什么处理签名时推荐 Web PSEditor？</strong><br>
+                电子签名属于**高度敏感的个人身份凭证**。普通在线工具会将图片上传至云端服务器，存在被爬取甚至滥用的潜在风险。Web PSEditor 全流程运行在您的本地浏览器沙箱中，断网也可完整操作，杜绝任何签名泄露隐患！
+            </div>
+
+            <!-- AdSense Compliant Banner Container -->
+            <div class="ads-container" style="margin: 24px 0; text-align: center; min-height: 90px; background: rgba(0,0,0,0.02); border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999;">Advertisement Placeholder</div>
+
+            <!-- 🎯 实战练习与安全导流 CTA 卡片 -->
+            <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手提取电子签名</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">无需安装软件，立即在浏览器中制作属于你的无水印透明电子签名图章，100% 隐私安全。</p>
+                </div>
+                <div>
+                    <a href="../editor.html" class="practice-btn">
+                        <span>打开 Web PSEditor 开始制作</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-en" style="display:none;">
+            <h1>How to Extract Handwritten Signature to Transparent PNG Online</h1>
+            <div class="meta-bar">
+                <span>Difficulty: Everyday Essential</span> • <span>Time: 2 Mins</span> • <span>Technology: Threshold & Alpha Channel</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">Turn Paper Signatures into Transparent PNG Seals</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">100% in-browser processing with zero server uploads.</div>
+                </div>
+                <a href="../editor.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
+            </div>
+
+            <p>For contracts, invoices, and digital certificates, having a clean, transparent digital signature is crucial. When photographing signatures on paper, shadows and yellow tint often make direct pasting impossible. This guide walks you through converting photo signatures into clean transparent PNG files using <strong>Web PSEditor</strong>.</p>
+
+            <!-- AdSense Compliant Banner Container -->
+            <div class="ads-container" style="margin: 24px 0; text-align: center; min-height: 90px; background: rgba(0,0,0,0.02); border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999;">Advertisement Placeholder</div>
+
+            <div class="step-card">
+                <div class="step-title">Step 1: Import Signature Photo & Crop</div>
+                <p>Drop your smartphone photo of the handwritten signature into Web PSEditor. Use the <strong>Crop Tool</strong> to tightly frame the signature, removing unwanted background desk space.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">Step 2: Grayscale & Contrast Boosting</div>
+                <p>1. Select <strong>Image -> Adjustments -> Grayscale</strong> to eliminate color cast.<br>2. Open <strong>Image -> Adjustments -> Brightness / Contrast</strong> (or Levels): increase contrast until the paper turns pure white (#FFFFFF) and pen strokes turn solid deep black.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">Step 3: Remove Background & Save Transparent PNG</div>
+                <p>Use the <strong>Magic Wand Tool</strong> with a tolerance of 40, select the white background, and hit <code>Delete</code>. Checkered transparency appears immediately. Finally, click <strong>File -> Save As -> PNG</strong> to download your reusable signature.</p>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Privacy Notice:</strong><br>
+                Signatures are highly sensitive personal credentials. Web PSEditor executes all graphics processing locally in your client sandbox. Your image is never uploaded to any remote server!
+            </div>
+
+            <!-- AdSense Compliant Banner Container -->
+            <div class="ads-container" style="margin: 24px 0; text-align: center; min-height: 90px; background: rgba(0,0,0,0.02); border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999;">Advertisement Placeholder</div>
+
+            <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Practice Signature Extraction</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Client-Side</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Try extracting your paper signature now directly inside your browser. No installs, zero privacy risks.</p>
+                </div>
+                <div>
+                    <a href="../editor.html" class="practice-btn">
+                        <span>Launch Web PSEditor</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setLang(lang) {
+            document.getElementById('content-zh').style.display = lang === 'zh' ? 'block' : 'none';
+            document.getElementById('content-en').style.display = lang === 'en' ? 'block' : 'none';
+            document.getElementById('btn-zh').className = 'lang-btn ' + (lang === 'zh' ? 'active' : '');
+            document.getElementById('btn-en').className = 'lang-btn ' + (lang === 'en' ? 'active' : '');
+            
+            var trnElements = document.querySelectorAll('.trn');
+            trnElements.forEach(function(el) {
+                var text = el.getAttribute('data-' + lang);
+                if (text) el.textContent = text;
+            });
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+        }
+    </script>
+</body>
+</html>
