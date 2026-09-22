@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>隐私政策 (Privacy Policy) - Web PSEditor</title>
+    <meta name="description" content="Web PSEditor 隐私政策与数据保护声明。我们郑重承诺：所有图像处理均在用户本地浏览器完成，绝不上传图片，绝不上云存储，严格保护您的肖像与数据隐私。" />
+    <link rel="icon" sizes="192x192" href="images/favicon.png">
+    <link rel="shortcut icon" href="favicon.ico">
     <style>
         :root {
             --primary: #2563eb;
@@ -119,7 +122,10 @@
 <body>
     <div class="container">
         <div class="header-nav">
-            <a href="/" class="back-link" id="back_link">← 返回在线编辑器</a>
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <a href="index.html" class="back-link">← 网站首页</a>
+                <a href="editor.html" class="back-link" style="color: var(--text-sub);">打开编辑器 →</a>
+            </div>
             <div class="lang-switch">
                 <button class="lang-btn active" id="btn_zh" onclick="setLang('zh')">中文</button>
                 <button class="lang-btn" id="btn_en" onclick="setLang('en')">English</button>
@@ -209,7 +215,6 @@
             document.getElementById('content_en').className = 'lang-content' + (!isZh ? ' active' : '');
             document.getElementById('btn_zh').className = 'lang-btn' + (isZh ? ' active' : '');
             document.getElementById('btn_en').className = 'lang-btn' + (!isZh ? ' active' : '');
-            document.getElementById('back_link').innerText = isZh ? '← 返回在线编辑器' : '← Back to Editor';
             document.title = isZh ? '隐私政策 (Privacy Policy) - Web PSEditor' : 'Privacy Policy - Web PSEditor';
         }
 
