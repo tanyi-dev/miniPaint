@@ -354,9 +354,9 @@
             line-height: 1.5;
         }
 
-        /* 教程推荐矩阵 */
+        /* 教程推荐矩阵 (重塑为高质感卡片) */
         .tutorials-section {
-            padding: 40px 0 60px;
+            padding: 48px 0 60px;
             background: #ffffff;
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
@@ -364,31 +364,95 @@
         .tut-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 16px;
+            gap: 20px;
         }
         .tut-card {
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 24px;
             text-decoration: none;
-            background: #fafafa;
-            transition: all 0.2s;
+            background: #ffffff;
+            transition: all 0.22s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
         .tut-card:hover {
             border-color: var(--primary);
-            background: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37,99,235,0.08);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px -6px rgba(37,99,235,0.12), 0 0 0 1px rgba(37,99,235,0.25);
+        }
+        .tut-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .tut-badge {
+            font-size: 11.5px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .badge-blue { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+        .badge-purple { background: #faf5ff; color: #9333ea; border: 1px solid #e9d5ff; }
+        .badge-amber { background: #fffbeb; color: #d97706; border: 1px solid #fde68a; }
+        .badge-emerald { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
+        .badge-rose { background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; }
+        
+        .tut-icon-box {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s ease;
+        }
+        .tut-card:hover .tut-icon-box {
+            transform: scale(1.08);
         }
         .tut-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 6px;
+            font-size: 16.5px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
         }
         .tut-desc {
-            font-size: 13px;
+            font-size: 13.5px;
             color: var(--text-sub);
+            line-height: 1.6;
+            margin-bottom: 18px;
+            flex-grow: 1;
+        }
+        .tut-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 14px;
+            border-top: 1px dashed #f1f5f9;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .tut-card:hover .tut-footer-arrow {
+            transform: translateX(4px);
+        }
+        .tut-footer-arrow {
+            transition: transform 0.2s ease;
+            display: inline-flex;
         }
 
         /* FAQ 问答模块 */
@@ -714,24 +778,74 @@
             </div>
             <div class="tut-grid">
                 <a href="tutorials/id-photo-background.html" class="tut-card">
-                    <div class="tut-title">证件照白底快速换蓝底/红底教程 →</div>
-                    <div class="tut-desc">魔棒选区 + 边缘羽化技巧，3步搞定标准证件照换底，无锯齿不生硬。</div>
+                    <div>
+                        <div class="tut-top">
+                            <div class="tut-icon-box" style="background: #eff6ff; border-color: #bfdbfe;">📸</div>
+                            <span class="tut-badge badge-blue">人像规范 · 证件标准</span>
+                        </div>
+                        <div class="tut-title">证件照白底快速换蓝底/红底教程</div>
+                        <div class="tut-desc">魔棒精准选区配合边缘平滑羽化，3 步搞定标准证件照换底色，边缘柔和无锯齿不生硬。</div>
+                    </div>
+                    <div class="tut-footer">
+                        <span>阅读完整图文步骤</span>
+                        <span class="tut-footer-arrow">→</span>
+                    </div>
                 </a>
                 <a href="tutorials/how-to-cutout-png.html" class="tut-card">
-                    <div class="tut-title">3步搞定在线抠图并导出透明底 PNG →</div>
-                    <div class="tut-desc">剥离纯色背景与商品轮廓，无损保存 Alpha 透明通道，电商排版必备。</div>
+                    <div>
+                        <div class="tut-top">
+                            <div class="tut-icon-box" style="background: #faf5ff; border-color: #e9d5ff;">🪄</div>
+                            <span class="tut-badge badge-purple">电商白底 · 透明通道</span>
+                        </div>
+                        <div class="tut-title">3步搞定在线抠图并导出透明底 PNG</div>
+                        <div class="tut-desc">毫秒级剥离商品与人物纯色背景，保留超清 Alpha 透明通道，电商上架与设计排版必备。</div>
+                    </div>
+                    <div class="tut-footer">
+                        <span>阅读完整图文步骤</span>
+                        <span class="tut-footer-arrow">→</span>
+                    </div>
                 </a>
                 <a href="tutorials/mosaic-and-blur-privacy.html" class="tut-card">
-                    <div class="tut-title">证件与敏感信息打码防泄露指南 →</div>
-                    <div class="tut-desc">使用马赛克与选区模糊安全脱敏，本地处理杜绝二次隐私风险。</div>
+                    <div>
+                        <div class="tut-top">
+                            <div class="tut-icon-box" style="background: #fffbeb; border-color: #fde68a;">🛡️</div>
+                            <span class="tut-badge badge-amber">隐私保护 · 安全脱敏</span>
+                        </div>
+                        <div class="tut-title">证件与敏感信息打码防泄露指南</div>
+                        <div class="tut-desc">利用局部马赛克与高斯模糊对身份证、车牌或商业合同脱敏，纯本地处理杜绝隐私二次泄露。</div>
+                    </div>
+                    <div class="tut-footer">
+                        <span>阅读完整图文步骤</span>
+                        <span class="tut-footer-arrow">→</span>
+                    </div>
                 </a>
                 <a href="tutorials/image-resize-and-compression.html" class="tut-card">
-                    <div class="tut-title">图片等比缩放与文件大小限制压缩 →</div>
-                    <div class="tut-desc">应对报名系统 200KB 严格限制，无损调整分辨率与导出质量百分比。</div>
+                    <div>
+                        <div class="tut-top">
+                            <div class="tut-icon-box" style="background: #ecfdf5; border-color: #a7f3d0;">⚡</div>
+                            <span class="tut-badge badge-emerald">求职报考 · 无损瘦身</span>
+                        </div>
+                        <div class="tut-title">图片等比缩放与文件大小限制压缩</div>
+                        <div class="tut-desc">精准应对各类政务与考试报名系统 200KB 严格大小限制，无损调整分辨率与导出画质。</div>
+                    </div>
+                    <div class="tut-footer">
+                        <span>阅读完整图文步骤</span>
+                        <span class="tut-footer-arrow">→</span>
+                    </div>
                 </a>
                 <a href="tutorials/layer-blend-modes-guide.html" class="tut-card">
-                    <div class="tut-title">图层系统与混合模式（合成双重曝光） →</div>
-                    <div class="tut-desc">掌握非破坏性图层编辑，灵活运用正片叠底、滤色等主流图层混合模式。</div>
+                    <div>
+                        <div class="tut-top">
+                            <div class="tut-icon-box" style="background: #fff1f2; border-color: #fecdd3;">🎨</div>
+                            <span class="tut-badge badge-rose">进阶合成 · 艺术设计</span>
+                        </div>
+                        <div class="tut-title">图层系统与混合模式（合成双重曝光）</div>
+                        <div class="tut-desc">掌握多图层非破坏性架构，灵活实战正片叠底、滤色、柔光，轻松合成电影质感双重曝光。</div>
+                    </div>
+                    <div class="tut-footer">
+                        <span>阅读完整图文步骤</span>
+                        <span class="tut-footer-arrow">→</span>
+                    </div>
                 </a>
             </div>
             <div style="text-align: center; margin-top: 32px;">
