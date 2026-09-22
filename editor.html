@@ -530,19 +530,20 @@
 				var privacyTxt = document.getElementById('footer_privacy_txt');
 				var termsTxt = document.getElementById('footer_terms_txt');
 				var donateEl = document.getElementById('footer_link_donate');
+				var topHomeTxt = document.getElementById('top_home_txt');
 
-				if (privacyTxt && termsTxt) {
-					if (isZh) {
-						if (guideTxt) guideTxt.innerText = '使用教程';
-						privacyTxt.innerText = '隐私政策';
-						termsTxt.innerText = '服务条款';
-						if (donateEl) donateEl.innerText = '☕ 赞助支持';
-					} else {
-						if (guideTxt) guideTxt.innerText = 'User Guide';
-						privacyTxt.innerText = 'Privacy Policy';
-						termsTxt.innerText = 'Terms of Service';
-						if (donateEl) donateEl.innerText = '☕ Buy Me a Coffee';
-					}
+				if (isZh) {
+					if (topHomeTxt) topHomeTxt.innerText = '返回首页';
+					if (guideTxt) guideTxt.innerText = '使用教程';
+					if (privacyTxt) privacyTxt.innerText = '隐私政策';
+					if (termsTxt) termsTxt.innerText = '服务条款';
+					if (donateEl) donateEl.innerText = '☕ 赞助支持';
+				} else {
+					if (topHomeTxt) topHomeTxt.innerText = 'Home';
+					if (guideTxt) guideTxt.innerText = 'User Guide';
+					if (privacyTxt) privacyTxt.innerText = 'Privacy Policy';
+					if (termsTxt) termsTxt.innerText = 'Terms of Service';
+					if (donateEl) donateEl.innerText = '☕ Buy Me a Coffee';
 				}
 			}
 
