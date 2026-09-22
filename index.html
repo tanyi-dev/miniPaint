@@ -329,7 +329,7 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 24px 20px;
+            padding: 22px 18px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.02);
             transition: transform 0.2s, box-shadow 0.2s;
             text-align: center;
@@ -339,16 +339,23 @@
             box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05);
         }
         .card-icon {
-            font-size: 32px;
-            margin-bottom: 12px;
+            font-size: 30px;
+            margin-bottom: 10px;
             display: inline-block;
         }
         .feature-card h3 {
             font-size: 17px;
             font-weight: 600;
-            margin: 0;
+            margin: 0 0 6px 0;
             color: #0f172a;
             text-align: center;
+        }
+        .feature-card .feature-tagline {
+            font-size: 13px;
+            color: #64748b;
+            margin: 0;
+            line-height: 1.4;
+            letter-spacing: 0.2px;
         }
 
         /* 教程推荐矩阵 (重塑为高质感卡片) */
@@ -741,14 +748,17 @@
                 <div class="feature-card">
                     <div class="card-icon">🪄</div>
                     <h3>图层系统与精细抠图</h3>
+                    <p class="feature-tagline">多图层堆叠 · 选区套索 · 导出透明 PNG</p>
                 </div>
                 <div class="feature-card">
                     <div class="card-icon">🎨</div>
                     <h3>专业滤镜与画笔调色</h3>
+                    <p class="feature-tagline">色彩曲线 · 局部打码 · 自由排版绘制</p>
                 </div>
                 <div class="feature-card">
                     <div class="card-icon">🔒</div>
                     <h3>100% 纯本地沙箱运算</h3>
+                    <p class="feature-tagline">零数据上传 · 断网可用 · 隐私绝对保障</p>
                 </div>
             </div>
         </div>
