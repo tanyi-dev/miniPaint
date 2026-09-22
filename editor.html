@@ -517,13 +517,22 @@
 		(function () {
 			function updateFooterLanguage() {
 				var isZh = false;
-				// 检查全局配置或cookie
-				if (window.config && window.config.LANG) {
-					isZh = (window.config.LANG === 'zh');
-				} else if (document.cookie.indexOf('language=zh') !== -1 || document.cookie.indexOf('%22zh%22') !== -1 || document.cookie.indexOf('"zh"') !== -1) {
-					isZh = true;
-				} else if (document.cookie.indexOf('config=') === -1 && (navigator.language || '').toLowerCase().indexOf('zh') !== -1) {
-					isZh = true;
+				// 1. 优先读取 URL 参数 ?lang=
+				var urlMatch = window.location.search.match(/[?&]lang=([^&]+)/i);
+				if (urlMatch) {
+					isZh = (urlMatch[1].toLowerCase().indexOf("zh") === 0);
+				} else if (window.config && window.config.LANG) {
+					isZh = (window.config.LANG === "zh");
+				} else {
+					// 2. 检查 index_lang / config Cookie
+					var indexCookie = document.cookie.match(/(?:^|; )index_lang=([^;]*)/);
+					if (indexCookie) {
+						isZh = (indexCookie[1] === "zh");
+					} else if (document.cookie.indexOf("language=zh") !== -1 || document.cookie.indexOf("%22zh%22") !== -1 || document.cookie.indexOf('"zh"') !== -1) {
+						isZh = true;
+					} else if (document.cookie.indexOf("config=") === -1 && /^zh\b/i.test(navigator.language || "")) {
+						isZh = true;
+					}
 				}
 
 				var guideTxt = document.getElementById('footer_guide_txt');
