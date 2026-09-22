@@ -673,7 +673,10 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 28px; }
             .hero p { font-size: 15px; }
+            /* 移动端保留功能、教程、FAQ 隐藏，但必须保留语言切换按钮和 CTA 按钮 */
             .nav-links a:not(.nav-cta) { display: none; }
+            .nav-links { gap: 8px; }
+            .nav-cta { padding: 8px 12px; font-size: 13px; }
             .final-cta-card {
                 padding: 32px 18px;
             }
