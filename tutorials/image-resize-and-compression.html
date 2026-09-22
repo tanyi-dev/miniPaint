@@ -172,6 +172,9 @@
             document.getElementById("content-en").style.display = (lang === "en") ? "block" : "none";
             document.getElementById("btn-zh").className = "lang-btn" + (lang === "zh" ? " active" : "");
             document.getElementById("btn-en").className = "lang-btn" + (lang === "en" ? " active" : "");
+            document.querySelectorAll(".trn").forEach(function(el) {
+                el.innerText = el.getAttribute("data-" + lang) || el.innerText;
+            });
         }
         (function() {
             var isZh = (navigator.language || "").toLowerCase().indexOf("zh") !== -1;
