@@ -186,7 +186,7 @@
             background: #f1f5f9;
         }
 
-        /* Hero 编辑器实景模型预览窗口 (视觉锚点，消除空白断层) */
+        /* Hero 编辑器真实实景预览窗口 (100% 真实界面展示，消除空白断层) */
         .editor-preview-window {
             max-width: 980px;
             margin: 0 auto 10px;
@@ -202,7 +202,7 @@
         }
         .editor-preview-window:hover {
             transform: translateY(-2px);
-            box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.2), 0 0 0 1px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.25), 0 0 0 1px rgba(37, 99, 235, 0.4);
         }
         .editor-preview-bar {
             background: #18181b;
@@ -242,113 +242,26 @@
             align-items: center;
             gap: 4px;
         }
-        .editor-preview-body {
-            background: #18181b;
-            height: 320px;
-            display: flex;
+        .editor-preview-media {
             position: relative;
-            user-select: none;
-        }
-        .preview-tools {
-            width: 42px;
             background: #141416;
-            border-right: 1px solid #27272a;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px 0;
-            gap: 8px;
-        }
-        .tool-icon {
-            width: 26px;
-            height: 26px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            color: #94a3b8;
-            border-radius: 4px;
-        }
-        .tool-icon.active {
-            background: #2563eb;
-            color: #ffffff;
-        }
-        .preview-canvas-area {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle, #242429 10%, #18181b 90%);
-            position: relative;
-            padding: 20px;
-        }
-        .canvas-mock-card {
-            width: 380px;
-            height: 220px;
-            background: #ffffff;
-            border-radius: 6px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+            line-height: 0;
             overflow: hidden;
-            border: 1px dashed #cbd5e1;
         }
-        .mock-layer-watermark {
-            font-size: 42px;
-            margin-bottom: 8px;
-        }
-        .mock-layer-text {
-            font-size: 13px;
-            font-weight: 600;
-            color: #0f172a;
-        }
-        .mock-layer-sub {
-            font-size: 11px;
-            color: #64748b;
-            margin-top: 4px;
-        }
-        .preview-layers {
-            width: 220px;
-            background: #141416;
-            border-left: 1px solid #27272a;
-            padding: 10px 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .layers-header {
-            color: #e2e8f0;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            padding-bottom: 6px;
-            border-bottom: 1px solid #27272a;
-        }
-        .layer-item-mock {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 6px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            color: #cbd5e1;
-            background: #1e1e24;
-            border: 1px solid #27272a;
-        }
-        .layer-item-mock.active {
-            background: #2563eb;
-            color: #ffffff;
-            border-color: #1d4ed8;
+        .editor-preview-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 16 / 9;
+            user-select: none;
+            -webkit-user-drag: none;
         }
         .preview-hover-overlay {
             position: absolute;
             inset: 0;
             background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(3px);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -364,18 +277,12 @@
             color: #ffffff;
             font-weight: 600;
             font-size: 14px;
-            padding: 10px 22px;
+            padding: 11px 24px;
             border-radius: 6px;
             display: flex;
             align-items: center;
-            gap: 6px;
-            box-shadow: 0 4px 14px rgba(37,99,235,0.4);
-        }
-
-        @media (max-width: 768px) {
-            .preview-layers { display: none; }
-            .canvas-mock-card { width: 90%; height: 180px; }
-            .editor-preview-body { height: 240px; }
+            gap: 8px;
+            box-shadow: 0 4px 16px rgba(37,99,235,0.45);
         }
 
         /* 核心功能卡片 */
@@ -732,45 +639,12 @@
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>
                 </div>
-                <div class="editor-preview-body">
-                    <!-- 左侧工具栏 -->
-                    <div class="preview-tools">
-                        <div class="tool-icon active" title="选择移动">↖</div>
-                        <div class="tool-icon" title="魔棒选区">🪄</div>
-                        <div class="tool-icon" title="裁剪">✂️</div>
-                        <div class="tool-icon" title="画笔">🖌️</div>
-                        <div class="tool-icon" title="橡皮擦">◻️</div>
-                        <div class="tool-icon" title="吸管">💧</div>
-                        <div class="tool-icon" title="文字">T</div>
-                    </div>
-                    <!-- 中间画布工作区 -->
-                    <div class="preview-canvas-area">
-                        <div class="canvas-mock-card">
-                            <div class="mock-layer-watermark">🖼️</div>
-                            <div class="mock-layer-text">支持多图层透明通道、蒙版与色阶调优</div>
-                            <div class="mock-layer-sub">拖拽图片至此，或按 Ctrl+V 粘贴剪贴板图片直接开始</div>
-                        </div>
-                    </div>
-                    <!-- 右侧图层与属性 -->
-                    <div class="preview-layers">
-                        <div class="layers-header">图层 (Layers) · 3</div>
-                        <div class="layer-item-mock active">
-                            <span>🔲 调整图层 (曲线/滤镜)</span>
-                            <span style="font-size: 10px; color: #93c5fd;">柔光</span>
-                        </div>
-                        <div class="layer-item-mock">
-                            <span>🖼️ 图层 1 (透明主体)</span>
-                            <span style="font-size: 10px; color: #94a3b8;">正常</span>
-                        </div>
-                        <div class="layer-item-mock">
-                            <span>⬜ 背景层 (纯白画布)</span>
-                            <span style="font-size: 10px; color: #94a3b8;">锁定</span>
-                        </div>
-                    </div>
+                <div class="editor-preview-media">
+                    <img src="images/editor-screenshot.jpg" alt="Web PSEditor 在线图片编辑器实操工作台" class="editor-preview-img" loading="eager" decoding="async">
                     <!-- 悬停即入遮罩提示 -->
                     <div class="preview-hover-overlay">
                         <div class="overlay-btn">
-                            <span>⚡ 点击立即进入完整功能工作台</span>
+                            <span>⚡ 点击立即免安装进入工作台创作</span>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </div>
                     </div>
