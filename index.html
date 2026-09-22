@@ -208,8 +208,13 @@
         }
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        @media (max-width: 900px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
         }
         .feature-card {
             background: var(--card-bg);
@@ -466,50 +471,26 @@
                 <a href="editor.html" onclick="handleLaunch(event)" class="feature-card" style="text-decoration:none; color:inherit; display:block;">
                     <div class="card-icon">🪄</div>
                     <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <h3>智能魔棒与精细选区</h3>
+                        <h3>图层系统与精细抠图</h3>
                         <span style="color:var(--primary); font-size:13px; font-weight:600;">立即体验 →</span>
                     </div>
-                    <p>支持容差微调、多边形套索与选区反选，精准框选任意复杂主体，毫秒级快速抠图。</p>
-                </a>
-                <a href="editor.html" onclick="handleLaunch(event)" class="feature-card" style="text-decoration:none; color:inherit; display:block;">
-                    <div class="card-icon">📑</div>
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <h3>无限图层与混合模式</h3>
-                        <span style="color:var(--primary); font-size:13px; font-weight:600;">立即体验 →</span>
-                    </div>
-                    <p>支持非破坏性图层编辑、图层复制与上下重排，内置正片叠底、滤色、叠加等丰富混合模式。</p>
+                    <p>支持多图层堆叠、混合模式与非破坏性编辑，配备魔棒与多边形套索，毫秒级抠图并无损导出透明 PNG。</p>
                 </a>
                 <a href="editor.html" onclick="handleLaunch(event)" class="feature-card" style="text-decoration:none; color:inherit; display:block;">
                     <div class="card-icon">🎨</div>
                     <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <h3>专业滤镜与色彩调节</h3>
+                        <h3>专业滤镜与画笔调色</h3>
                         <span style="color:var(--primary); font-size:13px; font-weight:600;">立即体验 →</span>
                     </div>
-                    <p>内置曲线调整、色彩平衡、亮度/对比度与高斯模糊等 20+ 款调色引擎，重塑画面质感。</p>
+                    <p>内置色彩曲线、高斯模糊、马赛克打码及 20+ 款调色引擎，配备自由画笔、矢量图形绘制与富文本排版。</p>
                 </a>
                 <a href="editor.html" onclick="handleLaunch(event)" class="feature-card" style="text-decoration:none; color:inherit; display:block;">
-                    <div class="card-icon">🖌️</div>
+                    <div class="card-icon">🔒</div>
                     <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <h3>自由画笔与文字排版</h3>
+                        <h3>100% 纯本地沙箱运算</h3>
                         <span style="color:var(--primary); font-size:13px; font-weight:600;">立即体验 →</span>
                     </div>
-                    <p>提供多重笔刷直径与软硬度调节、几何矢量图形绘制、富文本输入与颜色渐变填充。</p>
-                </a>
-                <a href="editor.html" onclick="handleLaunch(event)" class="feature-card" style="text-decoration:none; color:inherit; display:block;">
-                    <div class="card-icon">📐</div>
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <h3>多格式导出与无损压缩</h3>
-                        <span style="color:var(--primary); font-size:13px; font-weight:600;">立即体验 →</span>
-                    </div>
-                    <p>支持 PNG 透明通道、JPG 质量比例精调、WEBP 以及工程文件保存，轻松应对各类体积限制。</p>
-                </a>
-                <a href="editor.html" onclick="handleLaunch(event)" class="feature-card" style="text-decoration:none; color:inherit; display:block;">
-                    <div class="card-icon">⚡</div>
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <h3>零依赖 · 纯本地沙箱</h3>
-                        <span style="color:var(--primary); font-size:13px; font-weight:600;">立即体验 →</span>
-                    </div>
-                    <p>所有图像处理完全在浏览器本机内存中运行，断网完全可用，图片绝不上云，绝对保护隐私。</p>
+                    <p>无需安装软件，零云端数据上传，断网环境完全顺畅运行。图片绝不上云，绝对捍卫商业资产与肖像隐私。</p>
                 </a>
             </div>
         </div>
