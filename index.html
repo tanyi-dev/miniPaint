@@ -57,79 +57,6 @@
         }
       ]
     }
-    
-        // === 国际化多语言自适应引擎 (Bilingual i18n Auto-Detect & Switch) ===
-        function switchIndexLang(lang) {
-            document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
-            
-            // 切换所有含有 .trn 标记的文本
-            var elements = document.querySelectorAll('.trn');
-            elements.forEach(function(el) {
-                var text = el.getAttribute('data-' + lang);
-                if (text) {
-                    if (el.children.length === 0) {
-                        el.textContent = text;
-                    } else {
-                        // 如果有子节点 (如图标 svg)，只替换文本节点
-                        var replaced = false;
-                        for (var i = 0; i < el.childNodes.length; i++) {
-                            if (el.childNodes[i].nodeType === Node.TEXT_NODE && el.childNodes[i].nodeValue.trim()) {
-                                el.childNodes[i].nodeValue = text;
-                                replaced = true;
-                                break;
-                            }
-                        }
-                        if (!replaced) el.textContent = text;
-                    }
-                }
-            });
-
-            // 切换顶部导航栏按钮激活态
-            var btnZh = document.getElementById('index-btn-zh');
-            var btnEn = document.getElementById('index-btn-en');
-            if (btnZh && btnEn) {
-                if (lang === 'zh') {
-                    btnZh.classList.add('active');
-                    btnEn.classList.remove('active');
-                } else {
-                    btnEn.classList.add('active');
-                    btnZh.classList.remove('active');
-                }
-            }
-
-            // 持久化语言状态至本地存储和 Cookie，方便与编辑器和教程页面互通
-            try {
-                localStorage.setItem('index_lang', lang);
-                document.cookie = 'index_lang=' + lang + ';path=/;max-age=31536000';
-            } catch (e) {}
-        }
-
-        function autoDetectIndexLang() {
-            var savedLang = null;
-            try {
-                savedLang = localStorage.getItem('index_lang');
-            } catch (e) {}
-
-            if (!savedLang) {
-                // 检查 cookie
-                var match = document.cookie.match(/(?:^|; )index_lang=([^;]*)/);
-                if (match) savedLang = match[1];
-            }
-
-            if (savedLang === 'zh' || savedLang === 'en') {
-                switchIndexLang(savedLang);
-                return;
-            }
-
-            // 客户端系统语言智能嗅探
-            var navLang = (navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage || '';
-            var isZh = /^zh/i.test(navLang);
-            switchIndexLang(isZh ? 'zh' : 'en');
-        }
-
-        // 页面初始化时立即嗅探执行
-        autoDetectIndexLang();
-
     </script>
     <style>
         :root {
@@ -1089,6 +1016,78 @@
                 });
             });
         });
+        // === 国际化多语言自适应引擎 (Bilingual i18n Auto-Detect & Switch) ===
+        function switchIndexLang(lang) {
+            document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
+            
+            // 切换所有含有 .trn 标记的文本
+            var elements = document.querySelectorAll('.trn');
+            elements.forEach(function(el) {
+                var text = el.getAttribute('data-' + lang);
+                if (text) {
+                    if (el.children.length === 0) {
+                        el.textContent = text;
+                    } else {
+                        // 如果有子节点 (如图标 svg)，只替换文本节点
+                        var replaced = false;
+                        for (var i = 0; i < el.childNodes.length; i++) {
+                            if (el.childNodes[i].nodeType === Node.TEXT_NODE && el.childNodes[i].nodeValue.trim()) {
+                                el.childNodes[i].nodeValue = text;
+                                replaced = true;
+                                break;
+                            }
+                        }
+                        if (!replaced) el.textContent = text;
+                    }
+                }
+            });
+
+            // 切换顶部导航栏按钮激活态
+            var btnZh = document.getElementById('index-btn-zh');
+            var btnEn = document.getElementById('index-btn-en');
+            if (btnZh && btnEn) {
+                if (lang === 'zh') {
+                    btnZh.classList.add('active');
+                    btnEn.classList.remove('active');
+                } else {
+                    btnEn.classList.add('active');
+                    btnZh.classList.remove('active');
+                }
+            }
+
+            // 持久化语言状态至本地存储和 Cookie，方便与编辑器和教程页面互通
+            try {
+                localStorage.setItem('index_lang', lang);
+                document.cookie = 'index_lang=' + lang + ';path=/;max-age=31536000';
+            } catch (e) {}
+        }
+
+        function autoDetectIndexLang() {
+            var savedLang = null;
+            try {
+                savedLang = localStorage.getItem('index_lang');
+            } catch (e) {}
+
+            if (!savedLang) {
+                // 检查 cookie
+                var match = document.cookie.match(/(?:^|; )index_lang=([^;]*)/);
+                if (match) savedLang = match[1];
+            }
+
+            if (savedLang === 'zh' || savedLang === 'en') {
+                switchIndexLang(savedLang);
+                return;
+            }
+
+            // 客户端系统语言智能嗅探
+            var navLang = (navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage || '';
+            var isZh = /^zh/i.test(navLang);
+            switchIndexLang(isZh ? 'zh' : 'en');
+        }
+
+        // 页面初始化时立即嗅探执行
+        autoDetectIndexLang();
+
     </script>
 </body>
 </html>
