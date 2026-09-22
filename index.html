@@ -961,6 +961,31 @@
         function closeModal() {
             document.getElementById('mobile-modal').style.display = 'none';
         }
+
+        // 增强链接在各种预览/沙箱环境中的导航容错
+        document.addEventListener('DOMContentLoaded', function() {
+            var links = document.querySelectorAll('a[href]');
+            links.forEach(function(link) {
+                var href = link.getAttribute('href');
+                if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
+                
+                link.addEventListener('click', function(e) {
+                    // 如果移动端弹窗已拦截，不处理
+                    if (isMobileDevice() && (href.indexOf('editor.html') !== -1)) return;
+                    
+                    // 检查是否处于 iframe 沙箱环境且普通跳转受限
+                    try {
+                        if (window.self !== window.top) {
+                            // 处于 iframe 嵌入窗口时，优先尝试本窗口导航，若被阻止则在新标签页打开
+                            window.location.href = href;
+                        }
+                    } catch (err) {
+                        // 跨域或安全限制时回退
+                        window.open(href, '_blank');
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
