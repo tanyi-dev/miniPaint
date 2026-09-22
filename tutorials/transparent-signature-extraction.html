@@ -199,6 +199,10 @@
             });
             document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
         }
+        (function() {
+            var isZh = (navigator.language || "").toLowerCase().indexOf("zh") !== -1;
+            setLang(isZh ? "zh" : "en");
+        })();
     </script>
 </body>
 </html>
