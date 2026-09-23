@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实战教程：如何在线给图片添加文字水印防盗用 - Web PSEditor 教程</title>
+    <meta name="description" content="图文实战教程：如何在线给照片添加文字水印与防盗用标识：使用免费纯网页图片编辑器 Web PSEditor，三分钟为图片加上专属水印，全程浏览器本地处理，图片不上传服务器。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/add-text-watermark" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/add-text-watermark" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/add-text-watermark" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/add-text-watermark" />
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .compare { display: flex; gap: 12px; }
+        .compare figure { flex: 1; margin: 0; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">← 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide.html" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/add-text-watermark" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <!-- 🔒 隐私信任安全背书 -->
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+<h1>实战教程：如何在线给图片添加文字水印，防止被盗用</h1>
+            <div class="meta-bar">
+                <span>难度：极简入门</span> • <span>耗时：3 分钟</span> • <span>适用：作品集、电商图、摄影作品</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">图片不上传，水印本地加！</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">纯浏览器 Canvas 处理，素材不出你的电脑。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 加水印 →</a>
+            </div>
+
+            <p>辛苦拍的照片、精心做的电商主图，发到网上第二天就被别人搬运盗用，连个署名都没有——这是每位创作者都遇过的糟心事。给图片加上<strong>文字水印</strong>，是最简单有效的防盗手段：别人即使转载，观者也能一眼看出来源。很多在线加水印工具需要把图片上传到对方服务器，商务图和未发布作品存在泄露风险；而使用 <strong>Web PSEditor</strong>，全部处理都在你的浏览器本地完成，图片从头到尾不会离开你的电脑。</p>
+
+            <h2>先看效果：处理前 vs 处理后</h2>
+            <div class="compare">
+                <figure>
+                    <img src="../../images/tutorials/watermark-before.jpg" alt="加水印前的原始风景照片，画面干净无水印" loading="lazy">
+                    <figcaption>处理前：原始图片</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/watermark-after.jpg" alt="加上斜向平铺文字水印后的照片，印有 Web PSEditor 样图字样" loading="lazy">
+                    <figcaption>处理后：平铺斜向文字水印</figcaption>
+                </figure>
+            </div>
+
+            <h2>第一步：打开编辑器并导入图片</h2>
+            <p>打开 <a href="../../editor.html?lang=zh" target="_blank">Web PSEditor</a>，点击左上角 <strong>【文件】→【打开图片】</strong>，选择你要加水印的照片。图片载入后，界面右侧会显示画布信息与图层面板：</p>
+            <figure>
+                <img src="../../images/tutorials/watermark-editor-ui.jpg" alt="Web PSEditor 编辑器界面，画布中已载入待加水印的风景照片" loading="lazy">
+                <figcaption>Web PSEditor 编辑器界面：样图已载入画布</figcaption>
+            </figure>
+
+            <div class="step-card">
+                <div class="step-title">第二步：方法一 —— 单个署名水印（适合摄影作品）</div>
+                <p>
+                    1. 点击左侧工具栏的 <strong>文字工具（T 图标）</strong>，在画布上点击要放置水印的位置。<br>
+                    2. 输入你的署名，如：<code>摄影 @你的名字</code>，并在文字属性面板设置字号、颜色（建议白色或浅灰）。<br>
+                    3. 在右侧图层面板把该文字图层的 <strong>不透明度（Opacity）调至 60%~70%</strong>，水印清晰可见又不喧宾夺主。<br>
+                    4. 如需倾斜效果，选中文字图层后使用顶部 <strong>【编辑】→【自由变换】</strong> 旋转 -30° 左右。
+                </p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">第三步：方法二 —— 全图平铺水印（防盗用最强）</div>
+                <p>
+                    单个水印很容易被裁掉，全图平铺才是防盗王牌：<br>
+                    1. 先按方法一做好一个文字水印图层。<br>
+                    2. 在图层面板<strong>复制该图层</strong>，拖动副本到新的位置；重复操作让水印铺满全图（本文效果图即为平铺样式）。<br>
+                    3. 全部摆好后，把每个水印图层的不透明度统一调至 <strong>30%~40%</strong>，视觉更通透。<br>
+                    4. 小技巧：按住 <code>Shift</code> 拖动可水平/垂直对齐，让排布更整齐。
+                </p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">第四步：导出成品</div>
+                <p>
+                    点击 <strong>【文件】→【另存为】</strong>，选择格式：日常分享与电商图选 <strong>JPG（质量 85 以上）</strong>；需要保留透明背景的选 <strong>PNG</strong>。导出的图片自带水印，可直接发布。
+                </p>
+            </div>
+
+            <div class="tip-box">
+                💡 <strong>进阶提示</strong>：如果你管理的是产品图库，可以把水印文字换成「仅供 XX 店铺使用」，这样即使图片被盗用，反而变成免费的引流广告。
+            </div>
+
+            <!-- 🎯 实战练习与安全导流 CTA 卡片 -->
+            <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">打开编辑器，用你自己的照片按上述步骤加水印，全程无需注册、无需上传。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一键尝试此功能</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

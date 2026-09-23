@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Add a Text Watermark to Photos Online (Free, No Upload) - Web PSEditor Tutorial</title>
+    <meta name="description" content="Step-by-step tutorial: add text watermarks to your photos online for free with Web PSEditor. Protect your images from theft — everything runs locally in your browser, no uploads, no sign-up." />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/tutorials/add-text-watermark" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/add-text-watermark" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/add-text-watermark" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/add-text-watermark" />
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .compare { display: flex; gap: 12px; }
+        .compare figure { flex: 1; margin: 0; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">← Home</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide.html" class="back-link" style="color: var(--text-sub);">Tutorials</a>
+            </div>
+            <div class="lang-switch">
+                <a href="https://webpseditor.com/zh/tutorials/add-text-watermark" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span>
+            </div>
+        </div>
+
+        <!-- 🔒 Privacy trust badge -->
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% Local Browser Processing · Zero Uploads · Zero Privacy Risk</span>
+        </div>
+
+        <article>
+<h1>How to Add a Text Watermark to Photos Online (Free & Private)</h1>
+            <div class="meta-bar">
+                <span>Difficulty: Beginner</span> • <span>Time: 3 min</span> • <span>Great for: portfolios, product photos, artwork</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">Your photos never leave your computer!</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">100% in-browser canvas processing — no uploads, no sign-up.</div>
+                </div>
+                <a href="../../editor.html" class="cta-btn" target="_blank">Open Web PSEditor & Add a Watermark →</a>
+            </div>
+
+            <p>You spent hours shooting and editing the perfect photo, posted it online, and a day later it's reposted by someone else with no credit. Adding a <strong>text watermark</strong> is the simplest, most effective defense: even if your image gets reposted, everyone can see where it came from. Most online watermark tools require uploading your photos to their servers — a real risk for unreleased work and commercial images. With <strong>Web PSEditor</strong>, all processing happens locally in your browser, so your images never leave your machine.</p>
+
+            <h2>The Result: Before vs After</h2>
+            <div class="compare">
+                <figure>
+                    <img src="../../images/tutorials/watermark-before.jpg" alt="Original landscape photo without any watermark" loading="lazy">
+                    <figcaption>Before: original image</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/watermark-after.jpg" alt="Photo protected with a tiled diagonal text watermark" loading="lazy">
+                    <figcaption>After: tiled diagonal text watermark</figcaption>
+                </figure>
+            </div>
+
+            <h2>Step 1: Open the Editor and Load Your Image</h2>
+            <p>Open <a href="../../editor.html" target="_blank">Web PSEditor</a>, click <strong>File → Open</strong> and pick the photo you want to protect. Once loaded, the canvas info and layers panel appear on the right:</p>
+            <figure>
+                <img src="../../images/tutorials/watermark-editor-ui.jpg" alt="Web PSEditor interface with a sample photo loaded on the canvas" loading="lazy">
+                <figcaption>Web PSEditor with a sample photo loaded on the canvas</figcaption>
+            </figure>
+
+            <div class="step-card">
+                <div class="step-title">Step 2: Option A — Single Signature Watermark (great for photography)</div>
+                <p>
+                    1. Select the <strong>Text tool (T icon)</strong> in the left toolbar and click where you want the watermark.<br>
+                    2. Type your signature, e.g. <code>Photo by Your Name</code>, then set the font size and color (white or light gray works best).<br>
+                    3. In the layers panel, set the text layer's <strong>Opacity to 60–70%</strong> — visible but not distracting.<br>
+                    4. For a tilted look, select the layer and use <strong>Edit → Free Transform</strong> to rotate about -30°.
+                </p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">Step 3: Option B — Full-Canvas Tiled Watermark (strongest protection)</div>
+                <p>
+                    A single watermark is easy to crop out. Tiling covers the whole image:<br>
+                    1. Create one text watermark layer as in Option A.<br>
+                    2. <strong>Duplicate the layer</strong> in the layers panel and drag the copy to a new spot; repeat until the canvas is covered (that's the style used in our demo image).<br>
+                    3. Select all watermark layers and set <strong>Opacity to 30–40%</strong> for a clean, subtle look.<br>
+                    4. Pro tip: hold <code>Shift</code> while dragging to keep rows and columns perfectly aligned.
+                </p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">Step 4: Export the Final Image</div>
+                <p>
+                    Go to <strong>File → Save As</strong> and choose a format: use <strong>JPG (quality 85+)</strong> for web sharing and product photos, or <strong>PNG</strong> when you need transparency. The exported file ships with your watermark built in.
+                </p>
+            </div>
+
+            <div class="tip-box">
+                💡 <strong>Pro tip</strong>: Managing a product catalog? Watermark with "Property of Your Store" — if images get stolen, they become free advertising.
+            </div>
+
+            <!-- 🎯 Practice CTA -->
+            <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Open the editor and watermark your own photo right now — no account, no upload.</p>
+                </div>
+                <div>
+                    <a href="../../editor.html" class="practice-btn">
+                        <span>Try It in Web PSEditor</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>
