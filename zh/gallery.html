@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创意画廊 - 用 Web PSEditor 制作的示例作品 | 免费在线图片编辑器</title>
+    <meta name="description" content="浏览用 Web PSEditor 制作的示例作品：证件照换底色、电商商品抠图、签名提取、照片调色。每个示例都能作为模板一键在编辑器中打开，全部处理都在你的浏览器本地完成。" />
+    <meta name="keywords" content="图片编辑示例, 证件照模板, 商品抠图案例, 在线修图作品, 创意画廊" />
+    <link rel="icon" sizes="192x192" href="../images/favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/gallery" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/gallery" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/gallery" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/gallery" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ImageGallery",
+      "name": "Web PSEditor 创意画廊",
+      "description": "用 Web PSEditor 制作的示例作品：证件照换底色、电商商品抠图、照片调色与签名提取。每个示例都可在编辑器中作为模板打开直接编辑。",
+      "url": "https://webpseditor.com/zh/gallery"
+    }
+    </script>
+    <style>
+:root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.75;
+            color: var(--text-main);
+            background-color: var(--bg-page);
+            margin: 0;
+        }
+        .container { max-width: 1080px; margin: 0 auto; padding: 32px 24px 48px; }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 14px; }
+        .back-link:hover { text-decoration: underline; }
+        .lang-switch { display: flex; gap: 8px; align-items: center; }
+        .lang-btn { font-size: 13px; color: var(--text-sub); text-decoration: none; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-card); }
+        .lang-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        h1 { font-size: 30px; margin: 0 0 10px; color: #0f172a; }
+        .lead { color: var(--text-sub); font-size: 16px; margin: 0 0 8px; max-width: 760px; }
+        .sample-note { font-size: 13px; color: #94a3b8; margin: 0 0 26px; }
+
+        .group-title { display: flex; align-items: center; gap: 10px; font-size: 21px; color: #0f172a; margin: 40px 0 16px; }
+        .group-title .emoji { font-size: 24px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+        .art-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .2s ease, transform .2s ease; }
+        .art-card:hover { box-shadow: 0 10px 28px rgba(15, 23, 42, 0.10); transform: translateY(-3px); }
+        .art-thumb { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #eef2f7; }
+        .art-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .art-tag { position: absolute; top: 10px; left: 10px; background: rgba(37, 99, 235, 0.92); color: #fff; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; letter-spacing: .2px; }
+        .art-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+        .art-title { font-size: 15.5px; font-weight: 700; color: #0f172a; margin: 0; }
+        .art-desc { font-size: 13px; color: var(--text-sub); margin: 0; line-height: 1.6; flex: 1; }
+        .art-actions { display: flex; gap: 8px; margin-top: 4px; }
+        .btn { flex: 1; text-align: center; font-size: 13px; font-weight: 600; padding: 9px 6px; border-radius: 8px; text-decoration: none; white-space: nowrap; }
+        .btn-primary { background: var(--primary); color: #fff !important; }
+        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-ghost { border: 1px solid var(--border); color: var(--primary) !important; background: #f8fafc; }
+        .btn-ghost:hover { border-color: var(--primary); }
+
+        .cta-banner { display: flex; justify-content: space-between; align-items: center; gap: 16px; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 18px 22px; margin: 44px 0 8px; }
+        .cta-banner h3 { margin: 0 0 4px; font-size: 17px; color: #1e3a8a; }
+        .cta-banner p { margin: 0; font-size: 13px; color: #64748b; }
+        .cta-banner a { background: var(--primary); color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; padding: 10px 18px; border-radius: 8px; white-space: nowrap; }
+        .cta-banner a:hover { background: var(--primary-hover); }
+        .footer-nav { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--border); display: flex; gap: 18px; font-size: 13.5px; flex-wrap: wrap; }
+        .footer-nav a { color: var(--text-sub); text-decoration: none; }
+        .footer-nav a:hover { color: var(--primary); }
+        @media (max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .container { padding: 24px 16px 40px; } h1 { font-size: 24px; } .gallery-grid { grid-template-columns: 1fr; } .cta-banner { flex-direction: column; align-items: flex-start; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <a href="zh/index.html" class="back-link">← 返回首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="zh/guide" class="back-link" style="color: var(--text-sub);">全部教程</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/gallery" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <h1>创意画廊</h1>
+        <p class="lead">看看用 Web PSEditor 能做出什么——证件照、电商商品图、摄影后期、文档处理。点开任意示例即可作为模板直接编辑。</p>
+        <p class="sample-note">以下均为演示用示例作品。所有编辑都在你的浏览器本地完成，图片不会被上传。</p>
+
+        <h2 class="group-title"><span class="emoji">🧑</span>人像与证件照</h2>
+        <div class="gallery-grid">
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="../images/gallery/portrait-id-white.jpg" alt="纯白背景的证件照人像，适合一键更换底色" loading="lazy">
+                    <span class="art-tag">换底色</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">白底证件照</p>
+                    <p class="art-desc">最经典的起手式：用油漆桶工具把白底换成标准蓝底或红底，边缘干净无毛边。</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/portrait-id-white.jpg">在编辑器中打开模板</a>
+                        <a class="btn btn-ghost" href="editor.html">从零开始创作</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="../images/gallery/portrait-id-blue.jpg" alt="蓝底证件照人像示例" loading="lazy">
+                    <span class="art-tag">换底色</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">蓝底证件照</p>
+                    <p class="art-desc">用容差填充得到的蓝底效果。试着把它换成红底，或微调发丝边缘的细节。</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/portrait-id-blue.jpg">在编辑器中打开模板</a>
+                        <a class="btn btn-ghost" href="editor.html">从零开始创作</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="../images/gallery/portrait-headshot.jpg" alt="灰色摄影棚背景的职业形象照" loading="lazy">
+                    <span class="art-tag">换背景</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">职业形象照</p>
+                    <p class="art-desc">求职简历即用型头像。练习抠出人物主体，再换成品牌色或办公室背景。</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/portrait-headshot.jpg">在编辑器中打开模板</a>
+                        <a class="btn btn-ghost" href="editor.html">从零开始创作</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="group-title"><span class="emoji">🛍️</span>电商商品图</h2>
+        <div class="gallery-grid">
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="../images/gallery/product-headphones.jpg" alt="纯色背景上的白色无线耳机商品图，适合抠图练习" loading="lazy">
+                    <span class="art-tag">魔法抠图</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">耳机白底抠图</p>
+                    <p class="art-desc">用魔术橡皮擦除纯色背景，导出透明 PNG，直接上架你的商品详情页。</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/product-headphones.jpg">在编辑器中打开模板</a>
+                        <a class="btn btn-ghost" href="editor.html">从零开始创作</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="../images/gallery/product-cosmetics.jpg" alt="粉嫩背景上的琥珀色精华瓶商品图" loading="lazy">
+                    <span class="art-tag">抠图与调整</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">护肤品精华瓶</p>
+                    <p class="art-desc">抠出瓶身后放到纯白画布上，再微调亮度与对比度，轻松满足平台上传规范。</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/product-cosmetics.jpg">在编辑器中打开模板</a>
+                        <a class="btn btn-ghost" href="editor.html">从零开始创作</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="../images/gallery/product-sneakers.jpg" alt="纯白背景上悬浮展示的白橙配色运动鞋" loading="lazy">
+                    <span class="art-tag">魔法抠图</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">运动鞋悬浮图</p>
+                    <p class="art-desc">动感悬浮角度实拍。把鞋子抠出来，用你自己的品牌背景重新搭场景。</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/product-sneakers.jpg">在编辑器中打开模板</a>
+                        <a class="btn btn-ghost" href="editor.html">从零开始创作</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="group-title"><span class="emoji">🎨</span>摄影后期与文档处理</h2>
+        <div class="gallery-grid">
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="../images/gallery/photo-landscape.jpg" alt="灰蒙蒙的绿色山丘风景照，等待色彩还原" loading="lazy">
+                    <span class="art-tag">色彩校正</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">风景色彩还原</p>
+                    <p class="art-desc">一张灰蒙蒙的旅行照。打开后用自动调色或色彩校正，让绿色和天空恢复生机。</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/photo-landscape.jpg">在编辑器中打开模板</a>
+                        <a class="btn btn-ghost" href="editor.html">从零开始创作</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="../images/gallery/photo-food.jpg" alt="大理石桌面上的拿铁咖啡与草莓蛋糕俯拍图" loading="lazy">
+                    <span class="art-tag">滤镜调色</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">美食俯拍</p>
+                    <p class="art-desc">温暖的咖啡馆氛围。试试一键滤镜、色温和对比度，调出你的专属风格。</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/photo-food.jpg">在编辑器中打开模板</a>
+                        <a class="btn btn-ghost" href="editor.html">从零开始创作</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="../images/gallery/doc-signature.jpg" alt="带手写签名的扫描文档页，用于提取透明签名" loading="lazy">
+                    <span class="art-tag">透明 PNG</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">手写签名提取</p>
+                    <p class="art-desc">把拍下来的签名变成可复用的透明 PNG，合同、PDF 电子签章随取随用。</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/doc-signature.jpg">在编辑器中打开模板</a>
+                        <a class="btn btn-ghost" href="editor.html">从零开始创作</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-banner">
+            <div>
+                <h3 style="margin:0 0 4px; font-size:17px;">想处理自己的照片？</h3>
+                <p style="margin:0; font-size:13px; color:#94a3b8;">零安装、零上传——你的图片永远留在自己的设备上。</p>
+            </div>
+            <a href="editor.html">打开 Web PSEditor 画布 →</a>
+        </div>
+
+        <div class="footer-nav">
+            <a href="zh/index.html">首页</a>
+            <a href="editor.html">编辑器</a>
+            <a href="zh/guide">教程</a>
+            <a href="zh/privacy">隐私政策</a>
+            <a href="zh/terms">服务条款</a>
+        </div>
+    </div>
+</body>
+</html>

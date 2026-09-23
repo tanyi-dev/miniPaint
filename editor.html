@@ -506,6 +506,14 @@
 			</svg>
 			<span id="footer_terms_txt">Terms of Service</span>
 		</a>
+		<a id="footer_link_gallery" href="gallery" target="_blank">
+			<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.9;">
+				<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+				<circle cx="8.5" cy="8.5" r="1.5"></circle>
+				<polyline points="21 15 16 10 5 21"></polyline>
+			</svg>
+			<span id="footer_gallery_txt">Gallery</span>
+		</a>
 		<!-- 赞助功能待 Stripe 配置完成后再开启
 			<span style="color: #444;">|</span>
 		<a id="footer_link_donate" href="https://www.buymeacoffee.com/webpseditor" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: none; margin-left: 10px; font-weight: 500;">☕ Buy Me a Coffee</a>
@@ -538,6 +546,7 @@
 				var guideTxt = document.getElementById('footer_guide_txt');
 				var privacyTxt = document.getElementById('footer_privacy_txt');
 				var termsTxt = document.getElementById('footer_terms_txt');
+				var galleryTxt = document.getElementById('footer_gallery_txt');
 				var donateEl = document.getElementById('footer_link_donate');
 				var topHomeTxt = document.getElementById('top_home_txt');
 
@@ -549,6 +558,10 @@
 					if (guideTxt) guideTxt.innerText = '使用教程';
 					if (privacyTxt) privacyTxt.innerText = '隐私政策';
 					if (termsTxt) termsTxt.innerText = '服务条款';
+					if (galleryTxt) {
+						galleryTxt.innerText = '灵感画廊';
+						document.getElementById('footer_link_gallery').setAttribute('href', 'zh/gallery');
+					}
 					if (donateEl) donateEl.innerText = '☕ 赞助支持';
 				} else {
 					if (topHomeTxt) topHomeTxt.innerText = 'Home';
@@ -557,6 +570,10 @@
 					if (guideTxt) guideTxt.innerText = 'User Guide';
 					if (privacyTxt) privacyTxt.innerText = 'Privacy Policy';
 					if (termsTxt) termsTxt.innerText = 'Terms of Service';
+					if (galleryTxt) {
+						galleryTxt.innerText = 'Gallery';
+						document.getElementById('footer_link_gallery').setAttribute('href', 'gallery');
+					}
 					if (donateEl) donateEl.innerText = '☕ Buy Me a Coffee';
 				}
 			}
@@ -598,6 +615,67 @@
 					setTimeout(updateFooterLanguage, 100);
 				}
 			});
+		})();
+	</script>
+
+	<script>
+		// 画廊模板自动加载：gallery 页通过 ?load=/images/gallery/xxx.jpg 传入示例图
+		// 安全约束：仅允许本站 /images/gallery/ 目录下的 .jpg，防止被当作任意图片加载代理
+		(function () {
+			var m = window.location.search.match(/[?&]load=([^&]+)/i);
+			if (!m) return;
+			var path;
+			try { path = decodeURIComponent(m[1]); } catch (e) { return; }
+			if (!/^\/images\/gallery\/[a-z0-9-]+\.jpg$/i.test(path)) return;
+			if (window.__galleryTemplateLoaded) return;
+			window.__galleryTemplateLoaded = true;
+
+			function clickOk() {
+				var btns = document.querySelectorAll('.popup button');
+				for (var i = 0; i < btns.length; i++) {
+					var t = (btns[i].textContent || '').trim();
+					if (/^(ok|确定|好)$/i.test(t)) { btns[i].click(); return true; }
+				}
+				return false;
+			}
+
+			var pendingDu = null;
+
+			function loadTemplate(retries) {
+				if (!retries) return;
+				if (!(window.FileOpen && typeof window.FileOpen.open_data_url === 'function')) {
+					return setTimeout(function () { loadTemplate(retries - 1); }, 300);
+				}
+				fetch(path, { cache: 'force-cache' })
+					.then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.blob(); })
+					.then(function (blob) {
+						return new Promise(function (resolve, reject) {
+							var fr = new FileReader();
+							fr.onload = function () { resolve(fr.result); };
+							fr.onerror = reject;
+							fr.readAsDataURL(blob);
+						});
+					})
+					.then(function (du) {
+						var name = path.split('/').pop();
+						pendingDu = du;
+						window.FileOpen.open_data_url(du, name);
+						return new Promise(function (resolve) { setTimeout(resolve, 800); });
+					})
+					.then(function () {
+						// open_data_url 会弹出数据导入对话框：回填内容并确认（与手动流程一致）
+						var ta = document.querySelector('#pop_data_data');
+						if (!ta || !pendingDu) return;
+						ta.value = pendingDu;
+						ta.dispatchEvent(new Event('input', { bubbles: true }));
+						ta.dispatchEvent(new Event('change', { bubbles: true }));
+						setTimeout(function () { clickOk(); }, 100);
+					})
+					.catch(function (e) { console.warn('Gallery template load failed:', e); });
+			}
+
+			if (document.readyState === 'complete') loadTemplate(60);
+			else window.addEventListener('load', function () { loadTemplate(60); });
 		})();
 	</script>
 </body>

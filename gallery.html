@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Gallery - Examples Made with Web PSEditor | Free Online Photo Editor</title>
+    <meta name="description" content="Browse real examples made with Web PSEditor: ID photo background changes, product cutouts, signature extraction and photo color correction. Open any example as a template in the editor and make it yours — 100% in your browser." />
+    <meta name="keywords" content="photo editing examples, id photo template, product cutout example, photo editor gallery, online photo editor samples" />
+    <link rel="icon" sizes="192x192" href="images/favicon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/gallery" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/gallery" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/gallery" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/gallery" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ImageGallery",
+      "name": "Web PSEditor Creative Gallery",
+      "description": "Example works made with Web PSEditor: ID photo background recolor, e-commerce product cutouts, photo color correction and signature extraction. Each example opens in the editor as a ready-to-edit template.",
+      "url": "https://webpseditor.com/gallery"
+    }
+    </script>
+    <style>
+:root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.75;
+            color: var(--text-main);
+            background-color: var(--bg-page);
+            margin: 0;
+        }
+        .container { max-width: 1080px; margin: 0 auto; padding: 32px 24px 48px; }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 14px; }
+        .back-link:hover { text-decoration: underline; }
+        .lang-switch { display: flex; gap: 8px; align-items: center; }
+        .lang-btn { font-size: 13px; color: var(--text-sub); text-decoration: none; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-card); }
+        .lang-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        h1 { font-size: 30px; margin: 0 0 10px; color: #0f172a; }
+        .lead { color: var(--text-sub); font-size: 16px; margin: 0 0 8px; max-width: 760px; }
+        .sample-note { font-size: 13px; color: #94a3b8; margin: 0 0 26px; }
+
+        .group-title { display: flex; align-items: center; gap: 10px; font-size: 21px; color: #0f172a; margin: 40px 0 16px; }
+        .group-title .emoji { font-size: 24px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+        .art-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .2s ease, transform .2s ease; }
+        .art-card:hover { box-shadow: 0 10px 28px rgba(15, 23, 42, 0.10); transform: translateY(-3px); }
+        .art-thumb { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #eef2f7; }
+        .art-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .art-tag { position: absolute; top: 10px; left: 10px; background: rgba(37, 99, 235, 0.92); color: #fff; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; letter-spacing: .2px; }
+        .art-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+        .art-title { font-size: 15.5px; font-weight: 700; color: #0f172a; margin: 0; }
+        .art-desc { font-size: 13px; color: var(--text-sub); margin: 0; line-height: 1.6; flex: 1; }
+        .art-actions { display: flex; gap: 8px; margin-top: 4px; }
+        .btn { flex: 1; text-align: center; font-size: 13px; font-weight: 600; padding: 9px 6px; border-radius: 8px; text-decoration: none; white-space: nowrap; }
+        .btn-primary { background: var(--primary); color: #fff !important; }
+        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-ghost { border: 1px solid var(--border); color: var(--primary) !important; background: #f8fafc; }
+        .btn-ghost:hover { border-color: var(--primary); }
+
+        .cta-banner { display: flex; justify-content: space-between; align-items: center; gap: 16px; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 18px 22px; margin: 44px 0 8px; }
+        .cta-banner h3 { margin: 0 0 4px; font-size: 17px; color: #1e3a8a; }
+        .cta-banner p { margin: 0; font-size: 13px; color: #64748b; }
+        .cta-banner a { background: var(--primary); color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; padding: 10px 18px; border-radius: 8px; white-space: nowrap; }
+        .cta-banner a:hover { background: var(--primary-hover); }
+        .footer-nav { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--border); display: flex; gap: 18px; font-size: 13.5px; flex-wrap: wrap; }
+        .footer-nav a { color: var(--text-sub); text-decoration: none; }
+        .footer-nav a:hover { color: var(--primary); }
+        @media (max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .container { padding: 24px 16px 40px; } h1 { font-size: 24px; } .gallery-grid { grid-template-columns: 1fr; } .cta-banner { flex-direction: column; align-items: flex-start; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <a href="index.html" class="back-link">← Home</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="guide" class="back-link" style="color: var(--text-sub);">All Tutorials</a>
+            </div>
+            <div class="lang-switch">
+                <a href="https://webpseditor.com/zh/gallery" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span>
+            </div>
+        </div>
+
+        <h1>Creative Gallery</h1>
+        <p class="lead">Real examples of what you can make with Web PSEditor — ID photos, e-commerce shots, photo finishing and more. Open any example as a template and make it yours.</p>
+        <p class="sample-note">Images shown are sample works for demonstration. Everything opens and edits locally in your browser — nothing is uploaded.</p>
+
+        <h2 class="group-title"><span class="emoji">🧑</span>Portraits &amp; ID Photos</h2>
+        <div class="gallery-grid">
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="images/gallery/portrait-id-white.jpg" alt="Passport style portrait photo on a pure white background, ready for background recolor" loading="lazy">
+                    <span class="art-tag">Background Recolor</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">Passport Photo — White Background</p>
+                    <p class="art-desc">The classic starting point: swap the white backdrop to standard blue or red with the Fill tool, no edge artifacts.</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/portrait-id-white.jpg">Open as Template</a>
+                        <a class="btn btn-ghost" href="editor.html">Start from Scratch</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="images/gallery/portrait-id-blue.jpg" alt="ID photo of a woman on a royal blue studio background" loading="lazy">
+                    <span class="art-tag">Background Recolor</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">ID Photo — Blue Background</p>
+                    <p class="art-desc">Blue-background result achieved with tolerance-based fill. Try recoloring it to red, or fine-tune the hairline edges.</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/portrait-id-blue.jpg">Open as Template</a>
+                        <a class="btn btn-ghost" href="editor.html">Start from Scratch</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="images/gallery/portrait-headshot.jpg" alt="Professional corporate headshot of a businesswoman on a gray studio background" loading="lazy">
+                    <span class="art-tag">Background Replace</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">Professional Headshot</p>
+                    <p class="art-desc">LinkedIn-ready portrait. Practice cutting out the subject and placing it on a brand-color or office backdrop.</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/portrait-headshot.jpg">Open as Template</a>
+                        <a class="btn btn-ghost" href="editor.html">Start from Scratch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="group-title"><span class="emoji">🛍️</span>E-commerce Product Shots</h2>
+        <div class="gallery-grid">
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="images/gallery/product-headphones.jpg" alt="White wireless headphones product photo on a plain background for cutout practice" loading="lazy">
+                    <span class="art-tag">Magic Cutout</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">Headphones — Clean Cutout</p>
+                    <p class="art-desc">Erase the flat background with the Magic Eraser, then export a transparent PNG for your product listings.</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/product-headphones.jpg">Open as Template</a>
+                        <a class="btn btn-ghost" href="editor.html">Start from Scratch</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="images/gallery/product-cosmetics.jpg" alt="Amber glass skincare serum bottle on a pastel pink background" loading="lazy">
+                    <span class="art-tag">Cutout &amp; Adjust</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">Skincare Serum Bottle</p>
+                    <p class="art-desc">Cut out the bottle, drop it on a pure white canvas, then fine-tune brightness for marketplace compliance.</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/product-cosmetics.jpg">Open as Template</a>
+                        <a class="btn btn-ghost" href="editor.html">Start from Scratch</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="images/gallery/product-sneakers.jpg" alt="White and orange running sneaker floating on a pure white background" loading="lazy">
+                    <span class="art-tag">Magic Cutout</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">Sneaker — Floating Shot</p>
+                    <p class="art-desc">Dynamic floating-angle shot. Isolate the shoe and rebuild the scene with your own brand background.</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/product-sneakers.jpg">Open as Template</a>
+                        <a class="btn btn-ghost" href="editor.html">Start from Scratch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="group-title"><span class="emoji">🎨</span>Photo Finishing &amp; Documents</h2>
+        <div class="gallery-grid">
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="images/gallery/photo-landscape.jpg" alt="Dull hazy landscape photo of green hills that needs color correction" loading="lazy">
+                    <span class="art-tag">Color Correction</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">Landscape — Color Recovery</p>
+                    <p class="art-desc">A washed-out, hazy travel shot. Open it and use Auto Adjust or Color Corrections to bring the greens and sky back to life.</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/photo-landscape.jpg">Open as Template</a>
+                        <a class="btn btn-ghost" href="editor.html">Start from Scratch</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="images/gallery/photo-food.jpg" alt="Overhead flat lay of latte coffee and strawberry cake on a marble table" loading="lazy">
+                    <span class="art-tag">Filters &amp; Tone</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">Food Flat Lay</p>
+                    <p class="art-desc">Warm café mood. Experiment with one-click filters, warmth and contrast to build your own signature look.</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/photo-food.jpg">Open as Template</a>
+                        <a class="btn btn-ghost" href="editor.html">Start from Scratch</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="art-card">
+                <div class="art-thumb">
+                    <img src="images/gallery/doc-signature.jpg" alt="Scanned document page with a handwritten signature for transparent signature extraction" loading="lazy">
+                    <span class="art-tag">Transparent PNG</span>
+                </div>
+                <div class="art-body">
+                    <p class="art-title">Handwritten Signature Extraction</p>
+                    <p class="art-desc">Turn a photographed signature into a reusable transparent PNG for contracts, PDFs and digital paperwork.</p>
+                    <div class="art-actions">
+                        <a class="btn btn-primary" href="editor.html?load=/images/gallery/doc-signature.jpg">Open as Template</a>
+                        <a class="btn btn-ghost" href="editor.html">Start from Scratch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-banner">
+            <div>
+                <h3 style="margin:0 0 4px; font-size:17px;">Have your own photo to work on?</h3>
+                <p style="margin:0; font-size:13px; color:#94a3b8;">Zero installation, zero uploads — your images never leave your device.</p>
+            </div>
+            <a href="editor.html">Open Web PSEditor Canvas →</a>
+        </div>
+
+        <div class="footer-nav">
+            <a href="index.html">Home</a>
+            <a href="editor.html">Editor</a>
+            <a href="guide">Tutorials</a>
+            <a href="privacy">Privacy Policy</a>
+            <a href="terms">Terms of Service</a>
+        </div>
+    </div>
+</body>
+</html>
