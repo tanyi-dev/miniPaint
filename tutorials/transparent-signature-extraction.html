@@ -31,7 +31,24 @@
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
-        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } }
+        article figure { margin: 18px 0; text-align: center; }
+        article figure img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
+        article figcaption { font-size: 13px; color: var(--text-sub); margin-top: 8px; }
+        .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .tool-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; }
+        .mistake-box strong { color: #991b1b; }
+        .mistake-box li { color: #7f1d1d; font-size: 14px; margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
+        .faq-item h3 { font-size: 15px; margin: 0 0 6px; color: #0f172a; }
+        .faq-item p { margin: 0; font-size: 14px; color: #334155; }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        article h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { grid-template-columns: 1fr; } .related { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -67,8 +84,18 @@
                 <a href="../editor.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
             </div>
 
-            <p>For contracts, invoices, and digital certificates, having a clean, transparent digital signature is crucial. When photographing signatures on paper, shadows and yellow tint often make direct pasting impossible. This guide walks you through converting photo signatures into clean transparent PNG files using <strong>Web PSEditor</strong>.</p>
+            <p>For contracts, invoices, and digital certificates, having a clean, transparent digital signature is crucial. When photographing signatures on paper, shadows and yellow tint often make direct pasting impossible. This guide walks you through converting photo signatures into clean transparent PNG files using <strong>Web PSEditor</strong> — everything runs locally in your browser, so your signature never leaves your device.</p>
 
+            <div class="compare">
+                <figure>
+                    <img src="../../images/tutorials/signature-before.jpg" alt="Handwritten signature photographed on plain white paper" loading="lazy">
+                    <figcaption>Before: signature photographed on paper</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/signature-after.jpg" alt="Extracted signature with transparent background shown as checkerboard grid" loading="lazy">
+                    <figcaption>After: clean signature on a transparent background</figcaption>
+                </figure>
+            </div>
 
             <div class="step-card">
                 <div class="step-title">Step 1: Import Signature Photo & Crop</div>
@@ -82,8 +109,46 @@
 
             <div class="step-card">
                 <div class="step-title">Step 3: Remove Background & Save Transparent PNG</div>
-                <p>Use the <strong>Magic Wand Tool</strong> with a tolerance of 40, select the white background, and hit <code>Delete</code>. Checkered transparency appears immediately. Finally, click <strong>File -> Save As -> PNG</strong> to download your reusable signature.</p>
+                <p>Use the <strong>Magic Eraser Tool</strong> with a <strong>Power</strong> (tolerance) of 20–40 and click the white paper — the background vanishes instantly and the checkerboard transparency grid appears. Click any leftover corners to clean them up. Finally, click <strong>File -> Save As -> PNG</strong> to download your reusable signature.</p>
+                <figure>
+                    <img src="../../images/tutorials/signature-editor-ui-en.jpg" alt="Web PSEditor with the Magic Eraser tool extracting a handwritten signature from white paper" loading="lazy">
+                    <figcaption>The Magic Eraser (Power 30) lifts the paper background away in a few clicks.</figcaption>
+                </figure>
             </div>
+
+            <h2>Magic Eraser vs Blend Mode: Which One Fits Your Case?</h2>
+            <table class="tool-table">
+                <tr><th>Method</th><th>Best for</th><th>How it works</th></tr>
+                <tr><td><strong>Magic Eraser + PNG</strong></td><td>A reusable signature stamp for Word, PDF and e-sign platforms</td><td>Deletes the paper background permanently and exports a real transparent PNG</td></tr>
+                <tr><td><strong>Multiply blend mode</strong></td><td>Placing a photo/scanned signature over a document inside the editor</td><td>Non-destructive — white pixels simply stop showing; nothing is deleted</td></tr>
+                <tr><td><strong>Lasso + Delete</strong></td><td>Signatures on patterned or shaded paper</td><td>Manual outline around strokes when one-click color matching fails</td></tr>
+            </table>
+
+            <div class="mistake-box">
+                <strong>⚠️ Common mistakes to avoid</strong>
+                <ul>
+                    <li><strong>Photographing at an angle</strong> — skewed perspective makes the stroke weight uneven. Shoot straight from above with even lighting.</li>
+                    <li><strong>Too low Power on grayish paper</strong> — leaves semi-transparent ghost patches. Raise the Power to 30–40 and click the leftovers again.</li>
+                    <li><strong>Over-boosting contrast</strong> — thin stroke ends can break apart. Zoom to 200% and check the strokes before erasing.</li>
+                    <li><strong>Saving as JPG</strong> — the transparency is discarded. Always export as PNG.</li>
+                </ul>
+            </div>
+
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item"><h3>Why does my extracted signature have gray halo around the strokes?</h3><p>The photo paper was slightly gray and the Power value was too low. Raise the Power to 30–40 and click the halo areas once more; the checkerboard will show through.</p></div>
+            <div class="faq-item"><h3>Can I extract a signature from a phone photo with shadows?</h3><p>Yes. First use Brightness/Contrast to flatten the shadow into near-white, then run the Magic Eraser. Severe shadows are better removed with the Lasso tool stroke by stroke.</p></div>
+            <div class="faq-item"><h3>How do I add the transparent signature into Word or PDF?</h3><p>Export the PNG, then in Word or your PDF editor use Insert -> Picture. Because the background is transparent, the signature sits cleanly over text lines and signature fields.</p></div>
+            <div class="faq-item"><h3>Is my signature uploaded to a server?</h3><p>No. Web PSEditor runs 100% client-side — the signature is processed in your browser's memory and never leaves your device, even offline.</p></div>
+            <div class="faq-item"><h3>Can I make the signature strokes a different color, like blue ink?</h3><p>Yes. After extracting transparency, lock the layer's alpha and paint over it, or place a colored layer below and clip it — the strokes will adopt the new color while keeping transparency.</p></div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/how-to-cutout-png">Cut Out Images & Export Transparent PNG</a>
+                <a href="../tutorials/layer-blend-modes-guide">Layer Blend Modes: Multiply & Screen Explained</a>
+                <a href="../tutorials/png-vs-jpg-export">PNG vs JPG: Which Format Should You Export?</a>
+                <a href="../tutorials/image-resize-and-compression">Resize & Compress Images for Upload Limits</a>
+            </div>
+
 
             <div class="tip-box">
                 <strong>💡 Privacy Notice:</strong><br>
@@ -109,5 +174,18 @@
             </div>
         </article>
     </div>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Why does my extracted signature have gray halo around the strokes?", "acceptedAnswer": {"@type": "Answer", "text": "The photo paper was slightly gray and the Power value was too low. Raise the Power to 30-40 and click the halo areas once more."}},
+        {"@type": "Question", "name": "Can I extract a signature from a phone photo with shadows?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. First use Brightness/Contrast to flatten the shadow into near-white, then run the Magic Eraser. Severe shadows are better removed with the Lasso tool."}},
+        {"@type": "Question", "name": "How do I add the transparent signature into Word or PDF?", "acceptedAnswer": {"@type": "Answer", "text": "Export the PNG, then use Insert -> Picture in Word or your PDF editor. The transparent background lets the signature sit cleanly over text and signature fields."}},
+        {"@type": "Question", "name": "Is my signature uploaded to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. Web PSEditor runs 100% client-side - the signature is processed in your browser's memory and never leaves your device, even offline."}},
+        {"@type": "Question", "name": "Can I recolor the signature strokes, like blue ink?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. After extracting transparency, paint over the strokes on a clipped layer - the strokes adopt the new color while keeping the transparent background."}}
+      ]
+    }
+    </script>
 </body>
 </html>

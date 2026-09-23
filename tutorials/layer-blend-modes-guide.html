@@ -30,7 +30,24 @@
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
-        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } }
+        article figure { margin: 18px 0; text-align: center; }
+        article figure img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
+        article figcaption { font-size: 13px; color: var(--text-sub); margin-top: 8px; }
+        .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .tool-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; }
+        .mistake-box strong { color: #991b1b; }
+        .mistake-box li { color: #7f1d1d; font-size: 14px; margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
+        .faq-item h3 { font-size: 15px; margin: 0 0 6px; color: #0f172a; }
+        .faq-item p { margin: 0; font-size: 14px; color: #334155; }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        article h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { grid-template-columns: 1fr; } .related { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -66,17 +83,73 @@
                 <a href="../editor.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
             </div>
 
-            <p>The hallmark of serious image editing is non-destructive layering. <strong>Web PSEditor</strong> gives you pro-grade layer stack flexibility.</p>
+            <p>The hallmark of serious image editing is non-destructive layering. <strong>Web PSEditor</strong> gives you pro-grade layer stack flexibility — every layer can carry its own opacity and blend mode, and you can change them at any time without destroying a single pixel.</p>
 
+            <div class="compare">
+                <figure>
+                    <img src="../../images/tutorials/blend-before.jpg" alt="Watercolor texture layer stacked normally over a product photo" loading="lazy">
+                    <figcaption>Before: texture layer stacked normally (source-over)</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/blend-after.jpg" alt="Same two layers blended with Multiply mode, white areas turn transparent" loading="lazy">
+                    <figcaption>After: Multiply — white pixels vanish, textures fuse into the photo</figcaption>
+                </figure>
+            </div>
 
             <div class="step-card">
-                <div class="step-title">Key Blend Modes:</div>
-                <p>
-                    • <strong>Multiply:</strong> Discards pure white, keeps dark areas. Perfect for signatures or sketches.<br>
-                    • <strong>Screen:</strong> Discards pitch black, keeps luminous highlights. Great for sparks, flares, and smoke.<br>
-                    • <strong>Overlay:</strong> Enhances dynamic contrast and cinematic textures.
-                </p>
+                <div class="step-title">Step 1: Stack Two Layers</div>
+                <p>Open your base image, then drag a second image (texture, light leak, sketch) onto the canvas — it lands as a new layer on top. The right-hand Layers panel lists both.</p>
             </div>
+
+            <div class="step-card">
+                <div class="step-title">Step 2: Open the Composition Dialog</div>
+                <p>With the top layer selected, go to <strong>Layer -> Composition</strong>. A dialog opens with the full blend-mode dropdown and live preview on the canvas behind it.</p>
+                <figure>
+                    <img src="../../images/tutorials/blend-editor-ui-en.jpg" alt="Web PSEditor Layer Composition dialog with Multiply selected" loading="lazy">
+                    <figcaption>Layer → Composition: pick a mode and watch the canvas update live.</figcaption>
+                </figure>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">Step 3: Pick a Mode and Confirm</div>
+                <p>Choose <strong>multiply</strong> to discard white, <strong>screen</strong> to discard black, or <strong>overlay</strong> for punchy contrast. Click OK to commit — the original layers stay untouched, so you can switch modes anytime.</p>
+            </div>
+
+            <h2>The Blend Modes That Matter Most</h2>
+            <table class="tool-table">
+                <tr><th>Mode</th><th>What it does</th><th>Classic use cases</th></tr>
+                <tr><td><strong>Multiply</strong></td><td>Discards pure white, keeps dark areas</td><td>Blending signatures, line art and sketches onto backgrounds without erasing</td></tr>
+                <tr><td><strong>Screen</strong></td><td>Discards pitch black, keeps highlights</td><td>Sparks, lens flares, smoke and bokeh on black-background stock overlays</td></tr>
+                <tr><td><strong>Overlay</strong></td><td>Boosts contrast, mixes light and shadow</td><td>Cinematic textures, grunge paper, dramatic color grading</td></tr>
+                <tr><td><strong>Soft Light</strong></td><td>Gentler version of Overlay</td><td>Subtle vintage tone, skin-friendly texture washes</td></tr>
+                <tr><td><strong>Difference / Exclusion</strong></td><td>Inverts overlapping areas</td><td>Psychedelic posters, aligning two versions of a photo</td></tr>
+            </table>
+
+            <div class="mistake-box">
+                <strong>⚠️ Common mistakes to avoid</strong>
+                <ul>
+                    <li><strong>Blending the wrong layer</strong> — the mode applies to the <em>selected</em> layer only. Check which layer is highlighted before opening Composition.</li>
+                    <li><strong>Expecting opacity to fix contrast</strong> — if Multiply looks too strong, drop the layer's <strong>Opacity</strong> (e.g. 60–80%) instead of switching modes back and forth.</li>
+                    <li><strong>Flattening too early</strong> — once merged, blend modes are baked in. Keep layers separate until the final export.</li>
+                    <li><strong>Using JPEG sources for overlays</strong> — JPG compression halos around black/white areas become visible after blending. Prefer PNG overlays.</li>
+                </ul>
+            </div>
+
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item"><h3>Where is the blend mode option in Web PSEditor?</h3><p>Select a layer, then open <strong>Layer -> Composition</strong> in the top menu. The dropdown contains all canvas blend modes — Multiply, Screen, Overlay and more.</p></div>
+            <div class="faq-item"><h3>Why did my texture disappear completely after choosing Multiply?</h3><p>Multiply keeps only darker pixels. If your texture is mostly white on a light background, very little remains — try Screen for dark backgrounds, or Overlay for balanced contrast.</p></div>
+            <div class="faq-item"><h3>Can I animate or toggle the effect later?</h3><p>Yes. Blend modes are non-destructive. Reopen Layer -> Composition at any time, or hide the layer with the eye icon to compare before/after.</p></div>
+            <div class="faq-item"><h3>Do blend modes work with adjustment filters?</h3><p>They combine well: put a color gradient layer on Overlay, then add photo filters on the base layer — both stack non-destructively.</p></div>
+            <div class="faq-item"><h3>Is any of this uploaded to a server?</h3><p>No. Layer compositing runs 100% in your browser; nothing ever leaves your device.</p></div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/transparent-signature-extraction">Extract a Transparent Signature from Paper</a>
+                <a href="../tutorials/photo-filters-one-click">One-Click Photo Filters & Presets</a>
+                <a href="../tutorials/how-to-cutout-png">Cut Out Images & Export Transparent PNG</a>
+                <a href="../tutorials/photo-color-correction">Color Correction & White Balance Fix</a>
+            </div>
+
 
             <!-- 🎯 Hands-on Practice CTA Card -->
             <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
@@ -97,5 +170,18 @@
             </div>
         </article>
     </div>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Where is the blend mode option in Web PSEditor?", "acceptedAnswer": {"@type": "Answer", "text": "Select a layer, then open Layer -> Composition in the top menu. The dropdown contains all canvas blend modes - Multiply, Screen, Overlay and more."}},
+        {"@type": "Question", "name": "Why did my texture disappear completely after choosing Multiply?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply keeps only darker pixels. If your texture is mostly white on a light background, try Screen for dark backgrounds or Overlay for balanced contrast."}},
+        {"@type": "Question", "name": "Can I toggle the effect later?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Blend modes are non-destructive. Reopen Layer -> Composition at any time, or hide the layer with the eye icon to compare before and after."}},
+        {"@type": "Question", "name": "Do blend modes work with adjustment filters?", "acceptedAnswer": {"@type": "Answer", "text": "They combine well: put a color gradient layer on Overlay, then add photo filters on the base layer - both stack non-destructively."}},
+        {"@type": "Question", "name": "Is any of this uploaded to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. Layer compositing runs 100% in your browser; nothing ever leaves your device."}}
+      ]
+    }
+    </script>
 </body>
 </html>

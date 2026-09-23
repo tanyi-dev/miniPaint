@@ -30,7 +30,24 @@
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
-        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } }
+        article figure { margin: 18px 0; text-align: center; }
+        article figure img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
+        article figcaption { font-size: 13px; color: var(--text-sub); margin-top: 8px; }
+        .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .tool-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; }
+        .mistake-box strong { color: #991b1b; }
+        .mistake-box li { color: #7f1d1d; font-size: 14px; margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
+        .faq-item h3 { font-size: 15px; margin: 0 0 6px; color: #0f172a; }
+        .faq-item p { margin: 0; font-size: 14px; color: #334155; }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        article h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { grid-template-columns: 1fr; } .related { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -73,8 +90,16 @@
                 <div class="step-title">技巧 1：等比例缩放图片尺寸（像素微调）</div>
                 <p>
                     点击顶部菜单 <strong>【图像 (Image)】 -> 【调整大小 (Resize)】</strong>：<br>
-                    勾选 <strong>保持宽高比（Constrain Proportions）</strong>，输入目标宽度或高度，另一个数值会自动按比例计算，防止人物变形拉伸。
+                    在弹窗中输入目标<strong>宽度/高度像素值</strong>（或直接填百分比，如宽高各 50% 即可等比减半），模式保持默认的 <strong>Lanczos</strong>（缩放画质最锐利），点击确定即可一次性重缩放整张画布与全部图层。
                 </p>
+                <figure>
+                    <img src="../../images/tutorials/resize-editor-ui.jpg" alt="Web PSEditor 调整大小对话框，宽高填入 500 像素" loading="lazy">
+                    <figcaption>调整大小对话框：精确输入目标像素，Lanczos 模式画质最佳。</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/resize-compare.jpg" alt="原始 1024×952 图与缩放后 500×500 图的对比" loading="lazy">
+                    <figcaption>原始 1024×952 vs 缩放后 500×500 —— 尺寸缩小同时文件体积也大幅下降。</figcaption>
+                </figure>
             </div>
 
             <div class="step-card">
@@ -93,6 +118,41 @@
                     • 设置为 <code>70% ~ 80%</code>：可以轻松将几兆的大照片压缩到 50KB~100KB，完美通过各类系统审核。
                 </p>
             </div>
+
+            <h2>常见上传要求速查表</h2>
+            <table class="tool-table">
+                <tr><th>场景</th><th>典型要求</th><th>推荐设置</th></tr>
+                <tr><td>考试报名 / 政务平台照片</td><td>600×800 像素，小于 100KB</td><td>先裁剪到精确像素，JPG 质量 75~80% 导出</td></tr>
+                <tr><td>电商商品主图</td><td>800×800 或 1000×1000，白底</td><td>正方形裁剪 + 缩放，JPG 质量 85%</td></tr>
+                <tr><td>邮件附件</td><td>总计不超过 1~2MB</td><td>长边缩到 1600 像素，JPG 质量 80%</td></tr>
+                <tr><td>网页配图</td><td>尽量小且清晰</td><td>导出 WebP，质量 75~85%</td></tr>
+            </table>
+
+            <div class="mistake-box">
+                <strong>⚠️ 常见错误提醒</strong>
+                <ul>
+                    <li><strong>分多次逐步缩小</strong> —— 反复缩放会不断损失锐度。从原图一步到位缩到目标尺寸。</li>
+                    <li><strong>强行放大小图</strong> —— 放大只会产生模糊和伪影，建议回原图重新导出。</li>
+                    <li><strong>质量压到 60% 以下</strong> —— 文字和边缘会出现明显色块。75~85% 是体积与画质的黄金区间。</li>
+                    <li><strong>忽略宽高比例</strong> —— 只改一边会导致人物或商品被拉伸变形，请等比缩放或先裁剪再缩放。</li>
+                </ul>
+            </div>
+
+            <h2>常见问题 FAQ</h2>
+            <div class="faq-item"><h3>体积必须小于 100KB，光缩尺寸还不够怎么办？</h3><p>继续下调 JPG 质量滑块 —— 80%、75%、70% 逐档尝试。500~800 像素的照片在质量 75% 时通常都能稳稳压进 100KB 以内。</p></div>
+            <div class="faq-item"><h3>同等观感下 JPG 和 WebP 哪个更小？</h3><p>WebP 通常比 JPG 再小 25%~35%。网页用 WebP，报名系统只认传统格式时用 JPG。</p></div>
+            <div class="faq-item"><h3>Web PSEditor 会自动等比缩放吗？</h3><p>调整大小对话框提供独立的宽、高与百分比输入框；在两个百分比框中填相同数值（如各 50%）即可等比缩放，精确像素需求则分别输入宽高。</p></div>
+            <div class="faq-item"><h3>压缩过程会把我的证件文档传到云端吗？</h3><p>不会。缩放、质量压缩与导出全部在浏览器内完成，文件自始至终不离开你的设备。</p></div>
+            <div class="faq-item"><h3>可以只缩放某一个图层而不动整张画布吗？</h3><p>可以。在调整大小对话框中把 <strong>Layers（图层）</strong> 设为 <strong>Active（当前）</strong>，就只缩放选中图层，画布尺寸保持不变。</p></div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/id-photo-background">证件照换底色（白底换蓝底/红底）</a>
+                <a href="../tutorials/png-vs-jpg-export">PNG vs JPG：导出格式怎么选？</a>
+                <a href="../tutorials/crop-rotate-straighten">裁剪、旋转与矫正歪斜照片</a>
+                <a href="../tutorials/how-to-cutout-png">一键抠图并导出透明 PNG</a>
+            </div>
+
 
             <!-- 🎯 实战练习与安全导流 CTA 卡片 -->
             <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
@@ -113,5 +173,18 @@
             </div>
         </article>
     </div>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "体积必须小于 100KB，光缩尺寸还不够怎么办？", "acceptedAnswer": {"@type": "Answer", "text": "继续下调 JPG 质量滑块，80%、75%、70% 逐档尝试。500~800 像素的照片在质量 75% 时通常都能压进 100KB 以内。"}},
+        {"@type": "Question", "name": "同等观感下 JPG 和 WebP 哪个更小？", "acceptedAnswer": {"@type": "Answer", "text": "WebP 通常比 JPG 再小 25%~35%。网页用 WebP，报名系统只认传统格式时用 JPG。"}},
+        {"@type": "Question", "name": "Web PSEditor 会自动等比缩放吗？", "acceptedAnswer": {"@type": "Answer", "text": "调整大小对话框提供独立的宽、高与百分比输入框；在两个百分比框中填相同数值即可等比缩放。"}},
+        {"@type": "Question", "name": "压缩过程会把我的证件文档传到云端吗？", "acceptedAnswer": {"@type": "Answer", "text": "不会。缩放、质量压缩与导出全部在浏览器内完成，文件自始至终不离开你的设备。"}},
+        {"@type": "Question", "name": "可以只缩放某一个图层而不动整张画布吗？", "acceptedAnswer": {"@type": "Answer", "text": "可以。在调整大小对话框中把 Layers（图层）设为 Active（当前），就只缩放选中图层，画布尺寸保持不变。"}}
+      ]
+    }
+    </script>
 </body>
 </html>

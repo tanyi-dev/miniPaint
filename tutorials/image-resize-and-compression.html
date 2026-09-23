@@ -30,7 +30,24 @@
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
-        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } }
+        article figure { margin: 18px 0; text-align: center; }
+        article figure img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
+        article figcaption { font-size: 13px; color: var(--text-sub); margin-top: 8px; }
+        .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .tool-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; }
+        .mistake-box strong { color: #991b1b; }
+        .mistake-box li { color: #7f1d1d; font-size: 14px; margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
+        .faq-item h3 { font-size: 15px; margin: 0 0 6px; color: #0f172a; }
+        .faq-item p { margin: 0; font-size: 14px; color: #334155; }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        article h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { grid-template-columns: 1fr; } .related { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -66,18 +83,60 @@
                 <a href="../editor.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
             </div>
 
-            <p>Gov/exam portals frequently enforce strict constraints like "less than 100KB" or "exact 600x800 resolution". Use <strong>Web PSEditor</strong> to comply without sacrificing quality.</p>
-
+            <p>Gov/exam portals frequently enforce strict constraints like "less than 100KB" or "exact 600x800 resolution". Use <strong>Web PSEditor</strong> to comply without sacrificing quality — resizing and compression both happen locally in your browser, so even sensitive documents stay on your device.</p>
 
             <div class="step-card">
                 <div class="step-title">1. Proportional Resize</div>
-                <p>Choose <strong>Image -> Resize</strong>, check "Constrain Proportions", and input your required width/height.</p>
+                <p>Choose <strong>Image -> Resize</strong>, enter your required width/height (the percent fields are handy for quick scaling like 50%), pick the <strong>Lanczos</strong> mode for the sharpest downsampling, and click OK. The whole canvas and all layers are rescaled in one go.</p>
+                <figure>
+                    <img src="../../images/tutorials/resize-editor-ui-en.jpg" alt="Web PSEditor Resize dialog with width and height set to 500 pixels" loading="lazy">
+                    <figcaption>The Resize dialog: type exact pixel dimensions, keep Lanczos mode for best quality.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/resize-compare.jpg" alt="Comparison of an original 1024 by 952 image next to the resized 500 by 500 version" loading="lazy">
+                    <figcaption>Original 1024x952 vs resized 500x500 — downsampling also slashes the file size.</figcaption>
+                </figure>
             </div>
 
             <div class="step-card">
                 <div class="step-title">2. Compression at Export</div>
-                <p>Click <strong>File -> Save As -> JPG</strong>. Fine-tune the Quality slider (75%-85%) to compress file size instantly.</p>
+                <p>Click <strong>File -> Save As -> JPG</strong>. Fine-tune the Quality slider (75%-85%) to compress file size instantly — the estimated file size updates as you drag.</p>
             </div>
+
+            <h2>Common Upload Requirements Cheat Sheet</h2>
+            <table class="tool-table">
+                <tr><th>Scenario</th><th>Typical requirement</th><th>Recommended settings</th></tr>
+                <tr><td>Exam / gov portal photos</td><td>600x800 px, under 100 KB</td><td>Resize to exact pixels, export JPG at quality 75–80%</td></tr>
+                <tr><td>E-commerce product images</td><td>800x800 or 1000x1000 px, white background</td><td>Square crop + resize, JPG quality 85%</td></tr>
+                <tr><td>Email attachments</td><td>Under 1–2 MB total</td><td>Longest edge 1600 px, JPG quality 80%</td></tr>
+                <tr><td>Web page images</td><td>As small as possible, still sharp</td><td>Export WebP, quality 75–85%</td></tr>
+            </table>
+
+            <div class="mistake-box">
+                <strong>⚠️ Common mistakes to avoid</strong>
+                <ul>
+                    <li><strong>Resizing in multiple small steps</strong> — repeatedly shrinking degrades sharpness. Go from original to final size in one pass.</li>
+                    <li><strong>Enlarging small images</strong> — upscaling adds blur and artifacts; reshoot or re-export from the source instead.</li>
+                    <li><strong>Crushing quality below 60%</strong> — visible block artifacts appear around text and edges. 75–85% is the sweet spot.</li>
+                    <li><strong>Forgetting aspect ratio</strong> — changing only width or height stretches people and products. Scale both, or crop first then resize.</li>
+                </ul>
+            </div>
+
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item"><h3>My file must be under 100KB but resizing alone is not enough. What else can I do?</h3><p>Lower the JPG quality slider step by step — 80%, then 75%, then 70%. Each step roughly halves the size from the previous quality tier. A 500–800 px image at quality 75% usually lands well under 100 KB.</p></div>
+            <div class="faq-item"><h3>Which is smaller for the same look: JPG or WebP?</h3><p>WebP is typically 25–35% smaller than JPG at equal visual quality. Use WebP for websites, and JPG where a portal only accepts classic formats.</p></div>
+            <div class="faq-item"><h3>Does Web PSEditor resize in proportion automatically?</h3><p>The Resize dialog exposes width, height and percent fields independently. Enter only one percent field as 50 and the other as 50 to keep proportions; for exact pixel pairs, input both values.</p></div>
+            <div class="faq-item"><h3>Will compression leak my documents to the cloud?</h3><p>No. Resizing, quality compression and export all run inside your browser — the file never leaves your device.</p></div>
+            <div class="faq-item"><h3>Can I resize only one layer instead of the whole image?</h3><p>Yes. In the Resize dialog set <strong>Layers: Active</strong>, and only the selected layer is scaled while the canvas keeps its size.</p></div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/id-photo-background">Change ID Photo Background Color (White → Blue/Red)</a>
+                <a href="../tutorials/png-vs-jpg-export">PNG vs JPG: Which Format Should You Export?</a>
+                <a href="../tutorials/crop-rotate-straighten">Crop, Rotate & Straighten Crooked Photos</a>
+                <a href="../tutorials/how-to-cutout-png">Cut Out Images & Export Transparent PNG</a>
+            </div>
+
 
             <!-- 🎯 Hands-on Practice CTA Card -->
             <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
@@ -98,5 +157,18 @@
             </div>
         </article>
     </div>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "My file must be under 100KB but resizing alone is not enough. What else can I do?", "acceptedAnswer": {"@type": "Answer", "text": "Lower the JPG quality slider step by step - 80%, then 75%, then 70%. A 500-800 px image at quality 75% usually lands well under 100 KB."}},
+        {"@type": "Question", "name": "Which is smaller for the same look: JPG or WebP?", "acceptedAnswer": {"@type": "Answer", "text": "WebP is typically 25-35% smaller than JPG at equal visual quality. Use WebP for websites, and JPG where a portal only accepts classic formats."}},
+        {"@type": "Question", "name": "Does Web PSEditor resize in proportion automatically?", "acceptedAnswer": {"@type": "Answer", "text": "The Resize dialog exposes width, height and percent fields independently. Enter the same percent in both fields to keep proportions."}},
+        {"@type": "Question", "name": "Will compression leak my documents to the cloud?", "acceptedAnswer": {"@type": "Answer", "text": "No. Resizing, quality compression and export all run inside your browser - the file never leaves your device."}},
+        {"@type": "Question", "name": "Can I resize only one layer instead of the whole image?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. In the Resize dialog set Layers: Active, and only the selected layer is scaled while the canvas keeps its size."}}
+      ]
+    }
+    </script>
 </body>
 </html>
