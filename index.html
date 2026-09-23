@@ -227,6 +227,61 @@
         .btn-secondary:hover {
             background: #f1f5f9;
         }
+        .hero-microtrust {
+            margin-top: 16px;
+            font-size: 13.5px;
+            color: #64748b;
+            letter-spacing: 0.01em;
+        }
+
+        /* 截图功能热点标注 (Pulse dot + hover tooltip) */
+        .hotspot {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #3b82f6;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+            cursor: pointer;
+            z-index: 3;
+            line-height: 0;
+        }
+        .hotspot::before {
+            content: '';
+            position: absolute;
+            inset: -7px;
+            border-radius: 50%;
+            border: 2px solid rgba(59, 130, 246, 0.55);
+            animation: hsPulse 2s ease-out infinite;
+        }
+        @keyframes hsPulse {
+            0% { transform: scale(0.6); opacity: 1; }
+            100% { transform: scale(1.7); opacity: 0; }
+        }
+        .hotspot .hs-tip {
+            position: absolute;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.92);
+            color: #f8fafc;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.4;
+            padding: 5px 11px;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.18s ease;
+            z-index: 4;
+        }
+        .hotspot.hs-up .hs-tip { top: auto; bottom: 22px; }
+        .hotspot:hover .hs-tip { opacity: 1; }
+        @media (max-width: 640px) {
+            .hotspot { display: none; }
+        }
 
         /* Hero 编辑器真实实景预览窗口 (100% 真实界面展示，消除空白断层) */
         .editor-preview-window {
@@ -731,15 +786,17 @@
     <!-- Hero 首屏 -->
     <section class="hero">
         <div class="container">
-            <div>🔒 100% Client-Side · No Image Uploads · Zero Privacy Risk</div>
-            <h1>Free Online Photo Editor in Your Browser</h1>
-            <p>No software installation required. Powerful layers, magic wand selection, and filters run entirely in your local browser Canvas. Zero privacy risk.</p>
+            <div style="display:flex;align-items:center;justify-content:center;gap:7px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> 100% Client-Side · No Image Uploads · Zero Privacy Risk</div>
+            <h1>Free Online PSD &amp; Photo Editor in Your Browser</h1>
+            <p>Open PSD files, edit layers, remove backgrounds, and add text — then export your work without installing software or uploading a single file.</p>
             <div class="hero-actions">
                 <a href="editor.html" class="btn-primary" onclick="handleLaunch(event)">
                     <span>Launch Web PSEditor Free</span>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </a>
+                <a href="editor.html?image=images/tutorials/watermark-before.jpg" class="btn-secondary">Try with a Sample Photo</a>
             </div>
+            <div class="hero-microtrust">No signup · No installation · Files stay on your device &nbsp;|&nbsp; Supports PSD, PNG, JPG, WebP &amp; more</div>
 
             <!-- 编辑器实景拟物视窗 (解决视觉断层，直观展示专业工作台) -->
             <a href="editor.html" class="editor-preview-window" onclick="handleLaunch(event)" style="display: block; text-decoration: none; color: inherit;">
@@ -756,8 +813,12 @@
                 </div>
                 <div class="editor-preview-media">
                     <img src="images/editor-screenshot.jpg" alt="Web PSEditor online photo editor workspace preview" class="editor-preview-img" loading="eager" decoding="async">
+                    <div class="hotspot" style="left: 30%; top: 5.5%;" tabindex="0" aria-label="Full professional menu"><span class="hs-tip">Full Pro Menu · Layer / Filter / Effects</span></div>
+                    <div class="hotspot" style="left: 2.5%; top: 42%;" tabindex="0" aria-label="Professional tools"><span class="hs-tip">Pro Tools · Wand / Text / Shapes</span></div>
+                    <div class="hotspot" style="left: 43%; top: 46%;" tabindex="0" aria-label="Live editing canvas"><span class="hs-tip">Live Canvas · Edit Without Uploads</span></div>
+                    <div class="hotspot hs-up" style="left: 87%; top: 58%;" tabindex="0" aria-label="Layers panel"><span class="hs-tip">Layers Panel · Non-destructive Editing</span></div>
                     <div class="preview-badge">
-                        <span>⚡ 100% Client-Side · Click to Try</span>
+                        <span><svg width="13" height="13" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>100% Client-Side · Click to Try</span>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>
                 </div>
@@ -774,19 +835,19 @@
             </div>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <div class="card-icon">🪄</div>
-                    <h3>Layer System & Selection</h3>
-                    <p>Multi-layer Stacking · Lasso · Transparent PNG</p>
+                    <div class="card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg></div>
+                    <h3>Open &amp; Edit PSD Files</h3>
+                    <p>Layers and blend modes stay fully editable — right in your browser.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="card-icon">🎨</div>
-                    <h3>Pro Filters & Retouching</h3>
-                    <p>Color Curves · Pixelate · Vector & Brush Tools</p>
+                    <div class="card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"></path><path d="M15 16v-2"></path><path d="M8 9h2"></path><path d="M20 9h2"></path><path d="M17.8 11.8L19 13"></path><path d="M15 9h0"></path><path d="M17.8 6.2L19 5"></path><path d="M12.2 6.2L11 5"></path><path d="M12.2 11.8L11 13"></path><path d="M3 21l9-9"></path></svg></div>
+                    <h3>Remove Backgrounds &amp; Cut Out</h3>
+                    <p>Magic wand selection exports clean transparent PNGs in seconds.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="card-icon">🔒</div>
-                    <h3>100% Local Sandboxed Engine</h3>
-                    <p>Zero Server Upload · Offline Ready · Absolute Privacy</p>
+                    <div class="card-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                    <h3>Keep Every File 100% Private</h3>
+                    <p>Everything runs on your device — no uploads, no account, works offline.</p>
                 </div>
             </div>
         </div>
@@ -803,7 +864,7 @@
                 <a href="tutorials/id-photo-background.html" class="tut-card">
                     <div>
                         <div class="tut-top">
-                            <div class="tut-icon-box" style="background: #eff6ff; border-color: #bfdbfe;">📸</div>
+                            <div class="tut-icon-box" style="background: #eff6ff; border-color: #bfdbfe;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div>
                             <span>Passport · ID Photos</span>
                         </div>
                         <div>Fast ID Photo Background Color Change (White/Blue/Red)</div>
@@ -817,7 +878,7 @@
                 <a href="tutorials/how-to-cutout-png.html" class="tut-card">
                     <div>
                         <div class="tut-top">
-                            <div class="tut-icon-box" style="background: #faf5ff; border-color: #e9d5ff;">🪄</div>
+                            <div class="tut-icon-box" style="background: #faf5ff; border-color: #e9d5ff;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9333ea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"></path><path d="M15 16v-2"></path><path d="M8 9h2"></path><path d="M20 9h2"></path><path d="M17.8 11.8L19 13"></path><path d="M17.8 6.2L19 5"></path><path d="M12.2 6.2L11 5"></path><path d="M12.2 11.8L11 13"></path><path d="M3 21l9-9"></path></svg></div>
                             <span>E-commerce · Alpha Cutout</span>
                         </div>
                         <div>How to Cut Out Background & Export Transparent PNG in 3 Steps</div>
@@ -831,7 +892,7 @@
                 <a href="tutorials/mosaic-and-blur-redaction.html" class="tut-card">
                     <div>
                         <div class="tut-top">
-                            <div class="tut-icon-box" style="background: #fffbeb; border-color: #fde68a;">🛡️</div>
+                            <div class="tut-icon-box" style="background: #fffbeb; border-color: #fde68a;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><rect x="9" y="10" width="6" height="4" rx="1"></rect></svg></div>
                             <span>Privacy · Redaction</span>
                         </div>
                         <div>How to Pixelate & Blur Sensitive Info for Privacy Protection</div>
@@ -845,7 +906,7 @@
                 <a href="tutorials/image-resize-and-compression.html" class="tut-card">
                     <div>
                         <div class="tut-top">
-                            <div class="tut-icon-box" style="background: #ecfdf5; border-color: #a7f3d0;">⚡</div>
+                            <div class="tut-icon-box" style="background: #ecfdf5; border-color: #a7f3d0;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></div>
                             <span>Resize · Compression</span>
                         </div>
                         <div>Image Resizing and Target KB Compression for Web Forms</div>
@@ -856,34 +917,9 @@
                         <span class="tut-footer-arrow">→</span>
                     </div>
                 </a>
-                <a href="tutorials/layer-blend-modes-guide.html" class="tut-card">
-                    <div>
-                        <div class="tut-top">
-                            <div class="tut-icon-box" style="background: #fff1f2; border-color: #fecdd3;">🎨</div>
-                            <span>Blending · Creative Art</span>
-                        </div>
-                        <div>Mastering Layer Blend Modes: Create Double Exposure Effects</div>
-                        <div>Harness non-destructive layers and blend modes (Multiply, Screen, Soft Light) for cinematic double exposures.</div>
-                    </div>
-                    <div class="tut-footer">
-                        <span>Read Full Tutorial</span>
-                        <span class="tut-footer-arrow">→</span>
-                    </div>
-                </a>
-                <a href="tutorials/transparent-signature-extraction.html" class="tut-card">
-                    <div>
-                        <div class="tut-top">
-                            <div class="tut-icon-box" style="background: #ecfeff; border-color: #a5f3fc;">🖋️</div>
-                            <span>Signatures · Documents</span>
-                        </div>
-                        <div>Extract Handwritten Signature to Transparent PNG for PDF Signing</div>
-                        <div>Turn a paper signature photo into a transparent electronic PNG using contrast levels and alpha extraction.</div>
-                    </div>
-                    <div class="tut-footer">
-                        <span>Read Full Tutorial</span>
-                        <span class="tut-footer-arrow">→</span>
-                    </div>
-                </a>
+            </div>
+            <div style="text-align: center; margin-top: 32px;">
+                <a href="guide.html" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">View All 12 Tutorials <span aria-hidden="true">→</span></a>
             </div>
         </div>
     </section>
@@ -957,7 +993,7 @@
     <!-- 移动端防误触友好提示弹窗 -->
     <div id="mobile-modal">
         <div class="modal-content">
-            <div style="font-size: 36px; margin-bottom: 8px;">🖥️</div>
+            <div style="margin-bottom: 8px;"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
             <h3>Desktop Browser Recommended</h3>
             <p>Web PSEditor is designed for precision keyboard & mouse operations. For best experience, please open on a desktop computer.</p>
             <div class="modal-btns">
