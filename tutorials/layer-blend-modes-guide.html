@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>进阶修图：网页版PS多图层合成与混合模式入门指南 - Web PSEditor</title>
-    <meta name="description" content="零基础掌握类似专业修图软件的图层系统！讲解正片叠底、滤色、柔光等混合模式在网页端Web PSEditor中的实战应用。" />
-    <meta name="keywords" content="图层合成,混合模式,正片叠底,滤色,双重曝光,轻量级在线图片编辑器图层,网页修图技巧" />
+    <title>Advanced: Mastering Layers & Blend Modes Online - Web PSEditor</title>
+    <meta name="description" content="Learn advanced: mastering layers & blend modes online step by step using free, private, client-side Web PSEditor in your web browser." />
     <link rel="icon" sizes="192x192" href="../images/favicon.png">
     <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/tutorials/layer-blend-modes-guide" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/layer-blend-modes-guide" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/layer-blend-modes-guide" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/layer-blend-modes-guide" />
     <style>
-        :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
         .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
         .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
@@ -28,89 +31,30 @@
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
         @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } }
+        .ads-container { margin: 24px 0; text-align: center; min-height: 90px; background: rgba(0,0,0,0.02); border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999; }
     </style>
-	<link rel="canonical" href="https://webpseditor.com/tutorials/layer-blend-modes-guide" />
 </head>
 <body>
     <div class="container">
         <div class="header-nav">
             <div style="display: flex; gap: 14px; align-items: center;">
-                <a href="../index.html" class="back-link">← <span class="trn" data-zh="网站首页" data-en="Home">网站首页</span></a>
+                <a href="../index.html" class="back-link">← Home</a>
                 <span style="color: #cbd5e1;">|</span>
-                <a href="../guide.html" class="back-link" style="color: var(--text-sub);"><span class="trn" data-zh="教程目录" data-en="Tutorials">教程目录</span></a>
+                <a href="../guide.html" class="back-link" style="color: var(--text-sub);">All Tutorials</a>
             </div>
             <div class="lang-switch">
-                <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
-                <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+                <a href="https://webpseditor.com/zh/tutorials/layer-blend-modes-guide" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span>
             </div>
         </div>
 
-        <!-- 🔒 隐私信任安全背书 -->
+        <!-- 🔒 Privacy Trust Endorsement -->
         <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
-            <span class="trn" data-zh="🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险" data-en="🔒 100% Client-Side · No Image Uploads · Zero Privacy Risk">🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+            <span>🔒 100% Client-Side · No Image Uploads · Zero Privacy Risk</span>
         </div>
 
-        <div id="content-zh">
-            <h1>进阶实战：图层系统与混合模式（合成双重曝光）</h1>
-            <div class="meta-bar">
-                <span>难度：进阶修图</span> • <span>耗时：5 分钟</span> • <span>核心理念：非破坏性编辑</span>
-            </div>
-
-            <div class="cta-box">
-                <div>
-                    <strong style="color:#1e40af; font-size:16px;">解锁 专业修图软件 级图层魔法</strong>
-                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">纯网页端完整支持独立图层顺序、不透明度与混合模式。</div>
-                </div>
-                <a href="../editor.html" class="cta-btn" target="_blank">打开 Web PSEditor 开启创作 →</a>
-            </div>
-
-            <p>专业图片编辑与普通简易画图工具的核心区别，就在于<strong>图层（Layers）系统</strong>。在 <strong>Web PSEditor</strong> 中，每一个文字、贴图、背景都可以是独立的图层，随时可以上下拖动排序、调节半透明度，或通过混合模式产生艺术级视觉效果。</p>
-
-                        <!-- AdSense Compliant Banner Container (Pre-configured min-height to prevent CLS) -->
-            <div class="ads-container" style="margin: 24px 0; text-align: center; min-height: 90px; background: rgba(0,0,0,0.02); border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999;">Advertisement Placeholder</div>
-
-            <div class="step-card">
-                <div class="step-title">三大最常用混合模式速记指南：</div>
-                <p>
-                    • <strong>正片叠底（Multiply）：</strong>过滤白色、保留暗色。常用于把白底线稿、白底签名快速融入背景，免去抠图烦恼！<br>
-                    • <strong>滤色（Screen）：</strong>过滤黑色、保留亮色。常用于给照片叠加星光、光斑、火焰、烟雾等黑色背景特效素材！<br>
-                    • <strong>叠加 / 柔光（Overlay / Soft Light）：</strong>增强对比度与氛围感。常用于将复古纹理纸张或光影质感无缝贴合在画面上。
-                </p>
-            </div>
-
-            <div class="step-card">
-                <div class="step-title">实操演练：把黑底光斑特效合成到人物照片上</div>
-                <p>
-                    1. 打开人物底图。<br>
-                    2. 点击顶部菜单 <strong>【图层 (Layer)】 -> 【新建图层 (New Layer)】</strong>，或直接拖拽一张带有炫酷光斑的黑底图片进画布。<br>
-                    3. 在右侧图层面板选中光斑图层，将混合模式（Composition Mode）由 <code>Source-Over (正常)</code> 改为 <code>Screen (滤色)</code>。<br>
-                    4. 黑色背景瞬间消失，璀璨的光斑自然融入人像之中，电影感大片一秒生成！
-                </p>
-            </div>
-
-            <!-- AdSense Compliant Banner Container (Pre-configured min-height to prevent CLS) -->
-            <div class="ads-container" style="margin: 24px 0; text-align: center; min-height: 90px; background: rgba(0,0,0,0.02); border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999;">Advertisement Placeholder</div>
-            <!-- 🎯 实战练习与安全导流 CTA 卡片 -->
-            <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
-                <div style="flex: 1;">
-                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                        <span style="font-size: 18px;">🎯</span>
-                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
-                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
-                    </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">无需安装软件，立即在浏览器中应用本篇所学技巧，纯本地处理无隐私泄露风险。</p>
-                </div>
-                <div>
-                    <a href="../editor.html" class="practice-btn">
-                        <span>在 Web PSEditor 中一键尝试此功能</span>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div id="content-en" style="display:none;">
-            <h1>Advanced: Mastering Layers & Blend Modes Online</h1>
+        <article>
+<h1>Advanced: Mastering Layers & Blend Modes Online</h1>
             <div class="meta-bar">
                 <span>Difficulty: Intermediate</span> • <span>Time: 5 Mins</span> • <span>Core: Non-destructive Editing</span>
             </div>
@@ -156,23 +100,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </article>
     </div>
-
-    <script>
-        function setLang(lang) {
-            document.getElementById("content-zh").style.display = (lang === "zh") ? "block" : "none";
-            document.getElementById("content-en").style.display = (lang === "en") ? "block" : "none";
-            document.getElementById("btn-zh").className = "lang-btn" + (lang === "zh" ? " active" : "");
-            document.getElementById("btn-en").className = "lang-btn" + (lang === "en" ? " active" : "");
-            document.querySelectorAll(".trn").forEach(function(el) {
-                el.innerText = el.getAttribute("data-" + lang) || el.innerText;
-            });
-        }
-        (function() {
-            var isZh = (navigator.language || "").toLowerCase().indexOf("zh") !== -1;
-            setLang(isZh ? "zh" : "en");
-        })();
-    </script>
 </body>
 </html>

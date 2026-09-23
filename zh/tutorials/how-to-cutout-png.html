@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How to Resize, Crop & Compress Images Online - Web PSEditor</title>
-    <meta name="description" content="Learn how to resize, crop & compress images online step by step using free, private, client-side Web PSEditor in your web browser." />
-    <link rel="icon" sizes="192x192" href="../images/favicon.png">
-    <link rel="shortcut icon" href="../favicon.ico">
-    <link rel="canonical" href="https://webpseditor.com/tutorials/image-resize-and-compression" />
-    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/image-resize-and-compression" />
-    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/image-resize-and-compression" />
-    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/image-resize-and-compression" />
+    <title>实战教程：3步轻松在线抠图并导出透明底PNG - Web PSEditor 教程</title>
+    <meta name="description" content="在线学习实战教程：3步轻松在线抠图并导出透明底PNG：使用免费纯网页轻量级在线图片编辑器工具 Web PSEditor，简单高效、安全不泄露肖像隐私。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/how-to-cutout-png" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/how-to-cutout-png" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/how-to-cutout-png" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/how-to-cutout-png" />
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -27,6 +27,7 @@
         .cta-btn:hover { background: var(--primary-hover); }
         .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
         .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fef3c7; border-radius: 8px; padding: 14px 18px; color: #92400e; font-size: 14px; margin: 20px 0; }
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
@@ -38,65 +39,81 @@
     <div class="container">
         <div class="header-nav">
             <div style="display: flex; gap: 14px; align-items: center;">
-                <a href="../index.html" class="back-link">← Home</a>
+                <a href="../../index.html" class="back-link">← 网站首页</a>
                 <span style="color: #cbd5e1;">|</span>
-                <a href="../guide.html" class="back-link" style="color: var(--text-sub);">All Tutorials</a>
+                <a href="../guide.html" class="back-link" style="color: var(--text-sub);">教程目录</a>
             </div>
             <div class="lang-switch">
-                <a href="https://webpseditor.com/zh/tutorials/image-resize-and-compression" class="lang-btn" style="text-decoration:none;">中文</a>
-                <span class="lang-btn active">English</span>
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/how-to-cutout-png" class="lang-btn" style="text-decoration:none;">English</a>
             </div>
         </div>
 
-        <!-- 🔒 Privacy Trust Endorsement -->
+        <!-- 🔒 隐私信任安全背书 -->
         <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
-            <span>🔒 100% Client-Side · No Image Uploads · Zero Privacy Risk</span>
+            <span>🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
         </div>
 
         <article>
-<h1>How to Resize, Crop & Compress Images Online</h1>
+<h1>实战教程：3步轻松在线抠图并导出透明底PNG</h1>
             <div class="meta-bar">
-                <span>Difficulty: Beginner</span> • <span>Time: 2 Mins</span> • <span>Target: Meet File Constraints</span>
+                <span>难度：入门小白</span> • <span>耗时：2 分钟</span> • <span>输出格式：透明 PNG</span>
             </div>
 
             <div class="cta-box">
                 <div>
-                    <strong style="color:#1e40af; font-size:16px;">Pass Upload Limits Easily</strong>
-                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Resize dimensions and compress KB size within seconds.</div>
+                    <strong style="color:#1e40af; font-size:16px;">随时随地，纯浏览器极速抠图</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">零依赖，零插件，打开即用。</div>
                 </div>
-                <a href="../editor.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 开始抠图 →</a>
             </div>
 
-            <p>Gov/exam portals frequently enforce strict constraints like "less than 100KB" or "exact 600x800 resolution". Use <strong>Web PSEditor</strong> to comply without sacrificing quality.</p>
+            <p>制作电商商品图、PPT 配图或专属表情包时，提取纯净透明的主体是最高频的需求。传统的 JPG 格式不支持透明度，必须将背景彻底剥离并保存为 PNG 格式。下面教你用 <strong>Web PSEditor</strong> 快速抠图的实用工作流。</p>
 
                         <!-- AdSense Compliant Banner Container (Pre-configured min-height to prevent CLS) -->
             <div class="ads-container" style="margin: 24px 0; text-align: center; min-height: 90px; background: rgba(0,0,0,0.02); border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999;">Advertisement Placeholder</div>
 
             <div class="step-card">
-                <div class="step-title">1. Proportional Resize</div>
-                <p>Choose <strong>Image -> Resize</strong>, check "Constrain Proportions", and input your required width/height.</p>
+                <div class="step-title">第一步：导入并解锁基础图层</div>
+                <p>打开 Web PSEditor，将图片拖入画板。右侧图层面板（Layers）会默认生成一个基础图层。确保右侧图层处于选中状态（点击图层高亮）。</p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">2. Compression at Export</div>
-                <p>Click <strong>File -> Save As -> JPG</strong>. Fine-tune the Quality slider (75%-85%) to compress file size instantly.</p>
+                <div class="step-title">第二步：使用魔棒或多边形套索精准圈定背景</div>
+                <p>
+                    <strong>针对纯色/简单背景：</strong>点击左侧 <strong>魔棒工具</strong>，点击背景区域，配合顶部 <strong>容差（Tolerance）</strong> 微调即可完整框选背景。<br>
+                    <strong>针对复杂背景：</strong>推荐使用 <strong>套索工具（Lasso）</strong> 或 <strong>多边形选区</strong>，沿着主体边缘打点圈出轮廓。
+                </p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">第三步：一键清除背景并无损保存为 PNG</div>
+                <p>
+                    选区建立完成后，直接按下键盘的 <code>Delete</code>（或 <code>Backspace</code>）按键，背景瞬间被擦除！此时背景会呈现经典黑白灰的<strong>棋盘方格纹理</strong>（代表绝对透明）。<br>
+                    点击 <strong>【文件】 -> 【另存为】</strong>，**务必选择 PNG 格式**（JPG 不支持透明背景，存为 JPG 背景会自动变白）。
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 为什么我的背景存下来还是白色？</strong><br>
+                请务必检查导出时的格式设置。JPG 图片协议本身没有 Alpha 透明通道，只有 **PNG** 或 **WebP** 才能完美保留抠出来的透明图层！
             </div>
 
             <!-- AdSense Compliant Banner Container (Pre-configured min-height to prevent CLS) -->
             <div class="ads-container" style="margin: 24px 0; text-align: center; min-height: 90px; background: rgba(0,0,0,0.02); border: 1px dashed #ccc; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999;">Advertisement Placeholder</div>
-            <!-- 🎯 Hands-on Practice CTA Card -->
+            <!-- 🎯 实战练习与安全导流 CTA 卡片 -->
             <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
                         <span style="font-size: 18px;">🎯</span>
-                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
-                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% In-Browser</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">No software installation required. Apply this technique in your browser right now—100% private and secure.</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">无需安装软件，立即在浏览器中应用本篇所学技巧，纯本地处理无隐私泄露风险。</p>
                 </div>
                 <div>
-                    <a href="../editor.html" class="practice-btn">
-                        <span>Try in Web PSEditor Now</span>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一键尝试此功能</span>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>

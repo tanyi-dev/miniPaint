@@ -49,7 +49,7 @@
         },
         {
           "@type": "Question",
-          "name": "常用的修图快捷键与桌面版 Photoshop 一致吗？",
+          "name": "常用的修图快捷键与其他专业图像编辑软件一致吗？",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "常用快捷键高度习惯对齐：Ctrl+Z（撤销）、Ctrl+Y（重做）、Ctrl+C/V（复制粘贴）、Space+拖拽（平移画布）、滚轮（缩放），支持快速盲操与高频精修。"
@@ -923,7 +923,7 @@
                     </div>
                 </details>
                 <details class="faq-item">
-                    <summary class="trn" data-zh="常用的修图快捷键与桌面版 Photoshop 一致吗？" data-en="Are shortcuts consistent with desktop Photoshop?">常用的修图快捷键与桌面版 Photoshop 一致吗？</summary>
+                    <summary class="trn" data-zh="常用的修图快捷键与其他专业图像编辑软件一致吗？" data-en="Are shortcuts consistent with standard professional image editors?">常用的修图快捷键与其他专业图像编辑软件一致吗？</summary>
                     <div class="faq-answer trn" data-zh="常用快捷键高度习惯对齐：Ctrl+Z（撤销）、Ctrl+Y（重做）、Ctrl+C/V（复制粘贴）、Space+拖拽（平移画布）、滚轮（缩放），支持快速盲操与高频精修。" data-en="Standard shortcuts are closely aligned: Ctrl+Z (Undo), Ctrl+Y (Redo), Ctrl+C/V (Copy/Paste), Space+Drag (Pan canvas), and Scroll wheel (Zoom).">
                         常用快捷键高度习惯对齐：Ctrl+Z（撤销）、Ctrl+Y（重做）、Ctrl+C/V（复制粘贴）、Space+拖拽（平移画布）、滚轮（缩放），支持快速盲操与高频精修。
                     </div>
@@ -1071,6 +1071,31 @@
                     }
                     var base = href.split("?")[0];
                     link.setAttribute("href", base + "?lang=" + lang + hash);
+                }
+            });
+
+            // 同步页面教程、指南、隐私与服务条款链接到对应独立语言目录
+            var guideLinks = document.querySelectorAll("a[href*='guide.html']");
+            guideLinks.forEach(function(link) {
+                link.setAttribute("href", (lang === "zh") ? "zh/guide.html" : "guide.html");
+            });
+
+            var privacyLinks = document.querySelectorAll("a[href*='privacy.html']");
+            privacyLinks.forEach(function(link) {
+                link.setAttribute("href", (lang === "zh") ? "zh/privacy.html" : "privacy.html");
+            });
+
+            var termsLinks = document.querySelectorAll("a[href*='terms.html']");
+            termsLinks.forEach(function(link) {
+                link.setAttribute("href", (lang === "zh") ? "zh/terms.html" : "terms.html");
+            });
+
+            var tutLinks = document.querySelectorAll("a[href*='tutorials/']");
+            tutLinks.forEach(function(link) {
+                var href = link.getAttribute("href");
+                if (href) {
+                    var tutName = href.replace(/^.*tutorials\//, '');
+                    link.setAttribute("href", (lang === "zh") ? ("zh/tutorials/" + tutName) : ("tutorials/" + tutName));
                 }
             });
 

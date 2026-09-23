@@ -4,5 +4,6 @@ Allow: /guide
 Allow: /tutorials/
 Allow: /privacy
 Allow: /terms
+Allow: /zh/
 
 Sitemap: https://webpseditor.com/sitemap.xml
