@@ -32,7 +32,21 @@
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
-        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } }
+        article figure { margin: 18px 0; text-align: center; }
+        article figure img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
+        article figcaption { font-size: 13px; color: var(--text-sub); margin-top: 8px; }
+        .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; }
+        .mistake-box strong { color: #991b1b; }
+        .mistake-box li { color: #7f1d1d; font-size: 14px; margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
+        .faq-item h3 { font-size: 15px; margin: 0 0 6px; color: #0f172a; }
+        .faq-item p { margin: 0; font-size: 14px; color: #334155; }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        article h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { grid-template-columns: 1fr; } .related { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -41,7 +55,7 @@
             <div style="display: flex; gap: 14px; align-items: center;">
                 <a href="../../index.html" class="back-link">← 网站首页</a>
                 <span style="color: #cbd5e1;">|</span>
-                <a href="../guide.html" class="back-link" style="color: var(--text-sub);">教程目录</a>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
             </div>
             <div class="lang-switch">
                 <span class="lang-btn active">中文</span>
@@ -68,7 +82,18 @@
                 <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 立即实操 →</a>
             </div>
 
-            <p>在日常求职、考试报名或办理证件时，我们经常遇到手头只有白色底色照片，而报名系统明确要求提交蓝底（或红底）照片的情况。去照相馆费时费力，安装庞大的 专业修图软件 更是繁琐。本文将指导你使用免费在线修图工具 <strong>Web PSEditor</strong>，只需简单的 4 个步骤快速更换底色。</p>
+            <p>在日常求职、考试报名或办理证件时，我们经常遇到手头只有白色底色照片，而报名系统明确要求提交蓝底（或红底）照片的情况。去照相馆费时费力，安装庞大的 专业修图软件 更是繁琐。本文将指导你使用免费在线修图工具 <strong>Web PSEditor</strong>，只需简单的 4 个步骤快速更换底色，全程本地运算，照片绝不上传。</p>
+
+            <div class="compare">
+                <figure>
+                    <img src="../../images/tutorials/idphoto-before.jpg" alt="蓝底原始证件照" loading="lazy">
+                    <figcaption>处理前：原始蓝底证件照</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/idphoto-after.jpg" alt="换成标准红底后的证件照" loading="lazy">
+                    <figcaption>处理后：一键换成标准红底</figcaption>
+                </figure>
+            </div>
 
             <h2>标准证件照常见背景色参考：</h2>
             <ul>
@@ -97,6 +122,33 @@
                 <div class="step-title">步骤 4：填充目标底色并导出</div>
                 <p>在左侧颜色选择器中，设置前景色为你想要的颜色（例如标准蓝底 <code>#438EDB</code>），然后直接按键盘上的 <code>Delete</code> 键删除原背景，或者使用 <strong>油漆桶工具（Fill Tool）</strong> 往选区内轻轻一点，背景瞬间变色！<br>
                 完成后，点击顶部菜单 <strong>【文件】 -> 【另存为】</strong>，格式选择 <strong>JPG</strong>（普通报名推荐）或 <strong>PNG</strong> 保存到本地即可。</p>
+                <figure>
+                    <img src="../../images/tutorials/idphoto-editor-ui.jpg" alt="Web PSEditor 编辑器界面，油漆桶工具正在为证件照填充红底" loading="lazy">
+                    <figcaption>设好目标颜色后用油漆桶工具在背景上一点，新底色即刻生效。</figcaption>
+                </figure>
+            </div>
+
+            <div class="mistake-box">
+                <strong>⚠️ 这些坑别踩：常见错误清单</strong>
+                <ul>
+                    <li><strong>不做羽化</strong> —— 少了 1~2 像素的羽化过渡，头发与新背景的交界会出现"贴纸感"硬边。</li>
+                    <li><strong>背景有阴影时容差给太低</strong> —— 部分旧背景没被选中，填充后残留色块。调高容差或按住 <code>Shift</code> 补选漏掉的区域。</li>
+                    <li><strong>底色凭肉眼挑</strong> —— 考试和签证系统会校验背景色值，务必使用上文列出的标准色号，不要随手吸色。</li>
+                </ul>
+            </div>
+
+            <h2>常见问题 FAQ</h2>
+            <div class="faq-item"><h3>换底色后头发边缘会出现白边吗？</h3><p>按步骤 3 先羽化 1~2 像素就不会。如果仍有细小白边，用小尺寸橡皮擦手动清理，或适当调高容差重新选区。</p></div>
+            <div class="faq-item"><h3>蓝底可以换成护照要求的白底吗？</h3><p>完全可以，流程一模一样：魔棒选中蓝色背景 → 羽化 → 前景色设为 <code>#FFFFFF</code> → 填充即可。</p></div>
+            <div class="faq-item"><h3>最终照片的尺寸和分辨率有要求吗？</h3><p>多数报名系统要求一寸 295 × 413 像素或二寸 413 × 579 像素、300 DPI。导出前用 <strong>【图片】 -> 【调整尺寸】</strong> 精确设置即可。</p></div>
+            <div class="faq-item"><h3>我的证件照会被上传到服务器吗？</h3><p>不会。Web PSEditor 通过 HTML5 Canvas 在你本机浏览器内存中完成全部处理——零上传、零云端存储，断网也能用。</p></div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/how-to-cutout-png">3步搞定在线抠图并导出透明底 PNG</a>
+                <a href="../tutorials/photo-color-correction">一键照片调色矫正</a>
+                <a href="../tutorials/image-resize-and-compression">无损调整图片尺寸与压缩</a>
+                <a href="../tutorials/crop-rotate-straighten">照片裁剪、旋转与矫正</a>
             </div>
 
             <div class="tip-box">
@@ -123,5 +175,17 @@
             </div>
         </article>
     </div>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "换底色后头发边缘会出现白边吗？", "acceptedAnswer": {"@type": "Answer", "text": "先羽化 1~2 像素就不会。若仍有白边，用小尺寸橡皮擦手动清理或调高容差重新选区。"}},
+        {"@type": "Question", "name": "蓝底可以换成护照要求的白底吗？", "acceptedAnswer": {"@type": "Answer", "text": "可以，流程一样：魔棒选中蓝色背景、羽化、前景色设为 #FFFFFF 后填充。"}},
+        {"@type": "Question", "name": "最终照片的尺寸和分辨率有要求吗？", "acceptedAnswer": {"@type": "Answer", "text": "多数系统要求一寸 295x413 像素或二寸 413x579 像素、300 DPI，导出前用图片-调整尺寸精确设置。"}},
+        {"@type": "Question", "name": "我的证件照会被上传到服务器吗？", "acceptedAnswer": {"@type": "Answer", "text": "不会。Web PSEditor 通过 HTML5 Canvas 在本机浏览器内存中完成全部处理，零上传、零云端存储，断网可用。"}}
+      ]
+    }
+    </script>
 </body>
 </html>

@@ -30,7 +30,20 @@
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
-        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } }
+        article figure { margin: 18px 0; text-align: center; }
+        article figure img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
+        article figcaption { font-size: 13px; color: var(--text-sub); margin-top: 8px; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; }
+        .mistake-box strong { color: #991b1b; }
+        .mistake-box li { color: #7f1d1d; font-size: 14px; margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
+        .faq-item h3 { font-size: 15px; margin: 0 0 6px; color: #0f172a; }
+        .faq-item p { margin: 0; font-size: 14px; color: #334155; }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        article h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -39,7 +52,7 @@
             <div style="display: flex; gap: 14px; align-items: center;">
                 <a href="../../index.html" class="back-link">← 网站首页</a>
                 <span style="color: #cbd5e1;">|</span>
-                <a href="../guide.html" class="back-link" style="color: var(--text-sub);">教程目录</a>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
             </div>
             <div class="lang-switch">
                 <span class="lang-btn active">中文</span>
@@ -66,15 +79,19 @@
                 <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 立即打码 →</a>
             </div>
 
-            <p>在社交平台晒图、给客户发订单凭据或汇报工作时，如果不慎泄露手机号、身份证号、家庭住址或财务数字，后果不堪设想。很多在线打码工具会偷偷将你的图片上传到他们服务器，存在极大安全隐患。使用 <strong>Web PSEditor</strong>，数据自始至终停留在你本地电脑。</p>
+            <p>在社交平台晒图、给客户发订单凭据或汇报工作时，如果不慎泄露手机号、身份证号、家庭住址或财务数字，后果不堪设想。很多在线打码工具会偷偷将你的图片上传到他们服务器，存在极大安全隐患。使用 <strong>Web PSEditor</strong>，数据自始至终停留在你本地电脑，连处理过程都不经过任何服务器。</p>
 
+            <figure>
+                <img src="../../images/tutorials/mosaic-before.jpg" alt="包含机密条款和手写签名的扫描合同文档" loading="lazy">
+                <figcaption>示例素材：一份包含机密条款与手写签名的合同扫描件</figcaption>
+            </figure>
 
             <div class="step-card">
                 <div class="step-title">方法一：经典像素马赛克（Mosaic / Pixelate）</div>
                 <p>
                     1. 导入你的截图，选择左侧 <strong>矩形选区工具（Selection Tool）</strong>。<br>
                     2. 用鼠标框选出需要遮挡的敏感文字或头像区域。<br>
-                    3. 点击顶部菜单 <strong>【特效 (Effects)】 -> 【像素化 (Mosaic / Pixelate)】</strong>，拖动滑块调整像素块大小（建议 10~20 像素），点击确定！
+                    3. 点击顶部菜单 <strong>【特效 (Effects)】 -> 【像素化 (Mosaic / Pixelate)】</strong>，拖动滑块调整像素块大小（建议 10~20 像素），点击确定！马赛克会彻底破坏原始像素，法律敏感内容首选此方案。
                 </p>
             </div>
 
@@ -84,8 +101,17 @@
                     如果你觉得像素马赛克太生硬影响美观，可以使用高斯模糊：<br>
                     1. 同样先用选区工具框选目标敏感区域。<br>
                     2. 点击顶部菜单 <strong>【特效 (Effects)】 -> 【模糊 (Blur)】 -> 【高斯模糊 (Gaussian Blur)】</strong>。<br>
-                    3. 将模糊半径设为 <code>8 ~ 15 像素</code>，文字即可化作柔和的磨砂雾化效果，既防识别又极其精致美观。
+                    3. 将模糊半径设为 <code>8 ~ 15 像素</code>，文字即可化作柔和的磨砂雾化效果，既防识别又极其精致美观。<br>
+                    追求效率也可以直接用左侧 <strong>模糊工具（Blur Tool）</strong>：把笔刷尺寸调到 <code>50 ~ 80</code>，在敏感区域来回涂抹几笔即可。
                 </p>
+                <figure>
+                    <img src="../../images/tutorials/mosaic-editor-ui.jpg" alt="Web PSEditor 编辑器界面，模糊工具正在涂抹合同的签名区域" loading="lazy">
+                    <figcaption>用模糊工具在签名区域涂抹，几笔就能完成脱敏。</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/mosaic-after.jpg" alt="签名区域被完全模糊处理、无法辨认的合同文档" loading="lazy">
+                    <figcaption>处理后：签名区域已完全模糊，无法辨认。</figcaption>
+                </figure>
             </div>
 
             <div class="step-card">
@@ -95,7 +121,28 @@
                 </p>
             </div>
 
-            <!-- 🎯 实战练习与安全导流 CTA 卡片 -->
+            <div class="mistake-box">
+                <strong>⚠️ 这些坑会让脱敏形同虚设</strong>
+                <ul>
+                    <li><strong>打码力度太轻</strong> —— 浅度模糊或过小的马赛克块可以被去模糊工具甚至人眼还原。马赛克块至少 10~20 像素，模糊半径至少 8 以上。</li>
+                    <li><strong>只遮住看得见的部分</strong> —— 邮箱、证件号只打一半，对方仍能推测剩余内容。要整串遮盖，并前后多遮一位。</li>
+                    <li><strong>忘记照片元数据（EXIF）</strong> —— 截图可能携带 GPS 定位等信息。通过 Web PSEditor 重新导出会自动剥离原始元数据。</li>
+                </ul>
+            </div>
+
+            <h2>常见问题 FAQ</h2>
+            <div class="faq-item"><h3>马赛克和高斯模糊能被还原吗？</h3><p>强度足够的马赛克无法还原——原始像素已被彻底替换。轻度模糊存在被部分还原的可能，拿不准就用观感可接受的最大强度。</p></div>
+            <div class="faq-item"><h3>直接画一个黑色色块是不是更安全？</h3><p>纯色色块确实最保险，只是观感生硬。对外展示的图片用高强度模糊/马赛克是常见折中；法律文件建议马赛克或纯色色块。</p></div>
+            <div class="faq-item"><h3>打码过程中我的文档会被上传吗？</h3><p>绝对不会。全部处理都在你的浏览器内通过 HTML5 Canvas 完成，没有服务器参与——这正是合同、证件、病历可以放心处理的原因。</p></div>
+            <div class="faq-item"><h3>一张图里有多处敏感信息，要重复操作吗？</h3><p>是的，对每处敏感区域重复"框选 + 特效"即可；或者直接用模糊工具逐个涂抹，最后统一 <strong>【文件】 -> 【另存为】</strong> 导出一次。</p></div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/how-to-cutout-png">3步搞定在线抠图并导出透明底 PNG</a>
+                <a href="../tutorials/png-vs-jpg-export">PNG 和 JPG 到底选哪个导出？</a>
+                <a href="../tutorials/transparent-signature-extraction">手写签名透明底提取教程</a>
+                <a href="../tutorials/id-photo-background">证件照白底换蓝底/红底教程</a>
+            </div>
             <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
@@ -114,5 +161,17 @@
             </div>
         </article>
     </div>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "马赛克和高斯模糊能被还原吗？", "acceptedAnswer": {"@type": "Answer", "text": "强度足够的马赛克无法还原，原始像素已被彻底替换。轻度模糊存在被部分还原的可能，拿不准就用最大可接受强度。"}},
+        {"@type": "Question", "name": "直接画一个黑色色块是不是更安全？", "acceptedAnswer": {"@type": "Answer", "text": "纯色色块最保险但观感生硬。对外展示用高强度模糊/马赛克，法律文件建议马赛克或纯色色块。"}},
+        {"@type": "Question", "name": "打码过程中我的文档会被上传吗？", "acceptedAnswer": {"@type": "Answer", "text": "绝对不会。全部处理都在浏览器内通过 HTML5 Canvas 完成，没有服务器参与。"}},
+        {"@type": "Question", "name": "一张图里有多处敏感信息，要重复操作吗？", "acceptedAnswer": {"@type": "Answer", "text": "对每处敏感区域重复框选加特效即可，或用模糊工具逐个涂抹，最后统一另存为导出一次。"}}
+      ]
+    }
+    </script>
 </body>
 </html>

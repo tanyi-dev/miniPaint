@@ -32,7 +32,21 @@
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
-        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } }
+        article figure { margin: 18px 0; text-align: center; }
+        article figure img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
+        article figcaption { font-size: 13px; color: var(--text-sub); margin-top: 8px; }
+        .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; }
+        .mistake-box strong { color: #991b1b; }
+        .mistake-box li { color: #7f1d1d; font-size: 14px; margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
+        .faq-item h3 { font-size: 15px; margin: 0 0 6px; color: #0f172a; }
+        .faq-item p { margin: 0; font-size: 14px; color: #334155; }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        article h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { grid-template-columns: 1fr; } .related { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -41,7 +55,7 @@
             <div style="display: flex; gap: 14px; align-items: center;">
                 <a href="../index.html" class="back-link">← Home</a>
                 <span style="color: #cbd5e1;">|</span>
-                <a href="../guide.html" class="back-link" style="color: var(--text-sub);">All Tutorials</a>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">All Tutorials</a>
             </div>
             <div class="lang-switch">
                 <a href="https://webpseditor.com/zh/tutorials/id-photo-background" class="lang-btn" style="text-decoration:none;">中文</a>
@@ -68,12 +82,29 @@
                 <a href="../editor.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
             </div>
 
-            <p>Need a blue or red background ID photo in a hurry, but only have a white one? You don't need to install heavy desktop software. Here is a step-by-step tutorial on how to quickly swap your passport/ID photo background using <strong>Web PSEditor</strong>.</p>
+            <p>Need a blue or red background ID photo in a hurry, but only have a white one? You don't need to install heavy desktop software. Here is a step-by-step tutorial on how to quickly swap your passport/ID photo background using <strong>Web PSEditor</strong> — your photo never leaves your device.</p>
 
+            <div class="compare">
+                <figure>
+                    <img src="../../images/tutorials/idphoto-before.jpg" alt="Original portrait ID photo on a solid blue background" loading="lazy">
+                    <figcaption>Before: photo on the original blue background</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/idphoto-after.jpg" alt="Same portrait after changing the background to standard ID photo red" loading="lazy">
+                    <figcaption>After: standard red background applied in seconds</figcaption>
+                </figure>
+            </div>
+
+            <h2>Standard ID Photo Background Colors</h2>
+            <ul>
+                <li><strong>Standard blue:</strong> RGB(67, 142, 219) / hex <code>#438EDB</code> — diplomas, work permits, résumés, driver's licenses</li>
+                <li><strong>Standard red:</strong> RGB(214, 40, 40) / hex <code>#D62828</code> — insurance, medical records, certifications</li>
+                <li><strong>White:</strong> RGB(255, 255, 255) / hex <code>#FFFFFF</code> — passports, ID cards, visas</li>
+            </ul>
 
             <div class="step-card">
                 <div class="step-title">Step 1: Open Your Photo</div>
-                <p>Navigate to Web PSEditor, click <strong>File -> Open</strong> (or press <code>Ctrl + O</code>) to load your picture, or drag and drop it onto the canvas.</p>
+                <p>Navigate to Web PSEditor, click <strong>File → Open</strong> (or press <code>Ctrl + O</code>) to load your picture, or drag and drop it onto the canvas.</p>
             </div>
 
             <div class="step-card">
@@ -88,7 +119,34 @@
 
             <div class="step-card">
                 <div class="step-title">Step 4: Fill New Color and Save</div>
-                <p>Select your desired background color (e.g. Standard Blue <code>#438EDB</code>) and use the <strong>Fill Tool</strong> (or Delete key), then click <strong>File -> Save As</strong> to export your updated photo.</p>
+                <p>Select your desired background color (e.g. Standard Blue <code>#438EDB</code>) and use the <strong>Fill Tool</strong> (or press <code>Delete</code>), then click <strong>File → Save As</strong> to export your updated photo as JPG or PNG.</p>
+                <figure>
+                    <img src="../../images/tutorials/idphoto-editor-ui-en.jpg" alt="Web PSEditor interface showing the Fill tool applying a red ID photo background" loading="lazy">
+                    <figcaption>Set the target color and click the background with the Fill Tool — the new color applies instantly.</figcaption>
+                </figure>
+            </div>
+
+            <div class="mistake-box">
+                <strong>⚠️ Common mistakes to avoid</strong>
+                <ul>
+                    <li><strong>No feathering</strong> — without a 1–2 px feather, the boundary between hair and the new background looks like a hard sticker outline.</li>
+                    <li><strong>Tolerance too low on shaded backgrounds</strong> — parts of the old background stay unselected. Raise the tolerance or Shift-click the missed areas.</li>
+                    <li><strong>Non-standard color values</strong> — exam and visa systems check background colors; always use the official hex codes listed above instead of picking by eye.</li>
+                </ul>
+            </div>
+
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item"><h3>Will changing the background leave white fringes around my hair?</h3><p>Not if you feather the selection by 1–2 px first (Step 3). If you still see a thin fringe, erase the halo manually with the Eraser at a small size, or re-select with a slightly higher tolerance.</p></div>
+            <div class="faq-item"><h3>Can I change a blue background to white for passport photos?</h3><p>Yes — the workflow is identical. Select the blue background with the Magic Wand, feather it, set the foreground color to <code>#FFFFFF</code> and fill.</p></div>
+            <div class="faq-item"><h3>What resolution should the final photo be?</h3><p>Most exam and ID systems ask for 295 × 413 px (one-inch) or 413 × 579 px (two-inch) at 300 DPI. Use <strong>Image → Resize</strong> to set the exact size before exporting.</p></div>
+            <div class="faq-item"><h3>Is my portrait photo uploaded anywhere?</h3><p>No. Web PSEditor processes everything locally in your browser via HTML5 Canvas — zero uploads, zero cloud storage, and it even works offline.</p></div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/how-to-cutout-png">Cut Out Image & Export Transparent PNG in 3 Steps</a>
+                <a href="../tutorials/photo-color-correction">One-Click Photo Color Correction</a>
+                <a href="../tutorials/image-resize-and-compression">Resize & Compress Images Without Losing Quality</a>
+                <a href="../tutorials/crop-rotate-straighten">Crop, Rotate & Straighten Photos</a>
             </div>
 
             <!-- 🎯 Hands-on Practice CTA Card -->
@@ -110,5 +168,17 @@
             </div>
         </article>
     </div>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Will changing the background leave white fringes around my hair?", "acceptedAnswer": {"@type": "Answer", "text": "Not if you feather the selection by 1-2 px first. For a remaining thin fringe, erase it manually with a small Eraser or re-select with higher tolerance."}},
+        {"@type": "Question", "name": "Can I change a blue background to white for passport photos?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, the workflow is identical: select the blue background with the Magic Wand, feather, set foreground color to #FFFFFF and fill."}},
+        {"@type": "Question", "name": "What resolution should the final ID photo be?", "acceptedAnswer": {"@type": "Answer", "text": "Most systems ask for 295x413 px (one-inch) or 413x579 px (two-inch) at 300 DPI. Use Image > Resize before exporting."}},
+        {"@type": "Question", "name": "Is my portrait photo uploaded anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. Web PSEditor processes everything locally in your browser via HTML5 Canvas - zero uploads, zero cloud storage, works offline."}}
+      ]
+    }
+    </script>
 </body>
 </html>

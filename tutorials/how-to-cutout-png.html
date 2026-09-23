@@ -31,7 +31,24 @@
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
-        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } }
+        article figure { margin: 18px 0; text-align: center; }
+        article figure img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
+        article figcaption { font-size: 13px; color: var(--text-sub); margin-top: 8px; }
+        .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .tool-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; }
+        .mistake-box strong { color: #991b1b; }
+        .mistake-box li { color: #7f1d1d; font-size: 14px; margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
+        .faq-item h3 { font-size: 15px; margin: 0 0 6px; color: #0f172a; }
+        .faq-item p { margin: 0; font-size: 14px; color: #334155; }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        article h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { grid-template-columns: 1fr; } .related { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -40,7 +57,7 @@
             <div style="display: flex; gap: 14px; align-items: center;">
                 <a href="../index.html" class="back-link">← Home</a>
                 <span style="color: #cbd5e1;">|</span>
-                <a href="../guide.html" class="back-link" style="color: var(--text-sub);">All Tutorials</a>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">All Tutorials</a>
             </div>
             <div class="lang-switch">
                 <a href="https://webpseditor.com/zh/tutorials/how-to-cutout-png" class="lang-btn" style="text-decoration:none;">中文</a>
@@ -67,22 +84,68 @@
                 <a href="../editor.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
             </div>
 
-            <p>Creating product cards, logos, or stickers requires isolated transparent backgrounds. Follow this 3-step guide using <strong>Web PSEditor</strong> to create transparent PNG graphics easily.</p>
+            <p>Creating product cards, logos, or stickers requires isolated transparent backgrounds. Follow this 3-step guide using <strong>Web PSEditor</strong> to create transparent PNG graphics easily — everything runs locally in your browser, so your images are never uploaded.</p>
 
+            <div class="compare">
+                <figure>
+                    <img src="../../images/tutorials/cutout-before.jpg" alt="Product photo of white headphones on a solid light blue background" loading="lazy">
+                    <figcaption>Before: product photo on a solid background</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/cutout-after.jpg" alt="Headphones cut out cleanly, transparent background shown as checkerboard grid" loading="lazy">
+                    <figcaption>After: isolated subject with a fully transparent background</figcaption>
+                </figure>
+            </div>
 
             <div class="step-card">
                 <div class="step-title">Step 1: Open Image</div>
-                <p>Drag and drop your file into Web PSEditor. Ensure the layer is selected in the right-hand layer dock.</p>
+                <p>Drag and drop your file into Web PSEditor (or <strong>File → Open</strong>). Ensure the layer is selected in the right-hand layer dock.</p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">Step 2: Select the Background</div>
-                <p>Choose the <strong>Magic Wand Tool</strong> for uniform colors or <strong>Lasso / Polygonal Select</strong> for detailed edges.</p>
+                <div class="step-title">Step 2: Remove the Background with the Magic Eraser</div>
+                <p>Choose the <strong>Magic Eraser Tool</strong> (magic wand icon) from the left toolbar and click once on a uniform background — every pixel of the same color disappears instantly. If the background has gradients or soft shadows, raise the <strong>Power</strong> value in the top bar to about 20–60, then click any leftover corners to clean them up. For detailed edges, use <strong>Lasso / Polygonal Select</strong> instead, then press <code>Delete</code>.</p>
+                <figure>
+                    <img src="../../images/tutorials/cutout-editor-ui-en.jpg" alt="Web PSEditor interface with the Magic Eraser tool removing a uniform background in one click" loading="lazy">
+                    <figcaption>The Magic Eraser removes a uniform background in one click — transparency shows as a checkerboard.</figcaption>
+                </figure>
             </div>
 
             <div class="step-card">
-                <div class="step-title">Step 3: Clear and Export as PNG</div>
-                <p>Press <code>Delete</code> to remove selected pixels. You will see the checkered transparency grid. Click <strong>File -> Save As</strong> and pick <strong>PNG</strong>.</p>
+                <div class="step-title">Step 3: Export as PNG</div>
+                <p>Click <strong>File → Save As</strong> and pick <strong>PNG</strong> (or WebP). JPG has no alpha channel — saving as JPG paints the background white again.</p>
+            </div>
+
+            <h2>Which Selection Tool Should You Use?</h2>
+            <table class="tool-table">
+                <tr><th>Tool</th><th>Best for</th><th>How it works</th></tr>
+                <tr><td><strong>Magic Eraser</strong></td><td>Solid or gradient uniform backgrounds (e-commerce photos, portraits)</td><td>One click removes all similar-colored pixels; adjust <strong>Power</strong> for tolerance</td></tr>
+                <tr><td><strong>Lasso</strong></td><td>Freehand outlines around irregular subjects</td><td>Draw the outline manually, then delete the selection</td></tr>
+                <tr><td><strong>Polygonal Select</strong></td><td>Boxy products, buildings, geometric logos</td><td>Click point by point to trace straight edges precisely</td></tr>
+            </table>
+
+            <div class="mistake-box">
+                <strong>⚠️ Common mistakes to avoid</strong>
+                <ul>
+                    <li><strong>Exporting as JPG</strong> — the alpha channel is discarded and the background turns white. Always choose PNG or WebP.</li>
+                    <li><strong>Too low Power on gradient backgrounds</strong> — leaves ghost patches in the corners. Raise it to 30–60 and click the leftovers again.</li>
+                    <li><strong>Skipping the edge check</strong> — zoom to 200% and inspect hair or glass edges; a visible halo means one more erase pass with a lower Power is needed.</li>
+                </ul>
+            </div>
+
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item"><h3>Why is my exported image still white where the background should be transparent?</h3><p>You most likely saved as JPG. JPG does not support transparency — re-export and choose PNG (or WebP) as the file format.</p></div>
+            <div class="faq-item"><h3>The background has a slight gradient and the first click missed parts of it. What now?</h3><p>Increase the <strong>Power</strong> (tolerance) value in the top attributes bar to about 30–60, then click the remaining areas. Repeated clicks are non-destructive — press <code>Ctrl + Z</code> to undo at any time.</p></div>
+            <div class="faq-item"><h3>Can I keep a soft natural shadow under the product?</h3><p>Yes. Lower the Power so only the flat background color is removed, or erase the background with the Lasso tool and leave the shadow area untouched.</p></div>
+            <div class="faq-item"><h3>Is my image uploaded to a server?</h3><p>No. Web PSEditor runs 100% client-side — the image is processed in your browser's memory and never leaves your device.</p></div>
+            <div class="faq-item"><h3>Which formats support transparency?</h3><p>PNG and WebP both keep the full alpha channel. GIF supports only 1-bit transparency, and JPG supports none.</p></div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/id-photo-background">Change ID Photo Background Color (White → Blue/Red)</a>
+                <a href="../tutorials/png-vs-jpg-export">PNG vs JPG: Which Format Should You Export?</a>
+                <a href="../tutorials/mosaic-and-blur-redaction">Pixelate & Blur Sensitive Info for Privacy</a>
+                <a href="../tutorials/transparent-signature-extraction">Extract a Transparent Signature</a>
             </div>
 
             <!-- 🎯 Hands-on Practice CTA Card -->
@@ -104,5 +167,18 @@
             </div>
         </article>
     </div>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Why is my exported image still white where the background should be transparent?", "acceptedAnswer": {"@type": "Answer", "text": "You most likely saved as JPG. JPG does not support transparency - re-export and choose PNG (or WebP) as the file format."}},
+        {"@type": "Question", "name": "The background has a gradient and the first click missed parts of it. What now?", "acceptedAnswer": {"@type": "Answer", "text": "Increase the Power (tolerance) value to about 30-60 and click the remaining areas. Press Ctrl+Z to undo at any time."}},
+        {"@type": "Question", "name": "Can I keep a soft natural shadow under the product?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Lower the Power so only the flat background color is removed, or erase the background with the Lasso tool and leave the shadow untouched."}},
+        {"@type": "Question", "name": "Is my image uploaded to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. Web PSEditor runs 100% client-side - the image is processed in your browser's memory and never leaves your device."}},
+        {"@type": "Question", "name": "Which image formats support transparency?", "acceptedAnswer": {"@type": "Answer", "text": "PNG and WebP keep the full alpha channel. GIF supports only 1-bit transparency, and JPG supports none."}}
+      ]
+    }
+    </script>
 </body>
 </html>

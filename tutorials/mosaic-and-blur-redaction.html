@@ -30,7 +30,20 @@
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
-        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } }
+        article figure { margin: 18px 0; text-align: center; }
+        article figure img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
+        article figcaption { font-size: 13px; color: var(--text-sub); margin-top: 8px; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; }
+        .mistake-box strong { color: #991b1b; }
+        .mistake-box li { color: #7f1d1d; font-size: 14px; margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
+        .faq-item h3 { font-size: 15px; margin: 0 0 6px; color: #0f172a; }
+        .faq-item p { margin: 0; font-size: 14px; color: #334155; }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        article h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -39,7 +52,7 @@
             <div style="display: flex; gap: 14px; align-items: center;">
                 <a href="../index.html" class="back-link">← Home</a>
                 <span style="color: #cbd5e1;">|</span>
-                <a href="../guide.html" class="back-link" style="color: var(--text-sub);">All Tutorials</a>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">All Tutorials</a>
             </div>
             <div class="lang-switch">
                 <a href="https://webpseditor.com/zh/tutorials/mosaic-and-blur-redaction" class="lang-btn" style="text-decoration:none;">中文</a>
@@ -66,17 +79,29 @@
                 <a href="../editor.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
             </div>
 
-            <p>Sharing screenshots without redacting private details can lead to identity theft. <strong>Web PSEditor</strong> operates purely inside your local browser memory, ensuring your private data never touches any remote server.</p>
+            <p>Sharing screenshots without redacting private details can lead to identity theft. <strong>Web PSEditor</strong> operates purely inside your local browser memory, ensuring your private data never touches any remote server — not even during processing.</p>
 
+            <figure>
+                <img src="../../images/tutorials/mosaic-before.jpg" alt="Scanned contract document containing confidential text and signature lines" loading="lazy">
+                <figcaption>Example: a contract containing confidential terms and handwritten signatures</figcaption>
+            </figure>
 
             <div class="step-card">
                 <div class="step-title">Method 1: Pixelate / Mosaic Effect</div>
-                <p>Select the region with the <strong>Selection Tool</strong>. Click <strong>Effects -> Mosaic / Pixelate</strong>, adjust strength, and apply.</p>
+                <p>Select the region with the <strong>Selection Tool</strong>. Click <strong>Effects → Mosaic / Pixelate</strong>, adjust strength, and apply. Mosaic is the safest option for legally sensitive content — it destroys the underlying pixels completely, leaving nothing to reconstruct.</p>
             </div>
 
             <div class="step-card">
                 <div class="step-title">Method 2: Smooth Gaussian Blur</div>
-                <p>Box the sensitive text, then choose <strong>Effects -> Blur -> Gaussian Blur</strong> (8-15px radius) for an aesthetic frosted-glass look.</p>
+                <p>Box the sensitive text, then choose <strong>Effects → Blur → Gaussian Blur</strong> (8-15px radius) for an aesthetic frosted-glass look. For quick touch-ups you can also paint directly over the area with the <strong>Blur Tool</strong> — set a large brush size (50-80) and sweep across the text a few times.</p>
+                <figure>
+                    <img src="../../images/tutorials/mosaic-editor-ui-en.jpg" alt="Web PSEditor interface with the Blur tool brushing over the signature area of a contract" loading="lazy">
+                    <figcaption>Painting over the signature area with the Blur Tool — a few strokes are enough.</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/mosaic-after.jpg" alt="Contract document with the signature area fully blurred and unreadable" loading="lazy">
+                    <figcaption>After: the signature area is fully redacted and unreadable.</figcaption>
+                </figure>
             </div>
 
             <!-- 🎯 Hands-on Practice CTA Card -->
@@ -98,5 +123,17 @@
             </div>
         </article>
     </div>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Can a mosaic or blur be reversed?", "acceptedAnswer": {"@type": "Answer", "text": "A strong mosaic cannot - the original pixels are replaced. Light blur can sometimes be partially reversed, so use the strongest setting that still looks acceptable."}},
+        {"@type": "Question", "name": "Is it safer to draw a black box over the text?", "acceptedAnswer": {"@type": "Answer", "text": "A solid fill is the most bulletproof option. For presentations, high-strength blur or mosaic is the usual compromise; for legal documents prefer mosaic or a black fill."}},
+        {"@type": "Question", "name": "Does Web PSEditor upload my document while redacting?", "acceptedAnswer": {"@type": "Answer", "text": "Never. All processing happens in your browser with HTML5 Canvas - there is no server round-trip, which is why it is safe for contracts, IDs and medical records."}},
+        {"@type": "Question", "name": "Can I redact several areas in one pass?", "acceptedAnswer": {"@type": "Answer", "text": "Yes - repeat the selection and effect steps for each area, or paint multiple regions with the Blur Tool, then export once with File > Save As."}}
+      ]
+    }
+    </script>
 </body>
 </html>
