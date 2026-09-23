@@ -541,6 +541,89 @@
             display: inline-flex;
         }
 
+        /* 精选作品展示区 */
+        .gallery-section {
+            padding: 48px 0 60px;
+        }
+        .gal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .gal-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .gal-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px -6px rgba(37,99,235,0.12), 0 0 0 1px rgba(37,99,235,0.25);
+        }
+        .gal-thumb {
+            position: relative;
+            display: block;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            background: #eef2f7;
+        }
+        .gal-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .gal-tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(37, 99, 235, 0.92);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.2px;
+        }
+        .gal-body {
+            padding: 16px 18px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+        .gal-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #0f172a;
+            margin: 0;
+        }
+        .gal-desc {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin: 0;
+            line-height: 1.5;
+            flex: 1;
+        }
+        .gal-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .gal-cta:hover { text-decoration: underline; }
+        @media (max-width: 900px) {
+            .gal-grid { grid-template-columns: 1fr; }
+        }
+
         /* FAQ 问答模块 */
         .faq-section {
             padding: 50px 0 60px;
@@ -907,6 +990,54 @@
             </div>
             <div style="text-align: center; margin-top: 32px;">
                 <a href="guide" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">View All 12 Tutorials <span aria-hidden="true">→</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 精选作品展示区 -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2>Made with Web PSEditor</h2>
+                <p>Real results created entirely in the browser — open any work as a template and make it yours</p>
+            </div>
+            <div class="gal-grid">
+                <div class="gal-card">
+                    <a href="gallery" class="gal-thumb" aria-label="View this work in the gallery">
+                        <img src="images/gallery/portrait-id-blue.jpg" alt="ID photo of a woman on a royal blue studio background" loading="lazy">
+                        <span class="gal-tag">ID Photos</span>
+                    </a>
+                    <div class="gal-body">
+                        <p class="gal-title">Blue-Background ID Photo</p>
+                        <p class="gal-desc">Standard passport portrait with a clean Fill-tool background swap — no edge artifacts.</p>
+                        <a class="gal-cta" href="editor.html?load=/images/gallery/portrait-id-blue.jpg">Open as Template <span aria-hidden="true">→</span></a>
+                    </div>
+                </div>
+                <div class="gal-card">
+                    <a href="gallery" class="gal-thumb" aria-label="View this work in the gallery">
+                        <img src="images/gallery/product-sneakers.jpg" alt="White and orange running sneaker floating on a pure white background" loading="lazy">
+                        <span class="gal-tag">E-commerce</span>
+                    </a>
+                    <div class="gal-body">
+                        <p class="gal-title">Product Shot on Pure White</p>
+                        <p class="gal-desc">Magic-erase cutout puts the product on a marketplace-ready pure white background.</p>
+                        <a class="gal-cta" href="editor.html?load=/images/gallery/product-sneakers.jpg">Open as Template <span aria-hidden="true">→</span></a>
+                    </div>
+                </div>
+                <div class="gal-card">
+                    <a href="gallery" class="gal-thumb" aria-label="View this work in the gallery">
+                        <img src="images/gallery/photo-landscape.jpg" alt="Green hills landscape photo after color correction" loading="lazy">
+                        <span class="gal-tag">Photo Retouch</span>
+                    </a>
+                    <div class="gal-body">
+                        <p class="gal-title">Landscape Color Correction</p>
+                        <p class="gal-desc">One-click auto adjust revives hazy travel shots with richer color and contrast.</p>
+                        <a class="gal-cta" href="editor.html?load=/images/gallery/photo-landscape.jpg">Open as Template <span aria-hidden="true">→</span></a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 32px;">
+                <a href="gallery" class="btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">View Full Gallery <span aria-hidden="true">→</span></a>
             </div>
         </div>
     </section>
