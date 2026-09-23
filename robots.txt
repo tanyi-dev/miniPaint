@@ -1,9 +1,10 @@
+User-agent: Googlebot
+Allow: /
+
+User-agent: Mediapartners-Google
+Allow: /
+
 User-agent: *
 Allow: /
-Allow: /guide
-Allow: /tutorials/
-Allow: /privacy
-Allow: /terms
-Allow: /zh/
 
 Sitemap: https://webpseditor.com/sitemap.xml
