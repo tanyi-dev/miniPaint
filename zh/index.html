@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web PSEditor - Free Online Photo Editor (100% Local, No Uploads)</title>
-    <meta name="description" content="Web PSEditor is a free lightweight online photo editor that runs entirely in your browser. Layers, magic wand cutout, filters and lossless export - zero cloud uploads, absolute privacy for IDs and sensitive photos." />
-    <meta name="keywords" content="online photo editor, free image editor, browser photo editing, magic wand cutout, id photo background change, lossless image compression, layer editing, photo editor online" />
-    <link rel="icon" sizes="192x192" href="images/favicon.png">
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="canonical" href="https://webpseditor.com/" />
-    <link rel="alternate" hreflang="en" href="https://webpseditor.com/" />
+    <title>Web PSEditor - 免费在线图片编辑器（无需安装 · 纯本地处理 · 零上传）</title>
+    <meta name="description" content="Web PSEditor 是一款纯前端运行的轻量级在线图片编辑器。所有图像渲染、裁剪与滤镜均在浏览器本地 Canvas 运行，零云端上传，绝对保护肖像、证件与财务隐私，支持图层混合、魔棒抠图与无损导出。" />
+    <meta name="keywords" content="在线图片编辑器,轻量级图片编辑,纯前端图片处理,魔棒抠图,证件照换底色,图片无损压缩,网页修图工具,图层编辑,Photo Editor Online" />
+    <link rel="icon" sizes="192x192" href="../images/favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/" />
+    <!-- FAQPage Schema 结构化数据 -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -19,42 +20,42 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Does Web PSEditor upload my photos to a server?",
+          "name": "Web PSEditor 会将我的照片上传到服务器吗？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Never. All rendering, cropping and filters run locally in your browser Canvas with zero data transfer, keeping IDs and financial documents absolutely private."
+            "text": "绝不。所有图像渲染、裁剪、滤镜均运行在浏览器本地 Canvas 环境，零数据交互，绝对保护财务与证件隐私。"
           }
         },
         {
           "@type": "Question",
-          "name": "Can I use every editing feature on mobile?",
+          "name": "手机端可以使用全部修图功能吗？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "You can browse all tutorials and settings on mobile, but for precise selections and layer work we recommend a desktop browser with keyboard and mouse."
+            "text": "手机端可浏览所有教程与参数，但为了保证精细化的选区和图层体验，建议在 PC 电脑浏览器中使用键鼠操作。"
           }
         },
         {
           "@type": "Question",
-          "name": "Are there watermarks or resolution limits on export?",
+          "name": "导出图片有水印或分辨率限制吗？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No watermarks and no resolution limits. Lossless export to PNG, JPG and WEBP is fully supported."
+            "text": "完全无水印、不限制分辨率，支持无损导出 PNG、JPG 及 WEBP。"
           }
         },
         {
           "@type": "Question",
-          "name": "Which image formats can I import and edit?",
+          "name": "支持哪些图片格式的导入与编辑？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "All mainstream raster formats are supported, including PNG (with transparency), JPEG/JPG, WEBP, GIF, BMP and SVG, plus multi-layer JSON project files for re-editing."
+            "text": "支持导入主流光栅图片格式，包括 PNG（保留透明度）、JPEG/JPG、WEBP、GIF、BMP、SVG 等，还支持多图层 JSON 工程文件的保存与再次导入编辑。"
           }
         },
         {
           "@type": "Question",
-          "name": "Are the keyboard shortcuts similar to other professional image editors?",
+          "name": "常用的修图快捷键与其他专业图像编辑软件一致吗？",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Ctrl+Z (undo), Ctrl+Y (redo), Ctrl+C/V (copy/paste), Space+drag (pan) and scroll wheel (zoom) match common professional editing habits."
+            "text": "常用快捷键高度习惯对齐：Ctrl+Z（撤销）、Ctrl+Y（重做）、Ctrl+C/V（复制粘贴）、Space+拖拽（平移画布）、滚轮（缩放），支持快速盲操与高频精修。"
           }
         }
       ]
@@ -719,11 +720,11 @@
                 <span>Web PSEditor</span>
             </a>
             <nav class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#tutorials">Tutorials</a>
-                <a href="#faq">FAQ</a>
-                <a href="editor.html" onclick="handleLaunch(event)">Launch Editor</a>
-                <div class="lang-switch-nav" title="Language"><span class="lang-switch-btn active">English</span><a class="lang-switch-btn" href="zh/" style="text-decoration:none;">中文</a></div>
+                <a href="#features">功能特色</a>
+                <a href="#tutorials">实战教程</a>
+                <a href="#faq">常见问题</a>
+                <a href="../editor.html?lang=zh" onclick="handleLaunch(event)">启动编辑器</a>
+                <div class="lang-switch-nav" title="语言"><a class="lang-switch-btn" href="../" style="text-decoration:none;">English</a><span class="lang-switch-btn active">中文</span></div>
             </nav>
         </div>
     </header>
@@ -731,19 +732,19 @@
     <!-- Hero 首屏 -->
     <section class="hero">
         <div class="container">
-            <div>🔒 100% Client-Side · No Image Uploads · Zero Privacy Risk</div>
-            <h1>Free Online Photo Editor in Your Browser</h1>
-            <p>No software installation required. Powerful layers, magic wand selection, and filters run entirely in your local browser Canvas. Zero privacy risk.</p>
+            <div>🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</div>
+            <h1>纯前端轻量级在线图片编辑器</h1>
+            <p>无需安装软件，打开浏览器即用。所有图层混合、魔棒抠图、滤镜调色均在本地 Canvas 极速运算，图片绝不上云。</p>
             <div class="hero-actions">
-                <a href="editor.html" class="btn-primary" onclick="handleLaunch(event)">
-                    <span>Launch Web PSEditor Free</span>
+                <a href="../editor.html?lang=zh" class="btn-primary" onclick="handleLaunch(event)">
+                    <span>进入 Web PSEditor 开始创作</span>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </a>
-                <a href="guide.html">Explore Photo Tutorials</a>
+                <a href="guide.html">查看实战修图教程</a>
             </div>
 
             <!-- 编辑器实景拟物视窗 (解决视觉断层，直观展示专业工作台) -->
-            <a href="editor.html" class="editor-preview-window" onclick="handleLaunch(event)" style="display: block; text-decoration: none; color: inherit;">
+            <a href="../editor.html?lang=zh" class="editor-preview-window" onclick="handleLaunch(event)" style="display: block; text-decoration: none; color: inherit;">
                 <div class="editor-preview-bar">
                     <div class="window-dots">
                         <div class="window-dot dot-red"></div>
@@ -751,14 +752,14 @@
                         <div class="window-dot dot-green"></div>
                     </div>
                     <div class="window-launch-hint">
-                        <span>Web PSEditor Workspace · Click to Launch Free</span>
+                        <span>Web PSEditor 实操界面 · 点击免安装启动</span>
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>
                 </div>
                 <div class="editor-preview-media">
-                    <img src="images/editor-screenshot.jpg" alt="Web PSEditor online photo editor workspace preview" class="editor-preview-img" loading="eager" decoding="async">
+                    <img src="images/editor-screenshot.jpg" alt="Web PSEditor 在线图片编辑器实操工作台" class="editor-preview-img" loading="eager" decoding="async">
                     <div class="preview-badge">
-                        <span>⚡ 100% Client-Side · Click to Try</span>
+                        <span>⚡ 100% 本地运算 · 点击直接体验</span>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>
                 </div>
@@ -770,24 +771,24 @@
     <section class="features" id="features">
         <div class="container">
             <div class="section-header">
-                <h2>Professional Image Editing with Pure Privacy</h2>
-                <p>Lightweight graphics engine built on modern HTML5 Canvas and WebAssembly</p>
+                <h2>专业级图像处理，兼顾极致隐私与效率</h2>
+                <p>基于现代 HTML5 Canvas 与 WebAssembly 技术构建的轻量图形引擎</p>
             </div>
             <div class="feature-grid">
                 <div class="feature-card">
                     <div class="card-icon">🪄</div>
-                    <h3>Layer System & Selection</h3>
-                    <p>Multi-layer Stacking · Lasso · Transparent PNG</p>
+                    <h3>图层系统与精细抠图</h3>
+                    <p>多图层堆叠 · 选区套索 · 导出透明 PNG</p>
                 </div>
                 <div class="feature-card">
                     <div class="card-icon">🎨</div>
-                    <h3>Pro Filters & Retouching</h3>
-                    <p>Color Curves · Pixelate · Vector & Brush Tools</p>
+                    <h3>专业滤镜与画笔调色</h3>
+                    <p>色彩曲线 · 局部打码 · 自由排版绘制</p>
                 </div>
                 <div class="feature-card">
                     <div class="card-icon">🔒</div>
-                    <h3>100% Local Sandboxed Engine</h3>
-                    <p>Zero Server Upload · Offline Ready · Absolute Privacy</p>
+                    <h3>100% 纯本地沙箱运算</h3>
+                    <p>零数据上传 · 断网可用 · 隐私绝对保障</p>
                 </div>
             </div>
         </div>
@@ -797,21 +798,21 @@
     <section class="tutorials-section" id="tutorials">
         <div class="container">
             <div class="section-header">
-                <h2>Step-by-Step Photo Tutorials</h2>
-                <p>Clear, hands-on tutorials to help you master core photo editing skills in your browser</p>
+                <h2>精选实战修图指南</h2>
+                <p>循序渐进的实用图文教程，带你掌握在线修图核心技巧</p>
             </div>
             <div class="tut-grid">
                 <a href="tutorials/id-photo-background.html" class="tut-card">
                     <div>
                         <div class="tut-top">
                             <div class="tut-icon-box" style="background: #eff6ff; border-color: #bfdbfe;">📸</div>
-                            <span>Passport · ID Photos</span>
+                            <span>人像规范 · 证件标准</span>
                         </div>
-                        <div>Fast ID Photo Background Color Change (White/Blue/Red)</div>
-                        <div>3 simple steps using magic wand and feathering to cleanly replace ID photo backgrounds without rough edges.</div>
+                        <div>证件照白底快速换蓝底/红底教程</div>
+                        <div>魔棒精准选区配合边缘平滑羽化，3 步搞定标准证件照换底色，边缘柔和无锯齿不生硬。</div>
                     </div>
                     <div class="tut-footer">
-                        <span>Read Full Tutorial</span>
+                        <span>阅读完整图文步骤</span>
                         <span class="tut-footer-arrow">→</span>
                     </div>
                 </a>
@@ -819,13 +820,13 @@
                     <div>
                         <div class="tut-top">
                             <div class="tut-icon-box" style="background: #faf5ff; border-color: #e9d5ff;">🪄</div>
-                            <span>E-commerce · Alpha Cutout</span>
+                            <span>电商白底 · 透明通道</span>
                         </div>
-                        <div>How to Cut Out Background & Export Transparent PNG in 3 Steps</div>
-                        <div>Instantly strip solid backgrounds, preserving high-res alpha transparency for product listings and design layouts.</div>
+                        <div>3步搞定在线抠图并导出透明底 PNG</div>
+                        <div>毫秒级剥离商品与人物纯色背景，保留超清 Alpha 透明通道，电商上架与设计排版必备。</div>
                     </div>
                     <div class="tut-footer">
-                        <span>Read Full Tutorial</span>
+                        <span>阅读完整图文步骤</span>
                         <span class="tut-footer-arrow">→</span>
                     </div>
                 </a>
@@ -833,13 +834,13 @@
                     <div>
                         <div class="tut-top">
                             <div class="tut-icon-box" style="background: #fffbeb; border-color: #fde68a;">🛡️</div>
-                            <span>Privacy · Redaction</span>
+                            <span>隐私保护 · 安全脱敏</span>
                         </div>
-                        <div>How to Pixelate & Blur Sensitive Info for Privacy Protection</div>
-                        <div>Redact IDs, plates, or contracts using mosaic pixelation. 100% client-side to prevent second-hand leakage.</div>
+                        <div>证件与敏感信息打码防泄露指南</div>
+                        <div>利用局部马赛克与高斯模糊对身份证、车牌或商业合同脱敏，纯本地处理杜绝隐私二次泄露。</div>
                     </div>
                     <div class="tut-footer">
-                        <span>Read Full Tutorial</span>
+                        <span>阅读完整图文步骤</span>
                         <span class="tut-footer-arrow">→</span>
                     </div>
                 </a>
@@ -847,13 +848,13 @@
                     <div>
                         <div class="tut-top">
                             <div class="tut-icon-box" style="background: #ecfdf5; border-color: #a7f3d0;">⚡</div>
-                            <span>Resize · Compression</span>
+                            <span>求职报考 · 无损瘦身</span>
                         </div>
-                        <div>Image Resizing and Target KB Compression for Web Forms</div>
-                        <div>Easily meet strict 200KB upload limits for job applications and exam portals without visible quality loss.</div>
+                        <div>图片等比缩放与文件大小限制压缩</div>
+                        <div>精准应对各类政务与考试报名系统 200KB 严格大小限制，无损调整分辨率与导出画质。</div>
                     </div>
                     <div class="tut-footer">
-                        <span>Read Full Tutorial</span>
+                        <span>阅读完整图文步骤</span>
                         <span class="tut-footer-arrow">→</span>
                     </div>
                 </a>
@@ -861,13 +862,13 @@
                     <div>
                         <div class="tut-top">
                             <div class="tut-icon-box" style="background: #fff1f2; border-color: #fecdd3;">🎨</div>
-                            <span>Blending · Creative Art</span>
+                            <span>进阶合成 · 艺术设计</span>
                         </div>
-                        <div>Mastering Layer Blend Modes: Create Double Exposure Effects</div>
-                        <div>Harness non-destructive layers and blend modes (Multiply, Screen, Soft Light) for cinematic double exposures.</div>
+                        <div>图层系统与混合模式（合成双重曝光）</div>
+                        <div>掌握多图层非破坏性架构，灵活实战正片叠底、滤色、柔光，轻松合成电影质感双重曝光。</div>
                     </div>
                     <div class="tut-footer">
-                        <span>Read Full Tutorial</span>
+                        <span>阅读完整图文步骤</span>
                         <span class="tut-footer-arrow">→</span>
                     </div>
                 </a>
@@ -875,13 +876,13 @@
                     <div>
                         <div class="tut-top">
                             <div class="tut-icon-box" style="background: #ecfeff; border-color: #a5f3fc;">🖋️</div>
-                            <span>Signatures · Documents</span>
+                            <span>合同签署 · 商务办公</span>
                         </div>
-                        <div>Extract Handwritten Signature to Transparent PNG for PDF Signing</div>
-                        <div>Turn a paper signature photo into a transparent electronic PNG using contrast levels and alpha extraction.</div>
+                        <div>手写签名提取与背景透明化图章教程</div>
+                        <div>白纸拍照一秒变透明电子签名，高光色阶压黑提白配合 Alpha 透明提取，合同发票必备。</div>
                     </div>
                     <div class="tut-footer">
-                        <span>Read Full Tutorial</span>
+                        <span>阅读完整图文步骤</span>
                         <span class="tut-footer-arrow">→</span>
                     </div>
                 </a>
@@ -893,29 +894,29 @@
     <section class="faq-section" id="faq">
         <div class="container">
             <div class="section-header">
-                <h2>Frequently Asked Questions (FAQ)</h2>
-                <p>Learn about Web PSEditor safety, compatibility, and browser capabilities</p>
+                <h2>常见问题解答 (FAQ)</h2>
+                <p>了解 Web PSEditor 的安全性、平台兼容性与使用细节</p>
             </div>
             <div class="faq-list">
                 <details class="faq-item" open>
-                    <summary>Does Web PSEditor upload my images to any server?</summary>
-                    <div>Never. All processing, layers, and filters run locally inside your browser Canvas. Zero server uploads, safeguarding your confidential images.</div>
+                    <summary>Web PSEditor 会将我的照片上传到服务器吗？</summary>
+                    <div>绝不。所有图像渲染、裁剪、滤镜均运行在浏览器本地 Canvas 环境，零数据交互，绝对保护财务与证件隐私。</div>
                 </details>
                 <details class="faq-item">
-                    <summary>Can I use all editing features on mobile phones?</summary>
-                    <div>Mobile browsers can view tutorials and UI, but for precision selection, shortcuts, and multi-layer work, desktop browsers with keyboard and mouse are recommended.</div>
+                    <summary>手机端可以使用全部修图功能吗？</summary>
+                    <div>手机端可浏览所有教程与参数，但为了保证精细化的选区和图层体验，建议在 PC 电脑浏览器中使用键鼠操作。</div>
                 </details>
                 <details class="faq-item">
-                    <summary>Are there any watermarks or resolution limits upon export?</summary>
-                    <div>100% free with no watermarks and no resolution caps. Supports exporting lossless PNG, JPEG, and WEBP.</div>
+                    <summary>导出图片有水印或分辨率限制吗？</summary>
+                    <div>完全无水印、不限制分辨率，支持无损导出 PNG、JPG 及 WEBP。</div>
                 </details>
                 <details class="faq-item">
-                    <summary>Which image formats are supported for import and editing?</summary>
-                    <div>Supports major raster formats including PNG (alpha transparency), JPEG, WEBP, GIF, BMP, SVG, and multi-layer JSON project files.</div>
+                    <summary>支持哪些图片格式的导入与编辑？</summary>
+                    <div>支持导入主流光栅图片格式，包括 PNG（保留透明度）、JPEG/JPG、WEBP、GIF、BMP、SVG 等，还支持多图层 JSON 工程文件的保存与再次导入编辑。</div>
                 </details>
                 <details class="faq-item">
-                    <summary>Are shortcuts consistent with standard professional image editors?</summary>
-                    <div>Standard shortcuts are closely aligned: Ctrl+Z (Undo), Ctrl+Y (Redo), Ctrl+C/V (Copy/Paste), Space+Drag (Pan canvas), and Scroll wheel (Zoom).</div>
+                    <summary>常用的修图快捷键与其他专业图像编辑软件一致吗？</summary>
+                    <div>常用快捷键高度习惯对齐：Ctrl+Z（撤销）、Ctrl+Y（重做）、Ctrl+C/V（复制粘贴）、Space+拖拽（平移画布）、滚轮（缩放），支持快速盲操与高频精修。</div>
                 </details>
             </div>
         </div>
@@ -925,10 +926,10 @@
     <section class="final-cta-section">
         <div class="container">
             <div class="final-cta-card">
-                <h2>Ready to Start Your Image Creation?</h2>
-                <p>Zero installation, zero wait time, 100% in-browser processing. Images never leave your computer.</p>
-                <a href="editor.html" class="final-cta-btn" onclick="handleLaunch(event)">
-                    <span>Open Web PSEditor Now</span>
+                <h2>准备好开始你的图像创作了吗？</h2>
+                <p>零安装、零等待、100% 浏览器本地运算。所有图片绝不上云，安全可靠。</p>
+                <a href="../editor.html?lang=zh" class="final-cta-btn" onclick="handleLaunch(event)">
+                    <span>立即免费打开 Web PSEditor</span>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </a>
             </div>
@@ -940,13 +941,13 @@
         <div class="container">
             <div class="footer-wrap">
                 <div>
-                    <strong>Web PSEditor</strong> - <span>Free Online In-Browser Photo Editor</span>
+                    <strong>Web PSEditor</strong> - <span>纯前端轻量级在线图片编辑器</span>
                 </div>
                 <div class="footer-links">
-                    <a href="editor.html">Online Editor</a>
-                    <a href="guide.html">Tutorials</a>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
+                    <a href="../editor.html?lang=zh">在线编辑器</a>
+                    <a href="guide.html">使用教程</a>
+                    <a href="privacy.html">隐私政策</a>
+                    <a href="terms.html">服务条款</a>
                 </div>
             </div>
             <div style="text-align: center; color: #64748b; font-size: 12px;">
@@ -959,11 +960,11 @@
     <div id="mobile-modal">
         <div class="modal-content">
             <div style="font-size: 36px; margin-bottom: 8px;">🖥️</div>
-            <h3>Desktop Browser Recommended</h3>
-            <p>Web PSEditor is designed for precision keyboard & mouse operations. For best experience, please open on a desktop computer.</p>
+            <h3>建议在电脑端打开</h3>
+            <p>Web PSEditor 专为键鼠专业修图与多图层精细操作设计。在手机小屏上操作体验受限，建议收藏网址并在 PC 浏览器中打开。</p>
             <div class="modal-btns">
-                <a href="editor.html">Continue on Mobile Anyway</a>
-                <button onclick="closeModal()">Stay Here to Read Tutorials</button>
+                <a href="../editor.html?lang=zh">仍要继续进入编辑器</a>
+                <button onclick="closeModal()">留在当前页面查看教程</button>
             </div>
         </div>
     </div>

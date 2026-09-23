@@ -543,12 +543,17 @@
 
 				if (isZh) {
 					if (topHomeTxt) topHomeTxt.innerText = '返回首页';
+					// 中文用户返回中文首页 /zh/，英文用户返回英文根首页
+					var homeBtnZh = document.getElementById('top_nav_home_btn');
+					if (homeBtnZh) homeBtnZh.setAttribute('href', 'zh/index.html');
 					if (guideTxt) guideTxt.innerText = '使用教程';
 					if (privacyTxt) privacyTxt.innerText = '隐私政策';
 					if (termsTxt) termsTxt.innerText = '服务条款';
 					if (donateEl) donateEl.innerText = '☕ 赞助支持';
 				} else {
 					if (topHomeTxt) topHomeTxt.innerText = 'Home';
+					var homeBtnEn = document.getElementById('top_nav_home_btn');
+					if (homeBtnEn) homeBtnEn.setAttribute('href', 'index.html');
 					if (guideTxt) guideTxt.innerText = 'User Guide';
 					if (privacyTxt) privacyTxt.innerText = 'Privacy Policy';
 					if (termsTxt) termsTxt.innerText = 'Terms of Service';
