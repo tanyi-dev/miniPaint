@@ -395,7 +395,7 @@
 			};
 		})();
 	</script>
-	<script src="dist/bundle.js?v=1789916000"></script>
+	<script src="dist/bundle.js?v=1790171454"></script>
 </head>
 
 <body>
@@ -621,6 +621,8 @@
 	<script>
 		// 画廊模板自动加载：gallery 页通过 ?load=/images/gallery/xxx.jpg 传入示例图
 		// 安全约束：仅允许本站 /images/gallery/ 目录下的 .jpg，防止被当作任意图片加载代理
+		// 性能要点：脚本在解析时立即并行预取图片（与 bundle 下载/启动同时进行），
+		// 随后用细粒度轮询等待 FileOpen 与导入对话框就绪，替代固定延时。
 		(function () {
 			var m = window.location.search.match(/[?&]load=([^&]+)/i);
 			if (!m) return;
@@ -629,6 +631,30 @@
 			if (!/^\/images\/gallery\/[a-z0-9-]+\.jpg$/i.test(path)) return;
 			if (window.__galleryTemplateLoaded) return;
 			window.__galleryTemplateLoaded = true;
+
+			// 1) 立即预取图片并转 dataURL（不等待编辑器启动完成）
+			var fetchP = fetch(path, { cache: 'force-cache' })
+				.then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.blob(); })
+				.then(function (blob) {
+					return new Promise(function (resolve, reject) {
+						var fr = new FileReader();
+						fr.onload = function () { resolve(fr.result); };
+						fr.onerror = reject;
+						fr.readAsDataURL(blob);
+					});
+				});
+
+			function waitFor(ready, interval, timeout, label) {
+				return new Promise(function (resolve, reject) {
+					var t0 = Date.now();
+					(function poll() {
+						var v = ready();
+						if (v) return resolve(v);
+						if (Date.now() - t0 > timeout) return reject(new Error('timeout: ' + label));
+						setTimeout(poll, interval);
+					})();
+				});
+			}
 
 			function clickOk() {
 				var btns = document.querySelectorAll('.popup button');
@@ -639,43 +665,27 @@
 				return false;
 			}
 
-			var pendingDu = null;
-
-			function loadTemplate(retries) {
-				if (!retries) return;
-				if (!(window.FileOpen && typeof window.FileOpen.open_data_url === 'function')) {
-					return setTimeout(function () { loadTemplate(retries - 1); }, 300);
-				}
-				fetch(path, { cache: 'force-cache' })
-					.then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.blob(); })
-					.then(function (blob) {
-						return new Promise(function (resolve, reject) {
-							var fr = new FileReader();
-							fr.onload = function () { resolve(fr.result); };
-							fr.onerror = reject;
-							fr.readAsDataURL(blob);
-						});
-					})
-					.then(function (du) {
-						var name = path.split('/').pop();
-						pendingDu = du;
-						window.FileOpen.open_data_url(du, name);
-						return new Promise(function (resolve) { setTimeout(resolve, 800); });
-					})
-					.then(function () {
-						// open_data_url 会弹出数据导入对话框：回填内容并确认（与手动流程一致）
-						var ta = document.querySelector('#pop_data_data');
-						if (!ta || !pendingDu) return;
-						ta.value = pendingDu;
-						ta.dispatchEvent(new Event('input', { bubbles: true }));
-						ta.dispatchEvent(new Event('change', { bubbles: true }));
-						setTimeout(function () { clickOk(); }, 100);
-					})
-					.catch(function (e) { console.warn('Gallery template load failed:', e); });
-			}
-
-			if (document.readyState === 'complete') loadTemplate(60);
-			else window.addEventListener('load', function () { loadTemplate(60); });
+			// 2) 并行等待「图片就绪」和「编辑器 FileOpen 就绪」
+			Promise.all([
+				fetchP,
+				waitFor(function () {
+					return window.FileOpen && typeof window.FileOpen.open_data_url === 'function';
+				}, 100, 30000, 'FileOpen')
+			])
+				.then(function (res) {
+					var du = res[0];
+					// 3) 弹出数据导入对话框，并轮询等待其渲染完成（替代固定 800ms）
+					window.FileOpen.open_data_url(du, path.split('/').pop());
+					return waitFor(function () { return document.querySelector('#pop_data_data'); }, 50, 5000, 'popup')
+						.then(function (ta) { return { ta: ta, du: du }; });
+				})
+				.then(function (ctx) {
+					ctx.ta.value = ctx.du;
+					ctx.ta.dispatchEvent(new Event('input', { bubbles: true }));
+					ctx.ta.dispatchEvent(new Event('change', { bubbles: true }));
+					setTimeout(function () { clickOk(); }, 30);
+				})
+				.catch(function (e) { console.warn('Gallery template load failed:', e); });
 		})();
 	</script>
 </body>

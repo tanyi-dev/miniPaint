@@ -4,3 +4,10 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# 静态资源缓存：图片内容不可变；bundle 通过 ?v= 版本号控制失效（改 bundle 必须同步改 v）
+/images/*
+  Cache-Control: public, max-age=2592000, immutable
+
+/dist/*
+  Cache-Control: public, max-age=604800
