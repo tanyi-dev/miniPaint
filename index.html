@@ -830,7 +830,7 @@
                         <span class="tut-footer-arrow">→</span>
                     </div>
                 </a>
-                <a href="tutorials/mosaic-and-blur-privacy.html" class="tut-card">
+                <a href="tutorials/mosaic-and-blur-redaction.html" class="tut-card">
                     <div>
                         <div class="tut-top">
                             <div class="tut-icon-box" style="background: #fffbeb; border-color: #fde68a;">🛡️</div>
@@ -999,22 +999,22 @@
         document.addEventListener('DOMContentLoaded', function() {
             var links = document.querySelectorAll('a[href]');
             links.forEach(function(link) {
-                var href = link.getAttribute('href');
-                if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
-                
                 link.addEventListener('click', function(e) {
+                    var currentHref = link.getAttribute('href');
+                    if (!currentHref || currentHref.startsWith('#') || currentHref.startsWith('javascript:')) return;
+                    
                     // 如果移动端弹窗已拦截，不处理
-                    if (isMobileDevice() && (href.indexOf('editor.html') !== -1)) return;
+                    if (isMobileDevice() && (currentHref.indexOf('editor.html') !== -1)) return;
                     
                     // 检查是否处于 iframe 沙箱环境且普通跳转受限
                     try {
                         if (window.self !== window.top) {
                             // 处于 iframe 嵌入窗口时，优先尝试本窗口导航，若被阻止则在新标签页打开
-                            window.location.href = href;
+                            window.location.href = currentHref;
                         }
                     } catch (err) {
                         // 跨域或安全限制时回退
-                        window.open(href, '_blank');
+                        window.open(currentHref, '_blank');
                     }
                 });
             });
@@ -1071,31 +1071,6 @@
                     }
                     var base = href.split("?")[0];
                     link.setAttribute("href", base + "?lang=" + lang + hash);
-                }
-            });
-
-            // 同步页面教程、指南、隐私与服务条款链接到对应独立语言目录
-            var guideLinks = document.querySelectorAll("a[href*='guide.html']");
-            guideLinks.forEach(function(link) {
-                link.setAttribute("href", (lang === "zh") ? "zh/guide.html" : "guide.html");
-            });
-
-            var privacyLinks = document.querySelectorAll("a[href*='privacy.html']");
-            privacyLinks.forEach(function(link) {
-                link.setAttribute("href", (lang === "zh") ? "zh/privacy.html" : "privacy.html");
-            });
-
-            var termsLinks = document.querySelectorAll("a[href*='terms.html']");
-            termsLinks.forEach(function(link) {
-                link.setAttribute("href", (lang === "zh") ? "zh/terms.html" : "terms.html");
-            });
-
-            var tutLinks = document.querySelectorAll("a[href*='tutorials/']");
-            tutLinks.forEach(function(link) {
-                var href = link.getAttribute("href");
-                if (href) {
-                    var tutName = href.replace(/^.*tutorials\//, '');
-                    link.setAttribute("href", (lang === "zh") ? ("zh/tutorials/" + tutName) : ("tutorials/" + tutName));
                 }
             });
 
