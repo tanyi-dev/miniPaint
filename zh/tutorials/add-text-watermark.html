@@ -38,6 +38,10 @@
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
         @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { flex-direction: column; } }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        @media (max-width: 640px) { .related { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -126,6 +130,13 @@
                 💡 <strong>进阶提示</strong>：如果你管理的是产品图库，可以把水印文字换成「仅供 XX 店铺使用」，这样即使图片被盗用，反而变成免费的引流广告。
             </div>
 
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/png-vs-jpg-export">PNG 与 JPG 的区别：导出该选哪个？</a>
+                <a href="../tutorials/social-media-image-sizes">社交媒体图片尺寸速查表</a>
+                <a href="../tutorials/photo-color-correction">照片调色与色彩校正</a>
+                <a href="../tutorials/crop-rotate-straighten">裁剪、旋转与扶正照片</a>
+            </div>
             <!-- 🎯 实战练习与安全导流 CTA 卡片 -->
             <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">

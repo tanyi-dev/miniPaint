@@ -38,6 +38,10 @@
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
         @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { flex-direction: column; } }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        @media (max-width: 640px) { .related { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -104,6 +108,13 @@
             </div>
             <div class="tip-box">💡 <strong>矫正口诀：先大角度旋转、再小角度微调、最后裁剪收边——顺序反了会白白损失画质。</strong></div>
 
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/image-resize-and-compression">图片缩放与压缩（应对上传大小限制）</a>
+                <a href="../tutorials/photo-color-correction">照片调色与色彩校正</a>
+                <a href="../tutorials/social-media-image-sizes">社交媒体图片尺寸速查表</a>
+                <a href="../tutorials/add-text-watermark">给照片添加文字水印</a>
+            </div>
             <!-- 实战练习与安全导流 CTA 卡片 -->
             <div class="practice-cta-card">
                 <div style="flex: 1;">
