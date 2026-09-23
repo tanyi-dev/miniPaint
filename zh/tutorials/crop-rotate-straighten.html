@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实战教程：裁剪、旋转与矫正歪斜照片——让「拍歪了」起死回生 - Web PSEditor 教程</title>
+    <meta name="description" content="歪斜照片在线矫正教程：用免费网页图片编辑器 Web PSEditor 裁剪构图、旋转角度并矫正水平线，两分钟让废片变可用，全程浏览器本地处理。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/crop-rotate-straighten" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/crop-rotate-straighten" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/crop-rotate-straighten" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/crop-rotate-straighten" />
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .compare { display: flex; gap: 12px; }
+        .compare figure { flex: 1; margin: 0; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">← 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide.html" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch"><span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/crop-rotate-straighten" class="lang-btn" style="text-decoration:none;">English</a></div>
+        </div>
+
+        <!-- 隐私信任安全背书 -->
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+<h1>实战教程：裁剪、旋转与矫正歪斜照片</h1>
+            <div class="meta-bar"><span>难度：极简入门</span> • <span>耗时：2 分钟</span> • <span>适用：旅行照、翻拍照片、扫描件</span></div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">歪斜照片两分钟扶正！</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">裁剪+旋转+矫正一气呵成，本地处理。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 矫正 →</a>
+            </div>
+
+            <p>水平线歪 2 度，整张照片就「要倒了」；构图边上多了一截垃圾桶，再美的风景也扣分。别急着删——<strong>裁剪、旋转、矫正</strong>三步就能让歪斜照片起死回生，全程用 <strong>Web PSEditor</strong> 在本地完成。</p>
+            <h2>先看效果：矫正前 vs 矫正后</h2>
+            <div class="compare">
+                <figure>
+                    <img src="../../images/tutorials/straight-before.jpg" alt="矫正前：地平线明显倾斜的灯塔照片" loading="lazy">
+                    <figcaption>矫正前：水平线倾斜</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/straight-after.jpg" alt="矫正后：水平线端正、构图紧凑的成片" loading="lazy">
+                    <figcaption>矫正后：水平线端正</figcaption>
+                </figure>
+            </div>
+            <h2>操作步骤</h2>
+            <figure>
+                <img src="../../images/tutorials/straight-editor-ui.jpg" alt="Web PSEditor 中文界面，载入待矫正的歪斜照片" loading="lazy">
+                <figcaption>歪斜样图已载入画布</figcaption>
+            </figure>
+            <div class="step-card">
+                <div class="step-title">第一步：先旋转扶正</div>
+                <p>打开照片，点击 <strong>【图像】→【旋转】</strong> 做 90° 大旋转；小角度歪斜则用 <strong>【编辑】→【自由变换】</strong> 精细调整角度（本例约 4°）。旋转后会露出白边，下一步裁掉。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">第二步：裁剪收构图</div>
+                <p>选择 <strong>裁剪工具</strong>，沿着照片内容边缘裁掉白边，顺便把画面边缘的干扰物（行人、杂物）一并裁掉。主体放在三分线上，画面立刻专业。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">第三步：检查水平线</div>
+                <p>放大看建筑边缘或地平线是否水平。差一点点就再微调 0.5°——歪 1° 看不出来，歪 3° 全图都倒。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">第四步：导出</div>
+                <p>确认后 <strong>【文件】→【另存为】</strong> 导出。翻拍的文档和扫描件建议存 JPG 质量 90 以上，文字更清晰。</p>
+            </div>
+            <div class="tip-box">💡 <strong>矫正口诀：先大角度旋转、再小角度微调、最后裁剪收边——顺序反了会白白损失画质。</strong></div>
+
+            <!-- 实战练习与安全导流 CTA 卡片 -->
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">打开编辑器，把你拍歪的照片扶正试试，废片也能救回来。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一键尝试此功能</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

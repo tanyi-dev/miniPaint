@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Color Correction Basics: Fix Dull Photos with Brightness, Contrast & Saturation - Web PSEditor Tutorial</title>
+    <meta name="description" content="Free online photo color correction tutorial: fix dull, dark photos by adjusting brightness, contrast, saturation and sharpness in Web PSEditor — 100% in-browser, no uploads." />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/tutorials/photo-color-correction" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/photo-color-correction" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/photo-color-correction" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/photo-color-correction" />
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .compare { display: flex; gap: 12px; }
+        .compare figure { flex: 1; margin: 0; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">← Home</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide.html" class="back-link" style="color: var(--text-sub);">Tutorials</a>
+            </div>
+            <div class="lang-switch"><a href="https://webpseditor.com/zh/tutorials/photo-color-correction" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span></div>
+        </div>
+
+        <!-- 隐私信任安全背书 -->
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% Local Browser Processing · Zero Uploads · Zero Privacy Risk</span>
+        </div>
+
+        <article>
+<h1>Photo Color Correction Basics: Rescue Dull, Flat Photos</h1>
+            <div class="meta-bar"><span>Difficulty: Beginner</span> • <span>Time: 2 min</span> • <span>Great for: phone snapshots, product photos</span></div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">Fix dull photos instantly!</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">100% local color correction — originals stay on your machine.</div>
+                </div>
+                <a href="../../editor.html" class="cta-btn" target="_blank">Open Web PSEditor & Color Correct →</a>
+            </div>
+
+            <p>Straight-out-of-camera phone photos often look flat and gray — not because you shot badly, but because cameras deliberately play it safe to preserve details. A quick pass of <strong>brightness, contrast and saturation</strong> makes the image pop instantly. Many online tools upload your photos to their servers first; <strong>Web PSEditor</strong> does all the math locally in your browser, so even large images open and adjust instantly with zero privacy risk.</p>
+            <h2>The Result: Before vs After</h2>
+            <div class="compare">
+                <figure>
+                    <img src="../../images/tutorials/color-before.jpg" alt="Coffee photo before color correction, flat and dull" loading="lazy">
+                    <figcaption>Before: flat original</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/color-after.jpg" alt="Coffee photo after color correction, vibrant and punchy" loading="lazy">
+                    <figcaption>After: vibrant and punchy</figcaption>
+                </figure>
+            </div>
+            <h2>Step 1: Load Your Photo</h2>
+            <figure>
+                <img src="../../images/tutorials/color-editor-ui-en.jpg" alt="Web PSEditor English UI with a coffee photo loaded" loading="lazy">
+                <figcaption>Web PSEditor with sample photo loaded</figcaption>
+            </figure>
+            <p>Open <a href="../editor.html" target="_blank">Web PSEditor</a>, click <strong>File → Open</strong> and import your photo.</p>
+            <div class="step-card">
+                <div class="step-title">Step 2: One-Click Auto Adjust (easiest)</div>
+                <p>Click <strong>Image → Auto Adjust</strong>. The editor analyzes the histogram and automatically fixes exposure and contrast. For most photos this alone solves 80% of the problem.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Step 3: Fine-Tune with Three Sliders</div>
+                <p>For a personal look, open <strong>Image → Color Corrections</strong>:<br>1. <strong>Brightness</strong>: lift the whole image by +5 to +15; too much blows out highlights.<br>2. <strong>Contrast</strong>: make the image "stand up", +10 to +25.<br>3. <strong>Saturation</strong>: boost colors +10 to +30; go easy on portraits to avoid orange skin.<br>4. Finish with <strong>Sharpen</strong> at 30–60 for crisp details.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Step 4: Export</div>
+                <p>Click <strong>File → Save As</strong> and export as JPG (quality 85+). Keep the original file so you can re-edit later.</p>
+            </div>
+            <div class="tip-box">💡 <strong>Rule of thumb: auto first, manual second; brightness before color; adjust a little at a time and keep comparing.</strong></div>
+
+            <!-- 实战练习与安全导流 CTA 卡片 -->
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Open the editor and color correct your own photo now — no account, no upload.</p>
+                </div>
+                <div>
+                    <a href="../../editor.html" class="practice-btn">
+                        <span>Try It in Web PSEditor</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

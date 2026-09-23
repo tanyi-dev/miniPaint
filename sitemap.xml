@@ -200,4 +200,100 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>https://webpseditor.com/tutorials/add-text-watermark</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/add-text-watermark" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/add-text-watermark" />
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://webpseditor.com/zh/tutorials/add-text-watermark</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/add-text-watermark" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/add-text-watermark" />
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://webpseditor.com/tutorials/photo-color-correction</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/photo-color-correction" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/photo-color-correction" />
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://webpseditor.com/zh/tutorials/photo-color-correction</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/photo-color-correction" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/photo-color-correction" />
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://webpseditor.com/tutorials/photo-filters-one-click</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/photo-filters-one-click" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/photo-filters-one-click" />
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://webpseditor.com/zh/tutorials/photo-filters-one-click</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/photo-filters-one-click" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/photo-filters-one-click" />
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://webpseditor.com/tutorials/social-media-image-sizes</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/social-media-image-sizes" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/social-media-image-sizes" />
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://webpseditor.com/zh/tutorials/social-media-image-sizes</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/social-media-image-sizes" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/social-media-image-sizes" />
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://webpseditor.com/tutorials/crop-rotate-straighten</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/crop-rotate-straighten" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/crop-rotate-straighten" />
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://webpseditor.com/zh/tutorials/crop-rotate-straighten</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/crop-rotate-straighten" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/crop-rotate-straighten" />
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://webpseditor.com/tutorials/png-vs-jpg-export</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/png-vs-jpg-export" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/png-vs-jpg-export" />
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://webpseditor.com/zh/tutorials/png-vs-jpg-export</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/png-vs-jpg-export" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/png-vs-jpg-export" />
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

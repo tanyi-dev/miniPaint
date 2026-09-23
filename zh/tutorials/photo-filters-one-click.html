@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实战教程：一键滤镜风格——黑白、复古与电影感调色 - Web PSEditor 教程</title>
+    <meta name="description" content="免费在线照片滤镜教程：用纯网页图片编辑器 Web PSEditor 一键应用黑白、复古、电影感等滤镜风格，附参数微调技巧，全程本地处理不上传服务器。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/photo-filters-one-click" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/photo-filters-one-click" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/photo-filters-one-click" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/photo-filters-one-click" />
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .compare { display: flex; gap: 12px; }
+        .compare figure { flex: 1; margin: 0; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">← 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide.html" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch"><span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/photo-filters-one-click" class="lang-btn" style="text-decoration:none;">English</a></div>
+        </div>
+
+        <!-- 隐私信任安全背书 -->
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+<h1>实战教程：一键滤镜风格——黑白、复古与电影感</h1>
+            <div class="meta-bar"><span>难度：极简入门</span> • <span>耗时：1 分钟</span> • <span>适用：朋友圈配图、头像、壁纸</span></div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">一键套用高级感滤镜！</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">特效菜单即点即用，图片不出浏览器。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 加滤镜 →</a>
+            </div>
+
+            <p>同样一张照片，套上合适的滤镜气质就完全不同：黑白的克制、复古的温情、电影感的叙事——滤镜是成本最低的「出片」方式。<strong>Web PSEditor</strong> 内置多种滤镜特效，全部在浏览器本地实时渲染，试错零成本，不满意随时撤销。</p>
+            <h2>四种常见风格一览</h2>
+            <figure>
+                <img src="../../images/tutorials/filters-grid.jpg" alt="同一张照片的四种滤镜风格对比：原图、黑白、复古、电影感" loading="lazy">
+                <figcaption>左上原图 · 右上黑白 · 左下复古 · 右下电影感</figcaption>
+            </figure>
+            <h2>操作步骤</h2>
+            <figure>
+                <img src="../../images/tutorials/filters-editor-ui.jpg" alt="Web PSEditor 中文界面，特效菜单可一键应用滤镜" loading="lazy">
+                <figcaption>特效菜单位置一览</figcaption>
+            </figure>
+            <div class="step-card">
+                <div class="step-title">第一步：套用基础滤镜</div>
+                <p>打开照片后点击顶部 <strong>【特效 (Effects)】</strong> 菜单：<br>1. <strong>黑白</strong>：选择灰度/去色类效果，适合人文、建筑、人像特写。<br>2. <strong>复古</strong>：选择棕褐色/褪色类效果，瞬间有胶片味道。<br>3. <strong>电影感</strong>：组合使用青橙色调类预设，对比度略拉高。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">第二步：强度微调</div>
+                <p>滤镜默认强度常常「用力过猛」。套用后可以：降低图层不透明度（图层面板 50%~70%），或再次叠加原始图层用橡皮擦局部擦回，实现「部分上色」的高级效果。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">第三步：叠加细节特效</div>
+                <p>在滤镜之上再叠加一层 <strong>暗角 (Vignette)</strong> 或轻微 <strong>颗粒/噪点</strong>，胶片感立刻翻倍。参数宁少勿多。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">第四步：导出</div>
+                <p>满意后 <strong>【文件】→【另存为】</strong> 导出 JPG。社交平台配图建议长边 1080~1280 像素，清晰度与体积最平衡。</p>
+            </div>
+            <div class="tip-box">💡 <strong>选滤镜的捷径：想突出「人」用黑白，想讲「故事」用复古，想装「大片」用电影感青橙。</strong></div>
+
+            <!-- 实战练习与安全导流 CTA 卡片 -->
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">打开编辑器，给你的照片一键试试黑白或电影感滤镜，立刻出片。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一键尝试此功能</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>
