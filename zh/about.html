@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们 - Web PSEditor</title>
+    <meta name="description" content="关于 Web PSEditor：一款 100% 浏览器本地运行的免费在线图片编辑器。绝不上传图片、无需注册、无水印，底层基于开源引擎 miniPaint 构建。" />
+    <link rel="icon" sizes="192x192" href="../images/favicon.png">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/about" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/about" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/about" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/about" />
+    <style>
+:root {
+            --primary: #2563eb;
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.75;
+            color: var(--text-main);
+            background-color: var(--bg-page);
+            margin: 0;
+            padding: 30px 20px 60px;
+        }
+        .container {
+            max-width: 840px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            padding: 40px 48px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04), 0 2px 4px -1px rgba(0,0,0,0.02);
+            border: 1px solid var(--border);
+        }
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .back-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+        }
+        .back-link:hover { text-decoration: underline; }
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            background: #f1f5f9;
+            padding: 3px;
+            border-radius: 6px;
+        }
+        .lang-btn {
+            border: none;
+            background: transparent;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-sub);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-btn.active {
+            background: #ffffff;
+            color: var(--primary);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+        }
+        h1 {
+            color: #0f172a;
+            font-size: 26px;
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+        .updated-date {
+            color: var(--text-sub);
+            font-size: 13px;
+            margin-bottom: 24px;
+        }
+        h2 {
+            color: #0f172a;
+            font-size: 18px;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        p, li {
+            font-size: 15px;
+            color: #334155;
+        }
+        ul { padding-left: 20px; }
+        .highlight-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--primary);
+            padding: 14px 18px;
+            border-radius: 0 6px 6px 0;
+            margin: 18px 0;
+            font-size: 14px;
+            color: #1e40af;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-sub);
+            text-align: center;
+        }
+
+        .lang-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <a href="../index.html" class="back-link">← 网站首页</a>
+                <a href="../editor.html?lang=zh" class="back-link" style="color: var(--text-sub);">打开编辑器 →</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/about" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <article>
+<h1>关于 Web PSEditor</h1>
+            <div class="updated-date">最近更新日期：2026年10月2日</div>
+
+            <p>Web PSEditor 是一款完全在浏览器中运行的免费在线图片编辑器。打开照片，用图层、选区、滤镜与文字完成精修，然后直接导出成品——无需安装软件、无需注册账号，更无需把文件交给任何服务器。</p>
+
+            <div class="highlight-box">
+                <strong>一句话说明：</strong> 它拥有接近桌面级软件的专业光栅编辑能力，像本地程序一样保护你的隐私，而你只需要一个浏览器标签页。
+            </div>
+
+            <h2>1. 为什么做这个工具</h2>
+            <p>市面上大多数"免费在线修图"工具的运作方式是：先把你的照片上传到远程服务器，在服务器上处理完，再把结果传回给你。这种模式确实方便，但它隐含了一个前提——你愿意让别人的服务器保管你的文件。对于证件照、护照扫描件、已签字的合同、医疗记录或尚未公开的产品图来说，这个前提很难接受。</p>
+            <p>Web PSEditor 的设计目标就是彻底去掉这个前提：所有处理都由你自己的设备、在你已经打开的这个浏览器标签页里完成。</p>
+
+            <h2>2. 核心原则：图片永不离开你的设备</h2>
+            <p>整条处理链路——图片解码、画布渲染、图层合成、滤镜运算、文件导出——全部基于 HTML5 Canvas 与 JavaScript 在本地执行。我们这边没有上传接口、没有处理队列，也没有任何形式的图片存储。</p>
+            <ul>
+                <li>图片从不上传，因此不存在被截获、留存或转售的可能。</li>
+                <li>无需注册、无需邮箱、无需账号，打开页面即可直接使用。</li>
+                <li>因为运算是本地的，即使在网速很差的网络环境下，操作依然流畅跟手。</li>
+                <li>刷新或关闭页面，内存中的内容会被立即释放。</li>
+            </ul>
+
+            <h2>3. 浏览器里能完成哪些工作</h2>
+            <p>Web PSEditor 并非一堆零散滤镜的拼装，而是完整的图层编辑引擎。常见使用场景包括：</p>
+            <ul>
+                <li><strong>抠图与精修</strong>——魔棒选区、智能蒙版与背景去除，适用于产品图或证件照制作。</li>
+                <li><strong>图层合成</strong>——支持多图层、混合模式、不透明度、层序与显隐控制。</li>
+                <li><strong>色彩与影调</strong>——亮度、对比度、色相/饱和度、曲线式调整以及一键滤镜预设。</li>
+                <li><strong>几何变换</strong>——裁剪、旋转、倾斜校正、翻转、缩放与画布扩展。</li>
+                <li><strong>标注与打码</strong>——文字、水印、马赛克与模糊，用于遮盖敏感信息。</li>
+                <li><strong>导出</strong>——无损导出 PNG、JPG、WEBP 并可调节压缩质量，也可将整个工程保存为多图层 JSON 文件以便日后继续编辑。</li>
+            </ul>
+            <p>如果你是第一次使用，<a href="guide">教程中心</a>按流程逐步讲解了每一项工作流。</p>
+
+            <h2>4. 谁在使用 Web PSEditor</h2>
+            <ul>
+                <li><strong>注重隐私的用户</strong>——制作证件照、签证照、扫描件等不应离开个人设备的图片。</li>
+                <li><strong>师生群体</strong>——在学校电脑或 Chromebook 上需要快速修图，且无法安装任何软件。</li>
+                <li><strong>小微商家</strong>——预算有限，却需要制作商品图、横幅与社媒配图。</li>
+                <li><strong>设计师与开发者</strong>——在日常流程中需要快速裁剪、转格式与打码的轻量工具。</li>
+                <li><strong>使用受限设备或低配置电脑的用户</strong>——安装完整桌面版修图软件并不现实。</li>
+            </ul>
+
+            <h2>5. 技术实现与开源致谢</h2>
+            <p>Web PSEditor 的图像处理内核来自开源项目 <strong>miniPaint</strong>，该项目基于 <strong>MIT 开源许可证</strong> 发布。正是开源生态，才让一个功能如此完整的浏览器端编辑器成为可能，我们对其维护者与贡献者深表感谢。</p>
+            <p>MIT 许可证全文可在 <a href="../MIT-LICENSE.txt" target="_blank" rel="noopener noreferrer">MIT-LICENSE.txt</a> 查看。您可以将本工具用于个人创作、教学研究与商业项目，具体授权范围详见 <a href="terms">服务条款</a>。</p>
+
+            <h2>6. 网站如何保持免费</h2>
+            <p>Web PSEditor 没有订阅制、没有付费墙，导出的图片也不带任何水印。服务器与带宽成本，通过接入 Google AdSense 等第三方广告网络的展示广告来覆盖。</p>
+            <p>由于您的图片从不上传，广告投放从技术链路层面就与您的图片内容无关——广告仅依据 Cookie 与一般浏览行为进行匹配。完整的数据处理说明请见 <a href="privacy">隐私政策</a>。</p>
+
+            <h2>7. 联系我们</h2>
+            <p>无论是使用疑问、Bug 反馈、功能建议还是授权咨询，我们都欢迎。最快的方式是访问 <a href="contact">联系页面</a>，或直接发送邮件至 <code>support@webpseditor.com</code>。</p>
+        </article>
+
+        <div class="footer">
+            &copy; 2026 Web PSEditor. Powered by open-source miniPaint under MIT License. 保留所有权利。
+        </div>
+    </div>
+</body>
+</html>

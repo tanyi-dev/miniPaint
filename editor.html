@@ -257,7 +257,9 @@
 		/* 底栏「使用教程」、「隐私政策」、「服务条款」按钮：全量与顶部「返回首页」按钮样式及科技蓝质感对齐 */
 		#footer_link_guide,
 		#footer_link_privacy,
-		#footer_link_terms {
+		#footer_link_terms,
+		#footer_link_about,
+		#footer_link_contact {
 			display: inline-flex;
 			align-items: center;
 			gap: 4px;
@@ -281,7 +283,9 @@
 
 		#footer_link_guide:hover,
 		#footer_link_privacy:hover,
-		#footer_link_terms:hover {
+		#footer_link_terms:hover,
+		#footer_link_about:hover,
+		#footer_link_contact:hover {
 			background: #2563eb !important;
 			border-color: #1d4ed8 !important;
 			color: #ffffff !important;
@@ -291,7 +295,9 @@
 
 		#footer_link_guide:active,
 		#footer_link_privacy:active,
-		#footer_link_terms:active {
+		#footer_link_terms:active,
+		#footer_link_about:active,
+		#footer_link_contact:active {
 			background: #1e40af !important;
 			transform: translateY(1px) !important;
 		}
@@ -514,6 +520,21 @@
 			</svg>
 			<span id="footer_gallery_txt">Gallery</span>
 		</a>
+		<a id="footer_link_about" href="about" target="_blank">
+			<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.9;">
+				<circle cx="12" cy="12" r="10"></circle>
+				<line x1="12" y1="16" x2="12" y2="12"></line>
+				<line x1="12" y1="8" x2="12.01" y2="8"></line>
+			</svg>
+			<span id="footer_about_txt">About</span>
+		</a>
+		<a id="footer_link_contact" href="contact" target="_blank">
+			<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.9;">
+				<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+				<polyline points="22,6 12,13 2,6"></polyline>
+			</svg>
+			<span id="footer_contact_txt">Contact</span>
+		</a>
 		<!-- 赞助功能待 Stripe 配置完成后再开启
 			<span style="color: #444;">|</span>
 		<a id="footer_link_donate" href="https://www.buymeacoffee.com/webpseditor" target="_blank" rel="noopener noreferrer" style="color: #f59e0b; text-decoration: none; margin-left: 10px; font-weight: 500;">☕ Buy Me a Coffee</a>
@@ -547,6 +568,8 @@
 				var privacyTxt = document.getElementById('footer_privacy_txt');
 				var termsTxt = document.getElementById('footer_terms_txt');
 				var galleryTxt = document.getElementById('footer_gallery_txt');
+				var aboutTxt = document.getElementById('footer_about_txt');
+				var contactTxt = document.getElementById('footer_contact_txt');
 				var donateEl = document.getElementById('footer_link_donate');
 				var topHomeTxt = document.getElementById('top_home_txt');
 
@@ -562,6 +585,14 @@
 						galleryTxt.innerText = '灵感画廊';
 						document.getElementById('footer_link_gallery').setAttribute('href', 'zh/gallery');
 					}
+					if (aboutTxt) {
+						aboutTxt.innerText = '关于我们';
+						document.getElementById('footer_link_about').setAttribute('href', 'zh/about');
+					}
+					if (contactTxt) {
+						contactTxt.innerText = '联系我们';
+						document.getElementById('footer_link_contact').setAttribute('href', 'zh/contact');
+					}
 					if (donateEl) donateEl.innerText = '☕ 赞助支持';
 				} else {
 					if (topHomeTxt) topHomeTxt.innerText = 'Home';
@@ -573,6 +604,14 @@
 					if (galleryTxt) {
 						galleryTxt.innerText = 'Gallery';
 						document.getElementById('footer_link_gallery').setAttribute('href', 'gallery');
+					}
+					if (aboutTxt) {
+						aboutTxt.innerText = 'About';
+						document.getElementById('footer_link_about').setAttribute('href', 'about');
+					}
+					if (contactTxt) {
+						contactTxt.innerText = 'Contact';
+						document.getElementById('footer_link_contact').setAttribute('href', 'contact');
 					}
 					if (donateEl) donateEl.innerText = '☕ Buy Me a Coffee';
 				}

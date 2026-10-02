@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Web PSEditor</title>
+    <meta name="description" content="About Web PSEditor: a free online photo editor that runs 100% inside your browser. No uploads, no accounts, no watermarks — built on the open-source miniPaint engine." />
+    <link rel="icon" sizes="192x192" href="images/favicon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/about" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/about" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/about" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/about" />
+    <style>
+:root {
+            --primary: #2563eb;
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.75;
+            color: var(--text-main);
+            background-color: var(--bg-page);
+            margin: 0;
+            padding: 30px 20px 60px;
+        }
+        .container {
+            max-width: 840px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            padding: 40px 48px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04), 0 2px 4px -1px rgba(0,0,0,0.02);
+            border: 1px solid var(--border);
+        }
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .back-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+        }
+        .back-link:hover { text-decoration: underline; }
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            background: #f1f5f9;
+            padding: 3px;
+            border-radius: 6px;
+        }
+        .lang-btn {
+            border: none;
+            background: transparent;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-sub);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-btn.active {
+            background: #ffffff;
+            color: var(--primary);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+        }
+        h1 {
+            color: #0f172a;
+            font-size: 26px;
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+        .updated-date {
+            color: var(--text-sub);
+            font-size: 13px;
+            margin-bottom: 24px;
+        }
+        h2 {
+            color: #0f172a;
+            font-size: 18px;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        p, li {
+            font-size: 15px;
+            color: #334155;
+        }
+        ul { padding-left: 20px; }
+        .highlight-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--primary);
+            padding: 14px 18px;
+            border-radius: 0 6px 6px 0;
+            margin: 18px 0;
+            font-size: 14px;
+            color: #1e40af;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-sub);
+            text-align: center;
+        }
+
+        .lang-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <a href="index.html" class="back-link">← Home</a>
+                <a href="editor.html" class="back-link" style="color: var(--text-sub);">Launch Editor →</a>
+            </div>
+            <div class="lang-switch">
+                <a href="https://webpseditor.com/zh/about" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span>
+            </div>
+        </div>
+
+        <article>
+<h1>About Web PSEditor</h1>
+            <div class="updated-date">Last updated: October 2, 2026</div>
+
+            <p>Web PSEditor is a free online image editor that runs entirely inside your web browser. Open a photo, retouch it with layers, selections, filters and text, then export the result — no software to install, no account to create, and no file ever handed over to a server.</p>
+
+            <div class="highlight-box">
+                <strong>In one sentence:</strong> a professional-grade raster editor that behaves like a desktop application, respects your privacy like a local program, and requires nothing more than a browser tab.
+            </div>
+
+            <h2>1. Why We Built It</h2>
+            <p>Most "free online editors" work by uploading your photo to a remote server, processing it there, and sending a result back. That model is convenient, but it quietly assumes you are comfortable with a stranger's infrastructure holding your files. For an ID photo, a scanned passport, a signed contract, a medical record or an unreleased product shot, that assumption is hard to accept.</p>
+            <p>Web PSEditor was built to remove that assumption completely. Editing is performed by your own device, inside the browser tab you already have open.</p>
+
+            <h2>2. Our Core Principle: Your Files Never Leave Your Device</h2>
+            <p>The entire editing pipeline — decoding, canvas rendering, layer compositing, filter math, and file export — is executed locally with HTML5 Canvas and JavaScript. There is no upload endpoint, no processing queue, and no image storage of any kind on our side.</p>
+            <ul>
+                <li>Your image is never transmitted, so it cannot be intercepted, retained or resold.</li>
+                <li>No sign-up, no email, no account — the editor opens and works immediately.</li>
+                <li>Because processing is local, the tool stays responsive even on slow connections.</li>
+                <li>Refreshing or closing the tab releases everything from memory.</li>
+            </ul>
+
+            <h2>3. What You Can Do in the Browser</h2>
+            <p>Web PSEditor is built on a full layered editing engine rather than a set of one-off filters. Typical work includes:</p>
+            <ul>
+                <li><strong>Retouching and cutouts</strong> — magic wand selection, smart masking and background removal for product shots or ID photos.</li>
+                <li><strong>Layered composition</strong> — multiple layers with blend modes, opacity, ordering and visibility control.</li>
+                <li><strong>Color and tone</strong> — brightness, contrast, hue/saturation, curves-style adjustments and one-click filter presets.</li>
+                <li><strong>Geometry</strong> — crop, rotate, straighten, flip, resize and canvas expansion.</li>
+                <li><strong>Annotations and redaction</strong> — text, watermarks, mosaic and blur for hiding sensitive details.</li>
+                <li><strong>Export</strong> — lossless PNG, JPEG and WEBP output with adjustable quality, or save the whole project as a multi-layer JSON file you can reopen later.</li>
+            </ul>
+            <p>If you are new to the tool, the <a href="guide">tutorial library</a> walks through each workflow step by step.</p>
+
+            <h2>4. Who Uses Web PSEditor</h2>
+            <ul>
+                <li><strong>Privacy-conscious users</strong> preparing ID photos, visa photos, scans or documents that should not leave a personal device.</li>
+                <li><strong>Students and teachers</strong> who need quick edits on a school computer or Chromebook without installing anything.</li>
+                <li><strong>Small business owners</strong> producing product images, banners and social posts on a tight budget.</li>
+                <li><strong>Designers and developers</strong> who want a fast utility for cropping, converting and redacting assets during their normal workflow.</li>
+                <li><strong>Anyone on a locked-down or low-spec machine</strong> where installing a full desktop editor is impractical.</li>
+            </ul>
+
+            <h2>5. Technology and Open Source Credits</h2>
+            <p>The image manipulation engine powering Web PSEditor is the open-source project <strong>miniPaint</strong>, distributed under the <strong>MIT License</strong>. Open source is what makes a browser-based editor of this depth possible, and we are grateful to its maintainers and contributors.</p>
+            <p>The MIT License text is available at <a href="MIT-LICENSE.txt" target="_blank" rel="noopener noreferrer">MIT-LICENSE.txt</a>. You may use this application for personal, educational and commercial work; the terms are described in full on our <a href="terms">Terms of Service</a> page.</p>
+
+            <h2>6. How the Site Stays Free</h2>
+            <p>Web PSEditor has no subscription, no paywall and no watermark on exports. Hosting and bandwidth are covered by displaying advertisements through third-party networks such as Google AdSense.</p>
+            <p>Because your images are never uploaded, advertising has no technical path to your content: ads are selected from cookies and general browsing activity only. The full data-handling details are documented on our <a href="privacy">Privacy Policy</a> page.</p>
+
+            <h2>7. Get in Touch</h2>
+            <p>Questions, bug reports, feature requests and licensing inquiries are all welcome. Visit the <a href="contact">Contact page</a> for the fastest route, or email us directly at <code>support@webpseditor.com</code>.</p>
+        </article>
+
+        <div class="footer">
+            &copy; 2026 Web PSEditor. Powered by open-source miniPaint under MIT License. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>
