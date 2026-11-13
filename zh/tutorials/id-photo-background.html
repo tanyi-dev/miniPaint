@@ -109,19 +109,19 @@
             </div>
 
             <div class="step-card">
-                <div class="step-title">步骤 2：使用“魔棒工具”快速选中背景</div>
-                <p>在左侧工具栏中找到 <strong>魔棒工具（Magic Wand）</strong>。在顶部属性栏中，将 <strong>容差（Tolerance）</strong> 设为 <code>25 ~ 35</code>。然后在白色背景区域点击一下，此时白色背景周围会出现一圈闪烁的选区虚线（若部分边缘未选中，可按住 <code>Shift</code> 键继续点击未选区域）。</p>
+                <div class="step-title">步骤 2：用魔术橡皮擦擦掉旧背景</div>
+                <p>在左侧工具栏选 <strong>魔术橡皮擦工具</strong>，顶部参数里的 <strong>功率（Power）</strong> 就是容差，默认 15。先在背景最干净的地方点一下——同色像素立刻变透明，画布透出的棋盘格就是擦掉了。<br>两个参数决定这一下是干净还是毁图：<strong>功率</strong>调到 25 ~ 40 才能吃到背景的暗角；<strong>Contiguous</strong> 默认关闭，意味着它会清掉整个图层里所有相同颜色，而不仅是你点的那片连通区域。证件照的浅色衬衫如果接近背景色，先把功率压到 10 ~ 15 再点，避免肩膀被一起擦穿。</p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">步骤 3：羽化边缘，避免发丝产生生硬白边</div>
-                <p>点击顶部菜单栏 <strong>【选择】 -> 【羽化（Feather）】</strong>，将羽化半径设为 <code>1 ~ 2 像素</code>。这一步非常关键，它能让人物边缘与新底色自然过渡，不会产生突兀的锯齿或白色边缘。</p>
+                <div class="step-title">步骤 3：处理发丝边缘（这里没有羽化）</div>
+                <p>这个编辑器<strong>没有羽化功能</strong>，也没有羽化半径可填——想要软边只能换做法：<br>① 保持魔术橡皮擦的抗锯齿默认开启，它本身就会把边界软化一像素，大致等于 1 px 羽化的效果；<br>② 发际线残留一圈旧底色时，把<strong>功率降到 10 ~ 12 再点一次</strong>，而不是调高功率（调高会啃进头发）；<br>③ 还有残留就换<strong>橡皮擦</strong>，小笔刷、200% 缩放，沿轮廓慢慢刷。</p>
             </div>
 
             <div class="step-card">
                 <div class="step-title">步骤 4：填充目标底色并导出</div>
-                <p>在左侧颜色选择器中，设置前景色为你想要的颜色（例如标准蓝底 <code>#438EDB</code>），然后直接按键盘上的 <code>Delete</code> 键删除原背景，或者使用 <strong>油漆桶工具（Fill Tool）</strong> 往选区内轻轻一点，背景瞬间变色！<br>
-                完成后，点击顶部菜单 <strong>【文件】 -> 【另存为】</strong>，格式选择 <strong>JPG</strong>（普通报名推荐）或 <strong>PNG</strong> 保存到本地即可。</p>
+                <p>背景擦干净后，先垫一层底色：<strong>【图层】→【新建】</strong> 建一个新图层，再用 <strong>【图层】→【移动】→【向下】</strong> 把它压到人物下面。把颜色设成目标色值（如标准蓝底 <code>#438EDB</code>），选<strong>填充工具</strong>在透明区域点一下，新底色就出现在人物背后，人物本身一个像素都没动。<br>
+                尺寸不对先改尺寸：<strong>【图片】→【调整大小】</strong>，宽度填 295、高度自动按比例算，需要 413 × 579 时同理。<br>最后 <strong>【文件】→【导出】</strong>，选 <strong>JPG</strong>（质量 90 以上，报名系统普遍只认 JPG）或 <strong>PNG</strong> 存到本地。</p>
                 <figure>
                     <img src="../../images/tutorials/idphoto-editor-ui.jpg" alt="Web PSEditor 编辑器界面，油漆桶工具正在为证件照填充红底" loading="lazy">
                     <figcaption>设好目标颜色后用油漆桶工具在背景上一点，新底色即刻生效。</figcaption>
@@ -131,16 +131,16 @@
             <div class="mistake-box">
                 <strong>⚠️ 这些坑别踩：常见错误清单</strong>
                 <ul>
-                    <li><strong>不做羽化</strong> —— 少了 1~2 像素的羽化过渡，头发与新背景的交界会出现"贴纸感"硬边。</li>
-                    <li><strong>背景有阴影时容差给太低</strong> —— 部分旧背景没被选中，填充后残留色块。调高容差或按住 <code>Shift</code> 补选漏掉的区域。</li>
+                    <li><strong>发际线没处理</strong> —— 少了那一像素的抗锯齿过渡，头发与新底色的交界会出现"贴纸感"硬边，只能靠低功率补点或橡皮擦补救。</li>
+                    <li><strong>背景有阴影时功率给太低</strong> —— 部分旧背景没被擦掉，垫上新底色后残留一圈灰边。分区域多点几次、局部把功率提到 40 左右，别一次性拉满。</li>
                     <li><strong>底色凭肉眼挑</strong> —— 考试和签证系统会校验背景色值，务必使用上文列出的标准色号，不要随手吸色。</li>
                 </ul>
             </div>
 
             <h2>常见问题 FAQ</h2>
-            <div class="faq-item"><h3>换底色后头发边缘会出现白边吗？</h3><p>按步骤 3 先羽化 1~2 像素就不会。如果仍有细小白边，用小尺寸橡皮擦手动清理，或适当调高容差重新选区。</p></div>
-            <div class="faq-item"><h3>蓝底可以换成护照要求的白底吗？</h3><p>完全可以，流程一模一样：魔棒选中蓝色背景 → 羽化 → 前景色设为 <code>#FFFFFF</code> → 填充即可。</p></div>
-            <div class="faq-item"><h3>最终照片的尺寸和分辨率有要求吗？</h3><p>多数报名系统要求一寸 295 × 413 像素或二寸 413 × 579 像素、300 DPI。导出前用 <strong>【图片】 -> 【调整尺寸】</strong> 精确设置即可。</p></div>
+            <div class="faq-item"><h3>换底色后头发边缘会出现白边吗？</h3><p>先看步骤 3：这里没有羽化，靠的是抗锯齿加上低功率二次点击。仍有白边就把功率降到 10 ~ 12 点一次发际线，或者换小笔刷橡皮擦在 200% 缩放下手动收边。</p></div>
+            <div class="faq-item"><h3>蓝底可以换成护照要求的白底吗？</h3><p>完全可以，流程一样：魔术橡皮擦擦掉蓝底 → 新建图层压到底层 → 填入 <code>#FFFFFF</code> → 调整到 295 × 413 → 导出 JPG。</p></div>
+            <div class="faq-item"><h3>最终照片的尺寸和分辨率有要求吗？</h3><p>多数报名系统要求一寸 295 × 413 像素或二寸 413 × 579 像素、300 DPI。导出前用 <strong>【图片】→【调整大小】</strong> 精确设置即可。</p></div>
             <div class="faq-item"><h3>我的证件照会被上传到服务器吗？</h3><p>不会。Web PSEditor 通过 HTML5 Canvas 在你本机浏览器内存中完成全部处理——零上传、零云端存储，断网也能用。</p></div>
 
             <h2>相关教程推荐</h2>
@@ -180,8 +180,8 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {"@type": "Question", "name": "换底色后头发边缘会出现白边吗？", "acceptedAnswer": {"@type": "Answer", "text": "先羽化 1~2 像素就不会。若仍有白边，用小尺寸橡皮擦手动清理或调高容差重新选区。"}},
-        {"@type": "Question", "name": "蓝底可以换成护照要求的白底吗？", "acceptedAnswer": {"@type": "Answer", "text": "可以，流程一样：魔棒选中蓝色背景、羽化、前景色设为 #FFFFFF 后填充。"}},
+        {"@type": "Question", "name": "换底色后头发边缘会出现白边吗？", "acceptedAnswer": {"@type": "Answer", "text": "这里没有羽化功能，靠抗锯齿加低功率二次点击。仍有白边就把功率降到 10~12 再点发际线，或用小笔刷橡皮擦在 200% 缩放下收边。"}},
+        {"@type": "Question", "name": "蓝底可以换成护照要求的白底吗？", "acceptedAnswer": {"@type": "Answer", "text": "可以，流程一样：魔术橡皮擦擦掉蓝底，新建图层压到底层，填入 #FFFFFF，再调整到 295x413 导出 JPG。"}},
         {"@type": "Question", "name": "最终照片的尺寸和分辨率有要求吗？", "acceptedAnswer": {"@type": "Answer", "text": "多数系统要求一寸 295x413 像素或二寸 413x579 像素、300 DPI，导出前用图片-调整尺寸精确设置。"}},
         {"@type": "Question", "name": "我的证件照会被上传到服务器吗？", "acceptedAnswer": {"@type": "Answer", "text": "不会。Web PSEditor 通过 HTML5 Canvas 在本机浏览器内存中完成全部处理，零上传、零云端存储，断网可用。"}}
       ]

@@ -11,6 +11,30 @@
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/add-text-watermark" />
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/add-text-watermark" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/add-text-watermark" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "实战教程：如何在线给图片添加文字水印，防止被盗用",
+      "description": "用纯浏览器编辑器给照片加水印：位置怎么选、不透明度给多少、为什么另存为不等于导出，附平铺网格的具体做法。",
+      "author": {"@type": "Organization", "name": "Web PSEditor"},
+      "publisher": {"@type": "Organization", "name": "Web PSEditor"},
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "mainEntityOfPage": "https://webpseditor.com/zh/tutorials/add-text-watermark"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "水印怎么做到看得清又不毁图？", "acceptedAnswer": {"@type": "Answer", "text": "浅色字加一像素深色描边，不透明度 60%~70%。描边负责在亮部和暗部都留出一条边界，纯白字会消失在天空里，纯黑字会消失在阴影里。字号比不透明度更重要：不足画面宽度 3% 的字在手机上只是一层噪点。"}},
+        {"@type": "Question", "name": "水印放角落够用吗？", "acceptedAnswer": {"@type": "Answer", "text": "个人作品够用，但要离每条边至少 3% 宽度，否则平台缩放时会被裁掉。商业图不够：别人裁一刀就没了。至少压住主体，或者用对角两个角标，裁掉一个必然裁到内容。"}},
+        {"@type": "Question", "name": "文字水印能被去掉吗？", "acceptedAnswer": {"@type": "Answer", "text": "能。压在纯色背景上的字，用内容识别几分钟就能涂掉。目标不是做一个去不掉的水印——那不存在——而是让去掉的代价大过重新拍一张。压在主体上、铺满细节区域，就是在抬高这个代价。"}}
+      ]
+    }
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -22,7 +46,8 @@
         .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
         h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
         h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
-        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        h3 { color: #0f172a; font-size: 16px; margin: 20px 0 6px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
         .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
         .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
         .cta-btn:hover { background: var(--primary-hover); }
@@ -34,6 +59,10 @@
         .compare { display: flex; gap: 12px; }
         .compare figure { flex: 1; margin: 0; }
         .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #991b1b; }
+        .mistake-box ul { margin: 8px 0 0; padding-left: 20px; }
+        .mistake-box li { margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 14px; }
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
@@ -64,20 +93,20 @@
         </div>
 
         <article>
-<h1>实战教程：如何在线给图片添加文字水印，防止被盗用</h1>
+            <h1>实战教程：如何在线给图片添加文字水印，防止被盗用</h1>
             <div class="meta-bar">
-                <span>难度：极简入门</span> • <span>耗时：3 分钟</span> • <span>适用：作品集、电商图、摄影作品</span>
+                <span>难度：极简入门</span> • <span>阅读：8 分钟</span> • <span>更新：2026-11-13</span>
             </div>
 
             <div class="cta-box">
                 <div>
-                    <strong style="color:#1e40af; font-size:16px;">图片不上传，水印本地加！</strong>
+                    <strong style="color:#1e40af; font-size:16px;">图片不上传，水印本地加</strong>
                     <div style="font-size:13px; color:#3b82f6; margin-top:3px;">纯浏览器 Canvas 处理，素材不出你的电脑。</div>
                 </div>
                 <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 加水印 →</a>
             </div>
 
-            <p>辛苦拍的照片、精心做的电商主图，发到网上第二天就被别人搬运盗用，连个署名都没有——这是每位创作者都遇过的糟心事。给图片加上<strong>文字水印</strong>，是最简单有效的防盗手段：别人即使转载，观者也能一眼看出来源。很多在线加水印工具需要把图片上传到对方服务器，商务图和未发布作品存在泄露风险；而使用 <strong>Web PSEditor</strong>，全部处理都在你的浏览器本地完成，图片从头到尾不会离开你的电脑。</p>
+            <p>水印挡不住盗图。这句话得先说清楚，否则后面全是空谈。一张图被搬走之后，水印能做的事只有两件：让看到的人知道出处，让搬运的人多花几分钟。前者关乎署名，后者关乎成本。真正决定效果的不是水印有多重，而是<strong>它压在画面的什么位置</strong>——放在四个角的水印，是最容易被一刀裁掉的那种。</p>
 
             <h2>先看效果：处理前 vs 处理后</h2>
             <div class="compare">
@@ -86,57 +115,106 @@
                     <figcaption>处理前：原始图片</figcaption>
                 </figure>
                 <figure>
-                    <img src="../../images/tutorials/watermark-after.jpg" alt="加上斜向平铺文字水印后的照片，印有 Web PSEditor 样图字样" loading="lazy">
+                    <img src="../../images/tutorials/watermark-after.jpg" alt="加上斜向平铺文字水印后的照片，文字呈半透明重复分布" loading="lazy">
                     <figcaption>处理后：平铺斜向文字水印</figcaption>
                 </figure>
             </div>
 
-            <h2>第一步：打开编辑器并导入图片</h2>
-            <p>打开 <a href="../../editor.html?lang=zh" target="_blank">Web PSEditor</a>，点击左上角 <strong>【文件】→【打开图片】</strong>，选择你要加水印的照片。图片载入后，界面右侧会显示画布信息与图层面板：</p>
+            <h2>为什么位置比不透明度重要</h2>
+            <p>先说一个容易被忽略的事实：绝大多数盗图不是精心策划的，而是一次右键保存。这类人不会去修图，看到角标就直接裁掉——裁一刀的成本，比重新拍一张低太多。</p>
+            <p>所以水印的设计目标不是「无法去除」，那不存在；而是「去掉的代价高于重拍」。压在纯色天空上的字，用内容识别填充几秒钟就能补好；压在主体边缘、纹理、人脸附近的字，抹掉之后那块区域会留下明显的修补痕迹，一看就不对。同样的文字、同样的透明度，位置换一下，防盗效果差一个量级。</p>
+            <p>不透明度当然也重要，但它解决的是另一个问题：让水印既看得见又不抢画面。这两件事分开处理，思路就清楚了——<strong>位置决定防盗，透明度决定观感</strong>。</p>
+
+            <h2>第一步：打开编辑器，导入图片</h2>
+            <p>打开 <a href="../../editor.html?lang=zh" target="_blank">Web PSEditor</a>，点 <strong>【文件】→【打开】</strong> 选择照片，也可以直接把文件拖到画布上。导入后右侧是图层面板——后面每一个文字水印都会独立成为一个图层，这一点很关键：改透明度、改位置、单独删掉某一个，都靠它。</p>
             <figure>
-                <img src="../../images/tutorials/watermark-editor-ui.jpg" alt="Web PSEditor 编辑器界面，画布中已载入待加水印的风景照片" loading="lazy">
-                <figcaption>Web PSEditor 编辑器界面：样图已载入画布</figcaption>
+                <img src="../../images/tutorials/watermark-editor-ui.jpg" alt="Web PSEditor 编辑器界面，画布中已载入待加水印的风景照片，右侧显示图层面板" loading="lazy">
+                <figcaption>载入照片后：右侧图层面板会记录每一个文字水印</figcaption>
             </figure>
 
             <div class="step-card">
-                <div class="step-title">第二步：方法一 —— 单个署名水印（适合摄影作品）</div>
+                <div class="step-title">第二步：单个署名水印（适合摄影作品、个人博客）</div>
                 <p>
-                    1. 点击左侧工具栏的 <strong>文字工具（T 图标）</strong>，在画布上点击要放置水印的位置。<br>
-                    2. 输入你的署名，如：<code>摄影 @你的名字</code>，并在文字属性面板设置字号、颜色（建议白色或浅灰）。<br>
-                    3. 在右侧图层面板把该文字图层的 <strong>不透明度（Opacity）调至 60%~70%</strong>，水印清晰可见又不喧宾夺主。<br>
-                    4. 如需倾斜效果，选中文字图层后使用顶部 <strong>【编辑】→【自由变换】</strong> 旋转 -30° 左右。
+                    1. 选左侧工具栏的<strong>文字工具</strong>，在画布上点一下要放水印的位置。<br>
+                    2. 输入署名，例如 <code>摄影 你的名字</code>。文字工具默认是 40 号 Arial、绿色填充，两个都要改：颜色换成白色或浅灰，字号按画面宽度算，<strong>取图宽的 3%~5%</strong>。手机屏幕只有几英寸宽，小于 3% 的字看不清，只是给画面加了一层灰。<br>
+                    3. 在文字参数里加<strong>一像素的深色描边</strong>，然后把图层不透明度调到 <strong>60%~70%</strong>。描边这一步别省，理由在下一节。<br>
+                    4. 需要倾斜就选中文字图层，打开 <strong>【图片】→【旋转】</strong>。这里的角度框只接受 0~360，想要 -8° 就填 <code>352</code>；<strong>直角下拉必须留在「自定义」</strong>，选了 0/90/180/270 它会把你的角度直接覆盖掉。确认之后画布会变大以容纳旋转后的图层，用裁剪工具裁回原画幅即可。
                 </p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">第三步：方法二 —— 全图平铺水印（防盗用最强）</div>
+                <div class="step-title">第三步：平铺网格（商业图、样片交付必用）</div>
                 <p>
-                    单个水印很容易被裁掉，全图平铺才是防盗王牌：<br>
-                    1. 先按方法一做好一个文字水印图层。<br>
-                    2. 在图层面板<strong>复制该图层</strong>，拖动副本到新的位置；重复操作让水印铺满全图（本文效果图即为平铺样式）。<br>
-                    3. 全部摆好后，把每个水印图层的不透明度统一调至 <strong>30%~40%</strong>，视觉更通透。<br>
-                    4. 小技巧：按住 <code>Shift</code> 拖动可水平/垂直对齐，让排布更整齐。
+                    单个水印离边缘够近，一刀就没。铺满画面则把「去掉」从裁剪变成了修图，成本完全不同：<br>
+                    1. 按上一步做好第一个文字图层。<br>
+                    2. 选中它，<strong>【图层】→【复制】</strong>，把副本拖到下一个位置，重复到覆盖全图。横幅照片铺 6~9 个就够，再多会糊成一片。<br>
+                    3. 全部摆好后，把每个水印图层的不透明度统一降到 <strong>30%~40%</strong>。低于 30% 时，杂乱背景上的字会直接消失，白铺。<br>
+                    4. 间距要对齐，别靠眼睛拖。定一个位移值（例如每次沿对角线移动 250 像素），每次都移动同样的距离，行与行才对得上。这个编辑器没有按住 Shift 锁定方向的层拖拽，靠固定数值比靠手感稳。
                 </p>
             </div>
 
             <div class="step-card">
                 <div class="step-title">第四步：导出成品</div>
                 <p>
-                    点击 <strong>【文件】→【另存为】</strong>，选择格式：日常分享与电商图选 <strong>JPG（质量 85 以上）</strong>；需要保留透明背景的选 <strong>PNG</strong>。导出的图片自带水印，可直接发布。
+                    点 <strong>【文件】→【导出】</strong>，选 JPG（质量 85 以上）或 PNG（需要透明背景时）。<br>
+                    这里有个必须先讲清的坑：<strong>【文件】→【另存为】存的不是图片</strong>，而是一个带所有图层的 JSON 工程文件，用来下次继续编辑。想拿到能发布的图片，只能走「导出」。<br>
+                    另外，导出的图会把水印直接烧进像素；工程文件里水印仍是可编辑图层。所以建议保留一份分层工程，另外导出一份成品去发布。
                 </p>
             </div>
 
+            <h2>放在哪里：三条就够</h2>
+            <p>位置是整件事的核心，因为别人拿到图的第一件事就是重新取景。三条规则覆盖绝大多数情况：</p>
+            <ul>
+                <li><strong>离边至少 3% 宽度。</strong> 平台缩放、圆角裁切、封面适配都会吃掉边缘的几个像素，贴边的字最先消失。</li>
+                <li><strong>压住东西。</strong> 天空、白墙、纯色底上的字，一分钟就能克隆掉；压在主体轮廓、商品边缘、有纹理的地面上，抹掉必然留疤。</li>
+                <li><strong>用对角线。</strong> 放两个就放对角，想裁掉其中一个，必然要切到画面中间的主体。</li>
+            </ul>
+
+            <h2>既看得清，又不毁照片</h2>
+            <p>失败的水印通常走两个极端，方向正好相反。一种是淡到看不见：20% 的白色字压在浅色天空上，手机上看就是一层雾，署名作用为零。另一种是重到遮图：字比照片还抢眼，图片成了水印的背景板。</p>
+            <p>可行的中间值是<strong>浅色字配深色描边，整体 50%~70% 不透明度</strong>。描边做的是透明度做不到的事——纯白字在亮部消失，纯黑字在暗部消失，而带描边的字在两种背景上都还有一条边。所以先定描边，再调透明度，顺序反了会来回改。</p>
+            <p>还有一点关于平铺网格的实测经验：30%~40% 的不透明度在编辑器里看着刚好，上传到社交平台后会显得更重。原因是平台重新压缩时，文字边缘会被锐化，局部对比度被拉高。建议先用同套参数导出一张，在手机上看一眼，再批量套用。</p>
+
+            <div class="mistake-box">
+                <strong>⚠️ 四个常见错误</strong>
+                <ul>
+                    <li><strong>把「另存为」当成导出。</strong> 得到的是 JSON 工程文件，打不开、发不了，这是新手最容易卡住的一步。</li>
+                    <li><strong>只用白色不加深色描边。</strong> 亮背景上的水印会直接消失，甲方验收时才发现。</li>
+                    <li><strong>角标贴着画框边。</strong> 平台缩放时最先被裁掉，等于没加。</li>
+                    <li><strong>旋转时没注意直角下拉。</strong> 下拉不是「自定义」时，输入的角度会被覆盖成 90 的倍数，怎么调都是歪的直角。</li>
+                </ul>
+            </div>
+
             <div class="tip-box">
-                💡 <strong>进阶提示</strong>：如果你管理的是产品图库，可以把水印文字换成「仅供 XX 店铺使用」，这样即使图片被盗用，反而变成免费的引流广告。
+                💡 <strong>一条口诀：浅色字、深描边、六成透明度、压住主体。</strong> 能被裁掉的水印只是装饰，不叫保护。
+            </div>
+
+            <h2>常见问题 FAQ</h2>
+            <div class="faq-item">
+                <h3>水印怎么做到看得清又不毁图？</h3>
+                <p>浅色字加一像素深色描边，不透明度 60%~70%。描边负责在亮部和暗部都留出一条边界，纯白字会消失在天空里，纯黑字会消失在阴影里。字号比不透明度更重要：不足画面宽度 3% 的字在手机上只是一层噪点。</p>
+            </div>
+            <div class="faq-item">
+                <h3>水印放角落够用吗？</h3>
+                <p>个人作品够用，但要离每条边至少 3% 宽度，否则平台缩放时会被裁掉。商业图不够：别人裁一刀就没了。至少压住主体，或者用对角两个角标，裁掉一个必然裁到内容。</p>
+            </div>
+            <div class="faq-item">
+                <h3>文字水印能被去掉吗？</h3>
+                <p>能。压在纯色背景上的字，用内容识别几分钟就能涂掉。目标不是做一个去不掉的水印——那不存在——而是让去掉的代价大过重新拍一张。压在主体上、铺满细节区域，就是在抬高这个代价。</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
             </div>
 
             <h2>相关教程推荐</h2>
             <div class="related">
                 <a href="../tutorials/png-vs-jpg-export">PNG 与 JPG 的区别：导出该选哪个？</a>
                 <a href="../tutorials/social-media-image-sizes">社交媒体图片尺寸速查表</a>
-                <a href="../tutorials/photo-color-correction">照片调色与色彩校正</a>
+                <a href="../tutorials/photo-color-correction">照片调色与颜色校正</a>
                 <a href="../tutorials/crop-rotate-straighten">裁剪、旋转与扶正照片</a>
             </div>
+
             <!-- 🎯 实战练习与安全导流 CTA 卡片 -->
             <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">
@@ -145,7 +223,7 @@
                         <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
                         <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">打开编辑器，用你自己的照片按上述步骤加水印，全程无需注册、无需上传。</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">同一张照片加两次水印——一个角标、一个 3×3 网格——然后各裁掉 10%，看哪个还留着。</p>
                 </div>
                 <div>
                     <a href="../../editor.html?lang=zh" class="practice-btn">
