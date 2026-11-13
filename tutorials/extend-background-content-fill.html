@@ -140,7 +140,12 @@
             <p>You have a vertical shot and need it horizontal — a banner, a thumbnail, a slide. Cropping to 16:9 cuts the subject's head off. Stretching makes everyone wide. There is a third option: keep the subject where it is, grow the canvas sideways, and rebuild the missing strips from the pixels that are already there.</p>
             <p><strong>Tools → Content Fill</strong> does that rebuild. It requires one condition the editor enforces: the image layer must be smaller than the canvas, which is exactly the state you are in after growing the canvas.</p>
 
-            <h2>Step 1: Grow the Canvas, Keep the Pixels</h2>
+                        <figure>
+                <img src="../../images/tutorials/shots/tools-menu-en.png" alt="Web PSEditor Tools menu showing Content Fill" loading="lazy">
+                <figcaption>Content Fill is third in the Tools menu. It refuses to run while the image still covers the whole canvas — grow the canvas first.</figcaption>
+            </figure>
+
+<h2>Step 1: Grow the Canvas, Keep the Pixels</h2>
             <div class="step-card">
                 <div class="step-title">Image → Canvas Size</div>
                 <p>Untick <strong>In proportion</strong> so the layers do not scale. Set the new width for the target ratio: a 1200 × 1500 photo (4:5) becomes 1920 × 1500 for a 16:9-ish banner; 1080 × 1350 becomes 1080 × 1350 → 1920 × 1350 if you want a wide social crop. The extra space appears on the right, so the subject stays anchored left.</p>

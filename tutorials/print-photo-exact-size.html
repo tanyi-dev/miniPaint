@@ -140,7 +140,12 @@
             <p>A print job fails for one of two reasons: the file has too few pixels for the physical size, or the print dialog quietly scales it. Both are predictable, and both are settled before you press print.</p>
             <p>The maths is short: <strong>pixels = inches × DPI</strong>. At 300 DPI, 4 × 6 inches is 1200 × 1800 pixels, A4 (8.27 × 11.69 in) is 2480 × 3508, and a 35 × 45 mm passport photo is 413 × 531. At 150 DPI the same physical sizes need only a quarter of the pixels — acceptable for a poster viewed from a metre away, not for a passport photo inspected at arm's length.</p>
 
-            <h2>Step 1: Decide the Target Pixels</h2>
+                        <figure>
+                <img src="../../images/tutorials/shots/file-menu-en.png" alt="Web PSEditor File menu showing Print above Quick Save" loading="lazy">
+                <figcaption>Print (Ctrl + P) hands the canvas to the browser print dialog. That dialog is where exact physical size is usually lost, not in the editor.</figcaption>
+            </figure>
+
+<h2>Step 1: Decide the Target Pixels</h2>
             <table class="tool-table">
                 <tr><th>Output</th><th>Physical size</th><th>Pixels at 300 DPI</th></tr>
                 <tr><td>Standard photo print</td><td>4 × 6 in / 10 × 15 cm</td><td>1200 × 1800</td></tr>

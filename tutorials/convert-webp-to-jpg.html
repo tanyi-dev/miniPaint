@@ -140,7 +140,12 @@
             <p>You saved an image from a browser, and the file is <code>.webp</code>. Then a job portal says the format is not supported, or Word opens it as a blank box, or the print shop asks for JPG. Conversion here is not a re-upload to some online converter: open the file, choose the output type, save. The pixels never leave your machine.</p>
             <p>The one thing that decides whether the conversion goes well is <strong>transparency</strong>. WebP supports an alpha channel; JPG does not. A logo cut out on a transparent background will come back on a solid colour block, and that surprises people far more often than the format itself.</p>
 
-            <h2>Before You Convert: Check What You Actually Have</h2>
+                        <figure>
+                <img src="../../images/tutorials/shots/open-submenu-en.png" alt="Web PSEditor File → Open submenu showing Open File and Open URL" loading="lazy">
+                <figcaption>File → Open in the current build. Open File accepts png, jpg, webp, gif and avif directly — no conversion step needed before editing.</figcaption>
+            </figure>
+
+<h2>Before You Convert: Check What You Actually Have</h2>
             <p>Open the file with <strong>File → Open → Open File</strong>. The supported input list covers png, jpg, jpeg, webp, gif and avif, so a WebP drops in without any intermediate step.</p>
             <p>Then read the numbers in <strong>Image → Information</strong>: width, height and layer count. Two things matter at this point. If the image is larger than about 2000 px on the long edge and the destination is a form upload, you will probably resize as well, and it is faster to do that once here than to convert twice. If the layer panel shows a chequerboard behind the content, or the canvas edge is not filled edge to edge, you are holding a file with alpha and the next section applies to you.</p>
 

@@ -144,7 +144,12 @@
             <p>从网页上存下一张图，扩展名是 <code>.webp</code>。然后招聘网站说格式不支持，Word 打开是一片空白，打印店要 JPG。这里的转换不是在线上传给别人处理：打开文件、选输出格式、保存，像素全程不离开本机。</p>
             <p>决定转换成败的只有一个因素——<strong>透明度</strong>。WebP 支持 alpha 通道，JPG 不支持。抠好的透明 logo 转成 JPG，会在纯色块上回来，这个坑比格式本身坑人得多。</p>
 
-            <h2>动手前先看清楚手里是什么</h2>
+                        <figure>
+                <img src="../../images/tutorials/shots/file-menu-zh.png" alt="Web PSEditor 中文界面【文件】菜单，含打开、导出、另存为" loading="lazy">
+                <figcaption>当前版本的中文【文件】菜单：【打开】直接吃 png、jpg、webp、gif、avif，不需要先转换。</figcaption>
+            </figure>
+
+<h2>动手前先看清楚手里是什么</h2>
             <p>用 <strong>【文件】→【打开】→【打开文件】</strong> 载入。支持的输入包含 png、jpg、jpeg、webp、gif、avif，WebP 直接拖进来就行，不需要先转一道。</p>
             <p>再看 <strong>【图片】→【信息】</strong> 里的宽、高和图层数。这时候只有两件事要判断：如果长边超过 2000 像素、而目标是表单上传，多半还要顺手缩尺寸，在这里一次做完比转两次强；如果图层背后是格子底、或者画面没有铺满画布，说明这个文件带 alpha，下面那段就与你有关。</p>
 
