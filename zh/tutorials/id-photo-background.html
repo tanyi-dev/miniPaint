@@ -3,14 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>在线证件照换底色：白底换蓝底/红底 - Web PSEditor</title>
-    <meta name="description" content="在线学习实战教程：如何在线将证件照白底换成蓝底/红底：使用免费纯网页轻量级在线图片编辑器工具 Web PSEditor，简单高效、安全不泄露肖像隐私。" />
+    <title>证件照换底色：白底换蓝底/红底 - Web PSEditor</title>
+    <meta name="description" content="证件照换底色五步走：标准色值、魔术橡皮擦的功率与 Contiguous、没有羽化时怎么处理发际线、新图层垫底和精确像素设置。" />
     <link rel="icon" sizes="192x192" href="../../images/favicon.png">
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="canonical" href="https://webpseditor.com/zh/tutorials/id-photo-background" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/id-photo-background" />
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/id-photo-background" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/id-photo-background" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "证件照白底换蓝底 / 红底",
+  "description": "证件照换底色五步走：标准色值、魔术橡皮擦的功率与 Contiguous、没有羽化时怎么处理发际线、新图层垫底和精确像素设置。",
+  "author": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "datePublished": "2026-11-13",
+  "dateModified": "2026-11-13",
+  "mainEntityOfPage": "https://webpseditor.com/zh/tutorials/id-photo-background"
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "换底色后头发边缘会出现白边吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "先看第三步：这里没有羽化，靠的是抗锯齿加上低功率二次点击。仍有细白边就把功率降到 10 到 12 点一次发际线，或者换小笔刷橡皮擦在 200% 下收边。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "蓝底可以换成护照要求的白底吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可以，流程一样：魔术橡皮擦擦掉蓝底 → 新建图层压到底层 → 填入 #FFFFFF → 调整到规定像素 → 导出 JPG。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "最终照片的尺寸和分辨率有要求吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "多数报名系统要一寸 295×413 像素或二寸 413×579 像素，对应 300 DPI。像素用【图片】→【调整大小】精确设置；DPI 只是打印指令，系统查的是像素。"
+      }
+    }
+  ]
+}
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -21,39 +72,43 @@
         .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
         .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
         h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
-        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        h3 { color: #0f172a; font-size: 16px; margin: 20px 0 6px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
         .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
         .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
         .cta-btn:hover { background: var(--primary-hover); }
         .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
         .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
-        .tip-box { background: #fffbeb; border: 1px solid #fef3c7; border-radius: 8px; padding: 14px 18px; color: #92400e; font-size: 14px; margin: 20px 0; }
-        .color-badge { display: inline-block; width: 12px; height: 12px; border-radius: 2px; vertical-align: middle; margin-right: 4px; border: 1px solid rgba(0,0,0,0.1); }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .compare { display: flex; gap: 12px; }
+        .compare figure { flex: 1; margin: 0; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #991b1b; }
+        .mistake-box ul { margin: 8px 0 0; padding-left: 20px; }
+        .mistake-box li { margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 14px; }
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
-        article figure { margin: 18px 0; text-align: center; }
-        article figure img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
-        article figcaption { font-size: 13px; color: var(--text-sub); margin-top: 8px; }
-        .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; }
-        .mistake-box strong { color: #991b1b; }
-        .mistake-box li { color: #7f1d1d; font-size: 14px; margin-bottom: 6px; }
-        .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
-        .faq-item h3 { font-size: 15px; margin: 0 0 6px; color: #0f172a; }
-        .faq-item p { margin: 0; font-size: 14px; color: #334155; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { flex-direction: column; } }
         .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
         .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
         .related a:hover { border-color: var(--primary); }
-        article h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
-        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { grid-template-columns: 1fr; } .related { grid-template-columns: 1fr; } }
+        @media (max-width: 640px) { .related { grid-template-columns: 1fr; } }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header-nav">
             <div style="display: flex; gap: 14px; align-items: center;">
-                <a href="../../index.html" class="back-link">← 网站首页</a>
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
                 <span style="color: #cbd5e1;">|</span>
                 <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
             </div>
@@ -63,85 +118,103 @@
             </div>
         </div>
 
-        <!-- 🔒 隐私信任安全背书 -->
         <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
-            <span>🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
         </div>
 
         <article>
-<h1>实战教程：如何在线将证件照白底换成蓝底/红底</h1>
+            <h1>证件照白底换蓝底 / 红底</h1>
             <div class="meta-bar">
-                <span>难度：入门小白</span> • <span>耗时：3 分钟</span> • <span>工具：Web PSEditor (纯本地运行)</span>
+                <span>难度：极简入门</span> &bull; <span>阅读：9 分钟</span> &bull; <span>更新：2026-11-13</span>
             </div>
 
             <div class="cta-box">
                 <div>
-                    <strong style="color:#1e40af; font-size:16px;">边看边做，快速搞定！</strong>
-                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">无需安装任何软件，浏览器内本地运算，照片绝不上传服务器。</div>
+                    <strong style="color:#1e40af; font-size:16px;">底色要平，色值要准，尺寸要对</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">校验系统比的是数值，不是你觉得够不够蓝</div>
                 </div>
-                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 立即实操 →</a>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 换底色 &rarr;</a>
             </div>
 
-            <p>在日常求职、考试报名或办理证件时，我们经常遇到手头只有白色底色照片，而报名系统明确要求提交蓝底（或红底）照片的情况。去照相馆费时费力，安装庞大的 专业修图软件 更是繁琐。本文将指导你使用免费在线修图工具 <strong>Web PSEditor</strong>，只需简单的 4 个步骤快速更换底色，全程本地运算，照片绝不上传。</p>
+            <p>手上是白底照片，表格要蓝底；或者照片是蓝的，签证处非要白。换颜色是五分钟的活，但被接受的那张图还有别的规矩：像素尺寸要精确、底色要平、头发边上不能留一圈旧颜色。任一条不合，退回的理由通常和你的脸毫无关系。</p>
 
-            <div class="compare">
-                <figure>
-                    <img src="../../images/tutorials/idphoto-before.jpg" alt="蓝底原始证件照" loading="lazy">
-                    <figcaption>处理前：原始蓝底证件照</figcaption>
-                </figure>
-                <figure>
-                    <img src="../../images/tutorials/idphoto-after.jpg" alt="换成标准红底后的证件照" loading="lazy">
-                    <figcaption>处理后：一键换成标准红底</figcaption>
-                </figure>
-            </div>
-
-            <h2>标准证件照常见背景色参考：</h2>
+            <h2>先记住标准色值，别用眼睛挑</h2>
+            <p>自动校验会取样背景，偏差超过窄范围就判不合格。你看着「够蓝」的颜色，在某个通道上可能差 30 个点：</p>
             <ul>
-                <li><strong>标准蓝底：</strong>RGB(67, 142, 219) 或十六进制 <code>#438EDB</code>（常用于毕业证、工作证、简历、驾照）</li>
-                <li><strong>标准红底：</strong>RGB(255, 0, 0) 或十六进制 <code>#FF0000</code>（常用于保险、医保、重要认证）</li>
-                <li><strong>白底照片：</strong>RGB(255, 255, 255) 或十六进制 <code>#FFFFFF</code>（常用于护照、身份证、签证）</li>
+                <li><strong>标准蓝底：</strong>RGB(67, 142, 219) / <code>#438EDB</code>——毕业证、工作证、简历、驾照</li>
+                <li><strong>标准红底：</strong>RGB(255, 0, 0) / <code>#FF0000</code>——保险、医保、各类认证</li>
+                <li><strong>白底：</strong>RGB(255, 255, 255) / <code>#FFFFFF</code>——护照、身份证、签证</li>
             </ul>
+            <p>两条实操提醒。底色必须平，不要为了「自然」加渐变或暗角，校验看的就是均匀度。穿的衣服要和目标底色拉开：白衬衫配白底，肩线直接消失，照片看起来像一颗浮着的头。</p>
 
+            <h2>五步换底</h2>
 
             <div class="step-card">
-                <div class="step-title">步骤 1：导入需要修改的照片</div>
-                <p>进入 Web PSEditor 编辑器首页，点击顶部菜单 <strong>【文件】 -> 【打开】</strong>（或快捷键 <code>Ctrl + O</code>），选择你电脑中的证件照导入；也可以直接将图片文件拖放到画板中间。</p>
+                <div class="step-title">第一步：导入</div>
+                <p><strong>【文件】→【打开】</strong>，或把文件拖到画布上。确认右侧图层面板选中的是照片那一层——后面所有操作都只作用于选中图层。</p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">步骤 2：用魔术橡皮擦擦掉旧背景</div>
-                <p>在左侧工具栏选 <strong>魔术橡皮擦工具</strong>，顶部参数里的 <strong>功率（Power）</strong> 就是容差，默认 15。先在背景最干净的地方点一下——同色像素立刻变透明，画布透出的棋盘格就是擦掉了。<br>两个参数决定这一下是干净还是毁图：<strong>功率</strong>调到 25 ~ 40 才能吃到背景的暗角；<strong>Contiguous</strong> 默认关闭，意味着它会清掉整个图层里所有相同颜色，而不仅是你点的那片连通区域。证件照的浅色衬衫如果接近背景色，先把功率压到 10 ~ 15 再点，避免肩膀被一起擦穿。</p>
+                <div class="step-title">第二步：魔术橡皮擦擦掉旧底</div>
+                <p>选<strong>魔术橡皮擦</strong>，<strong>功率</strong>就是容差，默认 15。先在背景最平的地方点一下，同色像素立刻透明，棋盘格就是擦掉了。证件照背景常有轻微明暗过渡，起步用低功率，暗角单独多点几次，而不是一次性把功率拉高——拉高会连肩膀一起吃。</p>
+                <p><strong>Contiguous</strong> 默认关闭，意味着它清掉整层里所有同色像素，不限于你点的那片连通区域。人像上这点很重要：如果衣服是浅灰、接近背景色，高功率会直接在衣服上开洞。点之前先把肩膀放大看一眼。</p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">步骤 3：处理发丝边缘（这里没有羽化）</div>
-                <p>这个编辑器<strong>没有羽化功能</strong>，也没有羽化半径可填——想要软边只能换做法：<br>① 保持魔术橡皮擦的抗锯齿默认开启，它本身就会把边界软化一像素，大致等于 1 px 羽化的效果；<br>② 发际线残留一圈旧底色时，把<strong>功率降到 10 ~ 12 再点一次</strong>，而不是调高功率（调高会啃进头发）；<br>③ 还有残留就换<strong>橡皮擦</strong>，小笔刷、200% 缩放，沿轮廓慢慢刷。</p>
+                <div class="step-title">第三步：处理发际线（这里没有羽化）</div>
+                <p>这个编辑器<strong>没有羽化功能</strong>，没有半径可填。替代做法：保持抗锯齿开启（它会软化边界一像素，约等于 1 px 羽化），发际线残留旧色时<strong>把功率降到 10 到 12 再点一次</strong>，还不行就换橡皮擦小笔刷在 200% 下沿轮廓收边。</p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">步骤 4：填充目标底色并导出</div>
-                <p>背景擦干净后，先垫一层底色：<strong>【图层】→【新建】</strong> 建一个新图层，再用 <strong>【图层】→【移动】→【向下】</strong> 把它压到人物下面。把颜色设成目标色值（如标准蓝底 <code>#438EDB</code>），选<strong>填充工具</strong>在透明区域点一下，新底色就出现在人物背后，人物本身一个像素都没动。<br>
-                尺寸不对先改尺寸：<strong>【图片】→【调整大小】</strong>，宽度填 295、高度自动按比例算，需要 413 × 579 时同理。<br>最后 <strong>【文件】→【导出】</strong>，选 <strong>JPG</strong>（质量 90 以上，报名系统普遍只认 JPG）或 <strong>PNG</strong> 存到本地。</p>
-                <figure>
-                    <img src="../../images/tutorials/idphoto-editor-ui.jpg" alt="Web PSEditor 编辑器界面，油漆桶工具正在为证件照填充红底" loading="lazy">
-                    <figcaption>设好目标颜色后用油漆桶工具在背景上一点，新底色即刻生效。</figcaption>
-                </figure>
+                <div class="step-title">第四步：在新图层垫上底色</div>
+                <p><strong>【图层】→【新建】</strong> 建一层，再用 <strong>【图层】→【移动】→【向下】</strong> 压到人物下面。把颜色设成目标色值，选<strong>填充工具</strong>点一下透明区域，底色就出现在人物背后，人物本身一个像素都没动。也可以直接用<strong>形状工具</strong>画一个铺满画布、填好色的矩形。</p>
+                <p>无论哪种，都要检查边缘：橡皮擦漏掉的一圈旧底，在新底色上会变成一条颜色不对的边，比原来显眼得多。</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">第五步：定尺寸，导出</div>
+                <p>常见要求是一寸 295×413 像素、二寸 413×579 像素，对应 25×35mm 和 35×49mm（300 DPI）。用 <strong>【图片】→【调整大小】</strong> 填宽度，高度按原比例自动算；比例和规范对不上时，先用裁剪工具裁到对的构图，别硬拉。</p>
+                <p>最后 <strong>【文件】→【导出】</strong>，JPG 质量 90 以上。底色已经是实色层，没有透明可丢，所以 JPG 完全够用；PNG 只适合自己存档，多出来的体积对报名系统毫无意义。</p>
             </div>
 
             <div class="mistake-box">
-                <strong>⚠️ 这些坑别踩：常见错误清单</strong>
+                <strong>⚠️ 五个常见错误</strong>
                 <ul>
-                    <li><strong>发际线没处理</strong> —— 少了那一像素的抗锯齿过渡，头发与新底色的交界会出现"贴纸感"硬边，只能靠低功率补点或橡皮擦补救。</li>
-                    <li><strong>背景有阴影时功率给太低</strong> —— 部分旧背景没被擦掉，垫上新底色后残留一圈灰边。分区域多点几次、局部把功率提到 40 左右，别一次性拉满。</li>
-                    <li><strong>底色凭肉眼挑</strong> —— 考试和签证系统会校验背景色值，务必使用上文列出的标准色号，不要随手吸色。</li>
+                    <li><strong>去找羽化设置</strong>——这里没有。柔边靠抗锯齿加低功率二次点击，再不行用橡皮擦。</li>
+                    <li><strong>合并图层之后再擦背景</strong>——照片已经并到白底上，橡皮擦没有透明可揭示。始终保持照片是独立图层。</li>
+                    <li><strong>用手吸的颜色</strong>——考试和签证系统比对的是标准值。用上面的色号。</li>
+                    <li><strong>忘了尺寸检查</strong>——底色再完美，像素不对也会在有人看之前被系统退回。</li>
+                    <li><strong>把「另存为」当导出</strong>——那存的是工程文件。要交的图片只能【文件】→【导出】。</li>
                 </ul>
             </div>
 
+
+            <h2>与其修，不如拍对：一次过的证件照</h2>
+            <p>换底色能救的只是「颜色不对」，救不了光。拍一张能过审的证件照，四条就够：</p>
+            <ul>
+                <li><strong>光要软且匀。</strong> 面对窗户站，让光从正前方来，不要侧光、不要顶灯直打。单侧光会在脸上留半边阴影，换底色之后阴影还在，看起来像贴上去的。</li>
+                <li><strong>背景要平、要离人远。</strong> 找一面纯色墙，人往前站半米。贴墙站会把自己的影子投上去，那个影子橡皮擦吃不掉，最后只能靠手工。</li>
+                <li><strong>衣服和背景拉开明度。</strong> 白底穿浅灰，肩线就消失了。深色衣服配白底、浅色衣服配蓝红底，边界清晰，擦起来也省力。</li>
+                <li><strong>手机端平、别用广角。</strong> 镜头和眼睛同高，稍微退远一点再裁。贴太近用广角，鼻子会变大，脸型也会变。</li>
+            </ul>
+            <p>尺寸和比例提前想清楚：报名系统说 295×413，就按 25×35mm 的竖版构好图再拍，别拍成方图后期硬裁——裁掉的部分往往是头顶或肩膀，而这两处是校验构图时最先被看的。</p>
+
             <h2>常见问题 FAQ</h2>
-            <div class="faq-item"><h3>换底色后头发边缘会出现白边吗？</h3><p>先看步骤 3：这里没有羽化，靠的是抗锯齿加上低功率二次点击。仍有白边就把功率降到 10 ~ 12 点一次发际线，或者换小笔刷橡皮擦在 200% 缩放下手动收边。</p></div>
-            <div class="faq-item"><h3>蓝底可以换成护照要求的白底吗？</h3><p>完全可以，流程一样：魔术橡皮擦擦掉蓝底 → 新建图层压到底层 → 填入 <code>#FFFFFF</code> → 调整到 295 × 413 → 导出 JPG。</p></div>
-            <div class="faq-item"><h3>最终照片的尺寸和分辨率有要求吗？</h3><p>多数报名系统要求一寸 295 × 413 像素或二寸 413 × 579 像素、300 DPI。导出前用 <strong>【图片】→【调整大小】</strong> 精确设置即可。</p></div>
-            <div class="faq-item"><h3>我的证件照会被上传到服务器吗？</h3><p>不会。Web PSEditor 通过 HTML5 Canvas 在你本机浏览器内存中完成全部处理——零上传、零云端存储，断网也能用。</p></div>
+            <div class="faq-item">
+                <h3>换底色后头发边缘会出现白边吗？</h3>
+                <p>先看第三步：这里没有羽化，靠的是抗锯齿加上低功率二次点击。仍有细白边就把功率降到 10 到 12 点一次发际线，或者换小笔刷橡皮擦在 200% 下收边。</p>
+            </div>
+            <div class="faq-item">
+                <h3>蓝底可以换成护照要求的白底吗？</h3>
+                <p>可以，流程一样：魔术橡皮擦擦掉蓝底 → 新建图层压到底层 → 填入 #FFFFFF → 调整到规定像素 → 导出 JPG。</p>
+            </div>
+            <div class="faq-item">
+                <h3>最终照片的尺寸和分辨率有要求吗？</h3>
+                <p>多数报名系统要一寸 295×413 像素或二寸 413×579 像素，对应 300 DPI。像素用【图片】→【调整大小】精确设置；DPI 只是打印指令，系统查的是像素。</p>
+            </div>
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
 
             <h2>相关教程推荐</h2>
             <div class="related">
@@ -151,20 +224,14 @@
                 <a href="../tutorials/crop-rotate-straighten">照片裁剪、旋转与矫正</a>
             </div>
 
-            <div class="tip-box">
-                <strong>💡 隐私安全小提示：</strong><br>
-                Web PSEditor 所有图像处理全部在您本机的浏览器内存中通过 HTML5 Canvas 完成，<strong>零数据上传、零云端存储</strong>，您的私人肖像照片绝不会泄漏，安全合规。
-            </div>
-
-            <!-- 🎯 实战练习与安全导流 CTA 卡片 -->
             <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                        <span style="font-size: 18px;">🎯</span>
+                        <span style="font-size: 18px;">&#127919;</span>
                         <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
                         <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">无需安装软件，立即在浏览器中应用本篇所学技巧，纯本地处理无隐私泄露风险。</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">拿一张证件照，做一版蓝底、一版白底，都是 295×413，然后放大 200% 对比发际线。</p>
                 </div>
                 <div>
                     <a href="../../editor.html?lang=zh" class="practice-btn">
@@ -175,17 +242,5 @@
             </div>
         </article>
     </div>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {"@type": "Question", "name": "换底色后头发边缘会出现白边吗？", "acceptedAnswer": {"@type": "Answer", "text": "这里没有羽化功能，靠抗锯齿加低功率二次点击。仍有白边就把功率降到 10~12 再点发际线，或用小笔刷橡皮擦在 200% 缩放下收边。"}},
-        {"@type": "Question", "name": "蓝底可以换成护照要求的白底吗？", "acceptedAnswer": {"@type": "Answer", "text": "可以，流程一样：魔术橡皮擦擦掉蓝底，新建图层压到底层，填入 #FFFFFF，再调整到 295x413 导出 JPG。"}},
-        {"@type": "Question", "name": "最终照片的尺寸和分辨率有要求吗？", "acceptedAnswer": {"@type": "Answer", "text": "多数系统要求一寸 295x413 像素或二寸 413x579 像素、300 DPI，导出前用图片-调整尺寸精确设置。"}},
-        {"@type": "Question", "name": "我的证件照会被上传到服务器吗？", "acceptedAnswer": {"@type": "Answer", "text": "不会。Web PSEditor 通过 HTML5 Canvas 在本机浏览器内存中完成全部处理，零上传、零云端存储，断网可用。"}}
-      ]
-    }
-    </script>
 </body>
 </html>

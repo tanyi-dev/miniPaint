@@ -3,14 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>裁剪、旋转与矫正歪斜照片全攻略 - Web PSEditor</title>
-    <meta name="description" content="歪斜照片在线矫正教程：用免费网页图片编辑器 Web PSEditor 裁剪构图、旋转角度并矫正水平线，两分钟让废片变可用，全程浏览器本地处理。" />
+    <title>裁剪、旋转与矫正歪斜照片（完整步骤） - Web PSEditor</title>
+    <meta name="description" content="地平线歪 2 度怎么救：直角旋转、角度校正、裁剪的正确顺序，白角三种处理方式的取舍，以及为什么仰拍建筑的竖线转不直。" />
     <link rel="icon" sizes="192x192" href="../../images/favicon.png">
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="canonical" href="https://webpseditor.com/zh/tutorials/crop-rotate-straighten" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/crop-rotate-straighten" />
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/crop-rotate-straighten" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/crop-rotate-straighten" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "裁剪、旋转与矫正歪斜照片",
+  "description": "地平线歪 2 度怎么救：直角旋转、角度校正、裁剪的正确顺序，白角三种处理方式的取舍，以及为什么仰拍建筑的竖线转不直。",
+  "author": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "datePublished": "2026-11-13",
+  "dateModified": "2026-11-13",
+  "mainEntityOfPage": "https://webpseditor.com/zh/tutorials/crop-rotate-straighten"
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "不知道具体歪了多少度，能校正吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "能，而且猜一个数字才是错的做法。找一个本该水平的边——地平线、门框、桌面、楼顶——拖角度滑杆，直到这条边与画布边框平行即可。想要硬参照线就打开【视图】→【标尺】。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "校正角度会损失画质吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "任何不是 90 度整数倍的旋转都会把每个像素重采样一次，之后的裁剪再带走空出来的角。单次 2 到 5 度的校正肉眼看不出损失。真正伤画质的是反复拖动滑杆、每拖一次就确认一次——每次确认都焊进一轮重采样。在 100% 缩放下把角度定好，再确认一次。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "应该先裁剪还是先旋转？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "先旋转，再裁剪。先裁会先丢掉后面可能还用得上的像素，而且旋转产生的白角还得再裁一次，等于裁两遍。一次旋转、一次裁剪，就这个顺序。"
+      }
+    }
+  ]
+}
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -22,7 +73,8 @@
         .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
         h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
         h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
-        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        h3 { color: #0f172a; font-size: 16px; margin: 20px 0 6px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
         .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
         .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
         .cta-btn:hover { background: var(--primary-hover); }
@@ -34,6 +86,10 @@
         .compare { display: flex; gap: 12px; }
         .compare figure { flex: 1; margin: 0; }
         .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #991b1b; }
+        .mistake-box ul { margin: 8px 0 0; padding-left: 20px; }
+        .mistake-box li { margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 14px; }
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
@@ -42,71 +98,115 @@
         .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
         .related a:hover { border-color: var(--primary); }
         @media (max-width: 640px) { .related { grid-template-columns: 1fr; } }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header-nav">
             <div style="display: flex; gap: 14px; align-items: center;">
-                <a href="../../index.html" class="back-link">← 网站首页</a>
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
                 <span style="color: #cbd5e1;">|</span>
                 <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
             </div>
-            <div class="lang-switch"><span class="lang-btn active">中文</span>
-                <a href="https://webpseditor.com/tutorials/crop-rotate-straighten" class="lang-btn" style="text-decoration:none;">English</a></div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/crop-rotate-straighten" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
         </div>
 
-        <!-- 隐私信任安全背书 -->
         <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
-            <span>🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
         </div>
 
         <article>
-<h1>实战教程：裁剪、旋转与矫正歪斜照片</h1>
-            <div class="meta-bar"><span>难度：极简入门</span> • <span>耗时：2 分钟</span> • <span>适用：旅行照、翻拍照片、扫描件</span></div>
+            <h1>裁剪、旋转与矫正歪斜照片</h1>
+            <div class="meta-bar">
+                <span>难度：极简入门</span> &bull; <span>阅读：9 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
 
             <div class="cta-box">
                 <div>
-                    <strong style="color:#1e40af; font-size:16px;">歪斜照片两分钟扶正！</strong>
-                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">裁剪+旋转+矫正一气呵成，本地处理。</div>
+                    <strong style="color:#1e40af; font-size:16px;">歪的照片不用删，三步救回来</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">直角旋转 → 角度校正 → 裁剪，顺序对了画质不丢</div>
                 </div>
-                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 矫正 →</a>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 开始矫正 &rarr;</a>
             </div>
 
-            <p>水平线歪 2 度，整张照片就「要倒了」；构图边上多了一截垃圾桶，再美的风景也扣分。别急着删——<strong>裁剪、旋转、矫正</strong>三步就能让歪斜照片起死回生，全程用 <strong>Web PSEditor</strong> 在本地完成。</p>
-            <h2>先看效果：矫正前 vs 矫正后</h2>
-            <div class="compare">
-                <figure>
-                    <img src="../../images/tutorials/straight-before.jpg" alt="矫正前：地平线明显倾斜的灯塔照片" loading="lazy">
-                    <figcaption>矫正前：水平线倾斜</figcaption>
-                </figure>
-                <figure>
-                    <img src="../../images/tutorials/straight-after.jpg" alt="矫正后：水平线端正、构图紧凑的成片" loading="lazy">
-                    <figcaption>矫正后：水平线端正</figcaption>
-                </figure>
-            </div>
-            <h2>操作步骤</h2>
-            <figure>
-                <img src="../../images/tutorials/straight-editor-ui.jpg" alt="Web PSEditor 中文界面，载入待矫正的歪斜照片" loading="lazy">
-                <figcaption>歪斜样图已载入画布</figcaption>
-            </figure>
+            <p>地平线差 2 度，整张照片就像要往一边倒。多数人删掉重拍，其实三个动作就能救回来：先把大的方向转正，再把小的角度调平，最后裁掉空出来的白角。顺序错了，画质白掉一半。</p>
+
+            <h2>为什么差 2 度就觉得歪</h2>
+            <p>眼睛量的不是角度，是<strong>参照</strong>。水面、墙线、桌沿、楼顶——凡是大脑认定「应该水平」的东西，都会变成基准线，其它线全对着它比。所以海景歪 2 度难受得要命，而一张侧身倚靠的人像歪 2 度根本看不出来：前者有参照，后者没有。</p>
+            <p>手机让这件事更容易发生。举起手拍的时候身体本来就微微侧倾，而相机记录的只是「哪边朝上」——一个方向标签，用来把照片转正，并不是对你那点倾斜的校正。结果是取景屏上看着没问题，一放到显示器上就歪。手持拍摄常见偏差在 1 到 5 度之间，超过 5 度通常是按快门时人还在转。</p>
+
+            <h2>旋转救不了的那种歪：会聚垂直线</h2>
+            <p>还有一种问题，转多少度都没用。仰拍把整栋楼塞进画面时，两侧的竖线会向顶部收拢——每一根收的幅度还不一样，顶上收得多，基座几乎不收。这不是角度问题，是透视。旋转只能让水平线变平，竖线要正过来必须做透视（梯形）校正，而这个编辑器不提供。</p>
+            <p>遇到同时有两种歪的照片，处理顺序是：先把水平线救正，接受剩下的竖线倾斜，然后往楼基方向裁紧——那里会聚最轻，裁掉顶部就能弱化倒伏感。想彻底解决只能换拍摄位置，退到远处用长焦，或者把相机举到建筑中段的高度。</p>
+
+            <h2>三个动作，顺序不能错</h2>
+            <p>「旋转」在口语里指三件不同的事，混着用就会得到一张又软又紧的图：</p>
+            <ul>
+                <li><strong>直角旋转</strong>——正好 90、180、270 度。用在照片躺着或倒着的时候。它只是搬动像素行，不做插值，画质零损失。</li>
+                <li><strong>角度校正</strong>——中间任意值，通常 1 到 6 度。这才是修倾斜地平线的工具。它会把整张图重采样一次，一次没问题，反复确认十次就废了。</li>
+                <li><strong>裁剪</strong>——切掉角度校正挤出来的白角，顺手把构图定下来。永远放最后。</li>
+            </ul>
+            <p>由此得出一条规则：先修粗的错，再修细的错，最后定画框。已经调过角度、裁过图，再回头做 90 度旋转，等于把整张图白白重算一遍。</p>
+
             <div class="step-card">
-                <div class="step-title">第一步：先旋转扶正</div>
-                <p>打开照片，点击 <strong>【图片】→【旋转】</strong>。这个对话框只有两个控件：<strong>角度滑杆（0–360°）</strong>负责任意倾斜，<strong>直角下拉</strong>（自定义 / 0 / 90 / 180 / 270）负责 90° 的整倍旋转。本例约 4°，直接拖滑杆即可——注意直角下拉要留在「自定义」，选了其它值它会把滑杆数字覆盖成 90 的倍数。确认后画布会扩大以容纳旋转后的图层，这正是白边出现的原因，下一步裁掉。</p>
+                <div class="step-title">第一步：把角度转正</div>
+                <p>打开照片，点 <strong>【图片】→【旋转】</strong>。对话框里只有两个控件：<strong>角度</strong>滑杆（0–360°）管任意倾斜，<strong>直角</strong>下拉（自定义 / 0 / 90 / 180 / 270）管整倍旋转。直角下拉必须留在「自定义」，否则它会把滑杆的数字直接替换成 90 的倍数，怎么拖都是歪的直角。本例约 4 度，拖滑杆即可。确认之后画布会扩大以容纳旋转后的图层——白角就是这么来的。</p>
             </div>
+
             <div class="step-card">
-                <div class="step-title">第二步：裁剪收构图</div>
-                <p>选择 <strong>裁剪工具</strong>，沿着照片内容边缘裁掉白边，顺便把画面边缘的干扰物（行人、杂物）一并裁掉。主体放在三分线上，画面立刻专业。</p>
+                <div class="step-title">第二步：裁掉白角，同时收构图</div>
+                <p>选<strong>裁剪工具</strong>，沿画面内容把四个角收进去，顺带把画面边缘的杂物切掉。注意这个裁剪工具<strong>没有比例预设</strong>，只能自由拖；按住 Ctrl（Mac 为 Cmd）锁定的是原图比例，想让主体落在三分线上，靠眼睛对。收到什么程度算够：放大到 100% 逐个角看，任何一角露出一像素白边，全尺寸下都像失误。</p>
             </div>
+
             <div class="step-card">
-                <div class="step-title">第三步：检查水平线</div>
-                <p>放大看建筑边缘或地平线是否水平。差一点点就再微调 0.5°——歪 1° 看不出来，歪 3° 全图都倒。</p>
+                <div class="step-title">第三步：复查水平</div>
+                <p>放大看建筑轮廓或地平线。<strong>差 1 度看不出来，差 3 度整张都歪</strong>，所以以 0.5 度为步长微调。判断依据用画布边框，不要用画面里的另一条线——那条线本身可能也是歪的。看四角比看中间准，中间的小偏差最难察觉。需要硬参照就打开 <strong>【视图】→【标尺】</strong>。</p>
             </div>
+
             <div class="step-card">
                 <div class="step-title">第四步：导出</div>
-                <p>确认后 <strong>【文件】→【导出】</strong> 导出。翻拍的文档和扫描件建议存 JPG 质量 90 以上，文字更清晰。</p>
+                <p>走 <strong>【文件】→【导出】</strong>。翻拍的文档、扫描件用 JPG 质量 90 以上，文字更利；还要再编辑或要印刷的用 PNG，避免第二道压缩。</p>
             </div>
-            <div class="tip-box">💡 <strong>矫正口诀：先大角度旋转、再小角度微调、最后裁剪收边——顺序反了会白白损失画质。</strong></div>
+
+            <h2>裁掉、放大、还是补上：白角怎么处理</h2>
+            <p>确认角度校正后画布会扩大，照片本身面积不变，四边因此出现三角形空隙。怎么处理决定最终分辨率：</p>
+            <ul>
+                <li><strong>裁掉。</strong> 标准答案。每条边损失约 1 度 2%、5 度 10%，画面本身不动。绝大多数照片都该这么办。</li>
+                <li><strong>放大再裁。</strong> 保住原构图，但会二次重采样，整体变软。只在构图很紧、一点边都舍不得时才值。</li>
+                <li><strong>补上。</strong> 白角落在天空、沙滩、白墙上时，用克隆或画笔取邻近纹理盖掉。背景能糊过去，图案面立刻露馅，人脸和建筑直线上绝对不能用。</li>
+            </ul>
+            <p>不管走哪条，导出前都要在 100% 下把四角看一遍。矫歪照片最常见的瑕疵，就是某个角上残留一条原始白边，而适应窗口缩放下完全看不见。</p>
+
+            <h2>转正之后，重排一次构图</h2>
+            <p>旋转改变了画框落点，也就改变了构图。两件事值得在导出前做：<strong>重放主体</strong>——旋转前压在中线上的地平线，现在可能偏高或偏低，挪一下裁切框，让它落在三分线上，照片就从「被修正过」变成「本来就这样」；<strong>扫一遍边缘</strong>——旋转会把画框外的新内容拉进来，一个路牌、别人的肩膀、一块过曝的天空，正是这些让救回来的照片看上去像救回来的。裁到每条边要么干净、要么明显是有意为之。</p>
+
+            <div class="tip-box">
+                💡 <strong>口诀：大旋转 → 小角度 → 裁剪 → 导出。</strong> 反过来做，画质白丢；角度一次定好，别反复确认五次。
+            </div>
+
+            <h2>常见问题 FAQ</h2>
+            <div class="faq-item">
+                <h3>不知道具体歪了多少度，能校正吗？</h3>
+                <p>能，而且猜一个数字才是错的做法。找一个本该水平的边——地平线、门框、桌面、楼顶——拖角度滑杆，直到这条边与画布边框平行即可。想要硬参照线就打开【视图】→【标尺】。</p>
+            </div>
+            <div class="faq-item">
+                <h3>校正角度会损失画质吗？</h3>
+                <p>任何不是 90 度整数倍的旋转都会把每个像素重采样一次，之后的裁剪再带走空出来的角。单次 2 到 5 度的校正肉眼看不出损失。真正伤画质的是反复拖动滑杆、每拖一次就确认一次——每次确认都焊进一轮重采样。在 100% 缩放下把角度定好，再确认一次。</p>
+            </div>
+            <div class="faq-item">
+                <h3>应该先裁剪还是先旋转？</h3>
+                <p>先旋转，再裁剪。先裁会先丢掉后面可能还用得上的像素，而且旋转产生的白角还得再裁一次，等于裁两遍。一次旋转、一次裁剪，就这个顺序。</p>
+            </div>
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
 
             <h2>相关教程推荐</h2>
             <div class="related">
@@ -115,15 +215,15 @@
                 <a href="../tutorials/social-media-image-sizes">社交媒体图片尺寸速查表</a>
                 <a href="../tutorials/add-text-watermark">给照片添加文字水印</a>
             </div>
-            <!-- 实战练习与安全导流 CTA 卡片 -->
-            <div class="practice-cta-card">
+
+            <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                        <span style="font-size: 18px;">🎯</span>
+                        <span style="font-size: 18px;">&#127919;</span>
                         <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
                         <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">打开编辑器，把你拍歪的照片扶正试试，废片也能救回来。</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">打开一张你自己的歪照片，按「大旋转 → 小角度 → 裁剪」走一遍，再对比原图。</p>
                 </div>
                 <div>
                     <a href="../../editor.html?lang=zh" class="practice-btn">

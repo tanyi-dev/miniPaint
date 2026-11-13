@@ -3,14 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>手写电子签名背景透明化提取 - Web PSEditor</title>
-    <meta name="description" content="在线学习实战教程：手写电子签名背景透明化提取全攻略：使用免费纯网页轻量级在线图片编辑器工具 Web PSEditor，简单高效、安全不泄露肖像隐私。" />
+    <title>手写签名透明化提取（导出透明 PNG） - Web PSEditor</title>
+    <meta name="description" content="把纸上的签名变成可复用的透明 PNG：去色、提亮、擦除、导出的四步顺序，正片叠底和真透明的区别，以及拍摄环节该怎么避免灰底和断笔。" />
     <link rel="icon" sizes="192x192" href="../../images/favicon.png">
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="canonical" href="https://webpseditor.com/zh/tutorials/transparent-signature-extraction" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/transparent-signature-extraction" />
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/transparent-signature-extraction" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/transparent-signature-extraction" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "手写电子签名背景透明化提取",
+  "description": "把纸上的签名变成可复用的透明 PNG：去色、提亮、擦除、导出的四步顺序，正片叠底和真透明的区别，以及拍摄环节该怎么避免灰底和断笔。",
+  "author": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "datePublished": "2026-11-13",
+  "dateModified": "2026-11-13",
+  "mainEntityOfPage": "https://webpseditor.com/zh/tutorials/transparent-signature-extraction"
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "为什么提取出的签名周围有灰色光晕？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "那是墨水边缘的抗锯齿像素——一半纸一半墨——它们落在容差之外，被橡皮擦漏下了。把功率降到 10 到 12 直接点光晕，或者用小笔刷橡皮擦清。靠调高功率去除光晕会一起吃掉笔画，所以低功率二次点击才是对的做法。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "手机照片带阴影，还能提取吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "能。先用亮度把阴影提成接近纯白，再用魔术橡皮擦点；阴影特别重的地方，改用橡皮擦小笔刷沿笔画把纸刷掉，比跟容差较劲更快。拍的时候尽量平光正拍，这类补救能少一半。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "透明签名怎么插进 Word 或 PDF？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "导出 PNG 后在 Word 或 PDF 编辑器里【插入】→【图片】。因为背景是真的透明，签名会干净地浮在文字行和签名栏上方，不会带出一个白框。"
+      }
+    }
+  ]
+}
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -21,41 +72,43 @@
         .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
         .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
         h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
-        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        h3 { color: #0f172a; font-size: 16px; margin: 20px 0 6px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
         .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
         .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
         .cta-btn:hover { background: var(--primary-hover); }
         .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
         .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
-        .tip-box { background: #fffbeb; border: 1px solid #fef3c7; border-radius: 8px; padding: 14px 18px; color: #92400e; font-size: 14px; margin: 20px 0; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .compare { display: flex; gap: 12px; }
+        .compare figure { flex: 1; margin: 0; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #991b1b; }
+        .mistake-box ul { margin: 8px 0 0; padding-left: 20px; }
+        .mistake-box li { margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 14px; }
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
-        article figure { margin: 18px 0; text-align: center; }
-        article figure img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
-        article figcaption { font-size: 13px; color: var(--text-sub); margin-top: 8px; }
-        .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .tool-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
-        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
-        .tool-table th { background: #f1f5f9; color: #0f172a; }
-        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; }
-        .mistake-box strong { color: #991b1b; }
-        .mistake-box li { color: #7f1d1d; font-size: 14px; margin-bottom: 6px; }
-        .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
-        .faq-item h3 { font-size: 15px; margin: 0 0 6px; color: #0f172a; }
-        .faq-item p { margin: 0; font-size: 14px; color: #334155; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { flex-direction: column; } }
         .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
         .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
         .related a:hover { border-color: var(--primary); }
-        article h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
-        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { grid-template-columns: 1fr; } .related { grid-template-columns: 1fr; } }
+        @media (max-width: 640px) { .related { grid-template-columns: 1fr; } }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header-nav">
             <div style="display: flex; gap: 14px; align-items: center;">
-                <a href="../../index.html" class="back-link">← 网站首页</a>
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
                 <span style="color: #cbd5e1;">|</span>
                 <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
             </div>
@@ -65,94 +118,100 @@
             </div>
         </div>
 
-        <!-- 🔒 隐私信任安全背书 -->
         <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
-            <span>🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
         </div>
 
         <article>
-<h1>实战教程：手写电子签名背景透明化提取全攻略</h1>
+            <h1>手写电子签名背景透明化提取</h1>
             <div class="meta-bar">
-                <span>难度：日常必备</span> • <span>耗时：2 分钟</span> • <span>核心技术：黑白压阶与透明通道</span>
+                <span>难度：极简入门</span> &bull; <span>阅读：9 分钟</span> &bull; <span>更新：2026-11-13</span>
             </div>
 
             <div class="cta-box">
                 <div>
-                    <strong style="color:#1e40af; font-size:16px;">公文合同签署，手机白纸拍照秒变透明签名</strong>
-                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">纯前端本地处理，签名绝不上云，捍卫商务隐私。</div>
+                    <strong style="color:#1e40af; font-size:16px;">签名要复用，就必须是真的透明</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">正片叠底只是看起来透明，导出 PNG 才是真透明</div>
                 </div>
-                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 提取签名 →</a>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 提取签名 &rarr;</a>
             </div>
 
-            <p>在远程办公与电子化办公普及的今天，PDF 合同、发票报销单及电子证明经常需要附上个人真实手写签名。很多朋友用手机拍下白纸上的签名后，往往因为光线不均、纸张泛黄、带有阴影而无法直接贴入文档。本篇指南将教你使用 <strong>Web PSEditor</strong> 快速将拍照签名转为纯净、无阴影的透明背景 PNG 图章。</p>
+            <p>纸上的签名，本质上是「一张照片的照片」：白纸其实不是白的，某个角有镜头阴影，室内灯还给它加了一层黄。直接贴到合同上，一眼就是一块灰底加一道字。修它是四步，顺序决定成败——每一步都在让下一步更省事。</p>
 
+            <h2>四步走完，一张干净的透明签名</h2>
 
-            <div class="compare">
-                <figure>
-                    <img src="../../images/tutorials/signature-before.jpg" alt="白纸上拍摄的手写签名照片" loading="lazy">
-                    <figcaption>处理前：白纸上的手机拍摄签名</figcaption>
-                </figure>
-                <figure>
-                    <img src="../../images/tutorials/signature-after.jpg" alt="提取完成的透明背景签名，以棋盘格表示透明区域" loading="lazy">
-                    <figcaption>处理后：纯净签名，背景完全透明</figcaption>
-                </figure>
+            <div class="step-card">
+                <div class="step-title">第一步：导入，裁紧</div>
+                <p>把照片拖进编辑器，用裁剪工具裁到只剩签名，四周留 10 到 20 像素就够。裁紧不只是好看：后面魔术橡皮擦要清的纸面更少，原图边缘那些不均匀的光也一并扔掉了。</p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">第一步：导入签名照片并裁剪有效区域</div>
-                <p>
-                    在白纸上用黑色签字笔手写签名，手机正面平拍后，将照片直接拖入 <strong>Web PSEditor</strong> 画布。<br>
-                    使用左侧工具栏的 <strong>裁剪工具（Crop）</strong>，框选出签名主体区域并按回车确认，去除四周不必要的多余桌面和阴影边缘。
-                </p>
+                <div class="step-title">第二步：去色，把「偏色问题」变成「亮度问题」</div>
+                <p>点 <strong>【特效】→【常见滤镜】→【灰度】</strong>，百分比拉到 100。黄调、蓝调一次清掉，剩下的只是纸不够白——这比修偏色容易得多。如果墨水是蓝色的、想留一点冷调，就用 80 而不是 100，笔画会略带青，纸面照样褪色。</p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">第二步：黑白化与亮暗对比压阶（提白底、压黑字）</div>
-                <p>
-                    手机拍出的白纸通常呈灰色或带有渐变色，必须先让纸张变成纯白（#FFFFFF）：<br>
-                    1. 点击顶部菜单 <strong>【图片】 -> 【颜色校正】 -> 【黑白（Grayscale）】</strong>，去除纸张泛黄色差；<br>
-                    2. 打开 <strong>【图片】 -> 【颜色校正】 -> 【亮度/对比度】</strong> 或 <strong>【色阶/曲线】</strong>：适当拉高亮度和对比度，直到<strong>字迹变得极其黝黑纯粹，背景白纸完全变为纯白色</strong>。
-                </p>
+                <div class="step-title">第三步：把纸推到白，保住笔画</div>
+                <p>打开 <strong>【图片】→【颜色校正】</strong>。先提<strong>亮度</strong>让纸接近纯白，再加<strong>对比</strong>让笔画变深、纸面压平。做的时候盯着笔画的收尾——那是墨最薄的地方，对比一过就先断。</p>
+                <p>三个 <strong>红 / 绿 / 蓝</strong> 通道在这里是精准工具。灰度之后纸面还是偏暖，就把红降几个点，笔画的黑度不受影响。<strong>【图片】→【自动调整颜色】</strong> 是快速替代方案，但它的白点是固定的，淡签名很容易被它冲掉，接受之前放到 200% 看一眼。</p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">第三步：一键提取透明通道并导出 PNG</div>
-                <p>
-                    要将纯白背景转为透明，有两种极其高效的方法：<br>
-                    <strong>方法 A（魔术橡皮擦透明化）：</strong>选择左侧 <strong>魔术橡皮擦工具（Magic Eraser）</strong>，顶栏 <strong>功率（Power）</strong> 设为 20~40，直接点击白纸背景，白底瞬间消失并呈现棋盘状透明格；对残留的边角补点几笔即可全部清除。<br>
-                    <strong>方法 B（正片叠底无损使用）：</strong>如果签名是直接嵌入到 Word 或具备白底的 PDF 中，直接在图层混合模式中选择 <strong>正片叠底（Multiply）</strong>，白色会被算法自动忽略成透明！<br>
-                    完成后点击 <strong>【文件】 -> 【导出】 -> 【PNG 格式】</strong>，即可得到通用的透明电子签名图片。
-                </p>
-                <figure>
-                    <img src="../../images/tutorials/signature-editor-ui.jpg" alt="Web PSEditor 中使用魔术橡皮擦提取手写签名" loading="lazy">
-                    <figcaption>魔术橡皮擦（功率 30）点击几下即可揭走整张白纸背景。</figcaption>
-                </figure>
+                <div class="step-title">第四步：擦掉纸，导出 PNG</div>
+                <p>选<strong>魔术橡皮擦</strong>，<strong>功率</strong>设 20 到 40，点一块干净的纸面。容差内的像素全变透明，棋盘格透出来就是成功。剩下的角落、有阴影的边，一处一处补点，直到只剩笔画。</p>
+                <p>然后 <strong>【文件】→【导出】</strong>，选 <strong>PNG</strong>。（顺便记住：<strong>【文件】→【另存为】存的是工程文件，不是图片</strong>。）JPG 没有透明通道，导出会把背景填回白色，前面全白做。</p>
             </div>
 
-            <h2>魔术橡皮擦 vs 正片叠底：该用哪种？</h2>
+            <h2>擦除还是混合：两条路的区别</h2>
             <table class="tool-table">
-                <tr><th>方法</th><th>适用场景</th><th>原理与特点</th></tr>
-                <tr><td><strong>魔术橡皮擦 + PNG</strong></td><td>制作可复用的签名图章，用于 Word、PDF、电子签批平台</td><td>永久删除纸张背景，导出真正的透明 PNG，一劳永逸</td></tr>
-                <tr><td><strong>正片叠底混合模式</strong></td><td>在编辑器内把拍照签名直接叠放到文档图上</td><td>非破坏性 —— 白色像素只是不再显示，不删除任何像素</td></tr>
-                <tr><td><strong>橡皮擦（手动）</strong></td><td>纸纹复杂、阴影严重的签名照片</td><td>小笔刷沿笔画涂掉纸张，色彩识别失效时的兜底方案</td></tr>
+                <tr><th>做法</th><th>适合</th><th>它实际做了什么</th></tr>
+                <tr><td><strong>魔术橡皮擦 + PNG</strong></td><td>要复用到 Word、PDF、电子签平台</td><td>真的删掉纸的像素，写入透明通道，文件到哪都能用</td></tr>
+                <tr><td><strong>正片叠底</strong></td><td>只在这个编辑器里往文档上叠签名</td><td>白色被下层的颜色乘掉，看起来像透明，但一个像素都没删，文件本身不透明</td></tr>
+                <tr><td><strong>橡皮擦（手动）</strong></td><td>横线纸、有阴影的纸，颜色匹配失灵时</td><td>小笔刷在 200% 下沿笔画把纸刷成透明</td></tr>
             </table>
+            <p>这个区别只有把文件拿出去用的时候才会显形。用正片叠底叠出来的签名，导出 JPG 放在那份文档上看着完美，换到任何别的背景就是一个白方块。签名要复用，就必须擦掉再导 PNG。</p>
+
+            <h2>笔画干净与否，一半在拍摄</h2>
+            <p>大多数糟糕的提取，问题出在按快门那一刻。斜着拍会让笔画粗细不均——离镜头近的一端更粗；单侧打光会在纸上留下一道渐变，没有任何一个容差值能同时吃掉亮部和暗部。平光、正对着拍，后面整个流程就只剩两下点击。</p>
+            <p>另一个问题是加工过度。每提一次对比，纸和墨的差距就拉开一点，过了某个点，细的起笔会断成一串点。如果签名需要看起来像墨水而不是矢量图，那么在纸变白的那一刻就停手，接受一点浅灰底——魔术橡皮擦能清掉浅灰，但接不回断掉的笔画。</p>
 
             <div class="mistake-box">
-                <strong>⚠️ 常见错误提醒</strong>
+                <strong>⚠️ 五个常见错误</strong>
                 <ul>
-                    <li><strong>斜角度拍摄</strong> —— 透视变形会导致笔画粗细不均。务必垂直俯拍并保证光线均匀。</li>
-                    <li><strong>功率（Power）过低</strong> —— 灰色纸面上会残留半透明"鬼影"。把功率提到 30~40 再补点残留区域。</li>
-                    <li><strong>对比度拉过头</strong> —— 笔画细尾容易断裂丢失。擦除前先放大到 200% 检查笔画完整性。</li>
-                    <li><strong>存成 JPG</strong> —— 透明通道会被丢弃、背景变白。请务必导出 PNG。</li>
+                    <li><strong>斜着拍照</strong>——笔画粗细不均，加上一道颜色匹配吃不掉的打光渐变。</li>
+                    <li><strong>灰纸上的功率给太低</strong>——留下半透明的纸影。提到 30 到 40 再点一次。</li>
+                    <li><strong>对比推过头</strong>——细的收笔断成点。先 200% 看一眼再擦。</li>
+                    <li><strong>导出成 JPG</strong>——透明被丢弃。永远 PNG。</li>
+                    <li><strong>找「调整」或「色阶」菜单</strong>——这里没有。灰度在【特效】→【常见滤镜】下，亮度、对比和三个通道在【图片】→【颜色校正】里。</li>
                 </ul>
             </div>
 
+
+            <h2>横线纸、带章、蓝色墨水怎么办</h2>
+            <p>三种常见变体，处理方式略有不同：</p>
+            <ul>
+                <li><strong>横线纸</strong>——灰度之后线条和墨一样是深色，魔术橡皮擦分不开。直接用橡皮擦小笔刷沿笔画刷纸，或者先用矩形选择把签名所在的横条裁出来，避开大部分线。</li>
+                <li><strong>带公章的签名</strong>——章是红色的，灰度会把它变成灰块。如果只要签名，在灰度之前先用 <strong>【图片】→【颜色校正】</strong> 把红通道压下去，或者接受章一起保留；要单独取签名，就等灰度后用橡皮擦手工清。</li>
+                <li><strong>蓝色墨水</strong>——灰度百分比用 80 而不是 100，笔画会留一点冷调，看起来更像签字笔而不是打印体。真要保留蓝色，就跳过灰度，直接在颜色校正里把纸提白。</li>
+            </ul>
+            <p>还有一个尺寸上的实用建议：导出的 PNG 按你<strong>预期最大的用途</strong>做，别做小了再放大。透明 PNG 缩小很干净，放大超过 150% 边缘就开始软。留着分层工程，需要另一个尺寸时重新导出，而不是把已导出的文件拉大。</p>
+
             <h2>常见问题 FAQ</h2>
-            <div class="faq-item"><h3>为什么提取出的签名笔画周围有灰色光晕？</h3><p>纸张偏灰且功率值偏低所致。把功率（Power）调到 30~40，再点击光晕区域即可，棋盘格透出来就说明清除干净了。</p></div>
-            <div class="faq-item"><h3>手机照片带阴影，还能提取吗？</h3><p>可以。先用亮度/对比度把阴影压成接近纯白，再用魔术橡皮擦点击；阴影严重时改用橡皮擦小笔刷沿笔画逐段涂掉纸张更稳妥。</p></div>
-            <div class="faq-item"><h3>透明签名怎么插入 Word 或 PDF？</h3><p>导出 PNG 后，在 Word 或 PDF 编辑器中【插入】 -> 【图片】即可。背景透明，签名会干净地浮在文字行和签名栏上方。</p></div>
-            <div class="faq-item"><h3>签名图片会被上传到服务器吗？</h3><p>不会。Web PSEditor 100% 纯本地运行 —— 签名始终在浏览器内存中处理，即使断网也能完整操作，绝不外传。</p></div>
-            <div class="faq-item"><h3>可以把签名改成蓝色钢笔等其它颜色吗？</h3><p>可以。提取透明通道后，在签名图层上方新建颜色图层并创建剪贴蒙版（或锁定透明像素直接涂抹），笔画颜色即被替换，透明背景保持不变。</p></div>
+            <div class="faq-item">
+                <h3>为什么提取出的签名周围有灰色光晕？</h3>
+                <p>那是墨水边缘的抗锯齿像素——一半纸一半墨——它们落在容差之外，被橡皮擦漏下了。把功率降到 10 到 12 直接点光晕，或者用小笔刷橡皮擦清。靠调高功率去除光晕会一起吃掉笔画，所以低功率二次点击才是对的做法。</p>
+            </div>
+            <div class="faq-item">
+                <h3>手机照片带阴影，还能提取吗？</h3>
+                <p>能。先用亮度把阴影提成接近纯白，再用魔术橡皮擦点；阴影特别重的地方，改用橡皮擦小笔刷沿笔画把纸刷掉，比跟容差较劲更快。拍的时候尽量平光正拍，这类补救能少一半。</p>
+            </div>
+            <div class="faq-item">
+                <h3>透明签名怎么插进 Word 或 PDF？</h3>
+                <p>导出 PNG 后在 Word 或 PDF 编辑器里【插入】→【图片】。因为背景是真的透明，签名会干净地浮在文字行和签名栏上方，不会带出一个白框。</p>
+            </div>
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
 
             <h2>相关教程推荐</h2>
             <div class="related">
@@ -162,44 +221,23 @@
                 <a href="../tutorials/image-resize-and-compression">调整尺寸与压缩体积，通过上传限制</a>
             </div>
 
-
-            <div class="tip-box">
-                <strong>💡 为什么处理签名时推荐 Web PSEditor？</strong><br>
-                电子签名属于**高度敏感的个人身份凭证**。普通在线工具会将图片上传至云端服务器，存在被爬取甚至滥用的潜在风险。Web PSEditor 全流程运行在您的本地浏览器沙箱中，断网也可完整操作，杜绝任何签名泄露隐患！
-            </div>
-
-
-            <!-- 🎯 实战练习与安全导流 CTA 卡片 -->
             <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                        <span style="font-size: 18px;">🎯</span>
-                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手提取电子签名</strong>
+                        <span style="font-size: 18px;">&#127919;</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
                         <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">无需安装软件，立即在浏览器中制作属于你的无水印透明电子签名图章，100% 隐私安全。</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">提取一个签名，放到深色背景上查光晕，再贴到一份 PDF 里看效果。</p>
                 </div>
                 <div>
                     <a href="../../editor.html?lang=zh" class="practice-btn">
-                        <span>打开 Web PSEditor 开始制作</span>
+                        <span>在 Web PSEditor 中一键尝试此功能</span>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
             </div>
         </article>
     </div>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {"@type": "Question", "name": "为什么提取出的签名笔画周围有灰色光晕？", "acceptedAnswer": {"@type": "Answer", "text": "纸张偏灰且功率值偏低所致。把功率（Power）调到 30~40，再点击光晕区域即可清除。"}},
-        {"@type": "Question", "name": "手机照片带阴影，还能提取吗？", "acceptedAnswer": {"@type": "Answer", "text": "可以。先用亮度/对比度把阴影压成接近纯白，再用魔术橡皮擦点击；阴影严重时改用橡皮擦小笔刷沿笔画逐段涂掉纸张。"}},
-        {"@type": "Question", "name": "透明签名怎么插入 Word 或 PDF？", "acceptedAnswer": {"@type": "Answer", "text": "导出 PNG 后在 Word 或 PDF 编辑器中【插入】->【图片】，透明背景让签名干净地浮在文字与签名栏上方。"}},
-        {"@type": "Question", "name": "签名图片会被上传到服务器吗？", "acceptedAnswer": {"@type": "Answer", "text": "不会。Web PSEditor 100% 纯本地运行，签名始终在浏览器内存中处理，断网也能完整操作，绝不外传。"}},
-        {"@type": "Question", "name": "可以把签名改成蓝色钢笔等其它颜色吗？", "acceptedAnswer": {"@type": "Answer", "text": "可以。提取透明通道后，在签名图层上方新建颜色图层并创建剪贴蒙版，笔画颜色即被替换，透明背景保持不变。"}}
-      ]
-    }
-    </script>
 </body>
 </html>

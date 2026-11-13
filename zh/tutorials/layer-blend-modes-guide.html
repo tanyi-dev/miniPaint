@@ -3,14 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图层系统与混合模式（合成双重曝光） - Web PSEditor</title>
-    <meta name="description" content="在线学习进阶实战：图层系统与混合模式（合成双重曝光）：使用免费纯网页轻量级在线图片编辑器工具 Web PSEditor，简单高效、安全不泄露肖像隐私。" />
+    <title>图层合成与混合模式指南（正片叠底/滤色/叠加） - Web PSEditor</title>
+    <meta name="description" content="混合模式下拉框里混着两套规则：颜色运算和 canvas 合成操作。讲清正片叠底为什么不是透明、什么时候该调不透明度、以及五个高频坑。" />
     <link rel="icon" sizes="192x192" href="../../images/favicon.png">
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="canonical" href="https://webpseditor.com/zh/tutorials/layer-blend-modes-guide" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/layer-blend-modes-guide" />
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/layer-blend-modes-guide" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/layer-blend-modes-guide" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "图层系统与混合模式实战",
+  "description": "混合模式下拉框里混着两套规则：颜色运算和 canvas 合成操作。讲清正片叠底为什么不是透明、什么时候该调不透明度、以及五个高频坑。",
+  "author": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "datePublished": "2026-11-13",
+  "dateModified": "2026-11-13",
+  "mainEntityOfPage": "https://webpseditor.com/zh/tutorials/layer-blend-modes-guide"
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "混合模式在哪里设置？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "选中图层，点【图层】→【合成】。面板里能逐个预览画布效果，确认后模式成为该图层的属性，之后随时可以改或关掉。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "选了正片叠底后纹理怎么「消失」了？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "正片叠底只能压暗。低对比的纹理叠上去，把照片整体压平，看不出纹理。先把纹理自己的对比提起来（【图片】→【颜色校正】），或者换成叠加——它保留高光。扫描件常见的问题是纸白偏灰而不是纯白，先提一下白点再混合就好很多。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "混合模式能和滤镜叠加使用吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "能，顺序是先修底子再加风格：先用【图片】→【颜色校正】把曝光和色偏做好，再叠纹理或滤镜。绿色偏色的底子加任何复古滤镜，得到的就是绿色偏色的复古照，没有哪个预设能救回来。"
+      }
+    }
+  ]
+}
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -21,40 +72,43 @@
         .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
         .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
         h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
-        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        h3 { color: #0f172a; font-size: 16px; margin: 20px 0 6px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
         .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
         .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
         .cta-btn:hover { background: var(--primary-hover); }
         .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
         .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .compare { display: flex; gap: 12px; }
+        .compare figure { flex: 1; margin: 0; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #991b1b; }
+        .mistake-box ul { margin: 8px 0 0; padding-left: 20px; }
+        .mistake-box li { margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 14px; }
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
-        article figure { margin: 18px 0; text-align: center; }
-        article figure img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
-        article figcaption { font-size: 13px; color: var(--text-sub); margin-top: 8px; }
-        .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .tool-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
-        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
-        .tool-table th { background: #f1f5f9; color: #0f172a; }
-        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; }
-        .mistake-box strong { color: #991b1b; }
-        .mistake-box li { color: #7f1d1d; font-size: 14px; margin-bottom: 6px; }
-        .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
-        .faq-item h3 { font-size: 15px; margin: 0 0 6px; color: #0f172a; }
-        .faq-item p { margin: 0; font-size: 14px; color: #334155; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { flex-direction: column; } }
         .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
         .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
         .related a:hover { border-color: var(--primary); }
-        article h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
-        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { grid-template-columns: 1fr; } .related { grid-template-columns: 1fr; } }
+        @media (max-width: 640px) { .related { grid-template-columns: 1fr; } }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header-nav">
             <div style="display: flex; gap: 14px; align-items: center;">
-                <a href="../../index.html" class="back-link">← 网站首页</a>
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
                 <span style="color: #cbd5e1;">|</span>
                 <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
             </div>
@@ -64,84 +118,90 @@
             </div>
         </div>
 
-        <!-- 🔒 隐私信任安全背书 -->
         <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
-            <span>🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
         </div>
 
         <article>
-<h1>进阶实战：图层系统与混合模式（合成双重曝光）</h1>
+            <h1>图层系统与混合模式实战</h1>
             <div class="meta-bar">
-                <span>难度：进阶修图</span> • <span>耗时：5 分钟</span> • <span>核心理念：非破坏性编辑</span>
+                <span>难度：进阶</span> &bull; <span>阅读：10 分钟</span> &bull; <span>更新：2026-11-13</span>
             </div>
 
             <div class="cta-box">
                 <div>
-                    <strong style="color:#1e40af; font-size:16px;">解锁 专业修图软件 级图层魔法</strong>
-                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">纯网页端完整支持独立图层顺序、不透明度与混合模式。</div>
+                    <strong style="color:#1e40af; font-size:16px;">下拉框里其实有两套规则</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">颜色运算和合成操作混在一起，选错就得到透明矩形</div>
                 </div>
-                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 开启创作 →</a>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 试混合模式 &rarr;</a>
             </div>
 
-            <p>专业图片编辑与普通简易画图工具的核心区别，就在于<strong>图层（Layers）系统</strong>。在 <strong>Web PSEditor</strong> 中，每一个文字、贴图、背景都可以是独立的图层，随时可以上下拖动排序、调节半透明度，或通过混合模式产生艺术级视觉效果。</p>
+            <p>混合模式回答的只有一个问题：两层叠在一起时，哪个像素说话算数。清单里的每一个模式，都是一条「上层颜色怎么和下层结合」的规则，真正好用的不超过五种。让人迷惑的不是选项数量，而是这个下拉框里混着两套完全不同的东西。</p>
 
+            <h2>两大家族，挤在同一个下拉框里</h2>
+            <p>清单里大约一半是<strong>颜色运算</strong>：正片叠底、滤色、叠加、变暗、变亮、柔光、强光、差值、排除、色相、饱和度、颜色、明度。它们把两层的颜色按公式结合，两层都还看得见。</p>
+            <p>另一半是<strong>合成操作</strong>，来自 canvas 本身的规则：source-over、destination-out、source-atop、destination-in、xor 之类。它们根本不混色，只决定「这个像素画不画上去」。destination-out 放在上层，等于在它下面所有东西上打一个洞——用它从一叠图层里切形状，意外地好用。把这两族搞混，就会变成：在清单里滚来滚去，挑一个听起来对的，得到一个透明矩形。</p>
 
-            <div class="compare">
-                <figure>
-                    <img src="../../images/tutorials/blend-before.jpg" alt="水彩纹理图层以正常模式叠放在商品照片上" loading="lazy">
-                    <figcaption>处理前：纹理图层以正常（Source-Over）方式堆叠</figcaption>
-                </figure>
-                <figure>
-                    <img src="../../images/tutorials/blend-after.jpg" alt="同样的两个图层改用正片叠底后，白色区域消失纹理融入照片" loading="lazy">
-                    <figcaption>处理后：正片叠底 —— 白色像素自动隐身，纹理与照片融合</figcaption>
-                </figure>
-            </div>
-
-            <div class="step-card">
-                <div class="step-title">第一步：堆叠两个图层</div>
-                <p>打开底图后，把第二张图片（纹理、光斑、线稿等）直接拖入画布 —— 它会自动作为新图层置顶。右侧图层面板可以清楚看到两层结构。</p>
-            </div>
-
-            <div class="step-card">
-                <div class="step-title">第二步：打开混合模式（合成）对话框</div>
-                <p>选中顶层纹理图层，点击顶部菜单 <strong>【图层 (Layer)】 -> 【合成 (Composition)】</strong>，弹窗内就是完整的混合模式下拉列表，选中的同时画布会实时预览效果。</p>
-                <figure>
-                    <img src="../../images/tutorials/blend-editor-ui.jpg" alt="Web PSEditor 图层合成对话框中选择正片叠底" loading="lazy">
-                    <figcaption>图层 → 合成：选择混合模式，画布实时预览。</figcaption>
-                </figure>
-            </div>
-
-            <div class="step-card">
-                <div class="step-title">第三步：选择模式并确认</div>
-                <p>选 <strong>正片叠底（multiply）</strong> 过滤白色、<strong>滤色（screen）</strong> 过滤黑色，或 <strong>叠加（overlay）</strong> 增强对比，点击确定提交。底层像素完全不受破坏，随时可以换模式重试。</p>
-            </div>
-
-            <h2>最值得掌握的五个混合模式</h2>
+            <h2>值得背下来的五个</h2>
             <table class="tool-table">
-                <tr><th>模式</th><th>效果原理</th><th>经典用途</th></tr>
-                <tr><td><strong>正片叠底 Multiply</strong></td><td>过滤纯白、保留暗部</td><td>白底签名、线稿、草图免抠图融入背景</td></tr>
-                <tr><td><strong>滤色 Screen</strong></td><td>过滤纯黑、保留亮部</td><td>黑底星光、光斑、烟雾、火焰素材合成</td></tr>
-                <tr><td><strong>叠加 Overlay</strong></td><td>增强对比、光影混合</td><td>电影感纹理、复古纸张、浓烈色调</td></tr>
-                <tr><td><strong>柔光 Soft Light</strong></td><td>叠加的柔和版</td><td>轻量复古色调、不伤皮肤的质感叠加</td></tr>
-                <tr><td><strong>差值/排除 Difference / Exclusion</strong></td><td>重叠区域反色</td><td>迷幻海报、两张照片对位校准</td></tr>
+                <tr><th>模式</th><th>它做什么</th><th>典型用法</th></tr>
+                <tr><td><strong>正片叠底</strong></td><td>颜色相乘，白色消失，暗部保留</td><td>签名、线稿、手绘叠在文档上，不用擦白底</td></tr>
+                <tr><td><strong>滤色</strong></td><td>正片叠底的反向：黑色消失，亮部叠加</td><td>黑底素材上的火花、镜头光、烟雾、散景</td></tr>
+                <tr><td><strong>叠加</strong></td><td>暗部走正片叠底，亮部走滤色</td><td>需要「咬」进画面但不想压平中间调的纹理</td></tr>
+                <tr><td><strong>柔光</strong></td><td>更温和的叠加</td><td>暖色调、人像上的纸纹，力度轻</td></tr>
+                <tr><td><strong>差值</strong></td><td>两层相减，重叠处反相</td><td>对比两个版本是否对齐</td></tr>
             </table>
 
+            <div class="step-card">
+                <div class="step-title">第一步：叠出两层</div>
+                <p>打开底图，再把第二张图——纹理、漏光、扫描的手绘——拖到画布上。它落在最上面成为新图层，右侧面板会把两层都列出来。顺序比多数人以为的更重要：模式是拿<strong>下面那层</strong>当底，所以把图层上下挪一下，结果就变了，参数一个都没动。</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">第二步：打开合成面板</div>
+                <p>选中上层，点 <strong>【图层】→【合成】</strong>。面板列出所有模式，选中时画布会实时预览，可以逐个比对再决定，不用先确认再看结果。</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">第三步：选一个，确认</div>
+                <p>想让白色消失用正片叠底，想让黑色消失用滤色，想加对比用叠加。确认之后两层仍然是分开的——模式是<strong>图层的属性</strong>，不是一次性的像素操作，随时能改回来或者整个关掉。</p>
+            </div>
+
+            <h2>正片叠底不是透明</h2>
+            <p>最常见的误解：把白底签名用正片叠底压在文档上，白色不见了，看起来就像透明。其实不是。白色像素还在，只是被下面那层乘掉了——任何颜色乘上自己的底，结果还是底，白色刚好是那个「不留痕迹」的颜色。</p>
+            <p>这件事在文件离开这叠图层之后就要算账。导出 JPG，压平的结果没问题；可一旦把这张图放到深色背景上，或者拿去印刷，白色就会作为一块浅底回来，因为下面那层已经不在了。真要透明，先把背景抠掉、导出 PNG——正片叠底是合成的捷径，不是透明通道的替代品。</p>
+
+            <h2>什么时候该调不透明度，而不是换模式</h2>
+            <p>模式是一条曲线，不是一个力度旋钮。正片叠底压得太重，解决办法是图层的<strong>不透明度</strong>，不是换一个模式：60% 到 80% 既能留住纹理，又不会糊成一片泥。滤色叠漏光、叠加叠颗粒，同理。靠换模式去「修」强度，最后得到的是一个两头都不像的效果。</p>
+            <p>图层顺序和不透明度是一起作用的。纹理放在照片下面等于什么都没做；同一张纹理放到上面、40% 不透明度，就变成了颗粒。改任何参数之前，先确认选中了哪一层——合成面板只作用于高亮的那层，把正片叠底加到照片本身（底下没东西可乘），整张图只会变暗，看起来像曝光失误。</p>
+
             <div class="mistake-box">
-                <strong>⚠️ 常见错误提醒</strong>
+                <strong>⚠️ 导出时才发现的五个坑</strong>
                 <ul>
-                    <li><strong>选错图层就调模式</strong> —— 混合模式只作用于<strong>当前选中</strong>的图层，打开合成对话框前先确认右侧面板中高亮的是目标图层。</li>
-                    <li><strong>效果太浓却只会换模式</strong> —— 正片叠底过重时，直接下调图层<strong>不透明度（Opacity）</strong>到 60~80% 更细腻。</li>
-                    <li><strong>过早合并图层</strong> —— 合并后混合模式会被"焊死"。导出成图前请保持图层独立。</li>
-                    <li><strong>用 JPG 素材做叠加</strong> —— JPG 压缩在黑白交界处的光晕叠加后会显形，叠加素材请优先用 PNG。</li>
+                    <li><strong>给错了图层</strong>——模式作用在选中层，以它下面那层为底。先看清右侧面板的高亮。</li>
+                    <li><strong>过早压平</strong>——一旦合并，模式就焊进像素了。导出定稿之前别合。</li>
+                    <li><strong>用 JPEG 做叠加素材</strong>——黑白交界处的压缩光晕混完才显形。素材用 PNG。</li>
+                    <li><strong>指望正片叠底做出透明</strong>——它只在当前底上隐掉白色。需要 alpha 就用真抠图导 PNG。</li>
+                    <li><strong>误选了合成操作</strong>——destination-out 这类不混色，它直接擦。确认之前先把清单读一遍。</li>
                 </ul>
             </div>
 
             <h2>常见问题 FAQ</h2>
-            <div class="faq-item"><h3>Web PSEditor 的混合模式在哪里设置？</h3><p>选中图层后，点击顶部菜单 <strong>【图层】 -> 【合成】</strong>，下拉列表包含正片叠底、滤色、叠加等全部画布混合模式。</p></div>
-            <div class="faq-item"><h3>选了正片叠底后纹理怎么“消失”了？</h3><p>正片叠底只保留较暗像素。浅色背景上的浅色纹理叠上去几乎所剩无几 —— 深色背景改用滤色，想均衡对比请用叠加。</p></div>
-            <div class="faq-item"><h3>之后还能随时关闭或更换效果吗？</h3><p>可以。混合模式是非破坏性的，随时重新打开【图层】->【合成】更换，或点图层前的眼睛图标隐藏，即可对比前后效果。</p></div>
-            <div class="faq-item"><h3>混合模式能和滤镜叠加使用吗？</h3><p>可以，而且配合极佳：给渐变颜色层用叠加模式，再给底层照片加滤镜，两者都是非破坏性叠加。</p></div>
-            <div class="faq-item"><h3>图层合成会把图片上传到服务器吗？</h3><p>不会。图层合成 100% 在浏览器内完成，任何数据都不会离开你的设备。</p></div>
+            <div class="faq-item">
+                <h3>混合模式在哪里设置？</h3>
+                <p>选中图层，点【图层】→【合成】。面板里能逐个预览画布效果，确认后模式成为该图层的属性，之后随时可以改或关掉。</p>
+            </div>
+            <div class="faq-item">
+                <h3>选了正片叠底后纹理怎么「消失」了？</h3>
+                <p>正片叠底只能压暗。低对比的纹理叠上去，把照片整体压平，看不出纹理。先把纹理自己的对比提起来（【图片】→【颜色校正】），或者换成叠加——它保留高光。扫描件常见的问题是纸白偏灰而不是纯白，先提一下白点再混合就好很多。</p>
+            </div>
+            <div class="faq-item">
+                <h3>混合模式能和滤镜叠加使用吗？</h3>
+                <p>能，顺序是先修底子再加风格：先用【图片】→【颜色校正】把曝光和色偏做好，再叠纹理或滤镜。绿色偏色的底子加任何复古滤镜，得到的就是绿色偏色的复古照，没有哪个预设能救回来。</p>
+            </div>
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
 
             <h2>相关教程推荐</h2>
             <div class="related">
@@ -151,16 +211,14 @@
                 <a href="../tutorials/photo-color-correction">颜色校正与白平衡修复</a>
             </div>
 
-
-            <!-- 🎯 实战练习与安全导流 CTA 卡片 -->
             <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                        <span style="font-size: 18px;">🎯</span>
+                        <span style="font-size: 18px;">&#127919;</span>
                         <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
                         <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">无需安装软件，立即在浏览器中应用本篇所学技巧，纯本地处理无隐私泄露风险。</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">用一张黑底素材试滤色、一张白底素材试正片叠底，再各降到 60% 不透明度对比。</p>
                 </div>
                 <div>
                     <a href="../../editor.html?lang=zh" class="practice-btn">
@@ -171,18 +229,5 @@
             </div>
         </article>
     </div>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {"@type": "Question", "name": "Web PSEditor 的混合模式在哪里设置？", "acceptedAnswer": {"@type": "Answer", "text": "选中图层后，点击顶部菜单【图层】->【合成】，下拉列表包含正片叠底、滤色、叠加等全部画布混合模式。"}},
-        {"@type": "Question", "name": "选了正片叠底后纹理怎么“消失”了？", "acceptedAnswer": {"@type": "Answer", "text": "正片叠底只保留较暗像素。浅色背景上的浅色纹理叠上去几乎所剩无几，深色背景改用滤色，想均衡对比请用叠加。"}},
-        {"@type": "Question", "name": "之后还能随时关闭或更换效果吗？", "acceptedAnswer": {"@type": "Answer", "text": "可以。混合模式是非破坏性的，随时重新打开【图层】->【合成】更换，或点图层前的眼睛图标隐藏对比。"}},
-        {"@type": "Question", "name": "混合模式能和滤镜叠加使用吗？", "acceptedAnswer": {"@type": "Answer", "text": "可以，给渐变颜色层用叠加模式，再给底层照片加滤镜，两者都是非破坏性叠加。"}},
-        {"@type": "Question", "name": "图层合成会把图片上传到服务器吗？", "acceptedAnswer": {"@type": "Answer", "text": "不会。图层合成 100% 在浏览器内完成，任何数据都不会离开你的设备。"}}
-      ]
-    }
-    </script>
 </body>
 </html>

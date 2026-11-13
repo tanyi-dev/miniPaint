@@ -3,14 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>在线给敏感信息打马赛克与高斯模糊 - Web PSEditor</title>
-    <meta name="description" content="在线学习实战教程：如何在线为敏感信息打马赛克与高斯模糊：使用免费纯网页轻量级在线图片编辑器工具 Web PSEditor，简单高效、安全不泄露肖像隐私。" />
+    <title>马赛克与高斯模糊打码：敏感信息脱敏 - Web PSEditor</title>
+    <meta name="description" content="打码的目标是「交出去的文件读不出来」，不是屏幕上看不清。讲清模糊为什么可被反推、四种手段怎么选、以及为什么多数失败是框得太紧而不是糊得不够。" />
     <link rel="icon" sizes="192x192" href="../../images/favicon.png">
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="canonical" href="https://webpseditor.com/zh/tutorials/mosaic-and-blur-redaction" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/mosaic-and-blur-redaction" />
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/mosaic-and-blur-redaction" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/mosaic-and-blur-redaction" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "为敏感信息打马赛克与高斯模糊",
+  "description": "打码的目标是「交出去的文件读不出来」，不是屏幕上看不清。讲清模糊为什么可被反推、四种手段怎么选、以及为什么多数失败是框得太紧而不是糊得不够。",
+  "author": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "datePublished": "2026-11-13",
+  "dateModified": "2026-11-13",
+  "mainEntityOfPage": "https://webpseditor.com/zh/tutorials/mosaic-and-blur-redaction"
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "马赛克和高斯模糊能被还原吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "严格说不叫还原，细节确实没了。但对于结构强的内容——印刷文字、人脸、签名的运笔——已发表的研究显示能反推出相当一部分信息。马赛克在小字上更弱，因为块网格保留了字母的形状。判断标准很简单：人能不能靠上下文猜出这些字符。能，软件也能。密码、证件号、签名请用实心块。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "直接画一个黑色块是不是更安全？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "是，实心块就是最安全的一种。它不携带任何可重建的信息，经过截图、二次压缩也不会「变形泄漏」。马赛克和模糊的意义只在于好看一点、不那么突兀，安全性上永远不如色块。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "一张图里有多处敏感信息，要重复操作吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "要，每处单独处理。但别每处都复制一层——更省事的做法是新建一个图层，用形状工具画多个色块盖住所有敏感区，一次导出。这样原始画面始终没被改动过。"
+      }
+    }
+  ]
+}
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -21,36 +72,43 @@
         .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
         .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
         h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
-        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        h3 { color: #0f172a; font-size: 16px; margin: 20px 0 6px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
         .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
         .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
         .cta-btn:hover { background: var(--primary-hover); }
         .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
         .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .compare { display: flex; gap: 12px; }
+        .compare figure { flex: 1; margin: 0; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #991b1b; }
+        .mistake-box ul { margin: 8px 0 0; padding-left: 20px; }
+        .mistake-box li { margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 14px; }
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
-        article figure { margin: 18px 0; text-align: center; }
-        article figure img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
-        article figcaption { font-size: 13px; color: var(--text-sub); margin-top: 8px; }
-        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; }
-        .mistake-box strong { color: #991b1b; }
-        .mistake-box li { color: #7f1d1d; font-size: 14px; margin-bottom: 6px; }
-        .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
-        .faq-item h3 { font-size: 15px; margin: 0 0 6px; color: #0f172a; }
-        .faq-item p { margin: 0; font-size: 14px; color: #334155; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { flex-direction: column; } }
         .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
         .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
         .related a:hover { border-color: var(--primary); }
-        article h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
-        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+        @media (max-width: 640px) { .related { grid-template-columns: 1fr; } }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header-nav">
             <div style="display: flex; gap: 14px; align-items: center;">
-                <a href="../../index.html" class="back-link">← 网站首页</a>
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
                 <span style="color: #cbd5e1;">|</span>
                 <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
             </div>
@@ -60,81 +118,102 @@
             </div>
         </div>
 
-        <!-- 🔒 隐私信任安全背书 -->
         <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
-            <span>🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
         </div>
 
         <article>
-<h1>实战教程：如何在线为敏感信息打马赛克与高斯模糊</h1>
+            <h1>为敏感信息打马赛克与高斯模糊</h1>
             <div class="meta-bar">
-                <span>难度：极简入门</span> • <span>耗时：1 分钟</span> • <span>安全等级：最高 (客户端本地脱敏)</span>
+                <span>难度：极简入门</span> &bull; <span>阅读：9 分钟</span> &bull; <span>更新：2026-11-13</span>
             </div>
 
             <div class="cta-box">
                 <div>
-                    <strong style="color:#1e40af; font-size:16px;">敏感图片绝不上云！</strong>
-                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">纯本地浏览器 Canvas 算力脱敏，绝对防泄漏。</div>
+                    <strong style="color:#1e40af; font-size:16px;">打码看的是导出文件，不是画布</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">能反推的不是像素，是结构和上下文</div>
                 </div>
-                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 立即打码 →</a>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 开始打码 &rarr;</a>
             </div>
 
-            <p>在社交平台晒图、给客户发订单凭据或汇报工作时，如果不慎泄露手机号、身份证号、家庭住址或财务数字，后果不堪设想。很多在线打码工具会偷偷将你的图片上传到他们服务器，存在极大安全隐患。使用 <strong>Web PSEditor</strong>，数据自始至终停留在你本地电脑，连处理过程都不经过任何服务器。</p>
+            <p>一张银行流水截图、一份签过字的合同扫描、一张身份证照片，上面的号码被人用灰色涂了一把就发出来了。这类图每天都有，而且其中相当一部分能还原。打码不是「让它在我的屏幕上看起来看不清」，而是「在我交出去的那个文件里读不出来」。这是两个标准，只有一个能拿去应对外人。</p>
 
-            <figure>
-                <img src="../../images/tutorials/mosaic-before.jpg" alt="包含机密条款和手写签名的扫描合同文档" loading="lazy">
-                <figcaption>示例素材：一份包含机密条款与手写签名的合同扫描件</figcaption>
-            </figure>
+            <h2>模糊为什么不能当保证</h2>
+            <p>高斯模糊是一次卷积：每个像素被替换成邻域像素的加权平均。细节不是被加密，是被平均掉了，而平均是一个有损操作——学界花了几十年研究怎么把它反推回来。已发表的去模糊工作，能靠「这个场景大概长什么样」的先验，从模糊图里还原出可读的文字和可认的人脸：字母的形状、脸的轮廓、号码是七位这件事本身。</p>
+            <p>马赛克对小字号更糟。块平均抹掉了像素细节，却保留了字符的剪影——一串号码还是那一排深色方块，节奏和数字一致。块小一点，光凭节奏就能读出一个日期、一个邮编、一个四位 PIN。</p>
+            <p>还有一种泄漏跟像素无关，跟图层有关：如果模糊是作为一个可撤销的效果挂在图层上，之后有人打开工程、把效果删掉，内容就回来了。导出的文件是安全的，工程文件不是。图涉及法律问题，就在副本上做、导出交付，工程文件本身也当机密对待。</p>
+
+            <h2>按风险选手段</h2>
+            <table class="tool-table">
+                <tr><th>要遮什么</th><th>用什么</th><th>为什么</th></tr>
+                <tr><td>密码、PIN、证件号、卡号</td><td>实心色块</td><td>没留下可重建的信息。短字符串就算重度模糊也能猜</td></tr>
+                <tr><td>签名</td><td>整笔迹范围的实心块</td><td>模糊保留了倾斜和运笔节奏，那正是伪造需要的</td></tr>
+                <tr><td>姓名、信封上的地址</td><td>实心块，或 Size 25 以上的马赛克</td><td>字够大，粗马赛克就够</td></tr>
+                <tr><td>路人的脸</td><td>马赛克，Size 15 到 25</td><td>挡住五官即可，看起来像有意为之，实践上也反推不回来</td></tr>
+                <tr><td>聊天截图里的一条消息</td><td>模糊画笔或马赛克</td><td>低风险、高数量，速度比完美覆盖更重要</td></tr>
+            </table>
+
+            <h2>动手之前，先记住一条</h2>
+            <p><strong>马赛克和高斯模糊都作用于整个图层，不是选区。</strong> 确认对话框，整张截图都被打上码，这几乎从来不是你想要的。两条绕开的办法，都能在浏览器里完成：</p>
+            <ul>
+                <li><strong>复制一层，再擦回去。</strong> <strong>【图层】→【复制】</strong>，效果加在副本上，然后用<strong>橡皮擦</strong>把不该模糊的地方擦开，下面那层原始的清晰画面就透出来了。</li>
+                <li><strong>在上面盖。</strong> 新建图层，用<strong>形状工具</strong>画实心矩形压住敏感区域。下面一个像素都没动，而实心块本身就是最强的打码方式。</li>
+            </ul>
+
+            <h2>四种做法，按场景选</h2>
 
             <div class="step-card">
-                <div class="step-title">方法一：经典像素马赛克（Mosaic / Pixelate）</div>
-                <p>
-                    1. 导入你的截图，选择左侧 <strong>矩形选区工具（Selection Tool）</strong>。<br>
-                    2. 用鼠标框选出需要遮挡的敏感文字或头像区域。<br>
-                    3. 点击顶部菜单 <strong>【特效 (Effects)】 -> 【像素化 (Mosaic / Pixelate)】</strong>，拖动滑块调整像素块大小（建议 10~20 像素），点击确定！马赛克会彻底破坏原始像素，法律敏感内容首选此方案。
-                </p>
-            </div>
-
-            <div class="step-card">
-                <div class="step-title">方法二：柔和高级的高斯模糊（Gaussian Blur）</div>
-                <p>
-                    如果你觉得像素马赛克太生硬影响美观，可以使用高斯模糊：<br>
-                    1. 同样先用选区工具框选目标敏感区域。<br>
-                    2. 点击顶部菜单 <strong>【特效 (Effects)】 -> 【模糊 (Blur)】 -> 【高斯模糊 (Gaussian Blur)】</strong>。<br>
-                    3. 将模糊半径设为 <code>8 ~ 15 像素</code>，文字即可化作柔和的磨砂雾化效果，既防识别又极其精致美观。<br>
-                    追求效率也可以直接用左侧 <strong>模糊工具（Blur Tool）</strong>：把笔刷尺寸调到 <code>50 ~ 80</code>，在敏感区域来回涂抹几笔即可。
-                </p>
-                <figure>
-                    <img src="../../images/tutorials/mosaic-editor-ui.jpg" alt="Web PSEditor 编辑器界面，模糊工具正在涂抹合同的签名区域" loading="lazy">
-                    <figcaption>用模糊工具在签名区域涂抹，几笔就能完成脱敏。</figcaption>
-                </figure>
-                <figure>
-                    <img src="../../images/tutorials/mosaic-after.jpg" alt="签名区域被完全模糊处理、无法辨认的合同文档" loading="lazy">
-                    <figcaption>处理后：签名区域已完全模糊，无法辨认。</figcaption>
-                </figure>
+                <div class="step-title">做法一：马赛克</div>
+                <p>先复制图层。选中副本，点 <strong>【特效】→【马赛克】</strong>。对话框只有一个 <strong>Size</strong>，从 1 到 100，单位是图层短边的百分比：1000 像素宽的截图上取 10，块大约 100 像素，已经很粗。确认后把不该模糊的地方擦开。文字需要的块比人脸更大——判断标准是 100% 缩放下的样子，不是适应窗口，那里任何设置看起来都像毁掉了。</p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">方法三：加盖文字防盗水印（仅供某机构审核专用）</div>
-                <p>
-                    点击左侧 <strong>文字工具（Text Tool）</strong>，在画面上输入如：<code>仅供办理XX业务使用 他用无效</code>，设置颜色为浅灰色，并在右侧图层面板将该文字图层的不透明度（Opacity）调至 <code>40%</code>，完美防盗用！
-                </p>
+                <div class="step-title">做法二：高斯模糊</div>
+                <p>同样在副本上：<strong>【特效】→【常见滤镜】→【高斯模糊】</strong>。只有一个 <strong>百分比</strong> 滑杆，范围 0 到 50。它是一个挂在图层上的实时滤镜，应用之后还能改——不像马赛克会直接改写像素。这种灵活性在编辑时很方便，在工程文件流传出去时很危险，所以对外发布一律导出一份压平后的副本。</p>
             </div>
 
-            <div class="mistake-box">
-                <strong>⚠️ 这些坑会让脱敏形同虚设</strong>
-                <ul>
-                    <li><strong>打码力度太轻</strong> —— 浅度模糊或过小的马赛克块可以被去模糊工具甚至人眼还原。马赛克块至少 10~20 像素，模糊半径至少 8 以上。</li>
-                    <li><strong>只遮住看得见的部分</strong> —— 邮箱、证件号只打一半，对方仍能推测剩余内容。要整串遮盖，并前后多遮一位。</li>
-                    <li><strong>忘记照片元数据（EXIF）</strong> —— 截图可能携带 GPS 定位等信息。通过 Web PSEditor 重新导出会自动剥离原始元数据。</li>
-                </ul>
+            <div class="step-card">
+                <div class="step-title">做法三：模糊画笔</div>
+                <p>选工具栏的<strong>模糊工具</strong>，直接刷。默认笔刷 30、强度 1；把尺寸调大到两三笔盖住一行，靠重复走几遍，而不是压着不放。这是聊天截图最快的方式，也是最不精确的——笔刷边缘会留一道软边，软边里可能还剩一个原始像素，所以别用它处理证件号。</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">做法四：实心色块（默认选择）</div>
+                <p>新建图层，用<strong>形状工具</strong>画矩形，填一个接近页面底色的颜色。从第一个字上方几个像素画到最后一个字下方几个像素，左右都要宽出来。实心块不携带任何信息，截图、再压缩都活得下来，也是唯一能在合规审查里站住的做法。</p>
+            </div>
+
+            <h2>要遮的往往不止那几个字</h2>
+            <p>失败的打码多数不是模糊太弱，是框得太紧。四个东西在字形外面，每一个都能泄漏：</p>
+            <ul>
+                <li><strong>抗锯齿边缘。</strong> 文字渲染带软边，那些边缘像素落在字母外面、却在阅读范围内。四边各外扩三到五像素。</li>
+                <li><strong>阴影与透印。</strong> 双面文件的扫描件常能隐约看到背面；在桌上拍的文件会带上手的影子。这些也要一起遮，否则它们一样在描述下面的内容。</li>
+                <li><strong>周边信息。</strong> 藏了账号却留下银行名、支行、账单周期，足够定位到人。</li>
+                <li><strong>选框和控制点。</strong> 截图时工具还开着？那些控制点会告诉读者你刚才在改哪个字段。</li>
+            </ul>
+
+            <h2>验收看导出文件，不看画布</h2>
+            <p>发布之前闭环一次：<strong>导出，再打开导出的文件</strong>——忘了隐藏的图层在压平的 JPG 里看不见，在工程里才看得见，而最终要交出去的是导出文件；<strong>放大到 400%</strong>——软边、残余笔画、只盖住一半的字符，只在这个倍数下显形；<strong>自己试着读一遍</strong>——把显示器亮度调高，如果四位数字里你能靠形状猜出两位，那就是弱点；<strong>看一眼缩略图</strong>——聊天软件发送前会缩图，全尺寸安全的打码有时会在 20% 尺寸下变薄。</p>
+
+            <div class="tip-box">
+                💡 <strong>一条口诀：越值钱的字符串，越不要模糊。</strong> 密码、卡号、签名用实心块；脸和段落可以马赛克。
             </div>
 
             <h2>常见问题 FAQ</h2>
-            <div class="faq-item"><h3>马赛克和高斯模糊能被还原吗？</h3><p>强度足够的马赛克无法还原——原始像素已被彻底替换。轻度模糊存在被部分还原的可能，拿不准就用观感可接受的最大强度。</p></div>
-            <div class="faq-item"><h3>直接画一个黑色色块是不是更安全？</h3><p>纯色色块确实最保险，只是观感生硬。对外展示的图片用高强度模糊/马赛克是常见折中；法律文件建议马赛克或纯色色块。</p></div>
-            <div class="faq-item"><h3>打码过程中我的文档会被上传吗？</h3><p>绝对不会。全部处理都在你的浏览器内通过 HTML5 Canvas 完成，没有服务器参与——这正是合同、证件、病历可以放心处理的原因。</p></div>
-            <div class="faq-item"><h3>一张图里有多处敏感信息，要重复操作吗？</h3><p>是的，对每处敏感区域重复"框选 + 特效"即可；或者直接用模糊工具逐个涂抹，最后统一 <strong>【文件】 -> 【导出】</strong> 导出一次。</p></div>
+            <div class="faq-item">
+                <h3>马赛克和高斯模糊能被还原吗？</h3>
+                <p>严格说不叫还原，细节确实没了。但对于结构强的内容——印刷文字、人脸、签名的运笔——已发表的研究显示能反推出相当一部分信息。马赛克在小字上更弱，因为块网格保留了字母的形状。判断标准很简单：人能不能靠上下文猜出这些字符。能，软件也能。密码、证件号、签名请用实心块。</p>
+            </div>
+            <div class="faq-item">
+                <h3>直接画一个黑色块是不是更安全？</h3>
+                <p>是，实心块就是最安全的一种。它不携带任何可重建的信息，经过截图、二次压缩也不会「变形泄漏」。马赛克和模糊的意义只在于好看一点、不那么突兀，安全性上永远不如色块。</p>
+            </div>
+            <div class="faq-item">
+                <h3>一张图里有多处敏感信息，要重复操作吗？</h3>
+                <p>要，每处单独处理。但别每处都复制一层——更省事的做法是新建一个图层，用形状工具画多个色块盖住所有敏感区，一次导出。这样原始画面始终没被改动过。</p>
+            </div>
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
 
             <h2>相关教程推荐</h2>
             <div class="related">
@@ -143,14 +222,15 @@
                 <a href="../tutorials/transparent-signature-extraction">手写签名透明底提取教程</a>
                 <a href="../tutorials/id-photo-background">证件照白底换蓝底/红底教程</a>
             </div>
+
             <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                        <span style="font-size: 18px;">🎯</span>
+                        <span style="font-size: 18px;">&#127919;</span>
                         <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
                         <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">无需安装软件，立即在浏览器中应用本篇所学技巧，纯本地处理无隐私泄露风险。</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">拿一张带手机号的截图，用实心块盖住，导出后重新打开，试着读出那串号码。</p>
                 </div>
                 <div>
                     <a href="../../editor.html?lang=zh" class="practice-btn">
@@ -161,17 +241,5 @@
             </div>
         </article>
     </div>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {"@type": "Question", "name": "马赛克和高斯模糊能被还原吗？", "acceptedAnswer": {"@type": "Answer", "text": "强度足够的马赛克无法还原，原始像素已被彻底替换。轻度模糊存在被部分还原的可能，拿不准就用最大可接受强度。"}},
-        {"@type": "Question", "name": "直接画一个黑色色块是不是更安全？", "acceptedAnswer": {"@type": "Answer", "text": "纯色色块最保险但观感生硬。对外展示用高强度模糊/马赛克，法律文件建议马赛克或纯色色块。"}},
-        {"@type": "Question", "name": "打码过程中我的文档会被上传吗？", "acceptedAnswer": {"@type": "Answer", "text": "绝对不会。全部处理都在浏览器内通过 HTML5 Canvas 完成，没有服务器参与。"}},
-        {"@type": "Question", "name": "一张图里有多处敏感信息，要重复操作吗？", "acceptedAnswer": {"@type": "Answer", "text": "对每处敏感区域重复框选加特效即可，或用模糊工具逐个涂抹，最后统一导出导出一次。"}}
-      ]
-    }
-    </script>
 </body>
 </html>

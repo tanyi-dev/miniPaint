@@ -3,14 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>社交媒体图片尺寸指南：头像、封面与配图 - Web PSEditor</title>
-    <meta name="description" content="社交媒体图片尺寸全攻略：用免费在线图片编辑器 Web PSEditor 裁剪 1:1 头像、16:9 封面与朋友圈配图，避免上传后被裁切的尴尬，全程本地处理。" />
+    <title>社交媒体图片尺寸指南：不再被裁得七零八落 - Web PSEditor</title>
+    <meta name="description" content="各平台头像、封面、故事、链接卡的安全导出尺寸与比例，安全区该怎么留，以及没有比例预设时如何用裁剪 + 画布尺寸做出精确像素。" />
     <link rel="icon" sizes="192x192" href="../../images/favicon.png">
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="canonical" href="https://webpseditor.com/zh/tutorials/social-media-image-sizes" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/social-media-image-sizes" />
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/social-media-image-sizes" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/social-media-image-sizes" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "社交媒体图片尺寸指南",
+  "description": "各平台头像、封面、故事、链接卡的安全导出尺寸与比例，安全区该怎么留，以及没有比例预设时如何用裁剪 + 画布尺寸做出精确像素。",
+  "author": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "datePublished": "2026-11-13",
+  "dateModified": "2026-11-13",
+  "mainEntityOfPage": "https://webpseditor.com/zh/tutorials/social-media-image-sizes"
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "头像应该上传多大？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "至少 400×400 像素，有 1080×1080 就用它。多数平台把头像裁成圆形显示，所以脸或 Logo 要放在中心，四角留给背景。低于 200×200 会被平台放大，立刻变软。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "封面图上传后为什么变糊？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "两个原因，都能在上传前解决。要么原图比展示尺寸小、被放大了，要么保存时质量太低、又被平台压了一遍。按完整展示尺寸导出、质量 85 以上，并且别去重存下载回来的预览图。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "发社交平台需要导出 300 DPI 吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不需要。DPI 只告诉打印机怎么排点，屏幕读的是像素尺寸。1080×1080 的文件不管标 72 还是 300 DPI，都还是 1080×1080。设像素，忽略 DPI 字段。"
+      }
+    }
+  ]
+}
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -22,7 +73,8 @@
         .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
         h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
         h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
-        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        h3 { color: #0f172a; font-size: 16px; margin: 20px 0 6px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
         .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
         .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
         .cta-btn:hover { background: var(--primary-hover); }
@@ -34,6 +86,10 @@
         .compare { display: flex; gap: 12px; }
         .compare figure { flex: 1; margin: 0; }
         .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #991b1b; }
+        .mistake-box ul { margin: 8px 0 0; padding-left: 20px; }
+        .mistake-box li { margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 14px; }
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
@@ -42,69 +98,123 @@
         .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
         .related a:hover { border-color: var(--primary); }
         @media (max-width: 640px) { .related { grid-template-columns: 1fr; } }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header-nav">
             <div style="display: flex; gap: 14px; align-items: center;">
-                <a href="../../index.html" class="back-link">← 网站首页</a>
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
                 <span style="color: #cbd5e1;">|</span>
                 <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
             </div>
-            <div class="lang-switch"><span class="lang-btn active">中文</span>
-                <a href="https://webpseditor.com/tutorials/social-media-image-sizes" class="lang-btn" style="text-decoration:none;">English</a></div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/social-media-image-sizes" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
         </div>
 
-        <!-- 隐私信任安全背书 -->
         <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
-            <span>🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
         </div>
 
         <article>
-<h1>实战教程：社交媒体图片尺寸指南——不再被裁得七零八落</h1>
-            <div class="meta-bar"><span>难度：极简入门</span> • <span>耗时：2 分钟</span> • <span>适用：微信/QQ/微博/小红书配图</span></div>
+            <h1>社交媒体图片尺寸指南</h1>
+            <div class="meta-bar">
+                <span>难度：极简入门</span> &bull; <span>阅读：9 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
 
             <div class="cta-box">
                 <div>
-                    <strong style="color:#1e40af; font-size:16px;">头像封面一次裁对！</strong>
-                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">按平台尺寸精准裁剪，本地处理不传图。</div>
+                    <strong style="color:#1e40af; font-size:16px;">让平台没有可裁的余地</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">先按比例裁，再用画布尺寸定精确像素</div>
                 </div>
-                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 裁剪 →</a>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 裁尺寸 &rarr;</a>
             </div>
 
-            <p>好不容易挑好的头像，上传后被平台裁成「半张脸」；精心设计的封面，展示区只露出中间一条——都是因为没有按<strong>平台展示比例</strong>预先裁剪。这篇教程教你用 <strong>Web PSEditor</strong> 在本地一步裁对尺寸，上传后所见即所得。</p>
-            <h2>常用尺寸速查</h2>
-            <p>头像 / 朋友圈正方形配图：<code>1:1</code>（建议 800×800 以上）；公众号/主页封面：<code>16:9</code> 附近（常用 1200×628）；故事/短视频封面：<code>9:16</code>。按比例预裁，平台就不会乱切。</p>
-            <h2>第一步：认识两种裁剪结果</h2>
-            <div class="compare">
-                <figure>
-                    <img src="../../images/tutorials/social-square.jpg" alt="按 1:1 裁剪的正方形头像示例" loading="lazy">
-                    <figcaption>1:1 正方形头像裁剪</figcaption>
-                </figure>
-                <figure>
-                    <img src="../../images/tutorials/social-cover.jpg" alt="按 16:9 裁剪的横版封面示例" loading="lazy">
-                    <figcaption>16:9 横版封面裁剪</figcaption>
-                </figure>
-            </div>
-            <h2>第二步：编辑器实操</h2>
-            <figure>
-                <img src="../../images/tutorials/social-editor-ui.jpg" alt="Web PSEditor 中文界面，使用裁剪与尺寸功能调整社交平台图片" loading="lazy">
-                <figcaption>裁剪与尺寸功能都在【图片】菜单</figcaption>
-            </figure>
+            <p>挑好了一张完美的头像，上传完被裁成半张脸。精心做的封面，信息流里只露出一条细缝。原因很简单：平台从来不按你文件的原始比例展示，它按自己的容器展示；只要比例差一点，它就会替你裁。解法不是祈祷它裁得好看，而是<strong>提前裁好</strong>，让平台没有可裁的余地。</p>
+
+            <h2>平台为什么要裁你的图</h2>
+            <p>每个社交平台都把一个固定容器套在你的图片上。它要么加黑边（很少见）、要么拉伸（更少，只在做得差的站上）、要么裁切填满。裁切是默认，因为它在信息流里更整齐——也正好是你构图死掉的地方。</p>
+            <p>更麻烦的是预览。附上图片时，大多数应用会显示一个大致接近最终效果的缩略图，但真正的裁切由一条你看不见的规则决定：有时居中、有时贴顶、有时优先保留细节最多的区域。两张尺寸完全相同的照片，可能被裁得完全不一样。这就是为什么照着预览猜总是失手，而唯一可靠的办法是：<strong>交给平台一个已经是目标比例的文件</strong>。没有可裁的，就不会裁错。</p>
+
+            <h2>尺寸速查</h2>
+            <p>下面这些是大多数人真的会用到的位置。像素值按「安全导出尺寸」理解，不是平台强制的规格；<strong>必须对上的是比例</strong>，像素只要够大、不至于被平台放大就行。</p>
+            <table class="tool-table">
+                <tr><th>位置</th><th>比例</th><th>安全导出尺寸</th></tr>
+                <tr><td>头像 / 方形信息流</td><td>1:1</td><td>1080 × 1080</td></tr>
+                <tr><td>竖版信息流</td><td>4:5</td><td>1080 × 1350</td></tr>
+                <tr><td>链接预览卡</td><td>1.91:1</td><td>1200 × 630</td></tr>
+                <tr><td>主页横幅 / 封面</td><td>3:1</td><td>1500 × 500</td></tr>
+                <tr><td>故事 / 短视频封面</td><td>9:16</td><td>1080 × 1920</td></tr>
+                <tr><td>视频封面</td><td>16:9</td><td>1280 × 720</td></tr>
+                <tr><td>公众号首图</td><td>2.35:1</td><td>900 × 383</td></tr>
+            </table>
+            <p>比例是会变的。平台改一次信息流或横幅版式，按旧比例导出的文件进去就被再裁一遍。按当前比例导出、同时留着可编辑原图，下次重裁是几秒钟的事，不是重拍。</p>
+
+            <h2>安全区比比例更容易被忽略</h2>
+            <p>对上比例只是一半。故事和短视频封面上，界面是压在你的画面上的：底部有说明框和进度条，部分应用还会再加一行贴纸。一张 1080×1920 的故事，这些界面大约占掉<strong>底部 250 像素</strong>，手机端的顶部还可能盖住<strong>120 像素</strong>。文字放在那儿，在编辑器里完美，在观众屏幕上直接消失。</p>
+            <p>头像上的圆形裁切同理：平台把方图裁成圆，四角等于废了。名字、Logo 的基座、任何关键元素，都要留在中心区域。横幅则会被手机端的头像压住左边缘，而且屏幕越窄裁得越紧——把关键信息放在中间 60% 的范围内，各种视口都能活。</p>
+            <p>把外面那圈当「出血」处理：填背景、纹理、虚化的照片，永远不要放信息。</p>
+
+            <h2>在编辑器里：两刀定尺寸</h2>
+
             <div class="step-card">
-                <div class="step-title">第一步：裁剪构图</div>
-                <p>打开照片，选择左侧 <strong>裁剪工具</strong>，拖出保留区域后确认。这个裁剪工具<strong>没有比例预设</strong>：唯一的辅助键是按住 Ctrl（Mac 为 Cmd）拖动，而它锁定的是图片<strong>当前</strong>的宽高比——你想改的恰恰是比例，所以帮不上忙。做法分两步：先凭眼睛裁成大致形状，再用下一步把画面定到精确尺寸。构图上让主体居中或落在三分线上，被平台压缩后依然好看。</p>
+                <div class="step-title">第一步：自由裁剪，先定构图</div>
+                <p>打开照片，选<strong>裁剪工具</strong>，拖出保留区域。先说清一件事：这个裁剪工具<strong>没有比例预设</strong>，唯一的辅助键是按住 Ctrl（Mac 为 Cmd），而它锁定的是原图<strong>当前</strong>的比例——你想改的恰恰是比例，所以帮不上忙。所以先用眼睛裁成大致形状，让主体居中或落在三分线上，下一步再定精确尺寸。</p>
             </div>
+
             <div class="step-card">
-                <div class="step-title">第二步：定到精确像素</div>
-                <p>点击 <strong>【图片】→【画布尺寸】</strong>，宽度和高度都填目标值（如 1080 和 1080），「分辨率」保持「自定义」，「按比例」关掉。画布会变成这个尺寸，而画面不缩放，超出的部分被裁掉、不足的部分留空——所以第一步要裁得略大一点点，再用它收边。只想整体缩小、不改构图时，才用 <strong>【图片】→【调整大小】</strong>：只填一个边，另一边按原比例自动算。</p>
+                <div class="step-title">第二步：用「画布尺寸」定到精确像素</div>
+                <p>点 <strong>【图片】→【画布尺寸】</strong>，宽高都填目标值（头像就 1080 和 1080），<strong>分辨率</strong>保持「自定义」，<strong>按比例</strong>关掉。画布会变成这个尺寸，画面本身不缩放：超出部分被裁掉，不足的地方留空。所以第一步要裁得略大一点，再用它收边——这比反过来（先定尺寸再补内容）好处理得多。</p>
+                <p>如果只是整体缩小、构图不动，用 <strong>【图片】→【调整大小】</strong>：只填一个边，另一边按原比例自动算，画面不会变形。</p>
             </div>
+
             <div class="step-card">
-                <div class="step-title">第三步：导出上传</div>
-                <p><strong>【文件】→【导出】</strong> JPG（质量 85+）。上传后检查实际展示效果，不合适再微调裁剪区域即可。</p>
+                <div class="step-title">第三步：按位置分别导出</div>
+                <p><strong>【文件】→【导出】</strong>，JPG 质量 85 以上。一个位置一个文件，命名按用途来：<code>头像-1x1</code>、<code>封面-3x1</code>。下次平台改版，你不用再反推哪个文件是哪个。</p>
             </div>
-            <div class="tip-box">💡 <strong>多做几个尺寸版本分平台上传，比一个尺寸到处凑效果好得多——本地处理秒级完成，顺手的事。</strong></div>
+
+            <h2>分辨率、DPI 和体积，三个数只有一个重要</h2>
+            <p><strong>像素尺寸</strong>决定文件里有多少细节，它才决定画面清不清晰，也是在「调整大小」里要设的那个数。<strong>DPI</strong> 只告诉打印机每英寸排多少点，屏幕上毫无作用——把一个 600 像素的文件导出成「300 DPI」，它还是 600 像素，只是换了个标签。<strong>体积</strong>是上传限制关心的东西：1080 像素的照片按质量 85 导出，通常落在 150KB 到 400KB 之间，低于所有常见上限。</p>
+            <p>真正丢清晰度的地方是<strong>二次压缩</strong>。每个平台都会重新编码你的上传，一张已经存成质量 60、又被平台按 80 压一遍的图，块状噪点会叠加。一次高质量导出，让平台压它那一次，然后别再去保存平台返回的结果。把预览截屏再上传，是最常见的自毁画质方式。</p>
+            <p>纯色底加文字这类扁平图形（封面横幅、Logo 头像）用 PNG，避开 JPG 在硬边上的糊化，而且颜色少、体积也不大。照片一律 JPG 更小。平台接受 WebP 的话，同等观感下通常只要三分之一的字节，但手上永远留一份 JPG 兜底——不是每个上传框都认。</p>
+
+            <div class="mistake-box">
+                <strong>⚠️ 五个把正确裁剪毁掉的做法</strong>
+                <ul>
+                    <li><strong>放大一张小图。</strong> 400 像素的头像拉到 1080，平台还没碰它就已经软了。永远从手上最大的原图开始。</li>
+                    <li><strong>一个文件打天下。</strong> 1:1 方图硬塞进 9:16 的故事，宽度丢一半。本地处理是秒级的，一个位置一份文件。</li>
+                    <li><strong>忽略手机端裁切。</strong> 桌面预览会骗你——横幅和封面要到手机上看一遍再发。</li>
+                    <li><strong>把文字放在边缘。</strong> 故事和封面的外圈会被界面盖住，那是最不该放信息的区域。</li>
+                    <li><strong>相信上传框里的预览。</strong> 它只是近似。要相信的是你导出的那个比例。</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                💡 <strong>一个平台一份尺寸，比一个尺寸到处凑更省事。</strong> 本地处理只花几秒，代价远小于事后重做一张糊图。
+            </div>
+
+            <h2>常见问题 FAQ</h2>
+            <div class="faq-item">
+                <h3>头像应该上传多大？</h3>
+                <p>至少 400×400 像素，有 1080×1080 就用它。多数平台把头像裁成圆形显示，所以脸或 Logo 要放在中心，四角留给背景。低于 200×200 会被平台放大，立刻变软。</p>
+            </div>
+            <div class="faq-item">
+                <h3>封面图上传后为什么变糊？</h3>
+                <p>两个原因，都能在上传前解决。要么原图比展示尺寸小、被放大了，要么保存时质量太低、又被平台压了一遍。按完整展示尺寸导出、质量 85 以上，并且别去重存下载回来的预览图。</p>
+            </div>
+            <div class="faq-item">
+                <h3>发社交平台需要导出 300 DPI 吗？</h3>
+                <p>不需要。DPI 只告诉打印机怎么排点，屏幕读的是像素尺寸。1080×1080 的文件不管标 72 还是 300 DPI，都还是 1080×1080。设像素，忽略 DPI 字段。</p>
+            </div>
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
 
             <h2>相关教程推荐</h2>
             <div class="related">
@@ -113,15 +223,15 @@
                 <a href="../tutorials/crop-rotate-straighten">裁剪、旋转与扶正照片</a>
                 <a href="../tutorials/add-text-watermark">给照片添加文字水印</a>
             </div>
-            <!-- 实战练习与安全导流 CTA 卡片 -->
-            <div class="practice-cta-card">
+
+            <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                        <span style="font-size: 18px;">🎯</span>
+                        <span style="font-size: 18px;">&#127919;</span>
                         <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
                         <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">打开编辑器，把你的照片裁成 1:1 头像和封面尺寸，立刻可用。</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">把一张照片做成 1080×1080 头像和 1500×500 横幅两个版本，对着上表核对比例。</p>
                 </div>
                 <div>
                     <a href="../../editor.html?lang=zh" class="practice-btn">

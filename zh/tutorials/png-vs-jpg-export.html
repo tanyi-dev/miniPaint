@@ -3,14 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PNG 与 JPG 怎么选：透明度与体积 - Web PSEditor</title>
-    <meta name="description" content="PNG 和 JPG 格式区别详解：透明背景、压缩质量、文件大小的取舍，以及用免费在线图片编辑器 Web PSEditor 正确导出图片的设置方法，本地处理不上传。" />
+    <title>PNG 与 JPG 怎么选：透明、体积与导出设置 - Web PSEditor</title>
+    <meta name="description" content="三句话定格式：要透明用 PNG、要文字清晰用 PNG、只分享照片用 JPG 85。附 JPG 质量曲线、透明会在哪断掉、以及为什么有时 PNG 反而更小。" />
     <link rel="icon" sizes="192x192" href="../../images/favicon.png">
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="canonical" href="https://webpseditor.com/zh/tutorials/png-vs-jpg-export" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/png-vs-jpg-export" />
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/png-vs-jpg-export" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/png-vs-jpg-export" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "PNG 与 JPG 怎么选？透明、体积与导出",
+  "description": "三句话定格式：要透明用 PNG、要文字清晰用 PNG、只分享照片用 JPG 85。附 JPG 质量曲线、透明会在哪断掉、以及为什么有时 PNG 反而更小。",
+  "author": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "datePublished": "2026-11-13",
+  "dateModified": "2026-11-13",
+  "mainEntityOfPage": "https://webpseditor.com/zh/tutorials/png-vs-jpg-export"
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "照片导出 JPG 该用什么质量？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "85 到 90。质量 85 时正常观看尺寸下与原图看不出差别，体积大约是 PNG 的十分之一。调到 95 或 100 只是多花字节，平台重新压缩时照样丢掉。低于 70，平滑的天空和皮肤上开始出现方块。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "要保证小字清晰，用哪个格式？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PNG。JPG 把图像切成 8×8 的块逐块近似，细笔画会带上振铃和彩边，质量再高也有。截图、图表、幻灯片、任何带文字的图都该用 PNG，否则字在打印或阅读之前就已经脏了。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "PNG 最小能压到多小？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "先减颜色数，再减尺寸。纯色的扁平图形只有十几种颜色，全尺寸也可能只有几 KB，因为 PNG 对重复像素的压缩效率极高。照片没法这么压：它包含成千上万种颜色，硬减调色板只会在渐变里做大色带，体积却没小多少。"
+      }
+    }
+  ]
+}
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -22,7 +73,8 @@
         .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
         h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
         h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
-        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        h3 { color: #0f172a; font-size: 16px; margin: 20px 0 6px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
         .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
         .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
         .cta-btn:hover { background: var(--primary-hover); }
@@ -34,6 +86,10 @@
         .compare { display: flex; gap: 12px; }
         .compare figure { flex: 1; margin: 0; }
         .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #991b1b; }
+        .mistake-box ul { margin: 8px 0 0; padding-left: 20px; }
+        .mistake-box li { margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 14px; }
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
@@ -42,63 +98,114 @@
         .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
         .related a:hover { border-color: var(--primary); }
         @media (max-width: 640px) { .related { grid-template-columns: 1fr; } }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header-nav">
             <div style="display: flex; gap: 14px; align-items: center;">
-                <a href="../../index.html" class="back-link">← 网站首页</a>
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
                 <span style="color: #cbd5e1;">|</span>
                 <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
             </div>
-            <div class="lang-switch"><span class="lang-btn active">中文</span>
-                <a href="https://webpseditor.com/tutorials/png-vs-jpg-export" class="lang-btn" style="text-decoration:none;">English</a></div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/png-vs-jpg-export" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
         </div>
 
-        <!-- 隐私信任安全背书 -->
         <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
-            <span>🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
         </div>
 
         <article>
-<h1>实战教程：PNG 与 JPG 怎么选？一次讲透透明背景与导出设置</h1>
-            <div class="meta-bar"><span>难度：极简入门</span> • <span>耗时：3 分钟</span> • <span>适用：电商图、头像、截图、作品导出</span></div>
+            <h1>PNG 与 JPG 怎么选？透明、体积与导出</h1>
+            <div class="meta-bar">
+                <span>难度：极简入门</span> &bull; <span>阅读：9 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
 
             <div class="cta-box">
                 <div>
-                    <strong style="color:#1e40af; font-size:16px;">导出格式不再纠结！</strong>
-                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">PNG/JPG 随心导出，透明背景本地保留。</div>
+                    <strong style="color:#1e40af; font-size:16px;">三句话就能定，剩下都是细节</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">透明选 PNG，照片选 JPG 85</div>
                 </div>
-                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 导出 →</a>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 试试导出 &rarr;</a>
             </div>
 
-            <p>「导出时到底选 PNG 还是 JPG？」——选错的结果要么是文件大得传不出去，要么是图片糊得没法看，要么是该有的透明背景变成了白底黑块。其实选择逻辑只有三句话，看完这篇你就再也不用纠结。</p>
-            <h2>一图看懂：同样的图，两种格式差多大</h2>
-            <figure>
-                <img src="../../images/tutorials/format-png-vs-jpg.jpg" alt="同一张照片的 PNG 无损版本与 JPG 高压缩版本对比，附实际文件大小标注" loading="lazy">
-                <figcaption>左：PNG 无损（体积大）· 右：JPG 高压缩（体积小但可见压缩噪点）</figcaption>
-            </figure>
-            <h2>三句话选择逻辑</h2>
-            <p>1. 需要<strong>透明背景</strong>（抠图、签名、贴纸）→ 只能选 <strong>PNG</strong>，JPG 不支持透明。<br>2. 需要<strong>文字锐利、多次编辑</strong>（截图、设计稿、再加工）→ 选 <strong>PNG</strong>，无损不失真。<br>3. 就是<strong>发照片</strong>（人像、风景、商品图）→ 选 <strong>JPG 质量 85</strong>，体积小 10 倍，肉眼几乎无差。</p>
-            <h2>编辑器导出实操</h2>
-            <figure>
-                <img src="../../images/tutorials/format-editor-ui.jpg" alt="Web PSEditor 中文界面，通过文件菜单选择导出格式与质量" loading="lazy">
-                <figcaption>导出入口在【文件】→【导出】</figcaption>
-            </figure>
+            <p>「存 PNG 还是 JPG？」选错了，文件不是大到发不出去，就是糊得不能用，或者你需要的透明区域变成了一块白。整个判断其实三句话就能说完，剩下的都是细节。</p>
+
+            <h2>三句话的决策</h2>
+            <ul>
+                <li><strong>需要透明</strong>（抠图、签名、贴纸）→ 只能 PNG。JPG 存不了透明。</li>
+                <li><strong>需要文字清晰、之后还要再改</strong>（截图、设计稿、图表）→ PNG，无损，可反复编辑。</li>
+                <li><strong>只是分享照片</strong>（人、风景、商品）→ JPG 质量 85，体积极小，肉眼几乎无差。</li>
+            </ul>
+
+            <h2>两种格式各自丢掉了什么</h2>
+            <p>PNG 是无损的。每个像素原样存下来，再用一套预测滤波加 DEFLATE 压缩——思路和压缩一个文本文件一样。打开、保存一百次，第一百个文件与第一个完全一致。这就是它适合做工作格式的原因：截图、Logo、抠图、还要再编辑的图层导出。</p>
+            <p>JPG 是有损的，而且丢得很规律。图像被切成 8×8 的块，每块转成频率信息，高频——细节、硬边、细腻渐变——按质量值被量化掉。平滑区域压得极好，两色之间的突变压得很差，这就是为什么文字在 JPG 里会出彩边，红 Logo 压在白底上边界会发糊。</p>
+            <p>由此得到一个反直觉的结论：<strong>JPG 的质量不是线性旋钮</strong>。100 到 90 之间体积掉得飞快而画面几乎没变；90 到 80 继续掉、照片仍然好看；70 以下曲线就平了——省下的只有几个百分点，换来的是天空里的方块、灯光周围的条纹、高对比边缘的蚊噪。为了卡体积把质量调到 40 的人，是在用可见的损伤，换一个本来靠裁掉 10% 画幅就能拿到的节省。</p>
+
+            <h2>透明，以及它会在哪里断掉</h2>
+            <p>JPG 没有透明通道。把抠好的透明底导出成 JPG，编辑器就必须给那些像素填点东西——通常是白，有时是黑，取决于编码器。格式本身没法表示「这里什么都没有」，所以填白是预期行为，不是 Bug。</p>
+            <p>PNG 可以，但透明仍会在三个常见的地方断掉：<strong>压平</strong>——导出前把透明层并到不透明底上，透明在写文件之前就没了；<strong>索引色</strong>——降到调色板会把柔和的抗锯齿边缘变成硬边，因为中间那几级灰不存在了；<strong>接收方</strong>——某些聊天工具和打印服务会自动给 PNG 垫一层白底，于是透明 Logo 在编辑器里正常，落到文档里带了个框。</p>
+            <p>一个习惯能同时避开这三种：导出 PNG 之后，用能显示棋盘格的查看器把<strong>导出的文件</strong>打开确认一次。十秒钟，好过客户上传之后才发现。</p>
+
+            <h2>什么时候 PNG 反而更小</h2>
+            <p>「JPG 总是更小」这句对照片成立，对图形不成立。一份文字文档的截图、一个扁平图标、六种颜色的图表、纯色底上的 Logo——这些有大片完全相同的像素。PNG 的滤波加 DEFLATE 能把一串同色像素压到几乎不占数据，JPG 却还要为每个块的边界花字节，并在每个字母周围留下可见的伪影。</p>
+            <p>所以体积跟着内容走，不跟着扩展名走。一张 1200×630 的纯色加文字横幅，PNG 可能 40KB，JPG 质量 90 是 90KB，而且更难看；同样的尺寸换成一张照片，立刻反转：JPG 60KB，PNG 900KB。先看图里是什么，再决定格式。</p>
+
+            <h2>在编辑器里怎么导</h2>
+
             <div class="step-card">
                 <div class="step-title">第一步：打开导出面板</div>
-                <p>编辑完成后点击 <strong>【文件】→【导出】</strong>，在弹出面板中选择输出格式 PNG 或 JPG。</p>
+                <p>编辑完成后点 <strong>【文件】→【导出】</strong>，填文件名，选 PNG 还是 JPG。（顺便说清：<strong>【文件】→【另存为】</strong> 保存的是可再编辑的工程文件，不能当图片用。）</p>
             </div>
+
             <div class="step-card">
-                <div class="step-title">第二步：JPG 质量这样设</div>
-                <p>JPG 选质量 <strong>85~90</strong>：这是「画质几乎无损、体积大幅缩小」的最佳平衡点。低于 70 会出现明显色块，高于 95 体积暴涨却看不出差别。</p>
+                <div class="step-title">第二步：JPG 质量的甜点区</div>
+                <p>质量滑杆默认 90，只在有损格式下出现。留在 85 到 90：观感接近无损，体积小很多。70 以下开始出块；95 以上体积膨胀但看不出收益，因为你上传之后平台还要再编码一次。</p>
             </div>
+
             <div class="step-card">
-                <div class="step-title">第三步：PNG 透明背景要点</div>
-                <p>若画面有透明区域（如抠好的人像），必须导出 PNG 才能保留。导出前确认图层未合并，或在【图层】菜单按需合并。</p>
+                <div class="step-title">第三步：导之前先看体积</div>
+                <p>勾上 <strong>显示文件大小</strong>，估算体积会随滑杆实时变化。这是找「刚好卡在上限内的最高质量」最快的办法：往下拖，数字进线就停。同一个面板还会报像素尺寸，导出前扫一眼有好处。</p>
             </div>
-            <div class="tip-box">💡 <strong>上传网站或微信传图前的偷懒公式：照片用 JPG 85，带字截图和透明素材用 PNG，体积立刻省 80%。</strong></div>
+
+            <div class="step-card">
+                <div class="step-title">第四步：有透明的图只导 PNG</div>
+                <p>画面里有透明区域时，只有 PNG 留得住。别合并图层，也别在最后一刻垫一层不透明底——那会静悄悄抹掉你花时间抠出来的 alpha 通道。</p>
+            </div>
+
+            <div class="tip-box">
+                💡 <strong>上传前的懒人规则：照片用 JPG 85，文字截图和透明素材用 PNG。</strong> 体积立刻省下大半；尺寸看导出面板里的估算，别等上传失败再回头改。
+            </div>
+
+
+            <h2>上传之后还有一道压缩</h2>
+            <p>你导出的是质量 85，平台展示的是它自己再压一遍的结果。这就是为什么在导出对话框里把质量拉到 100 意义不大：多出来的字节在平台那一端会被重新丢掉，而你付出了更长的上传时间。</p>
+            <p>真正能保住清晰度的做法是<strong>一次到位</strong>：按最终展示尺寸导出，质量停在 85 到 90，不要反复从平台下载预览再重存。如果一张图要在多个尺寸上使用，从原始工程分别导出，而不是把小尺寸那张放大——放大是凭空插值，比重新导出差得多。</p>
+
+            <h2>常见问题 FAQ</h2>
+            <div class="faq-item">
+                <h3>照片导出 JPG 该用什么质量？</h3>
+                <p>85 到 90。质量 85 时正常观看尺寸下与原图看不出差别，体积大约是 PNG 的十分之一。调到 95 或 100 只是多花字节，平台重新压缩时照样丢掉。低于 70，平滑的天空和皮肤上开始出现方块。</p>
+            </div>
+            <div class="faq-item">
+                <h3>要保证小字清晰，用哪个格式？</h3>
+                <p>PNG。JPG 把图像切成 8×8 的块逐块近似，细笔画会带上振铃和彩边，质量再高也有。截图、图表、幻灯片、任何带文字的图都该用 PNG，否则字在打印或阅读之前就已经脏了。</p>
+            </div>
+            <div class="faq-item">
+                <h3>PNG 最小能压到多小？</h3>
+                <p>先减颜色数，再减尺寸。纯色的扁平图形只有十几种颜色，全尺寸也可能只有几 KB，因为 PNG 对重复像素的压缩效率极高。照片没法这么压：它包含成千上万种颜色，硬减调色板只会在渐变里做大色带，体积却没小多少。</p>
+            </div>
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
 
             <h2>相关教程推荐</h2>
             <div class="related">
@@ -107,15 +214,15 @@
                 <a href="../tutorials/add-text-watermark">给照片添加文字水印</a>
                 <a href="../tutorials/how-to-cutout-png">抠图并导出透明 PNG</a>
             </div>
-            <!-- 实战练习与安全导流 CTA 卡片 -->
-            <div class="practice-cta-card">
+
+            <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                        <span style="font-size: 18px;">🎯</span>
+                        <span style="font-size: 18px;">&#127919;</span>
                         <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
                         <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">打开编辑器，把同一张图分别导出 PNG 和 JPG 对比体积与画质。</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">同一张图分别导 PNG 和 JPG，对比体积，再把小字放大到 200% 看边缘。</p>
                 </div>
                 <div>
                     <a href="../../editor.html?lang=zh" class="practice-btn">

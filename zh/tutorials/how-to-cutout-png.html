@@ -3,14 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>实战教程：3步轻松在线抠图并导出透明底PNG - Web PSEditor 教程</title>
-    <meta name="description" content="在线学习实战教程：3步轻松在线抠图并导出透明底PNG：使用免费纯网页轻量级在线图片编辑器工具 Web PSEditor，简单高效、安全不泄露肖像隐私。" />
+    <title>在线抠图并导出透明底 PNG（三步） - Web PSEditor</title>
+    <meta name="description" content="用魔术橡皮擦、矩形选择、橡皮擦三个工具完成抠图：功率与 Contiguous 怎么设、没有羽化时怎么收边、以及导出后背景变白的真正原因。" />
     <link rel="icon" sizes="192x192" href="../../images/favicon.png">
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="canonical" href="https://webpseditor.com/zh/tutorials/how-to-cutout-png" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/how-to-cutout-png" />
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/how-to-cutout-png" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/how-to-cutout-png" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "3 步在线抠图并导出透明底 PNG",
+  "description": "用魔术橡皮擦、矩形选择、橡皮擦三个工具完成抠图：功率与 Contiguous 怎么设、没有羽化时怎么收边、以及导出后背景变白的真正原因。",
+  "author": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "datePublished": "2026-11-13",
+  "dateModified": "2026-11-13",
+  "mainEntityOfPage": "https://webpseditor.com/zh/tutorials/how-to-cutout-png"
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "为什么导出后背景又是白色的？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "因为存成了 JPG。JPG 存不了透明，编码器会把透明通道填成白色——抠图本身没问题。工程还开着就重新导出 PNG 或 WebP；工程已经关了，只能重做，因为那张 JPEG 已经把空像素焊成白像素了。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "功率（Power）该从多少开始？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "干净棚拍背景用默认 15。背景有渐变或阴影时，以 5 为步长往上加，只在需要的地方加。超过 50 左右，橡皮擦开始把主体的中间调当背景吃。真需要更高，说明背景对一键抠图来说太不匀，改用橡皮擦更快。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "商品底部的投影能留下吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "能。用低功率点背景，只清掉平整的底色，看到投影就停。投影留在图层上，或者用选择工具框出来剪到新图层、降低那层的不透明度。留着渐变的投影看起来像放在了真实台面上，硬边投影一看就是贴上去的。"
+      }
+    }
+  ]
+}
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -21,41 +72,43 @@
         .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
         .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
         h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
-        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        h3 { color: #0f172a; font-size: 16px; margin: 20px 0 6px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
         .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
         .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
         .cta-btn:hover { background: var(--primary-hover); }
         .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
         .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
-        .tip-box { background: #fffbeb; border: 1px solid #fef3c7; border-radius: 8px; padding: 14px 18px; color: #92400e; font-size: 14px; margin: 20px 0; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .compare { display: flex; gap: 12px; }
+        .compare figure { flex: 1; margin: 0; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #991b1b; }
+        .mistake-box ul { margin: 8px 0 0; padding-left: 20px; }
+        .mistake-box li { margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 14px; }
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
-        article figure { margin: 18px 0; text-align: center; }
-        article figure img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); }
-        article figcaption { font-size: 13px; color: var(--text-sub); margin-top: 8px; }
-        .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .tool-table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
-        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
-        .tool-table th { background: #f1f5f9; color: #0f172a; }
-        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; }
-        .mistake-box strong { color: #991b1b; }
-        .mistake-box li { color: #7f1d1d; font-size: 14px; margin-bottom: 6px; }
-        .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
-        .faq-item h3 { font-size: 15px; margin: 0 0 6px; color: #0f172a; }
-        .faq-item p { margin: 0; font-size: 14px; color: #334155; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { flex-direction: column; } }
         .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
         .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
         .related a:hover { border-color: var(--primary); }
-        article h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
-        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .compare { grid-template-columns: 1fr; } .related { grid-template-columns: 1fr; } }
+        @media (max-width: 640px) { .related { grid-template-columns: 1fr; } }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header-nav">
             <div style="display: flex; gap: 14px; align-items: center;">
-                <a href="../../index.html" class="back-link">← 网站首页</a>
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
                 <span style="color: #cbd5e1;">|</span>
                 <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
             </div>
@@ -65,80 +118,102 @@
             </div>
         </div>
 
-        <!-- 🔒 隐私信任安全背书 -->
         <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
-            <span>🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
         </div>
 
         <article>
-<h1>实战教程：3步轻松在线抠图并导出透明底PNG</h1>
+            <h1>3 步在线抠图并导出透明底 PNG</h1>
             <div class="meta-bar">
-                <span>难度：入门小白</span> • <span>耗时：2 分钟</span> • <span>输出格式：透明 PNG</span>
+                <span>难度：极简入门</span> &bull; <span>阅读：9 分钟</span> &bull; <span>更新：2026-11-13</span>
             </div>
 
             <div class="cta-box">
                 <div>
-                    <strong style="color:#1e40af; font-size:16px;">随时随地，纯浏览器极速抠图</strong>
-                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">零依赖，零插件，打开即用。</div>
+                    <strong style="color:#1e40af; font-size:16px;">抠图是两个动作，不是一步</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">去背景之后，还要保证导出时它真的透明</div>
                 </div>
-                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 开始抠图 →</a>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 开始抠图 &rarr;</a>
             </div>
 
-            <p>制作电商商品图、PPT 配图或专属表情包时，提取纯净透明的主体是最高频的需求。传统的 JPG 格式不支持透明度，必须将背景彻底剥离并保存为 PNG 格式。下面教你用 <strong>Web PSEditor</strong> 快速抠图的实用工作流，全程本地运算，图片绝不上传。</p>
+            <p>抠图不是一个动作，是两个：把背景去掉，然后保证去掉的部分在导出后依然是去掉的。失败几乎都发生在第二步——画布上主体已经分离干净，导出的文件却又带回来一个白框。</p>
 
-            <div class="compare">
-                <figure>
-                    <img src="../../images/tutorials/cutout-before.jpg" alt="浅蓝色纯色背景上的白色耳机商品图" loading="lazy">
-                    <figcaption>处理前：纯色背景上的商品图</figcaption>
-                </figure>
-                <figure>
-                    <img src="../../images/tutorials/cutout-after.jpg" alt="耳机主体抠图完成，棋盘格代表完全透明的背景" loading="lazy">
-                    <figcaption>处理后：主体分离，背景完全透明（棋盘格）</figcaption>
-                </figure>
-            </div>
-
-            <div class="step-card">
-                <div class="step-title">第一步：导入并解锁基础图层</div>
-                <p>打开 Web PSEditor，将图片拖入画板。右侧图层面板（Layers）会默认生成一个基础图层。确保右侧图层处于选中状态（点击图层高亮）。</p>
-            </div>
-
-            <div class="step-card">
-                <div class="step-title">第二步：魔术橡皮一键去背景</div>
-                <p>点击左侧工具栏的 <strong>魔术橡皮擦工具（魔棒图标）</strong>，在纯色背景上点一下——同色系像素瞬间全部消失。如果背景有渐变或柔和阴影，把顶部的 <strong>功率（Power）</strong> 调高到 <code>20 ~ 60</code>，再对边角残留处补点几下即可清理干净。遇到复杂边缘，这个编辑器没有套索：改用 <strong>选择工具</strong>（矩形）框住要删的区域，再点 <strong>【编辑】→【删除选区】</strong>；剩下的零碎用<strong>橡皮擦</strong>在小笔刷下沿边缘收掉。</p>
-                <figure>
-                    <img src="../../images/tutorials/cutout-editor-ui.jpg" alt="Web PSEditor 编辑器界面，魔术橡皮擦一键去除纯色背景" loading="lazy">
-                    <figcaption>魔术橡皮擦一键去除纯色背景，棋盘格即透明区域。</figcaption>
-                </figure>
-            </div>
-
-            <div class="step-card">
-                <div class="step-title">第三步：务必选 PNG 格式导出</div>
-                <p>点击 <strong>【文件】 -> 【导出】</strong>，格式选择 <strong>PNG</strong>（或 WebP）。JPG 不支持透明通道，存成 JPG 背景会自动变白。</p>
-            </div>
-
-            <h2>选区工具怎么选？一张表看懂</h2>
+            <h2>这个编辑器有的三个工具</h2>
+            <p>工具栏里没有套索，也没有多边形选区，对多数抠图来说够用了：</p>
             <table class="tool-table">
-                <tr><th>工具</th><th>适用场景</th><th>操作方式</th></tr>
-                <tr><td><strong>魔术橡皮擦</strong></td><td>纯色或渐变均匀背景（电商商品图、人像照）</td><td>单击即删同色像素，<strong>功率</strong> 控制容差大小</td></tr>
-                <tr><td><strong>选择工具</strong></td><td>边缘方正的物体、整块背景</td><td>拖出矩形选区，【编辑】→【删除选区】</td></tr>
-                <tr><td><strong>橡皮擦</strong></td><td>发丝、肩带、透明边缘等魔术橡皮擦吃不掉的残留</td><td>小笔刷在 200% 缩放下逐段涂抹，直接刷出透明</td></tr>
+                <tr><th>工具</th><th>适合什么</th><th>它实际做什么</th></tr>
+                <tr><td><strong>魔术橡皮擦</strong></td><td>纯色或近乎纯色的背景：商品图、棚拍人像、扫描件</td><td>把与你点击处颜色相近的像素变透明。<strong>功率</strong>即容差，默认 15。</td></tr>
+                <tr><td><strong>选择工具</strong></td><td>边缘方正、可以框住的物体</td><td>拖出矩形选区，再 <strong>【编辑】→【删除选区】</strong> 删掉框内像素。</td></tr>
+                <tr><td><strong>橡皮擦</strong></td><td>残余碎点、光晕、肩带边的最后一点背景</td><td>直接刷成透明。笔刷调小、放大画面，这是手工收尾。</td></tr>
             </table>
 
+            <div class="step-card">
+                <div class="step-title">第一步：打开图片</div>
+                <p>把文件拖到画布上，或 <strong>【文件】→【打开】</strong>。确认右侧图层面板里选中的是这张照片——下面所有工具都只作用于选中的图层。</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">第二步：用魔术橡皮擦去背景</div>
+                <p>选<strong>魔术橡皮擦</strong>，在背景最平的地方点一下。与取样颜色在容差内的像素立刻变透明，画布透出的棋盘格就是成功的标志。</p>
+                <p>两个设置决定这一下是干净还是毁图。<strong>功率</strong>是颜色容差：默认 15 只吃掉几乎同色的像素，背景有明暗过渡时得提到 25 到 40 才能吃到暗角。<strong>Contiguous</strong> 默认关闭，意味着擦除不受连通区域限制，整个图层里同色的都会被清掉——白底商品图上正合适；如果主体本身含有和背景一样的颜色，它会直接在主体上打洞，所以点之前先看一眼主体，颜色撞了就先把功率降下来。</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">第三步：收边（这里没有羽化）</div>
+                <p>这个编辑器<strong>没有羽化命令</strong>，桌面软件里那种柔边只能手动做：</p>
+                <p>1. 保持魔术橡皮擦的抗锯齿开启，它本身就会把边界软化一像素，大致等于 1 px 羽化的效果。<br>
+                2. 顽固光晕别靠调高功率，改成<strong>把功率降到 10 到 12 再点一次</strong>。提高容差会啃进主体，降低容差多点两次能保住边缘。<br>
+                3. 换<strong>橡皮擦</strong>、小笔刷，在 200% 缩放下沿轮廓慢慢走。慢，但收头发、肩带、透明边缘只有这一条路。<br>
+                4. 误删了一块，<code>Ctrl + Z</code> 能整体撤回——擦除是一次操作，不是一笔笔刷出来的。</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">第四步：导出 PNG</div>
+                <p><strong>【文件】→【导出】</strong>，选 PNG（或 WebP）。JPG 没有透明通道，编码时会把透明区域填成白色——这是「抠完导出又变白底」最常见的原因。工程还开着的时候，画布会一直显示棋盘格，正好把这个错误藏住，所以务必<strong>把导出的文件重新打开确认一次</strong>。</p>
+            </div>
+
+            <h2>为什么头发和玻璃特别难</h2>
+            <p>魔术橡皮擦靠颜色相似度工作，硬的边很好，软的边很糟。发丝上每一个像素都是主体色和背景色的混合：容差低到能保住发丝，就会留下一圈背景光晕；高到能清掉光晕，发丝就被吃掉。玻璃、烟雾、反光则是反过来的问题——你想去掉的那部分「背景」，恰恰是透过主体看见的。</p>
+            <p>这类主体现实的做法就是橡皮擦，小笔刷、200% 到 400%、短笔画贴着边走。花的是分钟而不是秒。如果这张图要印刷或者交给客户，这几分钟就是干净剪影和「每个尺寸都看得见毛边」的差别。</p>
+
+            <h2>导出之前，检查这四件事</h2>
+            <ul>
+                <li><strong>沿轮廓 200% 走一圈。</strong> 光晕在适应窗口下看不见，全尺寸下一眼就露。</li>
+                <li><strong>垫一个深色背景。</strong> 临时加一层深色图层垫在下面，白边立刻显形。</li>
+                <li><strong>重新打开导出的 PNG。</strong> 确认棋盘格还在，然后把临时图层删掉。</li>
+                <li><strong>按用途命名。</strong> <code>headphones-cutout-2000px.png</code> 比 <code>最终版2.png</code> 有用得多，半年后你会感谢自己。</li>
+            </ul>
+
             <div class="mistake-box">
-                <strong>⚠️ 这些坑别踩：常见错误清单</strong>
+                <strong>⚠️ 抠图会毁在这三处</strong>
                 <ul>
-                    <li><strong>导出成了 JPG</strong> —— Alpha 透明通道被丢弃，背景直接变白。导出时务必选 PNG 或 WebP。</li>
-                    <li><strong>渐变背景功率给太低</strong> —— 边角会留下淡淡的残影。把功率提到 30~60，对残留处补点几下。</li>
-                    <li><strong>不检查边缘就交付</strong> —— 放大到 200% 检查发丝、玻璃等半透明边缘，发现白边/色晕就降功率再擦一遍。</li>
+                    <li><strong>导出成 JPG</strong>——透明通道被丢弃，背景变白。请选 PNG 或 WebP。</li>
+                    <li><strong>导出前合并图层</strong>——并到不透明背景上，透明在写文件之前就没了。</li>
+                    <li><strong>为一个角落把功率拉满</strong>——能清掉角落的高容差同样会咬进主体。角落用低功率多点几次。</li>
                 </ul>
             </div>
 
+
+            <h2>抠完之后，第一次用在哪决定成败</h2>
+            <p>同一张抠图，放在白底上完美，放到深色卡片上立刻出现一圈浅色毛边——那是半透明的抗锯齿像素在白底上看不见、在暗底上变成了一圈亮边。所以验收不能只在编辑器里做：把抠好的图垫到<strong>目标背景</strong>上（深色卡片、彩色海报、深色 PPT 模板），看一眼边缘有没有出戏，再决定要不要回去补两笔橡皮擦。</p>
+            <p>另一个常见需求是缩放：抠出来的商品图要放在网页上，实际显示可能只有 300 像素宽。导出时按<strong>预期最大尺寸</strong>做，别按当前显示尺寸做——PNG 缩小是干净的，放大只会软。</p>
+
             <h2>常见问题 FAQ</h2>
-            <div class="faq-item"><h3>为什么导出后背景还是白色的？</h3><p>大概率是保存成了 JPG。JPG 不支持透明度——重新导出并把格式选为 PNG（或 WebP）即可。</p></div>
-            <div class="faq-item"><h3>背景有轻微渐变，一下没点干净怎么办？</h3><p>把顶部属性栏的 <strong>功率（容差）</strong> 调到 30~60 左右，再对残留区域补点。重复点击是安全的，随时可以 <code>Ctrl + Z</code> 撤销。</p></div>
-            <div class="faq-item"><h3>能保留商品底部的自然投影吗？</h3><p>可以。把功率调低，让工具只去除平坦的纯背景色；或者用橡皮擦沿投影边缘手动刷掉背景，绕开投影区域。</p></div>
-            <div class="faq-item"><h3>我的图片会被上传到服务器吗？</h3><p>不会。Web PSEditor 是 100% 纯客户端应用，图片只在你浏览器内存中处理，全程不离开你的设备。</p></div>
-            <div class="faq-item"><h3>哪些图片格式支持透明背景？</h3><p>PNG 和 WebP 都支持完整 Alpha 透明通道；GIF 只支持 1 位透明（边缘会有锯齿）；JPG 完全不支持。</p></div>
+            <div class="faq-item">
+                <h3>为什么导出后背景又是白色的？</h3>
+                <p>因为存成了 JPG。JPG 存不了透明，编码器会把透明通道填成白色——抠图本身没问题。工程还开着就重新导出 PNG 或 WebP；工程已经关了，只能重做，因为那张 JPEG 已经把空像素焊成白像素了。</p>
+            </div>
+            <div class="faq-item">
+                <h3>功率（Power）该从多少开始？</h3>
+                <p>干净棚拍背景用默认 15。背景有渐变或阴影时，以 5 为步长往上加，只在需要的地方加。超过 50 左右，橡皮擦开始把主体的中间调当背景吃。真需要更高，说明背景对一键抠图来说太不匀，改用橡皮擦更快。</p>
+            </div>
+            <div class="faq-item">
+                <h3>商品底部的投影能留下吗？</h3>
+                <p>能。用低功率点背景，只清掉平整的底色，看到投影就停。投影留在图层上，或者用选择工具框出来剪到新图层、降低那层的不透明度。留着渐变的投影看起来像放在了真实台面上，硬边投影一看就是贴上去的。</p>
+            </div>
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
 
             <h2>相关教程推荐</h2>
             <div class="related">
@@ -148,20 +223,14 @@
                 <a href="../tutorials/transparent-signature-extraction">手写签名透明底提取教程</a>
             </div>
 
-            <div class="tip-box">
-                <strong>💡 为什么我的背景存下来还是白色？</strong><br>
-                请务必检查导出时的格式设置。JPG 图片协议本身没有 Alpha 透明通道，只有 **PNG** 或 **WebP** 才能完美保留抠出来的透明图层！
-            </div>
-
-            <!-- 🎯 实战练习与安全导流 CTA 卡片 -->
             <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                        <span style="font-size: 18px;">🎯</span>
+                        <span style="font-size: 18px;">&#127919;</span>
                         <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
                         <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">无需安装软件，立即在浏览器中应用本篇所学技巧，纯本地处理无隐私泄露风险。</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">抠一张商品图，垫深色图层在 200% 下查光晕，然后导出 PNG 并重新打开确认。</p>
                 </div>
                 <div>
                     <a href="../../editor.html?lang=zh" class="practice-btn">
@@ -172,18 +241,5 @@
             </div>
         </article>
     </div>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {"@type": "Question", "name": "为什么导出后背景还是白色的？", "acceptedAnswer": {"@type": "Answer", "text": "大概率是保存成了 JPG。JPG 不支持透明度，重新导出并把格式选为 PNG（或 WebP）即可。"}},
-        {"@type": "Question", "name": "背景有轻微渐变，一下没点干净怎么办？", "acceptedAnswer": {"@type": "Answer", "text": "把功率（容差）调到 30~60 左右，再对残留区域补点，随时可以 Ctrl+Z 撤销。"}},
-        {"@type": "Question", "name": "能保留商品底部的自然投影吗？", "acceptedAnswer": {"@type": "Answer", "text": "可以。调低功率只去除平坦纯背景色，或用橡皮擦沿投影边缘刷掉背景，绕开投影区域。"}},
-        {"@type": "Question", "name": "我的图片会被上传到服务器吗？", "acceptedAnswer": {"@type": "Answer", "text": "不会。Web PSEditor 是 100% 纯客户端应用，图片只在浏览器内存中处理，全程不离开设备。"}},
-        {"@type": "Question", "name": "哪些图片格式支持透明背景？", "acceptedAnswer": {"@type": "Answer", "text": "PNG 和 WebP 支持完整 Alpha 透明通道；GIF 只支持 1 位透明；JPG 不支持。"}}
-      ]
-    }
-    </script>
 </body>
 </html>

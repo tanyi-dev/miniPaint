@@ -3,14 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>照片调色入门：亮度、对比度与饱和度 - Web PSEditor</title>
-    <meta name="description" content="在线免费照片调色教程：使用纯网页图片编辑器 Web PSEditor 调整亮度、对比度、饱和度与锐度，拯救灰暗发闷的照片，全程浏览器本地处理不上传。" />
+    <title>照片调色入门：拯救灰暗发闷的照片 - Web PSEditor</title>
+    <meta name="description" content="手机照片为什么发灰、自动调整什么时候会帮倒忙、六个滑块该按什么顺序动，以及这个编辑器没有曲线和色温时该怎么救偏色。" />
     <link rel="icon" sizes="192x192" href="../../images/favicon.png">
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="canonical" href="https://webpseditor.com/zh/tutorials/photo-color-correction" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/photo-color-correction" />
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/photo-color-correction" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/photo-color-correction" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "照片调色入门：拯救灰暗发闷的照片",
+  "description": "手机照片为什么发灰、自动调整什么时候会帮倒忙、六个滑块该按什么顺序动，以及这个编辑器没有曲线和色温时该怎么救偏色。",
+  "author": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Web PSEditor"
+  },
+  "datePublished": "2026-11-13",
+  "dateModified": "2026-11-13",
+  "mainEntityOfPage": "https://webpseditor.com/zh/tutorials/photo-color-correction"
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "自动调整之后照片更糟了，为什么？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "它会把画面推到约 1% 近白、0.5% 近黑。这对中间调照片有效，对本来就有亮天空、白纸的场景无效——工具没地方可推，就直接切掉高光。先看直方图：任意一端已经贴边，就跳过自动调整，手动动滑块。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "先调亮度还是先调对比？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "亮度在前，对比在后，饱和度最后，而偏色要在这一切之前。先加对比会把色阶拉开，之后再提亮就直接把高光推进溢出；饱和度会放大已有的偏色，所以三个通道必须先处理。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "同一张图在手机和电脑上不一样，哪个准？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "都不权威。手机屏的伽马、色域、自动亮度各不相同，同一张图在 30% 亮度的手机上就是会比校准过的显示器寡淡。判断依据换成「同一块屏幕上的中性灰」，别追着某个设备的效果调。"
+      }
+    }
+  ]
+}
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -22,7 +73,8 @@
         .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
         h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
         h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
-        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        h3 { color: #0f172a; font-size: 16px; margin: 20px 0 6px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
         .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
         .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
         .cta-btn:hover { background: var(--primary-hover); }
@@ -34,6 +86,10 @@
         .compare { display: flex; gap: 12px; }
         .compare figure { flex: 1; margin: 0; }
         .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .mistake-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #991b1b; }
+        .mistake-box ul { margin: 8px 0 0; padding-left: 20px; }
+        .mistake-box li { margin-bottom: 6px; }
+        .faq-item { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 14px; }
         .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
         .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
         .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
@@ -42,68 +98,112 @@
         .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
         .related a:hover { border-color: var(--primary); }
         @media (max-width: 640px) { .related { grid-template-columns: 1fr; } }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header-nav">
             <div style="display: flex; gap: 14px; align-items: center;">
-                <a href="../../index.html" class="back-link">← 网站首页</a>
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
                 <span style="color: #cbd5e1;">|</span>
                 <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
             </div>
-            <div class="lang-switch"><span class="lang-btn active">中文</span>
-                <a href="https://webpseditor.com/tutorials/photo-color-correction" class="lang-btn" style="text-decoration:none;">English</a></div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/photo-color-correction" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
         </div>
 
-        <!-- 隐私信任安全背书 -->
         <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
-            <span>🔒 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
         </div>
 
         <article>
-<h1>实战教程：照片调色入门——拯救灰暗发闷的照片</h1>
-            <div class="meta-bar"><span>难度：极简入门</span> • <span>耗时：2 分钟</span> • <span>适用：手机直出照片、电商图</span></div>
+            <h1>照片调色入门：拯救灰暗发闷的照片</h1>
+            <div class="meta-bar">
+                <span>难度：极简入门</span> &bull; <span>阅读：9 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
 
             <div class="cta-box">
                 <div>
-                    <strong style="color:#1e40af; font-size:16px;">灰暗照片就地拯救！</strong>
-                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">纯浏览器本地调色，原图不上传。</div>
+                    <strong style="color:#1e40af; font-size:16px;">发灰不是手机差，是曲线保守</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">先看直方图，再按「偏色 → 亮度 → 对比 → 饱和」动手</div>
                 </div>
-                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 调色 →</a>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 开始调色 &rarr;</a>
             </div>
 
-            <p>手机直出的照片常常发灰、发闷——不是你拍得不好，而是相机为了保留细节故意「拍得保守」。只要做一次简单的<strong>亮度、对比度、饱和度</strong>调整，画面立刻通透起来。网上很多在线调色工具会把你照片上传到服务器处理，既慢又有隐私风险；<strong>Web PSEditor</strong> 的所有调色运算都在你的浏览器本地完成，大图也秒开秒调。</p>
-            <h2>先看效果：调色前 vs 调色后</h2>
-            <div class="compare">
-                <figure>
-                    <img src="../../images/tutorials/color-before.jpg" alt="调色前的咖啡照片，颜色平淡发灰" loading="lazy">
-                    <figcaption>调色前：原始照片，画面平淡</figcaption>
-                </figure>
-                <figure>
-                    <img src="../../images/tutorials/color-after.jpg" alt="调色后：亮度、对比度与饱和度提升后的效果" loading="lazy">
-                    <figcaption>调色后：通透鲜亮</figcaption>
-                </figure>
-            </div>
-            <h2>第一步：导入照片</h2>
-            <figure>
-                <img src="../../images/tutorials/color-editor-ui.jpg" alt="Web PSEditor 中文界面，画布中已载入待调色的咖啡照片" loading="lazy">
-                <figcaption>Web PSEditor 编辑器界面：样图已载入</figcaption>
-            </figure>
-            <p>打开 <a href="../../editor.html?lang=zh" target="_blank">Web PSEditor</a>，点击 <strong>【文件】→【打开图片】</strong> 导入照片。</p>
+            <p>手机拍出来的照片发灰，不是手机差。相机为了不让高光爆掉，会保守曝光，再套一条留余量的对比曲线——结果是细节全在，观感发闷。修它有顺序，顺序错了，越调越糟。</p>
+
+            <h2>「自动调整颜色」到底做了什么</h2>
+            <p>它不是一个懂画面的智能滤镜。它的做法是：把每个通道整体乘一个系数，直到大约 1% 的像素接近纯白，再在黑端做一遍、让约 0.5% 的像素接近纯黑，最多重复十轮。说白了，就是把色阶拉开，让画面用满 0 到 255，而不是挤在中间一小段。</p>
+            <p>这对一张光线均匀的中间调照片正好对，对另外两类场景正好错：画面里本来就有白纸、雪、亮天空时，1% 的近白像素已经存在，工具只能把中间调往上推——天空先溢出，颜色变粉；夜景几乎没有近白像素，工具会一直乘下去，把黑变成灰噪。</p>
+            <p>还有一点副作用：因为它是乘法，饱和度会被顺带拉高。本来就偏暖的人像，这一步就是「自然肤色」和「一脸橙」的分界。</p>
+
+            <h2>动手之前，先看一眼直方图</h2>
+            <p>点 <strong>【图片】→【直方图】</strong>。图形直接告诉你是哪种病：</p>
+            <ul>
+                <li><strong>全挤在中间、两端空着</strong>——真·发平，自动调整正合适。</li>
+                <li><strong>左边贴死 0</strong>——暗部已经压死，提亮只会提出噪点，救不回细节。</li>
+                <li><strong>右边被削平</strong>——高光已经爆了，任何滑块都拿不回来，只能下次拍暗一点。</li>
+                <li><strong>某个颜色通道单独出尖峰</strong>——那个通道先爆，通常是偏色而不是曝光问题。</li>
+            </ul>
+
+            <h2>六个滑块，按这个顺序动</h2>
+            <p>点 <strong>【图片】→【颜色校正】</strong>，一个面板里六组参数。顺序比数值更重要，因为每一步都会改变下一步看到的东西。</p>
+
             <div class="step-card">
-                <div class="step-title">第二步：一键自动增强（懒人首选）</div>
-                <p>点击顶部菜单 <strong>【图像 (Image)】→【自动调整 (Auto Adjust)】</strong>，编辑器会分析直方图并自动校正曝光与对比度。大部分照片这一步就能解决 80% 的问题。</p>
+                <div class="step-title">1. 先修偏色（红 / 绿 / 蓝）</div>
+                <p>三个通道各是 −255 到 +255。在画面里找一个「本该是中性」的东西——白纸、灰墙、白衬衫——哪个通道过强就往下拉。钨丝灯下常见是红多蓝少：红降一点、蓝升一点，小步走，盯着那块中性区域看它褪掉染色。</p>
             </div>
+
             <div class="step-card">
-                <div class="step-title">第三步：手动精修三滑块</div>
-                <p>想要更个性化的效果，点击 <strong>【图片】→【颜色校正 (Color Corrections)】</strong>：<br>1. <strong>亮度（Brightness）</strong>：整体提亮，建议 +5 ~ +15，过亮会丢失高光细节。<br>2. <strong>对比度（Contrast）</strong>：让画面「立起来」，建议 +10 ~ +25。<br>3. <strong>饱和度（Saturation）</strong>：让色彩更鲜艳，建议 +10 ~ +30，人像慎用以免肤色发橙。<br>4. 最后加一点 <strong>锐化（Sharpen）</strong>，数值 30~60 即可，细节立刻清晰。</p>
+                <div class="step-title">2. 先亮度，再对比</div>
+                <p>亮度和对比都是 −100 到 +100。先把中间调提到顺眼，再加对比让它不再发闷。反过来的话，对比会把已有的提亮放大，高光直接切掉。示例图 +8 亮度、+15 对比就够了。</p>
             </div>
+
             <div class="step-card">
-                <div class="step-title">第四步：导出</div>
-                <p>点击 <strong>【文件】→【导出】</strong>，JPG 质量 85 以上即可发布。建议保留原图，调色版另存，方便日后重新调整。</p>
+                <div class="step-title">3. 饱和度放最后，而且克制</div>
+                <p>同样 −100 到 +100。判断标准是画面里<strong>最饱和的那个物体</strong>，不是平均值——红杯子早就满了，米色墙还没动。肤色永远最先变橙，确认之前把脸放到 100% 看。</p>
             </div>
-            <div class="tip-box">💡 <strong>调色口诀：先自动，后手动；先亮度，后色彩；每次只微调一点，反复对比效果。</strong></div>
+
+            <div class="step-card">
+                <div class="step-title">4. 明度和色相，留给特定问题</div>
+                <p>明度只提亮度、不动饱和度，适合「一提亮颜色就发白」的照片。色相是把所有颜色一起转（−180 到 180 度），是个粗糙工具，但对付水下发绿、荧光灯发绿最快——先转回中性，再回通道里微调。</p>
+            </div>
+
+            <h2>这个编辑器没有的东西，先知道少走弯路</h2>
+            <p>没有曲线、没有单独的色温与色调滑块、没有选区局部调整——所有校正都作用在整个图层上。这不是缺点，是边界。知道边界，方法就清楚了：严重的偏色就是通道平衡的活；只想改局部，就复制一层、擦回不想改的区域。</p>
+            <p>如果发闷的原因是雾而不是曝光，滑块帮不上太多：提对比只会先加灰。更有效的两步是 <strong>【特效】→【饱和度】</strong>（对应英文界面的 Vibrance，比颜色校正里的饱和度滑块温和，专提寡淡的颜色；中文界面里它和常见滤镜的「饱和度」同名，位置在特效菜单下半段），以及缩放之后补一道 <strong>【特效】→【锐化】</strong>，把雾带走的那点局部对比找回来。两个都是一次性操作，想对比效果就先复制图层。</p>
+
+            <h2>导出时留好原图</h2>
+            <p>最后 <strong>【文件】→【导出】</strong>，JPG 质量 85 以上。原图务必留着：校正一旦确认就焊进像素了，想重调得从原图开始，而不是从导出的 JPG 开始。要印刷或还要再编辑的，导出 PNG——每存一次 JPG，刚找回来的渐变细节就再丢一点。</p>
+
+
+            <h2>第二个判断：白点在哪</h2>
+            <p>直方图告诉你色阶分布，但有一件事它不说：画面里最亮的那块，到底是「该白的白」还是「本来就该是灰的」。这个判断错了，整张图的曝光基准就错了。</p>
+            <p>做法是找一个<strong>你确定它现实里是白色</strong>的东西——打印纸、白衬衫、墙上的开关面板——把它的 RGB 读数调到接近 250 以上。如果画面里根本没有白色物体，就用「记忆里的中间调」当基准：草地、天空、皮肤，都行，但要接受它只能对个大概。</p>
+            <p>还有一个容易忽略的前提：<strong>屏幕亮度</strong>。在亮度 30% 的笔记本上把图调到「看着亮」，换到手机上就是过曝。调色前先把屏幕调到 70% 左右，并且关掉系统里的「根据环境自动调亮度」，否则你每次判断的基准都在变。</p>
+
+            <h2>常见问题 FAQ</h2>
+            <div class="faq-item">
+                <h3>自动调整之后照片更糟了，为什么？</h3>
+                <p>它会把画面推到约 1% 近白、0.5% 近黑。这对中间调照片有效，对本来就有亮天空、白纸的场景无效——工具没地方可推，就直接切掉高光。先看直方图：任意一端已经贴边，就跳过自动调整，手动动滑块。</p>
+            </div>
+            <div class="faq-item">
+                <h3>先调亮度还是先调对比？</h3>
+                <p>亮度在前，对比在后，饱和度最后，而偏色要在这一切之前。先加对比会把色阶拉开，之后再提亮就直接把高光推进溢出；饱和度会放大已有的偏色，所以三个通道必须先处理。</p>
+            </div>
+            <div class="faq-item">
+                <h3>同一张图在手机和电脑上不一样，哪个准？</h3>
+                <p>都不权威。手机屏的伽马、色域、自动亮度各不相同，同一张图在 30% 亮度的手机上就是会比校准过的显示器寡淡。判断依据换成「同一块屏幕上的中性灰」，别追着某个设备的效果调。</p>
+            </div>
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
 
             <h2>相关教程推荐</h2>
             <div class="related">
@@ -112,15 +212,15 @@
                 <a href="../tutorials/layer-blend-modes-guide">图层混合模式指南（正片叠底/滤色/叠加）</a>
                 <a href="../tutorials/add-text-watermark">给照片添加文字水印</a>
             </div>
-            <!-- 实战练习与安全导流 CTA 卡片 -->
-            <div class="practice-cta-card">
+
+            <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-                        <span style="font-size: 18px;">🎯</span>
+                        <span style="font-size: 18px;">&#127919;</span>
                         <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
                         <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">打开编辑器，用你自己的照片按步骤调色，全程无需注册、无需上传。</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">找一张室内拍的照片，先用三个通道把白墙修成中性，再按顺序调亮度、对比和饱和度。</p>
                 </div>
                 <div>
                     <a href="../../editor.html?lang=zh" class="practice-btn">
