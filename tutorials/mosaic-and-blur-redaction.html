@@ -188,6 +188,10 @@
             <div class="step-card">
                 <div class="step-title">Method 2: Gaussian blur</div>
                 <p>Also on a duplicated layer: <strong>Effects → Common Filters → Gaussian Blur</strong>. The single <strong>Percentage</strong> slider runs 0–50. Because this is a live layer filter, the blur stays adjustable after you apply it — unlike Mosaic, which rewrites the pixels. That flexibility is convenient while you work and risky if the project file ever leaves your machine, so export a flattened copy for anything you publish.</p>
+            <figure>
+                <img src="../../images/tutorials/mosaic-editor-ui-en.jpg" alt="The scanned contract open in the editor, with the blur tool selected" loading="lazy">
+                <figcaption>Contract open in the editor — apply the effect on a duplicate layer</figcaption>
+            </figure>
             </div>
 
             <div class="step-card">
@@ -200,7 +204,12 @@
                 <p>Add a layer, choose the <strong>Shape tool</strong> with a rectangle, and fill it with a colour close to the page background. Draw it from a few pixels above the first character to a few pixels below the last, and wider than the text on both sides. A solid block carries no information at all, survives screenshots and re-compression, and is the only method that stays safe under a legal review.</p>
             </div>
 
-            <h2>Cover More Than the Text</h2>
+                        <figure>
+                <img src="../../images/tutorials/mosaic-after.jpg" alt="Signature area fully blurred beyond recognition" loading="lazy">
+                <figcaption>Result: the signature is unreadable in the exported file</figcaption>
+            </figure>
+
+<h2>Cover More Than the Text</h2>
             <p>Most failed redactions are not a weak blur; they are a tight box. Four things sit outside the glyphs and each one can leak:</p>
             <ul>
                 <li><strong>Antialiased edges.</strong> Text is rendered with soft edges, and those edge pixels fall outside the letter but inside the reading. Extend the cover three to five pixels past every side.</li>
