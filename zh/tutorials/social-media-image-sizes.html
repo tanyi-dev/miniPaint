@@ -161,7 +161,11 @@
             <p>头像上的圆形裁切同理：平台把方图裁成圆，四角等于废了。名字、Logo 的基座、任何关键元素，都要留在中心区域。横幅则会被手机端的头像压住左边缘，而且屏幕越窄裁得越紧——把关键信息放在中间 60% 的范围内，各种视口都能活。</p>
             <p>把外面那圈当「出血」处理：填背景、纹理、虚化的照片，永远不要放信息。</p>
 
-            <h2>在编辑器里：两刀定尺寸</h2>
+                        <figure>
+                <img src="../../images/tutorials/social-editor-ui.jpg" alt="编辑器界面，裁剪与尺寸功能都在图片菜单" loading="lazy">
+                <figcaption>裁剪与尺寸功能都在【图片】菜单</figcaption>
+            </figure>
+<h2>在编辑器里：两刀定尺寸</h2>
 
             <div class="step-card">
                 <div class="step-title">第一步：自由裁剪，先定构图</div>
@@ -179,7 +183,17 @@
                 <p><strong>【文件】→【导出】</strong>，JPG 质量 85 以上。一个位置一个文件，命名按用途来：<code>头像-1x1</code>、<code>封面-3x1</code>。下次平台改版，你不用再反推哪个文件是哪个。</p>
             </div>
 
-            <h2>分辨率、DPI 和体积，三个数只有一个重要</h2>
+                        <div class="compare">
+                <figure>
+                    <img src="../../images/tutorials/social-square.jpg" alt="1:1 正方形头像裁剪示意" loading="lazy">
+                    <figcaption>1:1 正方形头像裁剪</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/social-cover.jpg" alt="16:9 横版封面裁剪示意" loading="lazy">
+                    <figcaption>16:9 横版封面裁剪</figcaption>
+                </figure>
+            </div>
+<h2>分辨率、DPI 和体积，三个数只有一个重要</h2>
             <p><strong>像素尺寸</strong>决定文件里有多少细节，它才决定画面清不清晰，也是在「调整大小」里要设的那个数。<strong>DPI</strong> 只告诉打印机每英寸排多少点，屏幕上毫无作用——把一个 600 像素的文件导出成「300 DPI」，它还是 600 像素，只是换了个标签。<strong>体积</strong>是上传限制关心的东西：1080 像素的照片按质量 85 导出，通常落在 150KB 到 400KB 之间，低于所有常见上限。</p>
             <p>真正丢清晰度的地方是<strong>二次压缩</strong>。每个平台都会重新编码你的上传，一张已经存成质量 60、又被平台按 80 压一遍的图，块状噪点会叠加。一次高质量导出，让平台压它那一次，然后别再去保存平台返回的结果。把预览截屏再上传，是最常见的自毁画质方式。</p>
             <p>纯色底加文字这类扁平图形（封面横幅、Logo 头像）用 PNG，避开 JPG 在硬边上的糊化，而且颜色少、体积也不大。照片一律 JPG 更小。平台接受 WebP 的话，同等观感下通常只要三分之一的字节，但手上永远留一份 JPG 兜底——不是每个上传框都认。</p>

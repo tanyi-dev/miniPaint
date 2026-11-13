@@ -138,7 +138,17 @@
 
             <p>手上是白底照片，表格要蓝底；或者照片是蓝的，签证处非要白。换颜色是五分钟的活，但被接受的那张图还有别的规矩：像素尺寸要精确、底色要平、头发边上不能留一圈旧颜色。任一条不合，退回的理由通常和你的脸毫无关系。</p>
 
-            <h2>先记住标准色值，别用眼睛挑</h2>
+                        <div class="compare">
+                <figure>
+                    <img src="../../images/tutorials/idphoto-before.jpg" alt="原始蓝底证件照" loading="lazy">
+                    <figcaption>处理前：原始蓝底证件照</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/idphoto-after.jpg" alt="同一张证件照换成标准红底" loading="lazy">
+                    <figcaption>处理后：换成标准红底</figcaption>
+                </figure>
+            </div>
+<h2>先记住标准色值，别用眼睛挑</h2>
             <p>自动校验会取样背景，偏差超过窄范围就判不合格。你看着「够蓝」的颜色，在某个通道上可能差 30 个点：</p>
             <ul>
                 <li><strong>标准蓝底：</strong>RGB(67, 142, 219) / <code>#438EDB</code>——毕业证、工作证、简历、驾照</li>
@@ -158,6 +168,11 @@
                 <div class="step-title">第二步：魔术橡皮擦擦掉旧底</div>
                 <p>选<strong>魔术橡皮擦</strong>，<strong>功率</strong>就是容差，默认 15。先在背景最平的地方点一下，同色像素立刻透明，棋盘格就是擦掉了。证件照背景常有轻微明暗过渡，起步用低功率，暗角单独多点几次，而不是一次性把功率拉高——拉高会连肩膀一起吃。</p>
                 <p><strong>Contiguous</strong> 默认关闭，意味着它清掉整层里所有同色像素，不限于你点的那片连通区域。人像上这点很重要：如果衣服是浅灰、接近背景色，高功率会直接在衣服上开洞。点之前先把肩膀放大看一眼。</p>
+            <figure>
+                <img src="../../images/tutorials/idphoto-editor-ui.jpg" alt="编辑器界面中魔术橡皮擦正在处理证件照背景" loading="lazy">
+                <figcaption>擦掉旧底后，画布透出棋盘格</figcaption>
+            </figure>
+
             </div>
 
             <div class="step-card">

@@ -138,7 +138,17 @@
 
             <p>抠图不是一个动作，是两个：把背景去掉，然后保证去掉的部分在导出后依然是去掉的。失败几乎都发生在第二步——画布上主体已经分离干净，导出的文件却又带回来一个白框。</p>
 
-            <h2>这个编辑器有的三个工具</h2>
+                        <div class="compare">
+                <figure>
+                    <img src="../../images/tutorials/cutout-before.jpg" alt="纯色背景上的商品照片" loading="lazy">
+                    <figcaption>处理前：纯色背景上的商品图</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/cutout-after.jpg" alt="抠图后主体独立，背景显示为透明棋盘格" loading="lazy">
+                    <figcaption>处理后：背景完全透明（棋盘格）</figcaption>
+                </figure>
+            </div>
+<h2>这个编辑器有的三个工具</h2>
             <p>工具栏里没有套索，也没有多边形选区，对多数抠图来说够用了：</p>
             <table class="tool-table">
                 <tr><th>工具</th><th>适合什么</th><th>它实际做什么</th></tr>
@@ -156,6 +166,11 @@
                 <div class="step-title">第二步：用魔术橡皮擦去背景</div>
                 <p>选<strong>魔术橡皮擦</strong>，在背景最平的地方点一下。与取样颜色在容差内的像素立刻变透明，画布透出的棋盘格就是成功的标志。</p>
                 <p>两个设置决定这一下是干净还是毁图。<strong>功率</strong>是颜色容差：默认 15 只吃掉几乎同色的像素，背景有明暗过渡时得提到 25 到 40 才能吃到暗角。<strong>Contiguous</strong> 默认关闭，意味着擦除不受连通区域限制，整个图层里同色的都会被清掉——白底商品图上正合适；如果主体本身含有和背景一样的颜色，它会直接在主体上打洞，所以点之前先看一眼主体，颜色撞了就先把功率降下来。</p>
+            <figure>
+                <img src="../../images/tutorials/cutout-editor-ui.jpg" alt="魔术橡皮擦点击纯色背景后，画布露出棋盘格透明区域" loading="lazy">
+                <figcaption>魔术橡皮擦一点，棋盘格就是被擦掉的部分</figcaption>
+            </figure>
+
             </div>
 
             <div class="step-card">

@@ -145,7 +145,11 @@
                 <li><strong>只是分享照片</strong>（人、风景、商品）→ JPG 质量 85，体积极小，肉眼几乎无差。</li>
             </ul>
 
-            <h2>两种格式各自丢掉了什么</h2>
+                        <figure>
+                <img src="../../images/tutorials/format-png-vs-jpg.jpg" alt="同一张照片存为无损 PNG 与高压缩 JPG 的体积与画质对比" loading="lazy">
+                <figcaption>左：PNG 无损（体积大）· 右：JPG 高压缩（体积小但有噪点）</figcaption>
+            </figure>
+<h2>两种格式各自丢掉了什么</h2>
             <p>PNG 是无损的。每个像素原样存下来，再用一套预测滤波加 DEFLATE 压缩——思路和压缩一个文本文件一样。打开、保存一百次，第一百个文件与第一个完全一致。这就是它适合做工作格式的原因：截图、Logo、抠图、还要再编辑的图层导出。</p>
             <p>JPG 是有损的，而且丢得很规律。图像被切成 8×8 的块，每块转成频率信息，高频——细节、硬边、细腻渐变——按质量值被量化掉。平滑区域压得极好，两色之间的突变压得很差，这就是为什么文字在 JPG 里会出彩边，红 Logo 压在白底上边界会发糊。</p>
             <p>由此得到一个反直觉的结论：<strong>JPG 的质量不是线性旋钮</strong>。100 到 90 之间体积掉得飞快而画面几乎没变；90 到 80 继续掉、照片仍然好看；70 以下曲线就平了——省下的只有几个百分点，换来的是天空里的方块、灯光周围的条纹、高对比边缘的蚊噪。为了卡体积把质量调到 40 的人，是在用可见的损伤，换一个本来靠裁掉 10% 画幅就能拿到的节省。</p>
@@ -164,6 +168,11 @@
             <div class="step-card">
                 <div class="step-title">第一步：打开导出面板</div>
                 <p>编辑完成后点 <strong>【文件】→【导出】</strong>，填文件名，选 PNG 还是 JPG。（顺便说清：<strong>【文件】→【另存为】</strong> 保存的是可再编辑的工程文件，不能当图片用。）</p>
+            <figure>
+                <img src="../../images/tutorials/format-editor-ui.jpg" alt="文件菜单中的导出入口" loading="lazy">
+                <figcaption>导出入口在【文件】→【导出】</figcaption>
+            </figure>
+
             </div>
 
             <div class="step-card">

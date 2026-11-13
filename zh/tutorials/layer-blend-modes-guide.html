@@ -142,7 +142,17 @@
             <p>清单里大约一半是<strong>颜色运算</strong>：正片叠底、滤色、叠加、变暗、变亮、柔光、强光、差值、排除、色相、饱和度、颜色、明度。它们把两层的颜色按公式结合，两层都还看得见。</p>
             <p>另一半是<strong>合成操作</strong>，来自 canvas 本身的规则：source-over、destination-out、source-atop、destination-in、xor 之类。它们根本不混色，只决定「这个像素画不画上去」。destination-out 放在上层，等于在它下面所有东西上打一个洞——用它从一叠图层里切形状，意外地好用。把这两族搞混，就会变成：在清单里滚来滚去，挑一个听起来对的，得到一个透明矩形。</p>
 
-            <h2>值得背下来的五个</h2>
+                        <div class="compare">
+                <figure>
+                    <img src="../../images/tutorials/blend-before.jpg" alt="纹理图层以正常方式叠在照片上" loading="lazy">
+                    <figcaption>处理前：正常模式叠加</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/blend-after.jpg" alt="正片叠底后白色消失，纹理与照片融合" loading="lazy">
+                    <figcaption>处理后：正片叠底</figcaption>
+                </figure>
+            </div>
+<h2>值得背下来的五个</h2>
             <table class="tool-table">
                 <tr><th>模式</th><th>它做什么</th><th>典型用法</th></tr>
                 <tr><td><strong>正片叠底</strong></td><td>颜色相乘，白色消失，暗部保留</td><td>签名、线稿、手绘叠在文档上，不用擦白底</td></tr>
@@ -160,6 +170,11 @@
             <div class="step-card">
                 <div class="step-title">第二步：打开合成面板</div>
                 <p>选中上层，点 <strong>【图层】→【合成】</strong>。面板列出所有模式，选中时画布会实时预览，可以逐个比对再决定，不用先确认再看结果。</p>
+            <figure>
+                <img src="../../images/tutorials/blend-editor-ui.jpg" alt="图层合成面板中选择混合模式，画布实时预览" loading="lazy">
+                <figcaption>图层 → 合成：选模式，画布实时更新</figcaption>
+            </figure>
+
             </div>
 
             <div class="step-card">

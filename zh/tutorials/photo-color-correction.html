@@ -138,7 +138,17 @@
 
             <p>手机拍出来的照片发灰，不是手机差。相机为了不让高光爆掉，会保守曝光，再套一条留余量的对比曲线——结果是细节全在，观感发闷。修它有顺序，顺序错了，越调越糟。</p>
 
-            <h2>「自动调整颜色」到底做了什么</h2>
+                        <div class="compare">
+                <figure>
+                    <img src="../../images/tutorials/color-before.jpg" alt="原始照片画面平淡发灰" loading="lazy">
+                    <figcaption>处理前：平淡发灰</figcaption>
+                </figure>
+                <figure>
+                    <img src="../../images/tutorials/color-after.jpg" alt="校正后画面通透鲜亮" loading="lazy">
+                    <figcaption>处理后：通透鲜亮</figcaption>
+                </figure>
+            </div>
+<h2>「自动调整颜色」到底做了什么</h2>
             <p>它不是一个懂画面的智能滤镜。它的做法是：把每个通道整体乘一个系数，直到大约 1% 的像素接近纯白，再在黑端做一遍、让约 0.5% 的像素接近纯黑，最多重复十轮。说白了，就是把色阶拉开，让画面用满 0 到 255，而不是挤在中间一小段。</p>
             <p>这对一张光线均匀的中间调照片正好对，对另外两类场景正好错：画面里本来就有白纸、雪、亮天空时，1% 的近白像素已经存在，工具只能把中间调往上推——天空先溢出，颜色变粉；夜景几乎没有近白像素，工具会一直乘下去，把黑变成灰噪。</p>
             <p>还有一点副作用：因为它是乘法，饱和度会被顺带拉高。本来就偏暖的人像，这一步就是「自然肤色」和「一脸橙」的分界。</p>
@@ -154,6 +164,11 @@
 
             <h2>六个滑块，按这个顺序动</h2>
             <p>点 <strong>【图片】→【颜色校正】</strong>，一个面板里六组参数。顺序比数值更重要，因为每一步都会改变下一步看到的东西。</p>
+            <figure>
+                <img src="../../images/tutorials/color-editor-ui.jpg" alt="颜色校正面板中的六个参数组" loading="lazy">
+                <figcaption>颜色校正面板：六个参数组</figcaption>
+            </figure>
+
 
             <div class="step-card">
                 <div class="step-title">1. 先修偏色（红 / 绿 / 蓝）</div>
