@@ -11,6 +11,66 @@
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/photo-filters-one-click" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/photo-filters-one-click" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/photo-filters-one-click" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "One-Click Filters: Black & White, Vintage & Cinematic",
+      "description": "How black and white, vintage and cinematic filter presets work, how far to dial them back, and which look suits which subject, all processed in the browser.",
+      "datePublished": "2026-10-02",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/photo-filters-one-click"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why does skin turn orange when I apply a vintage filter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vintage presets warm the shadows and cool the highlights, then raise split-tone saturation. Skin sits in the orange-red range already, so it takes a double hit and drifts orange while the background still looks fine. Set the Level slider in the Vintage dialog to 40–60 (it previews live), or apply the preset to a duplicated layer and lower that layer's opacity. Then erase the effect over faces so the skin keeps its original hue."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much filter strength is too much?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If you can name the filter, it is too strong. On a Level or Percentage slider the useful range is roughly 40–70: the image reads as graded but nobody can point at a preset. Past 80 you start losing skin texture, shadows block up, and highlights clip to flat white with no recoverable detail."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I get a convincing black and white conversion instead of a flat grey one?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Desaturating alone averages the colour channels, which flattens everything that was distinguished only by hue. Convert with Effects → Common Filters → Grayscale, then fix tonal separation: if a blue sky and a grey roof land on the same brightness, darken the sky or lighten the roof before or after the conversion. Add contrast last, in small steps, so you do not crush the shadows you just separated."
+          }
+        }
+      ]
+    }
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -63,7 +123,7 @@
 
         <article>
 <h1>One-Click Filters: Black & White, Vintage & Cinematic</h1>
-            <div class="meta-bar"><span>Difficulty: Beginner</span> • <span>Time: 1 min</span> • <span>Great for: social posts, avatars, wallpapers</span></div>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Beginner</span> • <span>7 min read</span> • <span>Updated: 13 Nov 2026</span></div>
 
             <div class="cta-box">
                 <div>
@@ -74,6 +134,12 @@
             </div>
 
             <p>The same photo with the right filter becomes a completely different story: the restraint of black & white, the warmth of vintage, the drama of cinematic teal-and-orange. Filters are the cheapest way to make an image "pop". <strong>Web PSEditor</strong> ships with multiple one-click effects, all rendered locally in real time — experimenting costs nothing and undo is instant.</p>
+
+            <h2>What a Filter Actually Changes</h2>
+            <p>Most presets stack three separate operations: a <strong>tone split</strong> that pushes shadows one way and highlights another, a <strong>contrast curve</strong> that lifts or crushes the midtones, and a <strong>local touch</strong> such as a vignette, grain, or a slight blur at the frame edge. Once you know which of the three you are actually looking at, you can keep the part you like and drop the part that ruins the photo.</p>
+            <p>This matters because every preset was tuned on someone else's reference image. A vintage look built on a correctly exposed daylight shot will smear an indoor photo taken at ISO 3200, where the shadows already carry noise. The preset did not change; the input did. That is the single reason one-click results look great on the sample and wrong on your file.</p>
+            <p>Treat the filter as a starting position. Apply it, then ask three questions in order: is the colour direction right, is the contrast right, is the strength right. Fix them in that order and you will almost never need to hunt for a different preset.</p>
+
             <h2>Four Popular Looks at a Glance</h2>
             <figure>
                 <img src="../../images/tutorials/filters-grid.jpg" alt="Four filter styles compared on one photo: original, B&W, vintage, cinematic" loading="lazy">
@@ -86,21 +152,70 @@
             </figure>
             <div class="step-card">
                 <div class="step-title">Step 1: Apply a Base Filter</div>
-                <p>Open a photo and click the <strong>Effects</strong> menu:<br>1. <strong>Black & White</strong>: pick a grayscale/desaturate effect — ideal for street, architecture and portraits.<br>2. <strong>Vintage</strong>: sepia/fade presets give an instant film vibe.<br>3. <strong>Cinematic</strong>: use teal-and-orange style presets with slightly raised contrast.</p>
+                <p>Open a photo and pick from the <strong>Effects</strong> menu:<br>1. <strong>Black & White</strong>: <em>Effects → Common Filters → Grayscale</em> — its <strong>Percentage</strong> slider lets you stop at 80 instead of flat grey, which keeps a little colour in the skin.<br>2. <strong>Vintage</strong>: <em>Effects → Vintage</em> or <em>Effects → Common Filters → Sepia</em> for an instant film vibe.<br>3. <strong>Cinematic</strong>: <em>Effects → Instagram Filters</em> (Lo-fi, Valencia, Clarendon) gives the higher-contrast teal-and-orange direction without manual curves.</p>
             </div>
             <div class="step-card">
                 <div class="step-title">Step 2: Dial Back the Intensity</div>
-                <p>Default filter strength is often too strong. Lower the effect layer's opacity to 50–70% in the layers panel, or paint parts back with the eraser for a stylish "partial color" look.</p>
+                <p>Most one-click presets land too strong. The dialogs for <em>Vintage</em>, <em>Grayscale</em>, <em>Vignette</em> and <em>Grains</em> each carry a <strong>Level</strong> or <strong>Percentage</strong> slider with a live preview — pull Vintage down to 50–70 and watch the skin before you confirm. The Instagram presets (Lo-fi, Valencia, Clarendon) have no slider: they bake in at full strength, so duplicate the layer first (<strong>Layer → Duplicate</strong>), apply the preset to the copy, then lower that layer's opacity in the layer panel.</p>
             </div>
             <div class="step-card">
                 <div class="step-title">Step 3: Layer Detail Effects</div>
-                <p>Add <strong>Vignette</strong> or a touch of <strong>grain/noise</strong> on top to double the film feel. Less is more.</p>
+                <p>Finish with <em>Effects → Vignette</em> (Level around 0.3–0.5, Size 0.5) to pull the eye inward, then <em>Effects → Grains</em> at Level 20–30 for the film feel. Both are strong at default settings; check them at 100% zoom rather than in a fitted preview, where grain looks like nothing and a vignette looks like everything.</p>
             </div>
             <div class="step-card">
                 <div class="step-title">Step 4: Export</div>
-                <p>Save via <strong>File → Save As</strong> as JPG. For social media, a long edge of 1080–1280 px balances sharpness and file size.</p>
+                <p>Save the result with <strong>File → Export</strong> as JPG. For social media, a long edge of 1080–1280 px balances sharpness and file size. Keep the layered original if you plan to reuse the same grade on a series — re-exporting from the exported file compounds the compression.</p>
             </div>
-            <div class="tip-box">💡 <strong>Choosing fast: portraits love B&W, storytelling loves vintage, "movie poster" vibes love teal-and-orange.</strong></div>
+
+            <h2>Matching a Look to the Subject</h2>
+            <p>The look is not a matter of taste alone; some subjects survive a filter and others fall apart. A quick way to choose before you spend time grading:</p>
+            <ul>
+                <li><strong>Portraits</strong> — black & white, or a very light warm grade. Colour casts show up on skin first, so anything stronger than a hint reads as a mistake rather than a style.</li>
+                <li><strong>Street and architecture</strong> — hard black & white with real blacks. Texture and geometry carry the frame, and colour usually competes with them.</li>
+                <li><strong>Product shots</strong> — no creative filter at all. Buyers compare colour, and a vintage cast turns a white mug cream. Clean the background instead.</li>
+                <li><strong>Food</strong> — warm highlights, slightly lifted saturation, nothing on the shadows. Cold tones make food look stale.</li>
+                <li><strong>Landscape and travel</strong> — a mild teal-orange split, plus a vignette only if the sky is empty. Heavy grain on a wide vista looks like a broken file at full size.</li>
+            </ul>
+
+            <h2>Building a Look in Layers</h2>
+            <p>One preset applied at 100% is the amateur move; two or three passes at partial strength is what separates a graded image from a filtered one. The order below works for almost every subject:</p>
+            <div class="step-card">
+                <div class="step-title">Pass 1: Fix the Base First</div>
+                <p>Before any style, correct exposure and white balance with <strong>Image → Color Corrections</strong> or <strong>Image → Auto Adjust Colors</strong>. A filter on top of a green-cast photo produces a green-cast vintage photo, and no preset can undo that.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Pass 2: Style at Half Strength</div>
+                <p>Duplicate the layer (<strong>Layer → Duplicate</strong>), apply the preset to the copy, then set the copy's opacity to roughly 50%. Keeping the untouched original underneath is what makes the strength adjustable at any point later — a preset applied directly to a single layer is baked in, and only Undo takes it back.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Pass 3: Finish Locally</div>
+                <p>Before adding anything else, compare. Toggle the graded layer off and on (the eye icon in the layers panel) and look at both versions at fit-to-window size, which is how the image will actually be seen. If the difference only shows when you flick between them, the grade is at the right strength. If the flat version looks wrong next to it, you are still under-grading. Pick one and stop.</p>
+            </div>
+
+            <h2>Five Ways Filters Go Wrong</h2>
+            <ul>
+                <li><strong>Stacking presets.</strong> Vintage plus Lo-fi plus a warm overlay is three colour shifts with no reference — the result drifts until nothing looks intentional. One style, one strength, then stop.</li>
+                <li><strong>Grading a compressed file.</strong> Applying a heavy curve to an already-compressed JPEG amplifies blocking in the shadows. Work from the original, export once.</li>
+                <li><strong>Ignoring skin.</strong> Check faces at 100%, not in the thumbnail. Orange palms and grey lips are the two most common giveaways.</li>
+                <li><strong>Crushing blacks for drama.</strong> Detail removed by contrast cannot be recovered later. Leave a little information in the darkest areas.</li>
+                <li><strong>Saving the preview instead of the file.</strong> Screenshotting the graded view and re-uploading it is how a good grade becomes a soft, striped image.</li>
+            </ul>
+
+            <div class="tip-box">💡 <strong>Choosing fast: portraits love B&W, storytelling loves vintage, "movie poster" vibes love teal-and-orange. If you can name the preset, dial it back 20%.</strong></div>
+
+            <h2>FAQ</h2>
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">Why does skin turn orange when I apply a vintage filter?</h3>
+            <p>Vintage presets warm the shadows and cool the highlights, then raise split-tone saturation. Skin sits in the orange-red range already, so it takes a double hit and drifts orange while the background still looks fine. Set the Level slider in the Vintage dialog to 40–60 (it previews live), or apply the preset to a duplicated layer and lower that layer's opacity. Then erase the effect over faces so the skin keeps its original hue.</p>
+
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">How much filter strength is too much?</h3>
+            <p>If you can name the filter, it is too strong. On a Level or Percentage slider the useful range is roughly 40–70: the image reads as graded but nobody can point at a preset. Past 80 you start losing skin texture, shadows block up, and highlights clip to flat white with no recoverable detail.</p>
+
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">How do I get a convincing black and white conversion instead of a flat grey one?</h3>
+            <p>Desaturating alone averages the colour channels, which flattens everything that was distinguished only by hue. Convert with <em>Effects → Common Filters → Grayscale</em>, then fix tonal separation: if a blue sky and a grey roof land on the same brightness, darken the sky or lighten the roof before or after the conversion. Add contrast last, in small steps, so you do not crush the shadows you just separated.</p>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
 
             <h2>Related Tutorials</h2>
             <div class="related">

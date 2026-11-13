@@ -5,12 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Layers & Blend Modes: A Practical Guide - Web PSEditor</title>
     <meta name="description" content="Learn advanced: mastering layers & blend modes online step by step using free, private, client-side Web PSEditor in your web browser." />
-    <link rel="icon" sizes="192x192" href="../images/favicon.png">
-    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="canonical" href="https://webpseditor.com/tutorials/layer-blend-modes-guide" />
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/layer-blend-modes-guide" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/layer-blend-modes-guide" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/layer-blend-modes-guide" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Layers and Blend Modes: A Practical Guide",
+      "description": "Multiply, Screen, Overlay and the less obvious Composition entries: what each one does to the layer stack, and when to reach for opacity instead.",
+      "datePublished": "2026-10-02",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/layer-blend-modes-guide"
+      }
+    }
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -70,25 +98,23 @@
         </div>
 
         <article>
-<h1>Advanced: Mastering Layers & Blend Modes Online</h1>
-            <div class="meta-bar">
-                <span>Difficulty: Intermediate</span> • <span>Time: 5 Mins</span> • <span>Core: Non-destructive Editing</span>
-            </div>
+            <h1>Layers &amp; Blend Modes: A Practical Guide</h1>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Intermediate</span> • <span>8 min read</span> • <span>Updated: 13 Nov 2026</span></div>
 
             <div class="cta-box">
                 <div>
                     <strong style="color:#1e40af; font-size:16px;">Pro-Level Multi-layer Magic</strong>
-                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Full support for layer hierarchies, opacities, and blend modes in your browser.</div>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Layer hierarchies, opacity and blend modes — all in the browser.</div>
                 </div>
-                <a href="../editor.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
+                <a href="../../editor.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
             </div>
 
-            <p>The hallmark of serious image editing is non-destructive layering. <strong>Web PSEditor</strong> gives you pro-grade layer stack flexibility — every layer can carry its own opacity and blend mode, and you can change them at any time without destroying a single pixel.</p>
+            <p>A blend mode answers one question: when two layers overlap, which pixels win? Every mode in the list is a different rule for combining the top layer's colour with the one underneath, and the useful ones can be counted on one hand. What trips people up is not the number of options — it is that the list mixes two unrelated families of operation in the same dropdown.</p>
 
             <div class="compare">
                 <figure>
                     <img src="../../images/tutorials/blend-before.jpg" alt="Watercolor texture layer stacked normally over a product photo" loading="lazy">
-                    <figcaption>Before: texture layer stacked normally (source-over)</figcaption>
+                    <figcaption>Before: texture layer stacked normally</figcaption>
                 </figure>
                 <figure>
                     <img src="../../images/tutorials/blend-after.jpg" alt="Same two layers blended with Multiply mode, white areas turn transparent" loading="lazy">
@@ -97,73 +123,87 @@
             </div>
 
             <div class="step-card">
-                <div class="step-title">Step 1: Stack Two Layers</div>
-                <p>Open your base image, then drag a second image (texture, light leak, sketch) onto the canvas — it lands as a new layer on top. The right-hand Layers panel lists both.</p>
+                <div class="step-title">Step 1: Stack two layers</div>
+                <p>Open the base image, then drag a second image — texture, light leak, sketch — onto the canvas. It lands as a new layer on top, and the layers panel lists both. Order matters more than most people expect: the mode uses the layer <em>below</em> as its backdrop, so moving a layer up or down changes the result without changing any setting.</p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">Step 2: Open the Composition Dialog</div>
-                <p>With the top layer selected, go to <strong>Layer -> Composition</strong>. A dialog opens with the full blend-mode dropdown and live preview on the canvas behind it.</p>
+                <div class="step-title">Step 2: Open the Composition dialog</div>
+                <p>Select the top layer and choose <strong>Layer → Composition</strong>. The dialog lists every mode and previews the result on the canvas behind it, so you can compare without committing.</p>
                 <figure>
                     <img src="../../images/tutorials/blend-editor-ui-en.jpg" alt="Web PSEditor Layer Composition dialog with Multiply selected" loading="lazy">
-                    <figcaption>Layer → Composition: pick a mode and watch the canvas update live.</figcaption>
+                    <figcaption>Layer → Composition: pick a mode, watch the canvas update.</figcaption>
                 </figure>
             </div>
 
             <div class="step-card">
-                <div class="step-title">Step 3: Pick a Mode and Confirm</div>
-                <p>Choose <strong>multiply</strong> to discard white, <strong>screen</strong> to discard black, or <strong>overlay</strong> for punchy contrast. Click OK to commit — the original layers stay untouched, so you can switch modes anytime.</p>
+                <div class="step-title">Step 3: Pick a mode and confirm</div>
+                <p>Choose <strong>multiply</strong> to drop white, <strong>screen</strong> to drop black, or <strong>overlay</strong> for contrast. Confirm, and the layers stay separate — the mode is a property of the layer, not a pixel operation, so you can change it later or turn it off entirely.</p>
             </div>
 
-            <h2>The Blend Modes That Matter Most</h2>
+            <h2>Two Families, One Dropdown</h2>
+            <p>Roughly half the entries in that list are <strong>colour maths</strong>: multiply, screen, overlay, darken, lighten, soft-light, hard-light, difference, exclusion, hue, saturation, color, luminosity. They combine the colours of two layers and both layers remain visible.</p>
+            <p>The other half are <strong>compositing operations</strong>, inherited from the canvas API: <code>source-over</code>, <code>destination-out</code>, <code>source-atop</code>, <code>destination-in</code>, <code>xor</code> and friends. These do not mix colour at all — they decide <em>whether a pixel is drawn</em>. <code>destination-out</code> on a top layer punches a hole through everything below it, which makes it a surprisingly effective way to cut a shape out of a stack. Confusing the two families is why people scroll the list, pick something that sounds right, and get a transparent rectangle.</p>
+
+            <h2>The Modes Worth Memorising</h2>
             <table class="tool-table">
-                <tr><th>Mode</th><th>What it does</th><th>Classic use cases</th></tr>
-                <tr><td><strong>Multiply</strong></td><td>Discards pure white, keeps dark areas</td><td>Blending signatures, line art and sketches onto backgrounds without erasing</td></tr>
-                <tr><td><strong>Screen</strong></td><td>Discards pitch black, keeps highlights</td><td>Sparks, lens flares, smoke and bokeh on black-background stock overlays</td></tr>
-                <tr><td><strong>Overlay</strong></td><td>Boosts contrast, mixes light and shadow</td><td>Cinematic textures, grunge paper, dramatic color grading</td></tr>
-                <tr><td><strong>Soft Light</strong></td><td>Gentler version of Overlay</td><td>Subtle vintage tone, skin-friendly texture washes</td></tr>
-                <tr><td><strong>Difference / Exclusion</strong></td><td>Inverts overlapping areas</td><td>Psychedelic posters, aligning two versions of a photo</td></tr>
+                <tr><th>Mode</th><th>What it does</th><th>Classic use</th></tr>
+                <tr><td><strong>Multiply</strong></td><td>Multiplies the colours, so white becomes invisible and dark stays dark</td><td>Signatures, line art and sketches over a document, without erasing the white</td></tr>
+                <tr><td><strong>Screen</strong></td><td>The inverse of Multiply: black disappears, highlights add up</td><td>Sparks, lens flares, smoke and bokeh from black-background overlays</td></tr>
+                <tr><td><strong>Overlay</strong></td><td>Multiply in the shadows, Screen in the highlights</td><td>Textures and grain that need to bite without flattening mid-tones</td></tr>
+                <tr><td><strong>Soft Light</strong></td><td>A gentler Overlay</td><td>Warm tone washes, subtle paper texture on portraits</td></tr>
+                <tr><td><strong>Difference</strong></td><td>Subtracts the layers, inverting the overlap</td><td>Checking alignment between two versions of the same photo</td></tr>
             </table>
 
+            <h2>Multiply Is Not Transparency</h2>
+            <p>The most common misunderstanding: putting a signature on a white background over a document with Multiply makes the white disappear, so it looks transparent. It is not. The white pixels are still there — they were multiplied by the document underneath, and since anything multiplied by its backdrop stays unchanged, white is the one colour that leaves no trace.</p>
+            <p>That matters the moment the file leaves this stack. Export as JPG and the flattened result is fine. But if you later place that image on a dark background, or print it, the white returns as a pale box, because the underlying layer is gone. If you need a genuinely transparent signature, cut the background out first and export PNG — Multiply is a compositing shortcut, not a replacement for an alpha channel.</p>
+
+            <h2>When Opacity Beats Mode-Switching</h2>
+            <p>A mode is a curve, not a strength dial. If Multiply lands too heavy, the fix is the layer's <strong>Opacity</strong>, not a different mode: at 60–80% you keep the texture and lose the mud. The same is true of Screen on a light leak and Overlay on grain. Switching modes to "fix" intensity is how a texture ends up looking like neither effect.</p>
+            <p>Layer order interacts with this. A texture under the photo does nothing at all; the same texture above it at 40% opacity reads as grain. Before changing any setting, confirm which layer is selected — the Composition dialog applies to the highlighted layer only, and applying Multiply to the base photo instead of the texture darkens the entire image with nothing to blend against.</p>
+
+            <h2>Pitfalls That Show Up at Export</h2>
             <div class="mistake-box">
                 <strong>⚠️ Common mistakes to avoid</strong>
                 <ul>
-                    <li><strong>Blending the wrong layer</strong> — the mode applies to the <em>selected</em> layer only. Check which layer is highlighted before opening Composition.</li>
-                    <li><strong>Expecting opacity to fix contrast</strong> — if Multiply looks too strong, drop the layer's <strong>Opacity</strong> (e.g. 60–80%) instead of switching modes back and forth.</li>
-                    <li><strong>Flattening too early</strong> — once merged, blend modes are baked in. Keep layers separate until the final export.</li>
-                    <li><strong>Using JPEG sources for overlays</strong> — JPG compression halos around black/white areas become visible after blending. Prefer PNG overlays.</li>
+                    <li><strong>Blending the wrong layer</strong> — the mode applies to the selected layer, using what is beneath it as backdrop. Check the highlight in the layers panel first.</li>
+                    <li><strong>Flattening too early</strong> — merge and the mode is baked into the pixels. Keep layers separate until the export is final.</li>
+                    <li><strong>Using JPEG overlays</strong> — compression halos around black and white areas become visible once blended. Use PNG for overlays.</li>
+                    <li><strong>Expecting Multiply to create transparency</strong> — it hides white against the current backdrop only. Export PNG from a real cutout if you need an alpha channel.</li>
+                    <li><strong>Picking a compositing operation by accident</strong> — entries like destination-out do not blend colour; they erase. Read the list before confirming.</li>
                 </ul>
             </div>
 
-            <h2>Frequently Asked Questions</h2>
-            <div class="faq-item"><h3>Where is the blend mode option in Web PSEditor?</h3><p>Select a layer, then open <strong>Layer -> Composition</strong> in the top menu. The dropdown contains all canvas blend modes — Multiply, Screen, Overlay and more.</p></div>
-            <div class="faq-item"><h3>Why did my texture disappear completely after choosing Multiply?</h3><p>Multiply keeps only darker pixels. If your texture is mostly white on a light background, very little remains — try Screen for dark backgrounds, or Overlay for balanced contrast.</p></div>
-            <div class="faq-item"><h3>Can I animate or toggle the effect later?</h3><p>Yes. Blend modes are non-destructive. Reopen Layer -> Composition at any time, or hide the layer with the eye icon to compare before/after.</p></div>
-            <div class="faq-item"><h3>Do blend modes work with adjustment filters?</h3><p>They combine well: put a color gradient layer on Overlay, then add photo filters on the base layer — both stack non-destructively.</p></div>
-            <div class="faq-item"><h3>Is any of this uploaded to a server?</h3><p>No. Layer compositing runs 100% in your browser; nothing ever leaves your device.</p></div>
+            <h2>Quick Answers</h2>
+            <div class="faq-item"><h3>What happens if I apply Multiply to the wrong layer?</h3><p>The mode is attached to whichever layer is selected, and it blends against the layer underneath. Applied to the base photo, there is nothing beneath it, so the image simply darkens — the result looks like a bad exposure rather than a blend. Press <code>Ctrl + Z</code>, select the texture layer, and open Composition again.</p></div>
+            <div class="faq-item"><h3>Which mode removes a white background from a signature?</h3><p>Multiply. White multiplied by the document underneath stays unchanged, so the paper around the strokes disappears visually. It does not create transparency: export the stack as PNG only after cutting the background out, otherwise the white reappears the moment the image sits on a dark surface.</p></div>
+            <div class="faq-item"><h3>Why does my texture look flat after Multiply?</h3><p>Multiply can only darken, so a low-contrast texture flattens the photo instead of adding character. Raise the texture's own contrast first (Image → Color Corrections), or switch to Overlay, which preserves highlights. If the texture is a scan, the paper white is often grey rather than white — a levels-style boost before blending fixes most of it.</p></div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
 
             <h2>Related Tutorials</h2>
             <div class="related">
-                <a href="../tutorials/transparent-signature-extraction">Extract a Transparent Signature from Paper</a>
-                <a href="../tutorials/photo-filters-one-click">One-Click Photo Filters & Presets</a>
-                <a href="../tutorials/how-to-cutout-png">Cut Out Images & Export Transparent PNG</a>
-                <a href="../tutorials/photo-color-correction">Color Correction & White Balance Fix</a>
+                <a href="../tutorials/transparent-signature-extraction">Extract a Transparent Signature</a>
+                <a href="../tutorials/photo-filters-one-click">Apply Photo Filters in One Click</a>
+                <a href="../tutorials/photo-color-correction">Fix Photo Colors (Auto Color Correction)</a>
+                <a href="../tutorials/png-vs-jpg-export">PNG vs JPG: Which Format Should You Export?</a>
             </div>
 
-
-            <!-- 🎯 Hands-on Practice CTA Card -->
             <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
                         <span style="font-size: 18px;">🎯</span>
                         <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
-                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% In-Browser</span>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">No software installation required. Apply this technique in your browser right now—100% private and secure.</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Blend one black-background overlay with Screen and one white-background overlay with Multiply, then drop each to 60% opacity and compare.</p>
                 </div>
                 <div>
-                    <a href="../editor.html" class="practice-btn">
-                        <span>Try in Web PSEditor Now</span>
+                    <a href="../../editor.html" class="practice-btn">
+                        <span>Try It in Web PSEditor</span>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
@@ -175,11 +215,30 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {"@type": "Question", "name": "Where is the blend mode option in Web PSEditor?", "acceptedAnswer": {"@type": "Answer", "text": "Select a layer, then open Layer -> Composition in the top menu. The dropdown contains all canvas blend modes - Multiply, Screen, Overlay and more."}},
-        {"@type": "Question", "name": "Why did my texture disappear completely after choosing Multiply?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply keeps only darker pixels. If your texture is mostly white on a light background, try Screen for dark backgrounds or Overlay for balanced contrast."}},
-        {"@type": "Question", "name": "Can I toggle the effect later?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Blend modes are non-destructive. Reopen Layer -> Composition at any time, or hide the layer with the eye icon to compare before and after."}},
-        {"@type": "Question", "name": "Do blend modes work with adjustment filters?", "acceptedAnswer": {"@type": "Answer", "text": "They combine well: put a color gradient layer on Overlay, then add photo filters on the base layer - both stack non-destructively."}},
-        {"@type": "Question", "name": "Is any of this uploaded to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. Layer compositing runs 100% in your browser; nothing ever leaves your device."}}
+        {
+          "@type": "Question",
+          "name": "What happens if I apply Multiply to the wrong layer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The mode is attached to whichever layer is selected, and it blends against the layer underneath. Applied to the base photo, there is nothing beneath it, so the image simply darkens — the result looks like a bad exposure rather than a blend. Press Ctrl + Z, select the texture layer, and open Composition again."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which mode removes a white background from a signature?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiply. White multiplied by the document underneath stays unchanged, so the paper around the strokes disappears visually. It does not create transparency: export the stack as PNG only after cutting the background out, otherwise the white reappears the moment the image sits on a dark surface."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does my texture look flat after Multiply?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Multiply can only darken, so a low-contrast texture flattens the photo instead of adding character. Raise the texture's own contrast first (Image → Color Corrections), or switch to Overlay, which preserves highlights. If the texture is a scan, the paper white is often grey rather than white — a levels-style boost before blending fixes most of it."
+          }
+        }
       ]
     }
     </script>

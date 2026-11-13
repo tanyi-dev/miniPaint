@@ -11,6 +11,66 @@
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/png-vs-jpg-export" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/png-vs-jpg-export" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/png-vs-jpg-export" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "PNG vs JPG: Transparency, File Size & Export, Explained",
+      "description": "What each format actually throws away, which JPG quality setting survives re-compression, when PNG ends up smaller, and where transparency breaks in export.",
+      "datePublished": "2026-10-02",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/png-vs-jpg-export"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What JPG quality setting should I export a photo at?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "85 to 90 for photographs. At 85 the difference from the original is invisible at normal viewing size and the file is roughly a tenth of the PNG. Going to 95 or 100 adds bytes your platform will discard when it re-compresses the upload anyway. Below 70 the blocking artefacts start showing in smooth skies and skin."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which format keeps small text sharpest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PNG. JPG splits the image into 8×8 pixel blocks and approximates each one, so thin strokes pick up ringing and coloured fringes along their edges even at high quality settings. Screenshots, charts, slides and anything with type should be PNG, or the text will look dirty before it is printed or read."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the smallest PNG I can make?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Reduce the number of colours first, then the dimensions. A flat graphic with a dozen colours can be a few kilobytes at full size, because PNG stores repeated pixels efficiently. A photograph cannot be squeezed the same way: it holds thousands of colours, and shrinking the palette produces banding in gradients rather than a smaller file."
+          }
+        }
+      ]
+    }
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -63,7 +123,7 @@
 
         <article>
 <h1>PNG vs JPG: Transparency, File Size & Export, Explained</h1>
-            <div class="meta-bar"><span>Difficulty: Beginner</span> • <span>Time: 3 min</span> • <span>Great for: product photos, avatars, screenshots</span></div>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Beginner</span> • <span>7 min read</span> • <span>Updated: 13 Nov 2026</span></div>
 
             <div class="cta-box">
                 <div>
@@ -74,6 +134,17 @@
             </div>
 
             <p>"PNG or JPG?" — choose wrong and your file is either too big to send, too blurry to use, or the transparency you needed turns into ugly white blocks. The whole decision boils down to three sentences. Read on and you'll never hesitate again.</p>
+
+            <h2>Quick Answers</h2>
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">What JPG quality setting should I export a photo at?</h3>
+            <p>85 to 90 for photographs. At 85 the difference from the original is invisible at normal viewing size and the file is roughly a tenth of the PNG. Going to 95 or 100 adds bytes your platform will discard when it re-compresses the upload anyway. Below 70 the blocking artefacts start showing in smooth skies and skin.</p>
+
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">Which format keeps small text sharpest?</h3>
+            <p>PNG. JPG splits the image into 8×8 pixel blocks and approximates each one, so thin strokes pick up ringing and coloured fringes along their edges even at high quality settings. Screenshots, charts, slides and anything with type should be PNG, or the text will look dirty before it is printed or read.</p>
+
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">What is the smallest PNG I can make?</h3>
+            <p>Reduce the number of colours first, then the dimensions. A flat graphic with a dozen colours can be a few kilobytes at full size, because PNG stores repeated pixels efficiently. A photograph cannot be squeezed the same way: it holds thousands of colours, and shrinking the palette produces banding in gradients rather than a smaller file.</p>
+
             <h2>One Image Tells the Story</h2>
             <figure>
                 <img src="../../images/tutorials/format-png-vs-jpg.jpg" alt="The same photo as lossless PNG vs heavily compressed JPG, with real file sizes" loading="lazy">
@@ -81,24 +152,46 @@
             </figure>
             <h2>The Decision in Three Sentences</h2>
             <p>1. Need <strong>transparency</strong> (cutouts, signatures, stickers) → <strong>PNG</strong> only; JPG cannot store transparency.<br>2. Need <strong>crisp text or further editing</strong> (screenshots, design drafts) → <strong>PNG</strong>, lossless and re-editable.<br>3. Just <strong>sharing photos</strong> (people, landscapes, products) → <strong>JPG at quality 85</strong>: about 10× smaller, visually identical.</p>
+            <h2>Compression: What Each Format Throws Away</h2>
+            <p>PNG is lossless. Every pixel is stored exactly, then squeezed with a prediction filter plus DEFLATE — the same idea as zipping a text file. Open and re-save it a hundred times and the hundredth file is identical to the first. That is why PNG is the working format for anything you will edit again: screenshots, logos, cutouts, layered exports.</p>
+            <p>JPG is lossy, and it loses information in a specific, predictable way. The image is split into 8×8 blocks, each block is converted into frequency information, and the high frequencies — fine detail, hard edges, subtle gradients — are quantised away according to the quality setting. Smooth areas compress beautifully. Sharp transitions between two colours do not, which is why text on a JPG develops coloured halos and why a red logo on white turns mushy at the boundary.</p>
+            <p>The practical consequence is that JPG quality is not a linear dial. From 100 down to 90 the file shrinks fast and looks identical. From 90 to 80 it keeps shrinking and still looks fine on a photo. Below 70 the curve flattens — you save a few percent more and start seeing blocks in skies, banding around lights, and mosquito noise around high-contrast edges. Anyone exporting at 40 to hit a size limit is trading visible damage for a saving they could have got by cropping 10% of the frame instead.</p>
+
+            <h2>Transparency, and Where It Breaks</h2>
+            <p>JPG has no alpha channel. Export a cutout with a transparent background as JPG and the editor has to fill those pixels with something — usually white, sometimes black, depending on the encoder. The format has no way to represent "nothing here", so the white fill is expected behaviour rather than a glitch.</p>
+            <p>PNG can, but transparency still breaks in three common places. First, flattening: if you merge a transparent layer onto an opaque background layer before exporting, the transparency is gone before the file is written. Second, indexed colour: reducing to a palette can turn soft anti-aliased edges into a hard, jagged boundary, because the intermediate shades no longer exist. Third, the receiving app: some chat tools and print services put a white background behind a PNG automatically, so a transparent logo looks fine in the editor and boxed in the final document.</p>
+            <p>One habit avoids all three. Export the transparent asset as PNG, then open the exported file in a viewer that shows a checkerboard background and confirm the transparency survived. Ten seconds of checking beats discovering it after a client upload.</p>
+
+            <h2>When PNG Is Smaller Than JPG</h2>
+            <p>The usual advice — "JPG is always smaller" — holds for photographs and fails for graphics. A screenshot of a text document, a flat icon, a chart with six colours, a logo on a solid background: these contain large regions of identical pixels. PNG's filter plus DEFLATE pass turns a run of identical pixels into almost no data, while JPG still spends bytes approximating every block edge and produces visible artefacts around every letter.</p>
+            <p>So the size argument follows the content, not the extension. A 1200×630 banner of flat colour and type can be 40 KB as PNG and 90 KB as JPG at quality 90, with the JPG also looking worse. The same banner filled with a photograph flips completely: 60 KB as JPG, 900 KB as PNG. Look at what is <em>in</em> the image before choosing.</p>
+
             <h2>Exporting in the Editor</h2>
             <figure>
                 <img src="../../images/tutorials/format-editor-ui-en.jpg" alt="Web PSEditor English UI, export via the File menu" loading="lazy">
-                <figcaption>Export lives under File → Save As</figcaption>
+                <figcaption>Export lives under File → Export</figcaption>
             </figure>
             <div class="step-card">
-                <div class="step-title">Step 1: Open the Export Panel</div>
-                <p>When your edit is done, click <strong>File → Save As</strong> and pick PNG or JPG in the dialog.</p>
+                <div class="step-title">Step 1: Open the Export Dialog</div>
+                <p>When your edit is done, choose <strong>File → Export</strong>. The dialog asks for a file name and a <strong>Save as type</strong> — pick PNG or JPG. (File → Save As stores the editable project, which is a different thing and will not give you a flat image.)</p>
             </div>
             <div class="step-card">
                 <div class="step-title">Step 2: The Sweet Spot for JPG Quality</div>
-                <p>Use JPG quality <strong>85–90</strong>: the best balance of near-lossless looks and much smaller files. Below 70 shows visible blocks; above 95 the file balloons with no visible gain.</p>
+                <p>The quality slider defaults to <strong>90</strong> and only appears for lossy formats. Stay in the <strong>85–90</strong> band: near-lossless looks, much smaller files. Below 70 shows visible blocks; above 95 the file balloons with no visible gain, because whatever you upload will be re-encoded by the platform regardless.</p>
             </div>
             <div class="step-card">
-                <div class="step-title">Step 3: PNG Transparency Notes</div>
-                <p>If your image has transparent areas (a cutout person, for example), PNG is required to keep them. Make sure layers aren't flattened unless intended.</p>
+                <div class="step-title">Step 3: Check the Size Before You Commit</div>
+                <p>Enable <strong>Show file size</strong> in the dialog and the estimated output size updates as you move the quality slider. This is the fastest way to find the highest quality that still fits an upload limit — drag down until the number clears the limit, then stop. The same panel reports the pixel resolution, which is worth a glance before exporting a resized file.</p>
             </div>
-            <div class="tip-box">💡 <strong>Lazy rule before uploading anywhere: photos as JPG 85, text screenshots and transparent assets as PNG — saves ~80% file size instantly.</strong></div>
+            <div class="step-card">
+                <div class="step-title">Step 4: PNG Transparency Notes</div>
+                <p>If the image has transparent areas, only PNG keeps them. Leave the layers unmerged unless you intend to flatten, and do not place an opaque background layer underneath at the last minute — that silently removes the alpha channel you spent time cutting out.</p>
+            </div>
+            <div class="tip-box">💡 <strong>Lazy rule before uploading anywhere: photos as JPG 85, text screenshots and transparent assets as PNG — saves ~80% file size instantly. Check the estimated size in the export dialog, not after the upload fails.</strong></div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
 
             <h2>Related Tutorials</h2>
             <div class="related">

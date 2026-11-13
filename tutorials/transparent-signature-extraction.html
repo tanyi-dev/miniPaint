@@ -5,12 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extract a Signature to Transparent PNG - Web PSEditor</title>
     <meta name="description" content="Learn how to extract handwritten signature to transparent png online step by step using free, private, client-side Web PSEditor in your web browser." />
-    <link rel="icon" sizes="192x192" href="../images/favicon.png">
-    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="canonical" href="https://webpseditor.com/tutorials/transparent-signature-extraction" />
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/transparent-signature-extraction" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/transparent-signature-extraction" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/transparent-signature-extraction" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How to Extract a Handwritten Signature to a Transparent PNG",
+      "description": "Turn a phone photo of a signature into a reusable transparent PNG: desaturate, correct the paper white, erase the background, and keep the stroke ends intact.",
+      "datePublished": "2026-10-02",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/transparent-signature-extraction"
+      }
+    }
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -71,20 +99,18 @@
         </div>
 
         <article>
-<h1>How to Extract Handwritten Signature to Transparent PNG Online</h1>
-            <div class="meta-bar">
-                <span>Difficulty: Everyday Essential</span> • <span>Time: 2 Mins</span> • <span>Technology: Threshold & Alpha Channel</span>
-            </div>
+            <h1>How to Extract a Handwritten Signature to a Transparent PNG</h1>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Beginner</span> • <span>7 min read</span> • <span>Updated: 13 Nov 2026</span></div>
 
             <div class="cta-box">
                 <div>
                     <strong style="color:#1e40af; font-size:16px;">Turn Paper Signatures into Transparent PNG Seals</strong>
                     <div style="font-size:13px; color:#3b82f6; margin-top:3px;">100% in-browser processing with zero server uploads.</div>
                 </div>
-                <a href="../editor.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
+                <a href="../../editor.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
             </div>
 
-            <p>For contracts, invoices, and digital certificates, having a clean, transparent digital signature is crucial. When photographing signatures on paper, shadows and yellow tint often make direct pasting impossible. This guide walks you through converting photo signatures into clean transparent PNG files using <strong>Web PSEditor</strong> — everything runs locally in your browser, so your signature never leaves your device.</p>
+            <p>A signature on paper is a photo of a photo: white paper that is not white, a lens shadow at one corner, and a slight yellow cast from indoor light. Paste that onto a contract and it reads as a grey rectangle with a scribble on it. The fix is a four-step pass — desaturate, push the paper to pure white, erase the paper, export PNG — and the order matters, because each step makes the next one cleaner.</p>
 
             <div class="compare">
                 <figure>
@@ -98,76 +124,84 @@
             </div>
 
             <div class="step-card">
-                <div class="step-title">Step 1: Import Signature Photo & Crop</div>
-                <p>Drop your smartphone photo of the handwritten signature into Web PSEditor. Use the <strong>Crop Tool</strong> to tightly frame the signature, removing unwanted background desk space.</p>
+                <div class="step-title">Step 1: Import and crop tight</div>
+                <p>Drop the photo into the editor and crop to the signature with a small margin — 10–20 px around the strokes is enough. Cropping tight is not cosmetic: the Magic Eraser in the next steps has less paper to clear, and any uneven lighting at the edges of the original frame gets thrown away before it causes trouble.</p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">Step 2: Grayscale & Contrast Boosting</div>
-                <p>1. Select <strong>Image -> Adjustments -> Grayscale</strong> to eliminate color cast.<br>2. Open <strong>Image -> Adjustments -> Brightness / Contrast</strong> (or Levels): increase contrast until the paper turns pure white (#FFFFFF) and pen strokes turn solid deep black.</p>
+                <div class="step-title">Step 2: Desaturate the colour cast</div>
+                <p>Open <strong>Effects → Common Filters → Grayscale</strong> and apply it at <strong>Percentage 100</strong>. This removes the yellow or blue tint in one pass and turns "paper with a colour cast" into "paper with a brightness problem", which is much easier to fix. If the ink is blue and you want to keep a trace of it, run Grayscale at 80 instead of 100 — the strokes stay slightly cool while the paper loses its tint.</p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">Step 3: Remove Background & Save Transparent PNG</div>
-                <p>Use the <strong>Magic Eraser Tool</strong> with a <strong>Power</strong> (tolerance) of 20–40 and click the white paper — the background vanishes instantly and the checkerboard transparency grid appears. Click any leftover corners to clean them up. Finally, click <strong>File -> Save As -> PNG</strong> to download your reusable signature.</p>
+                <div class="step-title">Step 3: Push the paper to white, keep the strokes</div>
+                <p>Choose <strong>Image → Color Corrections</strong>. The dialog has brightness, contrast, saturation and hue, plus separate Red, Green and Blue channel sliders. Raise <strong>Brightness</strong> until the paper is nearly white, then add <strong>Contrast</strong> until the strokes go dark and the paper flattens out. Watch the stroke ends while you do it: they are the thinnest part of the ink and the first thing to break up when contrast goes too far.</p>
+                <p>The RGB channels are the precise tool here. If the paper still has a warm cast after grayscale, pull <strong>Red</strong> down a few points and it evens out without touching the stroke darkness. <em>Image → Auto Adjust Colors</em> is the fast alternative, but it targets a fixed white point and will happily blow out a pale signature, so check the result at 200% before accepting it.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">Step 4: Erase the paper, export PNG</div>
+                <p>Take the <strong>Magic Eraser Tool</strong>, set <strong>Power</strong> to 20–40 and click an area of clean paper. Everything within tolerance of that colour becomes transparent, and the checkerboard confirms it. Click any remaining patches — corners, the shadowed edge — until only the strokes are left.</p>
+                <p>Then export with <strong>File → Export</strong> and choose <strong>PNG</strong>. (File → Save As writes a project file, not an image.) JPG has no alpha channel, so a JPG export fills the background with white and undoes the entire exercise.</p>
                 <figure>
                     <img src="../../images/tutorials/signature-editor-ui-en.jpg" alt="Web PSEditor with the Magic Eraser tool extracting a handwritten signature from white paper" loading="lazy">
-                    <figcaption>The Magic Eraser (Power 30) lifts the paper background away in a few clicks.</figcaption>
+                    <figcaption>The Magic Eraser at Power 30 lifting the paper away.</figcaption>
                 </figure>
             </div>
 
-            <h2>Magic Eraser vs Blend Mode: Which One Fits Your Case?</h2>
+            <h2>Erase or Blend: Two Different Answers</h2>
             <table class="tool-table">
-                <tr><th>Method</th><th>Best for</th><th>How it works</th></tr>
-                <tr><td><strong>Magic Eraser + PNG</strong></td><td>A reusable signature stamp for Word, PDF and e-sign platforms</td><td>Deletes the paper background permanently and exports a real transparent PNG</td></tr>
-                <tr><td><strong>Multiply blend mode</strong></td><td>Placing a photo/scanned signature over a document inside the editor</td><td>Non-destructive — white pixels simply stop showing; nothing is deleted</td></tr>
-                <tr><td><strong>Lasso + Delete</strong></td><td>Signatures on patterned or shaded paper</td><td>Manual outline around strokes when one-click color matching fails</td></tr>
+                <tr><th>Method</th><th>Best for</th><th>What it actually does</th></tr>
+                <tr><td><strong>Magic Eraser + PNG</strong></td><td>A reusable signature for Word, PDF and e-sign platforms</td><td>Deletes the paper pixels and writes a real alpha channel — the file works anywhere</td></tr>
+                <tr><td><strong>Multiply blend</strong></td><td>Placing a signature over a document inside this editor</td><td>White stops showing because it is multiplied by what is underneath; nothing is deleted, and the file is not transparent</td></tr>
+                <tr><td><strong>Eraser (manual)</strong></td><td>Signatures on lined, ruled or shadowed paper where colour matching fails</td><td>Paint transparency along the strokes with a small brush at 200% zoom</td></tr>
             </table>
+            <p>The distinction matters when the file leaves the editor. A Multiply stack exported as JPG looks correct on that document and shows a white box everywhere else. If the signature will be reused, erase and export PNG.</p>
+
+            <h2>Getting a Clean Stroke</h2>
+            <p>Two problems account for most bad extractions, and both start at the camera. Shooting at an angle makes the stroke weight uneven across the signature, because one end is closer to the lens; shooting with a lamp on one side leaves a gradient across the paper that no single tolerance can clear. Flat, even light and a straight-down shot turn the rest of the workflow into two clicks.</p>
+            <p>The other problem is over-processing. Every contrast boost widens the gap between paper and ink, and past a point the thin upstrokes break into disconnected dots. If the signature has to look like ink rather than vector, stop pushing contrast when the paper turns white and accept a slightly grey background — the Magic Eraser can clear a light grey, but it cannot reconnect a broken stroke.</p>
 
             <div class="mistake-box">
                 <strong>⚠️ Common mistakes to avoid</strong>
                 <ul>
-                    <li><strong>Photographing at an angle</strong> — skewed perspective makes the stroke weight uneven. Shoot straight from above with even lighting.</li>
-                    <li><strong>Too low Power on grayish paper</strong> — leaves semi-transparent ghost patches. Raise the Power to 30–40 and click the leftovers again.</li>
-                    <li><strong>Over-boosting contrast</strong> — thin stroke ends can break apart. Zoom to 200% and check the strokes before erasing.</li>
-                    <li><strong>Saving as JPG</strong> — the transparency is discarded. Always export as PNG.</li>
+                    <li><strong>Photographing at an angle</strong> — uneven stroke weight and a lighting gradient that colour matching cannot fix.</li>
+                    <li><strong>Power set too low on greyish paper</strong> — leaves ghost patches of semi-transparent paper. Raise it to 30–40 and click again.</li>
+                    <li><strong>Over-boosting contrast</strong> — thin stroke ends break apart. Check at 200% before erasing.</li>
+                    <li><strong>Exporting as JPG</strong> — transparency is discarded. Always PNG.</li>
+                    <li><strong>Looking for an Adjustments or Levels menu</strong> — they do not exist here. Grayscale lives under Effects → Common Filters; brightness, contrast and the RGB channels live under Image → Color Corrections.</li>
                 </ul>
             </div>
 
-            <h2>Frequently Asked Questions</h2>
-            <div class="faq-item"><h3>Why does my extracted signature have gray halo around the strokes?</h3><p>The photo paper was slightly gray and the Power value was too low. Raise the Power to 30–40 and click the halo areas once more; the checkerboard will show through.</p></div>
-            <div class="faq-item"><h3>Can I extract a signature from a phone photo with shadows?</h3><p>Yes. First use Brightness/Contrast to flatten the shadow into near-white, then run the Magic Eraser. Severe shadows are better removed with the Lasso tool stroke by stroke.</p></div>
-            <div class="faq-item"><h3>How do I add the transparent signature into Word or PDF?</h3><p>Export the PNG, then in Word or your PDF editor use Insert -> Picture. Because the background is transparent, the signature sits cleanly over text lines and signature fields.</p></div>
-            <div class="faq-item"><h3>Is my signature uploaded to a server?</h3><p>No. Web PSEditor runs 100% client-side — the signature is processed in your browser's memory and never leaves your device, even offline.</p></div>
-            <div class="faq-item"><h3>Can I make the signature strokes a different color, like blue ink?</h3><p>Yes. After extracting transparency, lock the layer's alpha and paint over it, or place a colored layer below and clip it — the strokes will adopt the new color while keeping transparency.</p></div>
+            <h2>Quick Answers</h2>
+            <div class="faq-item"><h3>How far can I push contrast before the strokes break?</h3><p>Stop when the paper is white and the strokes are continuous — not when they are black. Zoom to 200% and look at the thinnest upstroke: if it is still one line, you have room; if it has started to dot, back the contrast off a few points. A slightly grey background is easier to fix than a broken stroke.</p></div>
+            <div class="faq-item"><h3>Why is there a grey halo around the strokes?</h3><p>Those are the anti-aliased pixels at the edge of the ink — part paper, part ink — and they fall outside the tolerance so the eraser leaves them. Drop Power to 10–12 and click the halo directly, or clean it with the Eraser at a small brush size. Raising Power to remove the halo also eats the stroke, which is why the low-Power second pass is the better move.</p></div>
+            <div class="faq-item"><h3>Can I reuse one signature at different sizes?</h3><p>Yes. A PNG with an alpha channel scales cleanly down, and up to about 150% before the edges soften noticeably. Keep the exported file at the largest size you expect to need rather than enlarging a small one later, and keep the layered original so you can re-export at a different resolution instead of rescaling an already exported file.</p></div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
 
             <h2>Related Tutorials</h2>
             <div class="related">
-                <a href="../tutorials/how-to-cutout-png">Cut Out Images & Export Transparent PNG</a>
-                <a href="../tutorials/layer-blend-modes-guide">Layer Blend Modes: Multiply & Screen Explained</a>
+                <a href="../tutorials/layer-blend-modes-guide">Layers &amp; Blend Modes: A Practical Guide</a>
+                <a href="../tutorials/how-to-cutout-png">Cut Out an Image &amp; Export a Transparent PNG</a>
                 <a href="../tutorials/png-vs-jpg-export">PNG vs JPG: Which Format Should You Export?</a>
-                <a href="../tutorials/image-resize-and-compression">Resize & Compress Images for Upload Limits</a>
+                <a href="../tutorials/photo-color-correction">Fix Photo Colors (Auto Color Correction)</a>
             </div>
-
-
-            <div class="tip-box">
-                <strong>💡 Privacy Notice:</strong><br>
-                Signatures are highly sensitive personal credentials. Web PSEditor executes all graphics processing locally in your client sandbox. Your image is never uploaded to any remote server!
-            </div>
-
 
             <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
                         <span style="font-size: 18px;">🎯</span>
-                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Practice Signature Extraction</strong>
-                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Client-Side</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Try extracting your paper signature now directly inside your browser. No installs, zero privacy risks.</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Extract one signature, drop the PNG onto a dark background to check the halo, then place it over a PDF page at 60% size.</p>
                 </div>
                 <div>
-                    <a href="../editor.html" class="practice-btn">
-                        <span>Launch Web PSEditor</span>
+                    <a href="../../editor.html" class="practice-btn">
+                        <span>Try It in Web PSEditor</span>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
@@ -179,11 +213,30 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {"@type": "Question", "name": "Why does my extracted signature have gray halo around the strokes?", "acceptedAnswer": {"@type": "Answer", "text": "The photo paper was slightly gray and the Power value was too low. Raise the Power to 30-40 and click the halo areas once more."}},
-        {"@type": "Question", "name": "Can I extract a signature from a phone photo with shadows?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. First use Brightness/Contrast to flatten the shadow into near-white, then run the Magic Eraser. Severe shadows are better removed with the Lasso tool."}},
-        {"@type": "Question", "name": "How do I add the transparent signature into Word or PDF?", "acceptedAnswer": {"@type": "Answer", "text": "Export the PNG, then use Insert -> Picture in Word or your PDF editor. The transparent background lets the signature sit cleanly over text and signature fields."}},
-        {"@type": "Question", "name": "Is my signature uploaded to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. Web PSEditor runs 100% client-side - the signature is processed in your browser's memory and never leaves your device, even offline."}},
-        {"@type": "Question", "name": "Can I recolor the signature strokes, like blue ink?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. After extracting transparency, paint over the strokes on a clipped layer - the strokes adopt the new color while keeping the transparent background."}}
+        {
+          "@type": "Question",
+          "name": "How far can I push contrast before the strokes break?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Stop when the paper is white and the strokes are continuous — not when they are black. Zoom to 200% and look at the thinnest upstroke: if it is still one line, you have room; if it has started to dot, back the contrast off a few points. A slightly grey background is easier to fix than a broken stroke."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is there a grey halo around the strokes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Those are the anti-aliased pixels at the edge of the ink — part paper, part ink — and they fall outside the tolerance so the eraser leaves them. Drop Power to 10–12 and click the halo directly, or clean it with the Eraser at a small brush size. Raising Power to remove the halo also eats the stroke, which is why the low-Power second pass is the better move."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I reuse one signature at different sizes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. A PNG with an alpha channel scales cleanly down, and up to about 150% before the edges soften noticeably. Keep the exported file at the largest size you expect to need rather than enlarging a small one later, and keep the layered original so you can re-export at a different resolution instead of rescaling an already exported file."
+          }
+        }
       ]
     }
     </script>

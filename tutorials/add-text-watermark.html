@@ -4,13 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How to Add a Text Watermark to Photos - Web PSEditor</title>
-    <meta name="description" content="Add text watermarks to your photos free, step by step. Protect images from theft - everything runs locally in your browser. No uploads, no sign-up." />
+    <meta name="description" content="Place a text watermark that survives reposting and cropping: single signature vs tiled grid, opacity that stays readable, and how to export it." />
     <link rel="icon" sizes="192x192" href="../../images/favicon.png">
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="canonical" href="https://webpseditor.com/tutorials/add-text-watermark" />
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/add-text-watermark" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/add-text-watermark" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/add-text-watermark" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How to Add a Text Watermark to Photos Online",
+      "description": "A text watermark that survives reposting and cropping: signature placement, a tiled grid built from duplicates, opacity and stroke values that stay readable, and export settings.",
+      "datePublished": "2026-10-02",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/add-text-watermark"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I keep a watermark readable without ruining the photo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use a light colour at 60 to 70 percent opacity and give the text a one pixel dark stroke. White text with no stroke disappears over a bright sky, and dark text disappears into shadows, so the stroke is what keeps it legible on both. Type size matters more than opacity: text shorter than about 3 percent of the image width cannot be read on a phone and only adds noise."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should the watermark go in a corner?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For personal work, yes, and keep it inside the frame by at least 3 percent so a platform crop does not take it. For commercial images, corners fail: anyone can crop or straighten the image and lose the mark. Two marks on opposite diagonal corners, or a tiled grid across the whole frame, cost more to remove than to reshoot."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can someone remove a text watermark?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. A text mark over a plain background can be painted out with content-aware tools in a couple of minutes. The goal is not an unremovable mark, which does not exist, but a mark whose removal damages the image. Overlapping the subject or tiling across detailed areas raises that cost, and a visible mark still deters the casual repost that most theft actually is."
+          }
+        }
+      ]
+    }
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -52,22 +112,18 @@
                 <span style="color: #cbd5e1;">|</span>
                 <a href="../guide" class="back-link" style="color: var(--text-sub);">Tutorials</a>
             </div>
-            <div class="lang-switch">
-                <a href="https://webpseditor.com/zh/tutorials/add-text-watermark" class="lang-btn" style="text-decoration:none;">中文</a>
-                <span class="lang-btn active">English</span>
-            </div>
+            <div class="lang-switch"><a href="https://webpseditor.com/zh/tutorials/add-text-watermark" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span></div>
         </div>
 
-        <!-- 🔒 Privacy trust badge -->
+        <!-- 隐私信任安全背书 -->
         <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
             <span>🔒 100% Local Browser Processing · Zero Uploads · Zero Privacy Risk</span>
         </div>
 
         <article>
-<h1>How to Add a Text Watermark to Photos Online (Free & Private)</h1>
-            <div class="meta-bar">
-                <span>Difficulty: Beginner</span> • <span>Time: 3 min</span> • <span>Great for: portfolios, product photos, artwork</span>
-            </div>
+            <h1>How to Add a Text Watermark to Photos Online</h1>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Beginner</span> • <span>6 min read</span> • <span>Updated: 13 Nov 2026</span></div>
 
             <div class="cta-box">
                 <div>
@@ -77,7 +133,7 @@
                 <a href="../../editor.html" class="cta-btn" target="_blank">Open Web PSEditor & Add a Watermark →</a>
             </div>
 
-            <p>You spent hours shooting and editing the perfect photo, posted it online, and a day later it's reposted by someone else with no credit. Adding a <strong>text watermark</strong> is the simplest, most effective defense: even if your image gets reposted, everyone can see where it came from. Most online watermark tools require uploading your photos to their servers — a real risk for unreleased work and commercial images. With <strong>Web PSEditor</strong>, all processing happens locally in your browser, so your images never leave your machine.</p>
+            <p>A watermark does not stop theft. What it does is change the calculation: a repost with your name on it advertises you, and an image with a mark across the middle is worth less to whoever scraped it. That is why placement matters more than opacity, and why a corner mark is the weakest version of the idea.</p>
 
             <h2>The Result: Before vs After</h2>
             <div class="compare">
@@ -87,47 +143,74 @@
                 </figure>
                 <figure>
                     <img src="../../images/tutorials/watermark-after.jpg" alt="Photo protected with a tiled diagonal text watermark" loading="lazy">
-                    <figcaption>After: tiled diagonal text watermark</figcaption>
+                    <figcaption>After: tiled text watermark</figcaption>
                 </figure>
             </div>
 
             <h2>Step 1: Open the Editor and Load Your Image</h2>
-            <p>Open <a href="../../editor.html" target="_blank">Web PSEditor</a>, click <strong>File → Open</strong> and pick the photo you want to protect. Once loaded, the canvas info and layers panel appear on the right:</p>
+            <p>Open <a href="../../editor.html" target="_blank">Web PSEditor</a>, choose <strong>File → Open</strong> and pick the photo. The canvas and the layers panel appear on the right; every text mark you add will be its own layer there.</p>
             <figure>
                 <img src="../../images/tutorials/watermark-editor-ui-en.jpg" alt="Web PSEditor English interface with a sample photo loaded on the canvas" loading="lazy">
-                <figcaption>Web PSEditor (English UI) with a sample photo loaded on the canvas</figcaption>
+                <figcaption>The canvas and layers panel after loading a photo</figcaption>
             </figure>
 
             <div class="step-card">
-                <div class="step-title">Step 2: Option A — Single Signature Watermark (great for photography)</div>
+                <div class="step-title">Step 2: Option A — a single signature mark</div>
                 <p>
-                    1. Select the <strong>Text tool (T icon)</strong> in the left toolbar and click where you want the watermark.<br>
-                    2. Type your signature, e.g. <code>Photo by Your Name</code>, then set the font size and color (white or light gray works best).<br>
-                    3. In the layers panel, set the text layer's <strong>Opacity to 60–70%</strong> — visible but not distracting.<br>
-                    4. For a tilted look, select the layer and use <strong>Edit → Free Transform</strong> to rotate about -30°.
+                    1. Pick the <strong>Text tool</strong> in the left toolbar and click where the mark should sit.<br>
+                    2. Type the text, e.g. <code>Photo by Your Name</code>. The tool defaults to size 40 in Arial with a green fill — change the colour to white or light grey in the text settings, and set size relative to the image: roughly 3–5% of the image width is the smallest that stays readable on a phone.<br>
+                    3. Set the text layer's <strong>opacity to 60–70%</strong> in the layers panel, and add a 1 px dark stroke so the text survives a bright sky.<br>
+                    4. To tilt it, select the text layer and use <strong>Image → Rotate</strong> with a negative angle. The canvas grows to fit the rotated layer, so crop back to the original frame afterwards with the Crop tool.
                 </p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">Step 3: Option B — Full-Canvas Tiled Watermark (strongest protection)</div>
+                <div class="step-title">Step 3: Option B — a tiled grid (stronger)</div>
                 <p>
-                    A single watermark is easy to crop out. Tiling covers the whole image:<br>
-                    1. Create one text watermark layer as in Option A.<br>
-                    2. <strong>Duplicate the layer</strong> in the layers panel and drag the copy to a new spot; repeat until the canvas is covered (that's the style used in our demo image).<br>
-                    3. Select all watermark layers and set <strong>Opacity to 30–40%</strong> for a clean, subtle look.<br>
-                    4. Pro tip: hold <code>Shift</code> while dragging to keep rows and columns perfectly aligned.
+                    One mark is one crop away from being gone. A grid makes removal a retouching job:<br>
+                    1. Build the first text layer as in Option A.<br>
+                    2. Select it and use <strong>Layer → Duplicate</strong>, then drag the copy to the next position. Repeat until the frame is covered — six to nine marks is enough on a landscape photo.<br>
+                    3. Set every mark to <strong>opacity 30–40%</strong>. Lower than that and the grid disappears over busy areas, which defeats the purpose.<br>
+                    4. Keep the spacing even. Duplicating and dragging by eye drifts; pick a spacing in pixels (say 250 px diagonal) and move each copy by that amount so the rows line up.
                 </p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">Step 4: Export the Final Image</div>
+                <div class="step-title">Step 4: Export the final image</div>
                 <p>
-                    Go to <strong>File → Save As</strong> and choose a format: use <strong>JPG (quality 85+)</strong> for web sharing and product photos, or <strong>PNG</strong> when you need transparency. The exported file ships with your watermark built in.
+                    Use <strong>File → Export</strong>: JPG at quality 85 or higher for web and product shots, PNG when you need transparency preserved. The watermark is merged into the exported pixels — but the project file keeps it as an editable layer, which is why you should keep the layered version and export a separate copy to publish.
                 </p>
             </div>
+
+            <h2>Where to Place It</h2>
+            <p>Placement is the whole game, because the first thing anyone does with a stolen image is reframe it. Three rules cover most cases:</p>
+            <ul>
+                <li><strong>Inside the safe area.</strong> Keep the mark at least 3% of the width away from every edge. Platforms crop a few pixels when they resize, and a mark that touches the border gets shaved off.</li>
+                <li><strong>Overlap something.</strong> A mark sitting on plain sky or a blank wall can be cloned out in a minute. A mark crossing a face, a product edge, or textured ground cannot be removed without leaving a scar.</li>
+                <li><strong>Use the diagonal.</strong> If you use two marks, put them on opposite corners of the diagonal. Cropping one off usually means cropping the subject too.</li>
+            </ul>
+
+            <h2>Making It Readable Without Ruining the Photo</h2>
+            <p>Two failure modes, and they look opposite. The first is a watermark so faint that nobody can read it — 20% opacity white text over a pale sky is invisible on a phone and only adds haze. The second is a mark so heavy that the photo becomes a billboard for the watermark instead of the image.</p>
+            <p>The workable middle is light text with a dark stroke at 50–70% opacity. The stroke does the work the opacity cannot: white text alone vanishes against bright areas, and dark text alone vanishes in shadows, but a stroked character keeps an edge against both. Size matters more than opacity for readability — text under about 3% of the image width reads as texture, not as a name.</p>
+            <p>One practical note on tiled grids: at 30–40% opacity, a grid looks acceptable in the editor and slightly heavier after the platform re-compresses the upload, because JPEG sharpening around the text edges increases local contrast. Export a test file and look at it on a phone before applying the same settings to a whole batch.</p>
+
+            <h2>Quick Answers</h2>
+            <h3>How do I keep a watermark readable without ruining the photo?</h3>
+            <p>Use a light colour at 60–70% opacity and give the text a one-pixel dark stroke. White text with no stroke disappears over a bright sky, and dark text disappears into shadows, so the stroke is what keeps it legible on both. Type size matters more than opacity: text shorter than about 3% of the image width cannot be read on a phone and only adds noise.</p>
+
+            <h3>Should the watermark go in a corner?</h3>
+            <p>For personal work, yes, and keep it inside the frame by at least 3% so a platform crop does not take it. For commercial images, corners fail: anyone can crop or straighten the image and lose the mark. Two marks on opposite diagonal corners, or a tiled grid across the whole frame, cost more to remove than to reshoot.</p>
+
+            <h3>Can someone remove a text watermark?</h3>
+            <p>Yes. A text mark over a plain background can be painted out with content-aware tools in a couple of minutes. The goal is not an unremovable mark, which does not exist, but a mark whose removal damages the image. Overlapping the subject or tiling across detailed areas raises that cost, and a visible mark still deters the casual repost that most theft actually is.</p>
 
             <div class="tip-box">
-                💡 <strong>Pro tip</strong>: Managing a product catalog? Watermark with "Property of Your Store" — if images get stolen, they become free advertising.
+                💡 <strong>Rule of thumb: light text, dark stroke, 60% opacity, overlapping the subject. A mark that can be cropped out is decoration, not protection.</strong>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
             </div>
 
             <h2>Related Tutorials</h2>
@@ -137,7 +220,7 @@
                 <a href="../tutorials/photo-color-correction">Fix Photo Colors (Auto Color Correction)</a>
                 <a href="../tutorials/crop-rotate-straighten">Crop, Rotate & Straighten Photos</a>
             </div>
-            <!-- 🎯 Practice CTA -->
+
             <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
@@ -145,7 +228,7 @@
                         <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
                         <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Open the editor and watermark your own photo right now — no account, no upload.</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Watermark one photo twice — a corner signature and a 3×3 grid — then crop both by 10% and see which mark survived.</p>
                 </div>
                 <div>
                     <a href="../../editor.html" class="practice-btn">

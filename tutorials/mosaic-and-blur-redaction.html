@@ -4,13 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How to Pixelate & Blur Sensitive Info - Web PSEditor</title>
-    <meta name="description" content="Learn how to pixelate & blur sensitive information online step by step using free, private, client-side Web PSEditor in your web browser." />
-    <link rel="icon" sizes="192x192" href="../images/favicon.png">
-    <link rel="shortcut icon" href="../favicon.ico">
+    <meta name="description" content="Redact a contract, ID or bank statement so the hidden text stays hidden: mosaic vs blur vs solid block, and why effects apply to the whole layer." />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="canonical" href="https://webpseditor.com/tutorials/mosaic-and-blur-redaction" />
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/mosaic-and-blur-redaction" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/mosaic-and-blur-redaction" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/mosaic-and-blur-redaction" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How to Pixelate & Blur Sensitive Information Online",
+      "description": "Which redaction method actually holds up: mosaic, gaussian blur or a solid block, how to localise an effect that applies to a whole layer, and how to verify the result before publishing.",
+      "datePublished": "2026-10-02",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/mosaic-and-blur-redaction"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is a blurred area really reversible?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A blur is not reversible in the strict sense, because the detail is gone. But for content with strong structure, such as printed text, faces or a signature stroke, published deblurring research shows a useful amount can be inferred back. Mosaic is weaker still on small text: the block grid keeps the shape of the letters. The test is whether a person can guess the characters from context. If they can, so can software. Passwords, ID numbers and signatures should get a solid block, not a blur."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I redact the whole page or just the sensitive line?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only what needs hiding, but cover each area generously: the full height of the characters plus three to five pixels beyond every edge. Text sits close to the box you draw, and an antialiased edge or a shadow can survive a tight crop. Redacting half the page is not safer either. It signals that something specific was in there and invites a closer look at whatever is left."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the safest way to hide a signature?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A solid filled rectangle over the whole stroke area, from the first letter to the last, including the pen shadow. Mosaic and blur leave the slant and rhythm of a signature readable, which is exactly what a forgery needs. Draw the rectangle with the Shape tool, fill it with a dark colour sampled from the page background, and check that no ink shows at the corners."
+          }
+        }
+      ]
+    }
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -21,7 +81,7 @@
         .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
         .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
         h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
-        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
         .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
         .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
         .cta-btn:hover { background: var(--primary-hover); }
@@ -43,6 +103,7 @@
         .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
         .related a:hover { border-color: var(--primary); }
         article h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
         @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -50,7 +111,7 @@
     <div class="container">
         <div class="header-nav">
             <div style="display: flex; gap: 14px; align-items: center;">
-                <a href="../index.html" class="back-link">← Home</a>
+                <a href="../../index.html" class="back-link">← Home</a>
                 <span style="color: #cbd5e1;">|</span>
                 <a href="../guide" class="back-link" style="color: var(--text-sub);">All Tutorials</a>
             </div>
@@ -66,56 +127,136 @@
         </div>
 
         <article>
-<h1>How to Pixelate & Blur Sensitive Information Online</h1>
+            <h1>How to Pixelate &amp; Blur Sensitive Information Online</h1>
             <div class="meta-bar">
-                <span>Difficulty: Easy</span> • <span>Time: 1 Min</span> • <span>Security: 100% In-Browser</span>
+                <span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Beginner</span> • <span>8 min read</span> • <span>Updated: 13 Nov 2026</span>
             </div>
 
             <div class="cta-box">
                 <div>
                     <strong style="color:#1e40af; font-size:16px;">Zero Cloud Uploads</strong>
-                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Process sensitive financial/ID photos safely on your device.</div>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Redact a bank statement or ID scan without the file leaving your device.</div>
                 </div>
-                <a href="../editor.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
+                <a href="../../editor.html" class="cta-btn" target="_blank">Launch Web PSEditor →</a>
             </div>
 
-            <p>Sharing screenshots without redacting private details can lead to identity theft. <strong>Web PSEditor</strong> operates purely inside your local browser memory, ensuring your private data never touches any remote server — not even during processing.</p>
+            <p>A screenshot of a bank statement. A scan of a signed contract. A photo of an ID card with the number covered by a grey smudge. People post images like these every day, and a surprising number of the smudges can be peeled back. Redaction is not "make it look unreadable on my screen" — it is "make it unreadable in the file I hand over". Those are different standards, and only one of them is enforceable.</p>
 
             <figure>
                 <img src="../../images/tutorials/mosaic-before.jpg" alt="Scanned contract document containing confidential text and signature lines" loading="lazy">
                 <figcaption>Example: a contract containing confidential terms and handwritten signatures</figcaption>
             </figure>
 
+            <h2>Why a Blur Is Not a Guarantee</h2>
+            <p>Gaussian blur is a convolution: every pixel is replaced by a weighted average of its neighbours. The fine detail is not encrypted, it is averaged away, and averaging is a lossy operation that research has spent decades learning to invert. Published deblurring work recovers readable text and recognisable faces from blurred images by exploiting what the scene probably looked like — letter shapes, facial structure, the fact that a number has seven digits.</p>
+            <p>Mosaic is worse for small type. Block averaging removes pixel detail but preserves the silhouette of the characters: a phone number stays a row of dark blobs in the same rhythm as the digits. At a small block size the rhythm is enough to read a date, a postcode, or a four-digit PIN.</p>
+            <p>There is one more leak that has nothing to do with the pixels: the layer stack. If you blur with a layer effect and later move or delete that effect, the content comes back. The exported file is safe; the project file is not. When the image is legally sensitive, work on a copy and export it, and treat the project file as confidential too.</p>
+
+            <h2>Match the Method to the Risk</h2>
+            <p>There is no single correct tool. What you are hiding decides how much destruction is acceptable:</p>
+            <div style="overflow-x:auto;">
+            <table style="width:100%; min-width:460px; border-collapse:collapse; font-size:14px; margin:20px 0;">
+                <thead>
+                    <tr style="background:#f1f5f9; text-align:left;">
+                        <th style="padding:10px 12px; border:1px solid var(--border);">What you are hiding</th>
+                        <th style="padding:10px 12px; border:1px solid var(--border);">Use this</th>
+                        <th style="padding:10px 12px; border:1px solid var(--border);">Why</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td style="padding:10px 12px; border:1px solid var(--border);">Password, PIN, ID or card number</td><td style="padding:10px 12px; border:1px solid var(--border);">Solid filled rectangle</td><td style="padding:10px 12px; border:1px solid var(--border);">Nothing left to reconstruct. Short strings are guessable even from heavy blur.</td></tr>
+                    <tr><td style="padding:10px 12px; border:1px solid var(--border);">Signature</td><td style="padding:10px 12px; border:1px solid var(--border);">Solid rectangle over the whole stroke</td><td style="padding:10px 12px; border:1px solid var(--border);">Blur keeps the slant and rhythm a forgery works from.</td></tr>
+                    <tr><td style="padding:10px 12px; border:1px solid var(--border);">Full name, address on an envelope</td><td style="padding:10px 12px; border:1px solid var(--border);">Solid rectangle or mosaic at Size 25+</td><td style="padding:10px 12px; border:1px solid var(--border);">Letters are large; a coarse mosaic is enough.</td></tr>
+                    <tr><td style="padding:10px 12px; border:1px solid var(--border);">Bystander's face</td><td style="padding:10px 12px; border:1px solid var(--border);">Mosaic, Size 15–25</td><td style="padding:10px 12px; border:1px solid var(--border);">Blocking the features reads as intentional and is not reversible in practice.</td></tr>
+                    <tr><td style="padding:10px 12px; border:1px solid var(--border);">Chat screenshot, one message</td><td style="padding:10px 12px; border:1px solid var(--border);">Blur brush or mosaic</td><td style="padding:10px 12px; border:1px solid var(--border);">Low risk, high volume. Speed matters more than perfect coverage.</td></tr>
+                </tbody>
+            </table>
+            </div>
+
+            <h2>One Rule Before Any Method</h2>
+            <p>The Mosaic and Gaussian Blur effects both process <strong>the entire layer</strong>, not the selection. Confirming the dialog pixels the whole screenshot, which is rarely what you want. Two ways around it, both of which you can do in the browser:</p>
+            <ul>
+                <li><strong>Duplicate, then erase back.</strong> <em>Layer → Duplicate</em>, apply the effect to the copy, then erase the areas that should stay sharp with the <strong>Eraser tool</strong>. The untouched original sits underneath and shows through.</li>
+                <li><strong>Draw the cover on top.</strong> Add a new layer and draw filled rectangles with the <strong>Shape tool</strong> over the sensitive areas. Nothing underneath is modified, and a filled shape is the strongest redaction available.</li>
+            </ul>
+
             <div class="step-card">
-                <div class="step-title">Method 1: Pixelate / Mosaic Effect</div>
-                <p>Select the region with the <strong>Selection Tool</strong>. Click <strong>Effects → Mosaic / Pixelate</strong>, adjust strength, and apply. Mosaic is the safest option for legally sensitive content — it destroys the underlying pixels completely, leaving nothing to reconstruct.</p>
+                <div class="step-title">Method 1: Mosaic (pixelate)</div>
+                <p>Duplicate the layer first. Select the copy and choose <strong>Effects → Mosaic</strong>. The dialog has a single <strong>Size</strong> control from 1 to 100, expressed as a percentage of the layer's shorter side: 10 on a 1000 px screenshot means roughly 100 px blocks, which is coarse. Confirm, then erase the parts of the copy that should stay readable. Text needs a coarser setting than faces — check at 100% zoom, not in the fitted preview, where every setting looks destructive.</p>
             </div>
 
             <div class="step-card">
-                <div class="step-title">Method 2: Smooth Gaussian Blur</div>
-                <p>Box the sensitive text, then choose <strong>Effects → Blur → Gaussian Blur</strong> (8-15px radius) for an aesthetic frosted-glass look. For quick touch-ups you can also paint directly over the area with the <strong>Blur Tool</strong> — set a large brush size (50-80) and sweep across the text a few times.</p>
-                <figure>
-                    <img src="../../images/tutorials/mosaic-editor-ui-en.jpg" alt="Web PSEditor interface with the Blur tool brushing over the signature area of a contract" loading="lazy">
-                    <figcaption>Painting over the signature area with the Blur Tool — a few strokes are enough.</figcaption>
-                </figure>
-                <figure>
-                    <img src="../../images/tutorials/mosaic-after.jpg" alt="Contract document with the signature area fully blurred and unreadable" loading="lazy">
-                    <figcaption>After: the signature area is fully redacted and unreadable.</figcaption>
-                </figure>
+                <div class="step-title">Method 2: Gaussian blur</div>
+                <p>Also on a duplicated layer: <strong>Effects → Common Filters → Gaussian Blur</strong>. The single <strong>Percentage</strong> slider runs 0–50. Because this is a live layer filter, the blur stays adjustable after you apply it — unlike Mosaic, which rewrites the pixels. That flexibility is convenient while you work and risky if the project file ever leaves your machine, so export a flattened copy for anything you publish.</p>
             </div>
 
-            <!-- 🎯 Hands-on Practice CTA Card -->
-            <div class="practice-cta-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 12px -2px rgba(37,99,235,0.08);">
+            <div class="step-card">
+                <div class="step-title">Method 3: The blur brush</div>
+                <p>Pick the <strong>Blur tool</strong> in the toolbar and paint straight over the text. The brush defaults to size 30 with strength 1; raise the size to cover a full line in two or three passes and repeat the stroke rather than pressing harder. This is the fastest option for chat screenshots and the least precise — the brush edge leaves a soft rim where a pixel of the original can survive, so do not use it for ID numbers.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">Method 4: Solid block (the safe default)</div>
+                <p>Add a layer, choose the <strong>Shape tool</strong> with a rectangle, and fill it with a colour close to the page background. Draw it from a few pixels above the first character to a few pixels below the last, and wider than the text on both sides. A solid block carries no information at all, survives screenshots and re-compression, and is the only method that stays safe under a legal review.</p>
+            </div>
+
+            <h2>Cover More Than the Text</h2>
+            <p>Most failed redactions are not a weak blur; they are a tight box. Four things sit outside the glyphs and each one can leak:</p>
+            <ul>
+                <li><strong>Antialiased edges.</strong> Text is rendered with soft edges, and those edge pixels fall outside the letter but inside the reading. Extend the cover three to five pixels past every side.</li>
+                <li><strong>Shadows and show-through.</strong> A scan of a two-sided page often reveals the reverse side faintly; a photo of a document on a desk picks up the shadow of your hand. Cover those areas too, or they describe what is underneath.</li>
+                <li><strong>Surrounding context.</strong> Hiding an account number but leaving the bank's name, the branch, and the statement period visible can be enough to identify the person.</li>
+                <li><strong>Selection handles and cursors.</strong> Screenshot captured while a tool was active? The handles tell a reader which field you were about to edit.</li>
+            </ul>
+
+            <h2>Check the Export, Not the Canvas</h2>
+            <p>Before publishing, close the loop:</p>
+            <ul>
+                <li><strong>Export, then reopen the exported file.</strong> A layer you forgot to hide is invisible in a flattened JPEG and visible in the project. The export is the artefact that matters.</li>
+                <li><strong>Zoom to 400%.</strong> Soft edges, residual strokes, and half-covered characters show up there and nowhere else.</li>
+                <li><strong>Try to read it yourself.</strong> Turn your monitor brightness up. If you can make out two of four digits from the shape, that is the weak spot.</li>
+                <li><strong>Look at the thumbnail.</strong> Chat apps shrink images before sending. A redaction that works at full size sometimes thins out at 20%, though the reverse — appearing safe small and readable large — is the more common trap.</li>
+            </ul>
+
+            <div class="tip-box">💡 <strong>Rule of thumb: the more valuable the string, the less you blur it. Passwords, card numbers and signatures get a solid block; faces and paragraphs can take a mosaic.</strong></div>
+
+            <h2>FAQ</h2>
+            <div class="faq-item">
+                <h3>Is a blurred area really reversible?</h3>
+                <p>A blur is not reversible in the strict sense, because the detail is gone. But for content with strong structure, such as printed text, faces or a signature stroke, published deblurring research shows a useful amount can be inferred back. Mosaic is weaker still on small text: the block grid keeps the shape of the letters. The test is whether a person can guess the characters from context. If they can, so can software. Passwords, ID numbers and signatures should get a solid block, not a blur.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Should I redact the whole page or just the sensitive line?</h3>
+                <p>Only what needs hiding, but cover each area generously: the full height of the characters plus three to five pixels beyond every edge. Text sits close to the box you draw, and an antialiased edge or a shadow can survive a tight crop. Redacting half the page is not safer either. It signals that something specific was in there and invites a closer look at whatever is left.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is the safest way to hide a signature?</h3>
+                <p>A solid filled rectangle over the whole stroke area, from the first letter to the last, including the pen shadow. Mosaic and blur leave the slant and rhythm of a signature readable, which is exactly what a forgery needs. Draw the rectangle with the Shape tool, fill it with a dark colour sampled from the page background, and check that no ink shows at the corners.</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/how-to-cutout-png">How to Cut Out an Image (Transparent PNG)</a>
+                <a href="../tutorials/add-text-watermark">Add a Text Watermark to Photos</a>
+                <a href="../tutorials/png-vs-jpg-export">PNG vs JPG: Which Format Should You Export?</a>
+                <a href="../tutorials/photo-color-correction">Fix Photo Colors (Auto Color Correction)</a>
+            </div>
+
+            <div class="practice-cta-card">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
                         <span style="font-size: 18px;">🎯</span>
                         <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
                         <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% In-Browser</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">No software installation required. Apply this technique in your browser right now—100% private and secure.</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Take a screenshot with a phone number in it, cover the number with a solid block, export, then reopen the file and try to read it.</p>
                 </div>
                 <div>
-                    <a href="../editor.html" class="practice-btn">
+                    <a href="../../editor.html" class="practice-btn">
                         <span>Try in Web PSEditor Now</span>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
@@ -123,17 +264,5 @@
             </div>
         </article>
     </div>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {"@type": "Question", "name": "Can a mosaic or blur be reversed?", "acceptedAnswer": {"@type": "Answer", "text": "A strong mosaic cannot - the original pixels are replaced. Light blur can sometimes be partially reversed, so use the strongest setting that still looks acceptable."}},
-        {"@type": "Question", "name": "Is it safer to draw a black box over the text?", "acceptedAnswer": {"@type": "Answer", "text": "A solid fill is the most bulletproof option. For presentations, high-strength blur or mosaic is the usual compromise; for legal documents prefer mosaic or a black fill."}},
-        {"@type": "Question", "name": "Does Web PSEditor upload my document while redacting?", "acceptedAnswer": {"@type": "Answer", "text": "Never. All processing happens in your browser with HTML5 Canvas - there is no server round-trip, which is why it is safe for contracts, IDs and medical records."}},
-        {"@type": "Question", "name": "Can I redact several areas in one pass?", "acceptedAnswer": {"@type": "Answer", "text": "Yes - repeat the selection and effect steps for each area, or paint multiple regions with the Blur Tool, then export once with File > Save As."}}
-      ]
-    }
-    </script>
 </body>
 </html>

@@ -4,13 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fix Dull Photos: Color Correction Basics - Web PSEditor</title>
-    <meta name="description" content="Fix dull, dark photos by adjusting brightness, contrast, saturation and sharpness. Step-by-step color correction, 100% in-browser, no uploads." />
+    <meta name="description" content="Why phones shoot flat, what Auto Adjust actually does to the white point, and the correct slider order — including RGB channels for colour casts." />
     <link rel="icon" sizes="192x192" href="../../images/favicon.png">
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="canonical" href="https://webpseditor.com/tutorials/photo-color-correction" />
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/photo-color-correction" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/photo-color-correction" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/photo-color-correction" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Photo Color Correction Basics: Rescue Dull, Flat Photos",
+      "description": "What Auto Adjust changes, the order to move brightness, contrast, saturation and the RGB channels, and how to read the histogram before you commit.",
+      "datePublished": "2026-10-02",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/photo-color-correction"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Auto Adjust made the photo worse. Why?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It pushes the image until roughly one percent of pixels sit near white and half a percent near black. That works on a mid-tone photo and fails on a scene that already contains bright sky or white paper, because the tool has nowhere to push and clips the highlights instead. Check the Histogram first: if either end is already touching the edge, skip Auto Adjust and work the sliders by hand."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Brightness first, or contrast?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Brightness first, then contrast, then saturation, and colour casts before any of that. Raising contrast first stretches the tonal range, so a later brightness lift pushes the highlights straight into clipping. And saturation magnifies whatever cast is already there, which is why a colour cast needs the RGB channels before you touch saturation at all."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "The same file looks different on my phone. Which screen is right?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Neither is authoritative. Phone screens ship with different gamma curves, wider or narrower colour gamuts, and an auto-brightness setting that changes with the room. A file that looks correct on a calibrated monitor can look washed out on a phone at 30 percent brightness. Judge the image against a neutral grey area on the same screen rather than chasing how it looks on one specific device."
+          }
+        }
+      ]
+    }
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -22,7 +82,8 @@
         .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
         h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
         h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
-        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; }
+        h3 { color: #0f172a; font-size: 16px; margin: 22px 0 6px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
         .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; }
         .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
         .cta-btn:hover { background: var(--primary-hover); }
@@ -62,18 +123,19 @@
         </div>
 
         <article>
-<h1>Photo Color Correction Basics: Rescue Dull, Flat Photos</h1>
-            <div class="meta-bar"><span>Difficulty: Beginner</span> • <span>Time: 2 min</span> • <span>Great for: phone snapshots, product photos</span></div>
+            <h1>Photo Color Correction Basics: Rescue Dull, Flat Photos</h1>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Beginner</span> • <span>7 min read</span> • <span>Updated: 13 Nov 2026</span></div>
 
             <div class="cta-box">
                 <div>
                     <strong style="color:#1e40af; font-size:16px;">Fix dull photos instantly!</strong>
-                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">100% local color correction — originals stay on your machine.</div>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Six sliders, a histogram, and no uploads — all in the tab you already have open.</div>
                 </div>
                 <a href="../../editor.html" class="cta-btn" target="_blank">Open Web PSEditor & Color Correct →</a>
             </div>
 
-            <p>Straight-out-of-camera phone photos often look flat and gray — not because you shot badly, but because cameras deliberately play it safe to preserve details. A quick pass of <strong>brightness, contrast and saturation</strong> makes the image pop instantly. Many online tools upload your photos to their servers first; <strong>Web PSEditor</strong> does all the math locally in your browser, so even large images open and adjust instantly with zero privacy risk.</p>
+            <p>Phone photos come out flat for a reason. The camera exposes for the highlights so nothing burns out, then applies a conservative contrast curve that leaves room for later edits. The result protects detail and looks grey. A quick pass of brightness, contrast and saturation fixes most of it — but move the sliders in the wrong order and you spend the time making it worse.</p>
+
             <h2>The Result: Before vs After</h2>
             <div class="compare">
                 <figure>
@@ -82,28 +144,65 @@
                 </figure>
                 <figure>
                     <img src="../../images/tutorials/color-after.jpg" alt="Coffee photo after color correction, vibrant and punchy" loading="lazy">
-                    <figcaption>After: vibrant and punchy</figcaption>
+                    <figcaption>After: corrected</figcaption>
                 </figure>
             </div>
-            <h2>Step 1: Load Your Photo</h2>
-            <figure>
-                <img src="../../images/tutorials/color-editor-ui-en.jpg" alt="Web PSEditor English UI with a coffee photo loaded" loading="lazy">
-                <figcaption>Web PSEditor with sample photo loaded</figcaption>
-            </figure>
-            <p>Open <a href="../editor.html" target="_blank">Web PSEditor</a>, click <strong>File → Open</strong> and import your photo.</p>
+
+            <h2>What Auto Adjust Actually Does</h2>
+            <p>It is not a smart filter. The tool multiplies every channel until about 1% of the pixels sit at or above near-white, then does the same at the dark end aiming for roughly 0.5% near-black — repeating up to ten times until that quota is met. In plain terms, it stretches the tonal range so the image uses the full 0–255 span instead of a narrow band in the middle.</p>
+            <p>That is exactly right for a mid-tone photo shot in even light, and wrong for two common cases. A scene that already contains white paper, snow, or a bright sky has its 1% of near-white pixels before the tool starts, so the stretch lands on the mid-tones and pushes them up: the sky clips and the colours go pastel. A night shot has almost no near-white pixels, so the tool keeps multiplying and turns black into grey noise.</p>
+            <p>Because it multiplies rather than offsets, it also raises saturation slightly as a side effect. On a portrait that is already warm, that is the difference between natural skin and an orange cast.</p>
+
+            <h2>Check the Histogram First</h2>
+            <p>Open <strong>Image → Histogram</strong> before touching anything. The graph tells you which problem you actually have:</p>
+            <ul>
+                <li><strong>Everything bunched in the middle, both ends empty</strong> — genuinely flat. Auto Adjust is appropriate.</li>
+                <li><strong>Left edge piled up against zero</strong> — crushed shadows, detail already gone. Lifting brightness will only reveal noise, not detail.</li>
+                <li><strong>Right edge clipped flat</strong> — blown highlights. No slider recovers them; the only fix is to expose darker next time.</li>
+                <li><strong>Spike in one colour channel</strong> — that channel is clipping before the others, which is almost always a colour cast rather than an exposure problem.</li>
+            </ul>
+
+            <h2>The Sliders, In the Right Order</h2>
+            <p><strong>Image → Color Corrections</strong> opens one dialog with six groups. The order below matters more than the values, because each step changes what the next one is looking at:</p>
             <div class="step-card">
-                <div class="step-title">Step 2: One-Click Auto Adjust (easiest)</div>
-                <p>Click <strong>Image → Auto Adjust</strong>. The editor analyzes the histogram and automatically fixes exposure and contrast. For most photos this alone solves 80% of the problem.</p>
+                <div class="step-title">1. Fix the colour cast first (Red / Green / Blue)</div>
+                <p>Each channel slider runs −255 to +255. Find something in the frame that should be neutral — white paper, a grey wall, a white shirt — and adjust the channel that is too strong downward. A photo shot under tungsten light usually has too much red and not enough blue; nudge Red down and Blue up in small steps and watch the neutral area lose its tint.</p>
             </div>
             <div class="step-card">
-                <div class="step-title">Step 3: Fine-Tune with Three Sliders</div>
-                <p>For a personal look, open <strong>Image → Color Corrections</strong>:<br>1. <strong>Brightness</strong>: lift the whole image by +5 to +15; too much blows out highlights.<br>2. <strong>Contrast</strong>: make the image "stand up", +10 to +25.<br>3. <strong>Saturation</strong>: boost colors +10 to +30; go easy on portraits to avoid orange skin.<br>4. Finish with <strong>Sharpen</strong> at 30–60 for crisp details.</p>
+                <div class="step-title">2. Brightness, then contrast</div>
+                <p>Brightness runs −100 to +100, contrast the same. Lift brightness until the mid-tones look right, then add contrast until the image stops looking hazy. Doing it in the other order means the contrast stretch amplifies the lift and clips the highlights. On the sample, +8 brightness and +15 contrast is enough.</p>
             </div>
             <div class="step-card">
-                <div class="step-title">Step 4: Export</div>
-                <p>Click <strong>File → Save As</strong> and export as JPG (quality 85+). Keep the original file so you can re-edit later.</p>
+                <div class="step-title">3. Saturation last, and cautiously</div>
+                <p>Saturation also runs −100 to +100. Stop at the point where the colour looks right on the most saturated object in the frame, not the average — a red mug reaches its limit well before a beige wall does. Faces turn orange first, so check skin at 100% zoom before confirming.</p>
             </div>
-            <div class="tip-box">💡 <strong>Rule of thumb: auto first, manual second; brightness before color; adjust a little at a time and keep comparing.</strong></div>
+            <div class="step-card">
+                <div class="step-title">4. Luminance and Hue, for specific problems</div>
+                <p><strong>Luminance</strong> moves brightness without touching colour saturation, which is useful on a photo where lifting brightness washed out the colour. <strong>Hue</strong> rotates every colour at once (−180 to 180 degrees) — a blunt tool, but the fastest way to bring a strongly green underwater or fluorescent-light shot back toward neutral before fine-tuning the channels.</p>
+            </div>
+
+            <h2>When a Boost Is Not Enough</h2>
+            <p>If the flatness comes from haze rather than exposure, no slider fixes it cleanly — lifting contrast adds mud before it adds depth. Two options that work better on this kind of image: <strong>Effects → Vibrance</strong>, which lifts muted colours less aggressively than the saturation slider, and a light <strong>Effects → Sharpen</strong> pass after resizing, which restores the local contrast that haze removed. Both are one-shot operations, so duplicate the layer if you want to compare.</p>
+            <p>What this editor does not have is worth knowing up front: there are no curve controls, no separate temperature and tint sliders, and no local adjustments by selection — every correction applies to the whole layer. Severe casts are therefore a channel-balancing job, and selective edits mean duplicating the layer and erasing back. That limitation shapes the workflow more than any slider value.</p>
+
+            <h2>Export and Keep the Original</h2>
+            <p>Finish with <strong>File → Export</strong> as JPG at quality 85 or higher. Keep the untouched original file: corrections are baked into the pixels when you confirm, so re-editing means starting from the original rather than from the exported JPEG. If the photo will be printed or edited again later, export PNG instead — every JPEG save throws away a little more of the gradient detail you just recovered.</p>
+
+            <h2>Quick Answers</h2>
+            <h3>Auto Adjust made the photo worse. Why?</h3>
+            <p>It pushes the image until roughly one percent of pixels sit near white and half a percent near black. That works on a mid-tone photo and fails on a scene that already contains bright sky or white paper, because the tool has nowhere to push and clips the highlights instead. Check the Histogram first: if either end is already touching the edge, skip Auto Adjust and work the sliders by hand.</p>
+
+            <h3>Brightness first, or contrast?</h3>
+            <p>Brightness first, then contrast, then saturation, and colour casts before any of that. Raising contrast first stretches the tonal range, so a later brightness lift pushes the highlights straight into clipping. And saturation magnifies whatever cast is already there, which is why a colour cast needs the RGB channels before you touch saturation at all.</p>
+
+            <h3>The same file looks different on my phone. Which screen is right?</h3>
+            <p>Neither is authoritative. Phone screens ship with different gamma curves, wider or narrower colour gamuts, and an auto-brightness setting that changes with the room. A file that looks correct on a calibrated monitor can look washed out on a phone at 30% brightness. Judge the image against a neutral grey area on the same screen rather than chasing how it looks on one specific device.</p>
+
+            <div class="tip-box">💡 <strong>Order of operations: cast → brightness → contrast → saturation. Auto Adjust only when the histogram has empty room at both ends.</strong></div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
 
             <h2>Related Tutorials</h2>
             <div class="related">
@@ -112,7 +211,7 @@
                 <a href="../tutorials/layer-blend-modes-guide">Layer Blend Modes Guide (Multiply / Screen / Overlay)</a>
                 <a href="../tutorials/add-text-watermark">Add a Text Watermark to Photos</a>
             </div>
-            <!-- 实战练习与安全导流 CTA 卡片 -->
+
             <div class="practice-cta-card">
                 <div style="flex: 1;">
                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
@@ -120,7 +219,7 @@
                         <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
                         <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Open the editor and color correct your own photo now — no account, no upload.</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Open a photo shot indoors, fix the cast on a white object with the RGB channels, then correct brightness and contrast in that order.</p>
                 </div>
                 <div>
                     <a href="../../editor.html" class="practice-btn">

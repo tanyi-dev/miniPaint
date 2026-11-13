@@ -11,6 +11,66 @@
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/crop-rotate-straighten" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/crop-rotate-straighten" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/crop-rotate-straighten" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Crop, Rotate & Straighten Tilted Photos",
+      "description": "Fix a tilted horizon in the right order: quarter turns, angle correction, then crop. Includes what rotation does to the canvas corners and how to recompose.",
+      "datePublished": "2026-10-02",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/crop-rotate-straighten"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I straighten a photo without knowing the exact tilt angle?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, and guessing a number is the wrong approach anyway. Find an edge in the frame that should be level, such as a horizon, a door frame, a table edge or the top of a building, and drag the angle slider until that edge runs parallel to the canvas border. Turn on the Ruler from the View menu if you want a hard reference line instead of eyeballing it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does straightening lose image quality?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Any rotation that is not a multiple of 90° resamples every pixel once, and the crop afterwards removes the empty corners. A single 2–5° correction is visually free. What does damage is nudging the slider twenty times and confirming each attempt, because every confirmed rotation bakes in another resample. Decide the angle at 100% zoom, then confirm once."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I crop before or after rotating?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Rotate first, crop second. Cropping first throws away pixels you may still need to keep the subject intact once the frame tilts, and it leaves you cropping a second time to remove the empty corners that rotation creates. One rotation, one crop, in that order."
+          }
+        }
+      ]
+    }
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -63,7 +123,7 @@
 
         <article>
 <h1>Crop, Rotate & Straighten Tilted Photos</h1>
-            <div class="meta-bar"><span>Difficulty: Beginner</span> • <span>Time: 2 min</span> • <span>Great for: travel shots, re-photographed documents</span></div>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Beginner</span> • <span>6 min read</span> • <span>Updated: 13 Nov 2026</span></div>
 
             <div class="cta-box">
                 <div>
@@ -74,6 +134,12 @@
             </div>
 
             <p>A horizon off by 2 degrees makes the whole photo feel like it's falling over; a trash can at the frame edge ruins the best landscape. Before you delete it — <strong>crop, rotate and straighten</strong> can rescue tilted photos in three steps, all locally with <strong>Web PSEditor</strong>.</p>
+
+            <h2>Why a Two-Degree Tilt Feels Wrong</h2>
+            <p>Your eye does not measure angle, it measures <em>reference</em>. Water, a horizon, a wall, a table edge — anything the brain knows should be level becomes the baseline, and every other line is judged against it. That is why 2° of tilt on a seascape is unbearable while the same 2° on a portrait of someone leaning is invisible: one has a reference, the other does not.</p>
+            <p>Phone cameras make this worse. You shoot with your arms out, tilted slightly toward the subject, and the phone only records which way up it was held — an orientation tag that gets applied automatically, not a correction for the small lean of your body. The result is a frame that looks fine on a 5-inch screen and leans the moment it fills a monitor. Handheld shots commonly land between 1° and 5° off; anything above that usually means you were turning while pressing the shutter.</p>
+            <p>There is a second problem rotation cannot solve: converging verticals. Tilt the camera upward to fit a building into the frame and its vertical lines lean inward toward the top. No rotation squares them, because the distortion is perspective — each line leans by a different amount, more at the top than at the base. Straightening fixes the horizon; the verticals would need a perspective or keystone correction, which this editor does not do. When a photo has both, level the horizon, accept the remaining lean, and crop tighter on the base of the building where the convergence is least visible.</p>
+
             <h2>The Result: Before vs After</h2>
             <div class="compare">
                 <figure>
@@ -85,6 +151,15 @@
                     <figcaption>After: level horizon, tighter composition</figcaption>
                 </figure>
             </div>
+            <h2>Three Fixes, In the Right Order</h2>
+            <p>Three different tools get called "rotating", and using them in the wrong order is why people end up with a soft, tightly cropped file after five minutes of work. Separate them once and the whole job takes under a minute:</p>
+            <ul>
+                <li><strong>Quarter turns</strong> — exactly 90°, 180° or 270°. Use this when the photo is sideways or upside down. It rotates pixel rows without interpolation, so it costs nothing in quality.</li>
+                <li><strong>Angle correction</strong> — any value in between, typically 1–6°. This is the tool for a leaning horizon. It resamples the image once, which is fine at a single pass and corrosive if repeated.</li>
+                <li><strong>Crop</strong> — removes the empty corners that angle correction creates, and fixes composition at the same time. Always last.</li>
+            </ul>
+            <p>The rule that follows: correct the coarse error first, the fine error second, the framing third. Rotating 90° after you have already angled and cropped re-bakes the whole image for no reason.</p>
+
             <h2>How to Fix It</h2>
             <figure>
                 <img src="../../images/tutorials/straight-editor-ui-en.jpg" alt="Web PSEditor English UI with a tilted photo loaded" loading="lazy">
@@ -92,21 +167,49 @@
             </figure>
             <div class="step-card">
                 <div class="step-title">Step 1: Rotate First</div>
-                <p>Open the photo and use <strong>Image → Rotate</strong> for 90° turns; for small tilts use <strong>Edit → Free Transform</strong> to fine-tune the angle (about 4° in our example). Rotating exposes white corners — we crop them away next.</p>
+                <p>Open the photo and choose <strong>Image → Rotate</strong>. The dialog gives you two controls: a <strong>Rotate</strong> slider covering 0–360° for any tilt, and a <strong>Right angle</strong> dropdown (0 / 90 / 180 / 270) for quarter turns. Our sample needs about 4° on the slider. Confirming the dialog expands the canvas so the rotated layer fits, which is exactly why empty corners appear.</p>
             </div>
             <div class="step-card">
                 <div class="step-title">Step 2: Crop the Composition</div>
-                <p>Select the <strong>Crop tool</strong>, trim the white edges along the photo content, and cut distractions at the frame edge at the same time. Putting the subject on a third line instantly looks professional.</p>
+                <p>Select the <strong>Crop tool</strong>, trim the empty corners along the photo content, and cut distractions at the frame edge at the same time. Putting the subject on a third line instantly looks professional. Pull the crop in just far enough that no background shows at any corner — zoom to 100% and check each one, because a single pixel of border reads as a mistake at full size.</p>
             </div>
             <div class="step-card">
                 <div class="step-title">Step 3: Check the Horizon</div>
-                <p>Zoom in on building edges or the horizon. Off by 1° is invisible; off by 3° ruins everything — nudge 0.5° at a time.</p>
+                <p>Zoom in on building edges or the horizon. Off by 1° is invisible; off by 3° ruins everything — nudge 0.5° at a time. Judge it against the canvas edge, not against another line inside the photo, and check the corners of the frame rather than the centre, where small deviations are easiest to see.</p>
             </div>
             <div class="step-card">
                 <div class="step-title">Step 4: Export</div>
-                <p>Save via <strong>File → Save As</strong>. For re-photographed documents, export JPG at quality 90+ to keep text crisp.</p>
+                <p>Save via <strong>File → Export</strong>. For re-photographed documents, export JPG at quality 90 or higher to keep text crisp; for anything that will be printed or edited again, PNG avoids a second round of compression.</p>
             </div>
-            <div class="tip-box">💡 <strong>Order matters: big rotation → fine angle → crop. Do it backwards and you lose image quality for nothing.</strong></div>
+
+            <h2>FAQ</h2>
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">Can I straighten a photo without knowing the exact tilt angle?</h3>
+            <p>Yes, and guessing a number is the wrong approach anyway. Find an edge that should be level — a horizon, a door frame, a table edge, the top of a building — and drag the angle slider until that edge runs parallel to the canvas border. Turn on the Ruler from the View menu if you want a hard reference line instead of eyeballing it.</p>
+
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">Does straightening lose image quality?</h3>
+            <p>Any rotation that is not a multiple of 90° resamples every pixel once, and the crop afterwards removes the empty corners. A single 2–5° correction is visually free. What does damage is nudging the slider twenty times and confirming each attempt, because every confirmed rotation bakes in another resample. Decide the angle at 100% zoom, then confirm once.</p>
+
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">Should I crop before or after rotating?</h3>
+            <p>Rotate first, crop second. Cropping first throws away pixels you may still need to keep the subject intact once the frame tilts, and it leaves you cropping a second time to remove the empty corners that rotation creates. One rotation, one crop, in that order.</p>
+
+            <h2>What Rotating Does to the Corners</h2>
+            <p>When you confirm an angle correction, the canvas grows to fit the rotated layer. The photo keeps its full area, and four triangular gaps appear at the edges — filled with the background colour, or transparent if the layer has no background. How you deal with them determines the final resolution:</p>
+            <ul>
+                <li><strong>Crop them away.</strong> The standard answer. You lose a strip along each edge, roughly 2% at 1° and 10% at 5°, and the remaining image is untouched. Fine for almost every photo.</li>
+                <li><strong>Scale up, then crop.</strong> Keeps the original framing but resamples the image a second time and softens it. Only worth it when the composition is tight and you cannot lose the edges.</li>
+                <li><strong>Fill them in.</strong> Clone or brush over the gaps with a nearby texture when the corner sits on sky, sand, or a plain wall. Effective for backgrounds, obvious on patterned surfaces, and never acceptable on a face or a straight architectural line.</li>
+            </ul>
+            <p>Whichever route you take, check the corners at 100% before exporting. A thin sliver of the original white background surviving in one corner is the most common defect in straightened photos, and it is invisible at fit-to-window zoom.</p>
+
+            <h2>Recomposing After the Fix</h2>
+            <p>Straightening changes where the frame edges fall, which means it changes the composition. Two things worth doing before you export:</p>
+            <p>First, re-place the subject. A horizon that was on the middle line before rotation may now sit high or low; move the crop so it lands on a third instead, and the photo instantly looks deliberate rather than corrected. Second, sweep the edges. Rotation pulls new content into the frame — a signpost, a stranger's shoulder, a bright patch of sky — and those arrivals are what make a rescued photo look rescued. Crop until every edge is either clean or clearly intentional.</p>
+
+            <div class="tip-box">💡 <strong>Order matters: big rotation → fine angle → crop → export. Do it backwards and you lose image quality for nothing. Confirm the angle once, not five times.</strong></div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
 
             <h2>Related Tutorials</h2>
             <div class="related">

@@ -11,6 +11,82 @@
     <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/social-media-image-sizes" />
     <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/social-media-image-sizes" />
     <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/social-media-image-sizes" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Social Media Image Sizes: Stop Awkward Auto-Cropping",
+      "description": "Crop 1:1 avatars, 4:5 feed posts, 3:1 covers and 9:16 story images to the ratios each platform actually renders, with a size table and safe-zone notes.",
+      "datePublished": "2026-09-23",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/social-media-image-sizes"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What size should a profile photo be?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Upload at least 400×400 px, and 1080×1080 if you have it. Most platforms display avatars as a circle inside a square, so keep the face or logo inside the central area and let the corners be background. Anything below 200×200 px is upscaled by the platform and turns soft."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does my cover image look blurry after upload?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Two causes, both fixable before upload. Either the source was smaller than the display size and got upscaled, or it was saved at low quality and then re-compressed by the platform. Export at the full display size and quality 85 or higher, and never re-save a downloaded preview."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to export at 300 DPI for social media?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. DPI only tells a printer how to space dots on paper; screens read pixel dimensions. A 1080×1080 file is 1080×1080 whether it is tagged 72 or 300 DPI. Set the pixel size and ignore the DPI field."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use one image for a feed post and a story?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not well. A feed post is 1:1 or 4:5, a story is 9:16. Forcing one file into both means either bars or a heavy crop. Crop two versions from the same original; each takes seconds when the processing runs locally, and the composition survives intact."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which format should I upload, JPEG or PNG?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JPEG for photographs at quality 85 or higher. PNG for flat graphics with text, logos, or a solid background, where JPEG would smear the edges. Most platforms re-encode everything to their own format anyway, so the goal is simply to avoid losing detail before they do."
+          }
+        }
+      ]
+    }
+    </script>
     <style>
 :root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
@@ -63,7 +139,7 @@
 
         <article>
 <h1>Social Media Image Sizes: Stop Awkward Auto-Cropping</h1>
-            <div class="meta-bar"><span>Difficulty: Beginner</span> • <span>Time: 2 min</span> • <span>Great for: WeChat, Weibo, Instagram, X</span></div>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Beginner</span> • <span>6 min read</span> • <span>Updated: 13 Nov 2026</span></div>
 
             <div class="cta-box">
                 <div>
@@ -74,8 +150,36 @@
             </div>
 
             <p>You picked the perfect avatar, then the platform cropped it into half a face. You designed a beautiful cover, and the feed only shows a thin slice of it. The fix is simple: <strong>pre-crop to the platform's display ratio</strong>. This tutorial shows you how to do it locally with <strong>Web PSEditor</strong>, so what you crop is exactly what gets displayed.</p>
+
+            <h2>Why Platforms Crop Your Image</h2>
+            <p>Every social platform renders images inside a fixed container. Your file is never shown at its own aspect ratio. The platform either letterboxes it (adds bars), stretches it (rare, only on badly built sites), or crops it to fill. Cropping is the default because it looks tidier in a feed, and it is exactly where your composition dies.</p>
+            <p>The trap is the preview. When you attach a file, most apps show a thumbnail that roughly matches the final render, but the crop is applied by a rule you cannot see: sometimes it centres, sometimes it anchors to the top, sometimes it favours the region with the most edge detail. Two photos with identical dimensions can end up cropped differently. That is why guessing from the preview keeps failing and why the only reliable method is to hand the platform a file that is <strong>already the right ratio</strong>. If there is nothing to crop, nothing gets cropped badly.</p>
+
             <h2>Quick Size Reference</h2>
             <p>Avatars & square feed posts: <code>1:1</code> (800×800 px or larger); page covers: roughly <code>16:9</code> (commonly 1200×628); stories & short-video covers: <code>9:16</code>. Pre-cropping to these ratios keeps platforms from cutting randomly.</p>
+            <p>Below are the placements most people actually need. Treat the pixel numbers as a safe export size rather than a rule the platform enforces. The <em>ratio</em> is what must match, and the pixel size just has to be big enough that the platform never has to upscale.</p>
+            <div style="overflow-x:auto;">
+            <table style="width:100%; min-width:420px; border-collapse:collapse; font-size:14px; margin:20px 0;">
+                <thead>
+                    <tr style="background:#f1f5f9; text-align:left;">
+                        <th style="padding:10px 12px; border:1px solid var(--border);">Placement</th>
+                        <th style="padding:10px 12px; border:1px solid var(--border); white-space:nowrap;">Ratio</th>
+                        <th style="padding:10px 12px; border:1px solid var(--border); white-space:nowrap;">Safe export size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td style="padding:10px 12px; border:1px solid var(--border);">Avatar / square feed post</td><td style="padding:10px 12px; border:1px solid var(--border);">1:1</td><td style="padding:10px 12px; border:1px solid var(--border);">1080 × 1080</td></tr>
+                    <tr><td style="padding:10px 12px; border:1px solid var(--border);">Portrait feed post</td><td style="padding:10px 12px; border:1px solid var(--border);">4:5</td><td style="padding:10px 12px; border:1px solid var(--border);">1080 × 1350</td></tr>
+                    <tr><td style="padding:10px 12px; border:1px solid var(--border);">Link preview card</td><td style="padding:10px 12px; border:1px solid var(--border);">1.91:1</td><td style="padding:10px 12px; border:1px solid var(--border);">1200 × 630</td></tr>
+                    <tr><td style="padding:10px 12px; border:1px solid var(--border);">Profile header / banner</td><td style="padding:10px 12px; border:1px solid var(--border);">3:1</td><td style="padding:10px 12px; border:1px solid var(--border);">1500 × 500</td></tr>
+                    <tr><td style="padding:10px 12px; border:1px solid var(--border);">Story / short-video cover</td><td style="padding:10px 12px; border:1px solid var(--border);">9:16</td><td style="padding:10px 12px; border:1px solid var(--border);">1080 × 1920</td></tr>
+                    <tr><td style="padding:10px 12px; border:1px solid var(--border);">Video thumbnail</td><td style="padding:10px 12px; border:1px solid var(--border);">16:9</td><td style="padding:10px 12px; border:1px solid var(--border);">1280 × 720</td></tr>
+                    <tr><td style="padding:10px 12px; border:1px solid var(--border);">WeChat article cover</td><td style="padding:10px 12px; border:1px solid var(--border);">2.35:1</td><td style="padding:10px 12px; border:1px solid var(--border);">900 × 383</td></tr>
+                </tbody>
+            </table>
+            </div>
+            <p>Ratios drift. When a platform reshapes its feed or banner, a file exported at the old ratio gets cropped again on the way in. Export at the right ratio first and keep the editable original, and re-cutting takes seconds instead of a re-shoot.</p>
+
             <h2>The Two Crops You Need Most</h2>
             <div class="compare">
                 <figure>
@@ -87,6 +191,10 @@
                     <figcaption>16:9 wide cover crop</figcaption>
                 </figure>
             </div>
+            <h2>Mind the Safe Zone</h2>
+            <p>Matching the ratio is only half the job. On stories and short-video covers, the interface sits on top of your artwork: the caption box and progress bar run along the bottom, and some apps add a sticker row above them. On a 1080×1920 story, that chrome occupies roughly the bottom 250 px, while a header can cover the top 120 px on a phone. Text placed there disappears on the viewer's screen while looking perfectly fine in your editor.</p>
+            <p>The same applies to profile headers. A 3:1 banner is shown full width on desktop, but the profile avatar overlaps its left edge on mobile, and the crop tightens as the screen narrows. Keep logos, faces, and any text inside the central 60% and you survive every viewport. Think of the outer band as bleed: fill it with background, texture, or blurred photo, never with information.</p>
+
             <h2>Step-by-Step in the Editor</h2>
             <figure>
                 <img src="../../images/tutorials/social-editor-ui-en.jpg" alt="Web PSEditor English UI with crop and image size features" loading="lazy">
@@ -94,17 +202,57 @@
             </figure>
             <div class="step-card">
                 <div class="step-title">Step 1: Crop the Composition</div>
-                <p>Open your photo, pick the <strong>Crop tool</strong> in the left toolbar, set the target ratio (e.g. 1:1) and confirm. Keep the subject centered or on a third line so it survives compression.</p>
+                <p>Open your photo, pick the <strong>Crop tool</strong> in the left toolbar, set the target ratio (e.g. 1:1) and confirm. Keep the subject centered or on a third line so it survives compression. Do not try to fit the whole frame in. Crop for the placement you are filling, not for the file you happen to have. If the subject's head or a product edge lands on the boundary, pull back slightly: platforms sometimes shave a few pixels when rounding to their render grid.</p>
             </div>
             <div class="step-card">
                 <div class="step-title">Step 2: Set Exact Pixels</div>
-                <p>Click <strong>Image → Image Size</strong> and enter the target pixels (e.g. 800×800). Keep "keep aspect ratio" enabled to avoid distortion.</p>
+                <p>Click <strong>Image → Resize</strong> and enter one dimension (e.g. 800 in Width) — the height is calculated from the original ratio, so the frame cannot distort. The same dialog takes a percentage instead of pixels and carries a <strong>Sharpen</strong> toggle, which is worth enabling when you downscale by more than half because rescaling softens edges. Downscaling is safe and even improves quality after platform compression; upscaling never adds detail, so if the number you need is larger than the original, shoot or source a bigger file instead of enlarging.</p>
             </div>
             <div class="step-card">
                 <div class="step-title">Step 3: Export & Upload</div>
-                <p><strong>File → Save As</strong> as JPG (quality 85+). Check the live display after uploading and fine-tune the crop if needed.</p>
+                <p><strong>File → Export</strong> as JPG (quality 85+). Check the live display after uploading and fine-tune the crop if needed. Export one file per placement and name them by intent (<code>avatar-1x1</code>, <code>cover-3x1</code>). The next time a platform changes its layout you will not have to reverse-engineer which file was which.</p>
             </div>
-            <div class="tip-box">💡 <strong>Making one sized version per platform beats squeezing one file everywhere — local processing takes seconds.</strong></div>
+
+            <h2>Resolution, DPI, and File Size</h2>
+            <p>Three numbers get mixed up constantly, and only one of them matters:</p>
+            <ul>
+                <li><strong>Pixel dimensions</strong> decide how much detail is in the file. This is the number that makes an image look sharp, and it is the one you set in <em>Resize</em>.</li>
+                <li><strong>DPI</strong> only tells a printer how to space dots on paper. On screen it changes nothing. Exporting "300 DPI" from a 600 px file still gives you 600 px, just with a different embedded label.</li>
+                <li><strong>File size</strong> is what the upload limit cares about. A quality-85 JPEG of a 1080 px photo usually lands between 150 KB and 400 KB, well under every common limit.</li>
+            </ul>
+            <p>Where sharpness is genuinely lost is double compression. Every platform re-encodes your upload, so a file already saved at quality 60 and then re-compressed at 80 accumulates blocking artefacts. Export once at high quality, let the platform do its single pass, and stop re-saving the result. Screenshotting a preview and re-uploading that screenshot is the most common way people destroy their own image quality. If you are fighting a size limit at the same time, see <a href="../tutorials/image-resize-and-compression">Resize &amp; Compress Images for Upload Limits</a>.</p>
+            <p>For flat graphics such as a cover with a solid background or a logo avatar, PNG avoids the smearing JPEG applies to hard edges, and the file stays small because there are few colours. For photographs, JPEG wins every time on size. When a platform accepts WebP, it typically gives you the same visual quality at a third of the bytes, but always keep a JPEG fallback: not every upload dialog accepts it. The trade-offs are compared in <a href="../tutorials/png-vs-jpg-export">PNG vs JPG</a>.</p>
+
+            <h2>Five Mistakes That Ruin a Correct Crop</h2>
+            <ul>
+                <li>Upscaling a small source. A 400 px avatar stretched to 1080 px is soft before the platform ever touches it, so start from the largest original you have.</li>
+                <li>One file for every platform. A 1:1 square forced into a 9:16 story loses most of its width. One export per placement costs seconds when processing is local.</li>
+                <li>Ignoring the mobile crop. Desktop previews lie about headers and banners, so check the phone view before you publish.</li>
+                <li>Putting text on the edge. Anything inside the outer band of a story or banner can be covered by interface chrome.</li>
+                <li>Trusting the attach preview. It approximates the result. Trust the ratio you exported instead.</li>
+            </ul>
+
+            <div class="tip-box">💡 <strong>Making one sized version per platform beats squeezing one file everywhere. Local processing takes seconds.</strong></div>
+
+            <h2>FAQ</h2>
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">What size should a profile photo be?</h3>
+            <p>Upload at least 400×400 px, and 1080×1080 if you have it. Most platforms display avatars as a circle inside a square, so keep the face or logo inside the central area and let the corners be background. Anything below 200×200 px is upscaled by the platform and turns soft.</p>
+
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">Why does my cover image look blurry after upload?</h3>
+            <p>Two causes, both fixable before upload. Either the source was smaller than the display size and got upscaled, or it was saved at low quality and then re-compressed by the platform. Export at the full display size and quality 85 or higher, and never re-save a downloaded preview.</p>
+
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">Do I need to export at 300 DPI for social media?</h3>
+            <p>No. DPI only tells a printer how to space dots on paper; screens read pixel dimensions. A 1080×1080 file is 1080×1080 whether it is tagged 72 or 300 DPI. Set the pixel size and ignore the DPI field.</p>
+
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">Can I use one image for a feed post and a story?</h3>
+            <p>Not well. A feed post is 1:1 or 4:5, a story is 9:16. Forcing one file into both means either bars or a heavy crop. Crop two versions from the same original; each takes seconds when the processing runs locally, and the composition survives intact.</p>
+
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">Which format should I upload, JPEG or PNG?</h3>
+            <p>JPEG for photographs at quality 85 or higher. PNG for flat graphics with text, logos, or a solid background, where JPEG would smear the edges. Most platforms re-encode everything to their own format anyway, so the goal is simply to avoid losing detail before they do.</p>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
 
             <h2>Related Tutorials</h2>
             <div class="related">
@@ -121,7 +269,7 @@
                         <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
                         <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
                     </div>
-                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Open the editor and crop your photo into a 1:1 avatar and a cover image.</p>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Crop one photo into a 1080×1080 avatar and a 1500×500 banner in two passes, then compare them against the table above.</p>
                 </div>
                 <div>
                     <a href="../../editor.html" class="practice-btn">
