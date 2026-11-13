@@ -202,11 +202,11 @@
             </figure>
             <div class="step-card">
                 <div class="step-title">Step 1: Crop the Composition</div>
-                <p>Open your photo, pick the <strong>Crop tool</strong> in the left toolbar, set the target ratio (e.g. 1:1) and confirm. Keep the subject centered or on a third line so it survives compression. Do not try to fit the whole frame in. Crop for the placement you are filling, not for the file you happen to have. If the subject's head or a product edge lands on the boundary, pull back slightly: platforms sometimes shave a few pixels when rounding to their render grid.</p>
+                <p>Open your photo and pick the <strong>Crop tool</strong> in the left toolbar. It crops freely: there is no ratio preset built into it, and the one modifier it does have (hold Ctrl or Cmd while dragging) locks the crop to the picture's <em>current</em> ratio, which is no help when that ratio is exactly what you are trying to change. So work in two passes. Drag a crop that is roughly the target shape and confirm it, then type the exact frame into <strong>Image → Canvas Size</strong> — 1080 by 1080 for an avatar, Resolution left on Custom. The canvas becomes those pixels and the image keeps its scale, so anything outside the new frame is cut away rather than squeezed. Keep the subject centered or on a third line so it survives that second trim. Do not try to fit the whole frame in. Crop for the placement you are filling, not for the file you happen to have. If the subject's head or a product edge lands on the boundary, pull back slightly: platforms sometimes shave a few pixels when rounding to their render grid.</p>
             </div>
             <div class="step-card">
-                <div class="step-title">Step 2: Set Exact Pixels</div>
-                <p>Click <strong>Image → Resize</strong> and enter one dimension (e.g. 800 in Width) — the height is calculated from the original ratio, so the frame cannot distort. The same dialog takes a percentage instead of pixels and carries a <strong>Sharpen</strong> toggle, which is worth enabling when you downscale by more than half because rescaling softens edges. Downscaling is safe and even improves quality after platform compression; upscaling never adds detail, so if the number you need is larger than the original, shoot or source a bigger file instead of enlarging.</p>
+                <div class="step-title">Step 2: Downscale First if the Source Is Huge</div>
+                <p>A 4000 px phone photo is more resolution than any feed uses, and dragging crop handles around a canvas that large is slow. Open <strong>Image → Resize</strong> and enter one dimension (e.g. 1080 in Width) — the height is calculated from the original ratio, so the frame cannot distort, and the <strong>Sharpen</strong> toggle is worth enabling because a downscale of more than half softens edges. Do this <em>before</em> the crop in Step 1 if the original is over about 3000 px, then set the exact frame with Canvas Size as described there. Downscaling is safe and even improves quality after platform compression; upscaling never adds detail, so if the number you need is larger than the original, shoot or source a bigger file instead of enlarging.</p>
             </div>
             <div class="step-card">
                 <div class="step-title">Step 3: Export & Upload</div>
@@ -234,7 +234,7 @@
 
             <div class="tip-box">💡 <strong>Making one sized version per platform beats squeezing one file everywhere. Local processing takes seconds.</strong></div>
 
-            <h2>FAQ</h2>
+            <h2>Quick Answers</h2>
             <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">What size should a profile photo be?</h3>
             <p>Upload at least 400×400 px, and 1080×1080 if you have it. Most platforms display avatars as a circle inside a square, so keep the face or logo inside the central area and let the corners be background. Anything below 200×200 px is upscaled by the platform and turns soft.</p>
 

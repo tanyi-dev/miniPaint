@@ -135,16 +135,6 @@
 
             <p>"PNG or JPG?" — choose wrong and your file is either too big to send, too blurry to use, or the transparency you needed turns into ugly white blocks. The whole decision boils down to three sentences. Read on and you'll never hesitate again.</p>
 
-            <h2>Quick Answers</h2>
-            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">What JPG quality setting should I export a photo at?</h3>
-            <p>85 to 90 for photographs. At 85 the difference from the original is invisible at normal viewing size and the file is roughly a tenth of the PNG. Going to 95 or 100 adds bytes your platform will discard when it re-compresses the upload anyway. Below 70 the blocking artefacts start showing in smooth skies and skin.</p>
-
-            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">Which format keeps small text sharpest?</h3>
-            <p>PNG. JPG splits the image into 8×8 pixel blocks and approximates each one, so thin strokes pick up ringing and coloured fringes along their edges even at high quality settings. Screenshots, charts, slides and anything with type should be PNG, or the text will look dirty before it is printed or read.</p>
-
-            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">What is the smallest PNG I can make?</h3>
-            <p>Reduce the number of colours first, then the dimensions. A flat graphic with a dozen colours can be a few kilobytes at full size, because PNG stores repeated pixels efficiently. A photograph cannot be squeezed the same way: it holds thousands of colours, and shrinking the palette produces banding in gradients rather than a smaller file.</p>
-
             <h2>One Image Tells the Story</h2>
             <figure>
                 <img src="../../images/tutorials/format-png-vs-jpg.jpg" alt="The same photo as lossless PNG vs heavily compressed JPG, with real file sizes" loading="lazy">
@@ -188,6 +178,16 @@
                 <p>If the image has transparent areas, only PNG keeps them. Leave the layers unmerged unless you intend to flatten, and do not place an opaque background layer underneath at the last minute — that silently removes the alpha channel you spent time cutting out.</p>
             </div>
             <div class="tip-box">💡 <strong>Lazy rule before uploading anywhere: photos as JPG 85, text screenshots and transparent assets as PNG — saves ~80% file size instantly. Check the estimated size in the export dialog, not after the upload fails.</strong></div>
+
+            <h2>Quick Answers</h2>
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">What JPG quality setting should I export a photo at?</h3>
+            <p>85 to 90 for photographs. At 85 the difference from the original is invisible at normal viewing size and the file is roughly a tenth of the PNG. Going to 95 or 100 adds bytes your platform will discard when it re-compresses the upload anyway. Below 70 the blocking artefacts start showing in smooth skies and skin.</p>
+
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">Which format keeps small text sharpest?</h3>
+            <p>PNG. JPG splits the image into 8×8 pixel blocks and approximates each one, so thin strokes pick up ringing and coloured fringes along their edges even at high quality settings. Screenshots, charts, slides and anything with type should be PNG, or the text will look dirty before it is printed or read.</p>
+
+            <h3 style="font-size:16px; color:#0f172a; margin:20px 0 6px;">What is the smallest PNG I can make?</h3>
+            <p>Reduce the number of colours first, then the dimensions. A flat graphic with a dozen colours can be a few kilobytes at full size, because PNG stores repeated pixels efficiently. A photograph cannot be squeezed the same way: it holds thousands of colours, and shrinking the palette produces banding in gradients rather than a smaller file.</p>
 
             <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
                 <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
