@@ -138,7 +138,7 @@
             </div>
 
             <p>You sold the same mug in five colours and only shot one. Or the sample arrived in the wrong shade. Recolouring a product photo is one of the few jobs where a browser editor genuinely earns its place, provided the object is a fairly uniform colour and the lighting is not wildly uneven.</p>
-            <p><strong>Tools → Replace Color</strong> takes a <strong>Target</strong> colour, a <strong>Replacement</strong> colour, a <strong>Power</strong> tolerance and a <strong>Mode</strong>. That is a small set of controls, and most of the quality comes from two things you do before touching them: sampling the right hex, and choosing an object that can survive the swap.</p>
+            <p><strong>Tools → Replace Color</strong> takes a <strong>Target</strong> colour, a <strong>Replacement</strong> colour, a <strong>Power</strong> tolerance, an <strong>Opacity</strong> and a <strong>Mode</strong>. That is a small set of controls, and most of the quality comes from two things you do before touching them: sampling the right hex, and choosing an object that can survive the swap.</p>
 
                         <figure>
                 <img src="../../images/tutorials/shots/tools-menu-en.png" alt="Web PSEditor Tools menu with Content Fill and Replace Color" loading="lazy">
@@ -155,12 +155,13 @@
                 <p>Duplicate the layer first (<strong>Layer → Duplicate</strong>) and run Replace Color on the copy. If the result is close but not right, you can erase parts of the copy instead of undoing the whole operation.</p>
             </div>
 
-            <h2>The Four Controls</h2>
+            <h2>The Five Controls</h2>
             <table class="tool-table">
                 <tr><th>Control</th><th>Range / default</th><th>What it decides</th></tr>
                 <tr><td>Target</td><td>Current foreground colour</td><td>Which colour is being replaced. Set it by sampling, not by guessing a hex</td></tr>
                 <tr><td>Replacement</td><td>#ff0000 default</td><td>The new colour. Enter the exact brand hex if there is one</td></tr>
                 <tr><td>Power</td><td>0–255, default 20</td><td>Tolerance. Higher catches more shades around the target — and more of the background</td></tr>
+                <tr><td>Opacity</td><td>0–255, default 255</td><td>Alpha of the replacement. Leave at 255 for a normal swap; lower values let the layer underneath show through</td></tr>
                 <tr><td>Mode</td><td>Advanced / Simple</td><td>Advanced preserves more of the original luminance variation; Simple flattens toward the replacement</td></tr>
             </table>
             <p>Start with Power at 10 and climb in steps of five. A low value leaves a rim of the old colour where the object curves away from the light; a high value starts eating the background and neighbouring objects. The right number is the point just before the background shifts.</p>
