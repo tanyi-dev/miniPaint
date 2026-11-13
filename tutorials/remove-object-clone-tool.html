@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove a Small Object With the Clone Tool - Web PSEditor</title>
+    <meta name="description" content="Right-click sets the source, then paint. What the Clone tool can genuinely remove, why it refuses on resized layers, and how to avoid repeating patterns." />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/tutorials/remove-object-clone-tool" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/remove-object-clone-tool" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/remove-object-clone-tool" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/remove-object-clone-tool" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Clone Tool: Removing Small Objects From a Photo",
+      "description": "Right-click sets the source, then paint. What the Clone tool can genuinely remove, why it refuses on resized layers, and how to avoid repeating patterns.",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/remove-object-clone-tool"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "The Clone tool says the source is empty. What did I miss?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The source point has to be saved with a right-click (or a long press on touch) on the area you want to copy before the first stroke. Left-clicking alone only paints with no source, which produces the error message."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is the Clone tool disabled on my image?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The layer has probably been resized or rotated. Convert it with Layer → Convert to Raster, or undo back to the original size and clone before resizing. The tool refuses to work on scaled layers because the source coordinates would map to the wrong pixels."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I avoid the repeating pattern that gives cloning away?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use short strokes and reset the source point after each one, sample from different areas with the same texture direction, and alternate between 100% zoom and fit-to-window while working. If a large area needs repair, use Tools → Content Fill instead of many clone strokes."
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">← Home</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">Tutorials</a>
+            </div>
+            <div class="lang-switch"><a href="https://webpseditor.com/zh/tutorials/remove-object-clone-tool" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span></div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% Local Browser Processing · Zero Uploads · Zero Privacy Risk</span>
+        </div>
+
+        <article>
+            <h1>Remove a Small Object With the Clone Tool</h1>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Intermediate</span> • <span>7 min read</span> • <span>Updated: 13 Nov 2026</span></div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">Sample, then paint</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Right-click sets the source point; the Clone tool copies pixels under the brush.</div>
+                </div>
+                <a href="../../editor.html" class="cta-btn" target="_blank">Open Web PSEditor & Clone →</a>
+            </div>
+
+            <p>A cable across a wall, a bin in the corner of a product shot, a bit of litter on the grass. Small distractions that no crop can fix. The <strong>Clone</strong> tool handles these by copying pixels from one part of the layer to another, and it has two behaviours that catch first-time users out: the source must be set with a right-click, and the layer has to be an untouched raster.</p>
+
+            <h2>How the Tool Actually Works</h2>
+            <div class="step-card">
+                <div class="step-title">Right-click to place the source</div>
+                <p>Select the <strong>Clone</strong> tool in the left toolbar, then <strong>right-click</strong> on the area you want to copy — clean wall, plain grass, uninterrupted sky. A confirmation appears that the source coordinates are saved. A long press on touch devices does the same thing.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Then paint over the object</div>
+                <p>Left-click and drag across the thing you want gone. The pixels under the brush come from the saved source, offset by the distance between the source point and where you started painting. That offset stays constant for the stroke, which is why short strokes work better than long ones.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Reset the source often</div>
+                <p>After each short stroke, right-click a fresh area. A single long stroke drags one band of texture across the whole frame and leaves a visible streak — the most common clone-tool tell.</p>
+            </div>
+
+            <h2>Requirements the Tool Enforces</h2>
+            <table class="tool-table">
+                <tr><th>Condition</th><th>What happens if not met</th></tr>
+                <tr><td>Layer contains a raster image</td><td>Error asking you to convert the layer to raster first</td></tr>
+                <tr><td>Layer has not been resized</td><td>"Clone tool disabled for resized image" — rasterize first</td></tr>
+                <tr><td>Layer is not rotated</td><td>Error asking you to rasterize the rotated object</td></tr>
+                <tr><td>Source coordinates saved</td><td>"Source is empty, right click on image" message</td></tr>
+            </table>
+            <p>That second row matters in practice: if you resized the image with <strong>Image → Resize</strong>, clone can refuse until the layer is rasterised with <strong>Layer → Convert to Raster</strong>. Rasterising is one-way, so do any resize last if you plan to clone.</p>
+
+            <h2>Source Layer: Current or Previous</h2>
+            <p>The tool's options include a source layer setting. <strong>Current</strong> samples from the layer you are painting on. <strong>Previous</strong> samples from the layer directly below — useful when you want to repair a photo on one layer while keeping the original untouched underneath: paint the repair on the top layer, and if it goes wrong, delete that layer instead of undoing twenty strokes.</p>
+
+            <h2>What It Can and Cannot Remove</h2>
+            <ul>
+                <li><strong>Works:</strong> a cable on a plain wall, a small bin on grass, a watermark-free logo on a uniform background, a hair or dust speck on a scan.</li>
+                <li><strong>Works with care:</strong> a person at the edge of a group, a sign on a textured wall — every stroke needs a new source from the same texture.</li>
+                <li><strong>Fails:</strong> anything crossing a straight line, a face, text, or a strong gradient. The clone copies the source's structure, so a horizon will bend and a gradient will band.</li>
+                <li><strong>Fails badly:</strong> large objects. Covering a third of the frame needs dozens of strokes and the texture repetition becomes obvious.</li>
+            </ul>
+
+            <h2>Techniques That Look Clean</h2>
+            <div class="step-card">
+                <div class="step-title">Work from the edges inward</div>
+                <p>Repair the boundary between object and background first, using sources that sit just outside the object. Then fill the middle. Doing it the other way leaves a halo of the original object around a repaired centre.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Match the texture direction</div>
+                <p>On grass, wood or brick, the texture has a direction. Pick a source that runs the same way: cloning vertical brick lines into a horizontal course produces a visible cross-hatch.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Keep the brush soft but not too soft</div>
+                <p>A hard edge repeats the seam of the clone stamp; an extremely soft brush smears a blur into the area. A medium-hard round brush, small relative to the object, gives the least obvious result.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Check at 100%, then step back</div>
+                <p>Clone marks are invisible when you are staring at the cursor and obvious when you look at the whole frame. Alternate between 100% and fit-to-window every few strokes.</p>
+            </div>
+
+            <h2>When Cloning Is the Wrong Tool</h2>
+            <p>For a large area of texture — a whole wall, a stretch of sky — <strong>Tools → Content Fill</strong> extends the edges in one operation and does a better job than fifty clone strokes. For a face or a person, hide rather than remove: <strong>Effects → Mosaic</strong> or <strong>Gaussian Blur</strong> is the honest approach, and it is what privacy redaction needs anyway. Cloning a person out of a photo is fabrication, and it shows.</p>
+
+            <div class="tip-box">💡 <strong>Right-click to set the source, paint in short strokes, reset the source constantly, and rasterise before resizing. Big areas belong to Content Fill, not to the clone stamp.</strong></div>
+
+            <h2>Quick Answers</h2>
+            <div class="faq-item">
+                <h3>The Clone tool says the source is empty. What did I miss?</h3>
+                <p>The source point has to be saved with a right-click (or a long press on touch) on the area you want to copy before the first stroke. Left-clicking alone only paints with no source, which produces the error message.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Why is the Clone tool disabled on my image?</h3>
+                <p>The layer has probably been resized or rotated. Convert it with Layer → Convert to Raster, or undo back to the original size and clone before resizing. The tool refuses to work on scaled layers because the source coordinates would map to the wrong pixels.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do I avoid the repeating pattern that gives cloning away?</h3>
+                <p>Use short strokes and reset the source point after each one, sample from different areas with the same texture direction, and alternate between 100% zoom and fit-to-window while working. If a large area needs repair, use Tools → Content Fill instead of many clone strokes.</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/extend-background-content-fill">Extend a Background Without Cropping (Content Fill)</a>
+                <a href="../tutorials/mosaic-and-blur-redaction">Pixelate & Gaussian Blur for Sensitive Information</a>
+                <a href="../tutorials/how-to-cutout-png">Cut Out an Image & Export Transparent PNG</a>
+                <a href="../tutorials/sharpen-blurry-photo">Sharpen a Blurry Photo: Order, Numbers, Limits</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Clone a small object out of a plain background in five short strokes, resetting the source each time, then compare with one long stroke.</p>
+                </div>
+                <div>
+                    <a href="../../editor.html" class="practice-btn">
+                        <span>Try It in Web PSEditor</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

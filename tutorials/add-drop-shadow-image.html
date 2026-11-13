@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Soft Drop Shadow Behind a Cut-out - Web PSEditor</title>
+    <meta name="description" content="Use Effects → Shadow with exact offsets and radius values, understand why the shadow disappears on a full-frame photo, and keep it from looking fake." />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/tutorials/add-drop-shadow-image" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/add-drop-shadow-image" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/add-drop-shadow-image" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/add-drop-shadow-image" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Drop Shadow for Cut-outs and Graphics: Practical Settings",
+      "description": "Use Effects → Shadow with exact offsets and radius values, understand why the shadow disappears on a full-frame photo, and keep it from looking fake.",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/add-drop-shadow-image"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "I applied Shadow and nothing changed. Why?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Either the layer fills the entire canvas, so there is no transparent area for the shadow to show through, or the shadow was applied to the background layer. Cut the subject out first, or apply the effect to a layer whose edges are transparent, then check that no other layer sits above it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What radius and offset give a realistic shadow?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For a product on white: Offset Y 10–16, Offset X 0–4, Radius 12–20 in black. For a realistic look, use two passes — a tight contact shadow (Offset 4, Radius 6) plus a wide faint one (Offset 20, Radius 30 at 25–35% layer opacity). Values are in canvas pixels, so scale them with the image."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I remove a shadow after applying it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The filter is applied to the layer, so Undo (Ctrl+Z) is the direct way back. To keep the option open, duplicate the layer before applying the shadow and work on the copy; delete the copy if you change your mind."
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">← Home</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">Tutorials</a>
+            </div>
+            <div class="lang-switch"><a href="https://webpseditor.com/zh/tutorials/add-drop-shadow-image" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span></div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% Local Browser Processing · Zero Uploads · Zero Privacy Risk</span>
+        </div>
+
+        <article>
+            <h1>Add a Soft Drop Shadow (and Why Yours Is Invisible)</h1>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Beginner</span> • <span>7 min read</span> • <span>Updated: 13 Nov 2026</span></div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">Shadows sell the "lift"</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Effects → Common Filters → Shadow: offset, radius, colour — live preview.</div>
+                </div>
+                <a href="../../editor.html" class="cta-btn" target="_blank">Open Web PSEditor & Add Shadow →</a>
+            </div>
+
+            <p>A drop shadow is the cheapest way to make a cut-out look like it exists in space rather than floating. It is also the effect most people apply and then cannot see — because a shadow is drawn behind opaque pixels, and a full-frame photo has no area where "behind" is visible.</p>
+            <p>So the rule before any slider: <strong>the layer must have transparent edges</strong>. A product cut-out, a logo, a text layer, a PNG sticker — those work. A photo that fills the canvas edge to edge will not show a shadow at all, no matter how far you push the offset.</p>
+
+            <h2>What the Dialog Actually Changes</h2>
+            <p><strong>Effects → Common Filters → Shadow</strong> opens four controls:</p>
+            <table class="tool-table">
+                <tr><th>Control</th><th>Range / default</th><th>What it does</th></tr>
+                <tr><td>Offset X</td><td>−100 to 100, default 10</td><td>Horizontal displacement. Positive moves the shadow right.</td></tr>
+                <tr><td>Offset Y</td><td>−100 to 100, default 10</td><td>Vertical displacement. Positive moves it down — the usual choice, since light comes from above.</td></tr>
+                <tr><td>Radius</td><td>0 to 100, default 5</td><td>Softness. 0 is a hard-edged duplicate, high values blur it into a haze.</td></tr>
+                <tr><td>Color</td><td>#000000 default</td><td>Shadow colour. Not always black — see the colour note below.</td></tr>
+            </table>
+            <p>Values are in canvas pixels, so the same numbers mean different things on a 600 px sticker and a 3000 px product shot. Judge the result at 100% zoom, not in the fitted window, where a 20 px radius looks like nothing.</p>
+
+            <h2>Settings That Look Right</h2>
+            <div class="step-card">
+                <div class="step-title">Product photo on white</div>
+                <p>Offset Y 10–16, Offset X 0–4, Radius 12–20, black. The shadow should read as a soft contact shadow under the object. If it spreads to the sides, the radius is too high relative to the offset.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Logo or text on a light background</div>
+                <p>Offset Y 3–6, Radius 6–10. Tight and subtle; anything bigger turns a logo into a 2005 web button.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Sticker on a coloured background</div>
+                <p>Change the colour away from black. On a warm background, a pure black shadow looks like dirt. Sample the background and darken it — a deep version of the same hue reads as shadow, not as a stain.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Everything at once</div>
+                <p>After you confirm, the shadow is applied to the layer. It is not a live adjustment, so undo (Ctrl+Z) is the only way back — or duplicate the layer first and apply the shadow to the copy, so the original stays clean.</p>
+            </div>
+
+            <h2>Why Your Shadow Is Missing</h2>
+            <ul>
+                <li><strong>The layer covers the whole canvas.</strong> There is nowhere for the shadow to fall. Cut the subject out first.</li>
+                <li><strong>You applied it to the background layer.</strong> The shadow is drawn under that layer's own opaque pixels, which are everywhere, so it stays hidden.</li>
+                <li><strong>The shadow is under another layer.</strong> Move the shadowed layer up, or move the covering layer down.</li>
+                <li><strong>Offset too small for the radius.</strong> With Offset 2 and Radius 40, the shadow blurs evenly in every direction and reads as a grey halo rather than a shadow.</li>
+            </ul>
+
+            <h2>Making It Look Real</h2>
+            <p>Real shadows are not uniform. They are darker and sharper right where the object touches the surface, and they fade as distance increases. One filter pass cannot do both, so the trick is two passes on two copies of the layer:</p>
+            <div class="step-card">
+                <div class="step-title">Pass 1: the contact shadow</div>
+                <p>Duplicate the layer (<strong>Layer → Duplicate</strong>), apply Shadow with Offset Y 4, Radius 6, colour black. This is the tight dark line where the object meets the ground.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Pass 2: the ambient shadow</div>
+                <p>Duplicate again, apply Shadow with Offset Y 20, Radius 30, and then lower that layer's opacity in the layer panel to around 25–35%. Two overlapping shadows, one tight and dark, one wide and faint, is what a real surface does.</p>
+            </div>
+            <p>Keep the original cut-out on top of both. With three layers — object, contact shadow, ambient shadow — you can tune the strength later without redoing the cut-out.</p>
+
+            <h2>Where It Belongs, and Where It Doesn't</h2>
+            <ul>
+                <li><strong>Good:</strong> product listings, presentation slides, portfolio thumbnails, UI mock-ups, thumbnails where the subject must separate from a busy background.</li>
+                <li><strong>Bad:</strong> anything going to print where the background is already white — a shadow costs ink and looks like a smudge. Photographic restorations: adding a shadow to a scanned portrait is a fabrication, not a restoration.</li>
+            </ul>
+
+            <div class="tip-box">💡 <strong>Shadow needs transparency. Offset Y positive, radius larger than offset, and keep the original layer on top so you can dial the look back later.</strong></div>
+
+            <h2>Quick Answers</h2>
+            <div class="faq-item">
+                <h3>I applied Shadow and nothing changed. Why?</h3>
+                <p>Either the layer fills the entire canvas, so there is no transparent area for the shadow to show through, or the shadow was applied to the background layer. Cut the subject out first, or apply the effect to a layer whose edges are transparent, then check that no other layer sits above it.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What radius and offset give a realistic shadow?</h3>
+                <p>For a product on white: Offset Y 10–16, Offset X 0–4, Radius 12–20 in black. For a realistic look, use two passes — a tight contact shadow (Offset 4, Radius 6) plus a wide faint one (Offset 20, Radius 30 at 25–35% layer opacity). Values are in canvas pixels, so scale them with the image.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I remove a shadow after applying it?</h3>
+                <p>The filter is applied to the layer, so Undo (Ctrl+Z) is the direct way back. To keep the option open, duplicate the layer before applying the shadow and work on the copy; delete the copy if you change your mind.</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/white-background-product-photo">Put a Product Photo on a Pure White Canvas</a>
+                <a href="../tutorials/how-to-cutout-png">Cut Out an Image & Export Transparent PNG</a>
+                <a href="../tutorials/layer-blend-modes-guide">Layer Blend Modes Guide (Multiply / Screen / Overlay)</a>
+                <a href="../tutorials/add-text-watermark">Add Text and Watermarks to Photos</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Take a transparent PNG, duplicate the layer twice, and build a tight contact shadow plus a wide ambient one, then compare against a single-pass shadow.</p>
+                </div>
+                <div>
+                    <a href="../../editor.html" class="practice-btn">
+                        <span>Try It in Web PSEditor</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

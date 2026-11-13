@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extend a Background Without Cropping (Content Fill) - Web PSEditor</title>
+    <meta name="description" content="Turn 4:5 into 16:9 by growing the canvas, then let Content Fill extend the edges or clone the surroundings. Three modes, exact parameters, no stretching." />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/tutorials/extend-background-content-fill" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/extend-background-content-fill" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/extend-background-content-fill" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/extend-background-content-fill" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Content Fill: Change the Aspect Ratio Without Losing the Subject",
+      "description": "Turn 4:5 into 16:9 by growing the canvas, then let Content Fill extend the edges or clone the surroundings. Three modes, exact parameters, no stretching.",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/extend-background-content-fill"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Content Fill says the image already takes the whole area. What now?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "That means the canvas has not been grown yet — the tool only fills the gap between the layer edge and the canvas edge. Use Image → Canvas Size with In proportion unticked to add the space first, keep the image layer selected, then run Content Fill."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which mode should I pick?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Expand edges for flat backgrounds such as sky, studio grey or a wall. Cloned edges for texture such as grass, gravel or fabric, where repeating small patches reads as natural. Resized as background when the surroundings are busy and any invented detail would look wrong."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I extend a photo that has a horizon in it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, but the automatic fill will not continue the line — it only samples near the edge. Fill first, then use the Clone tool with short strokes and a frequently reset source point to carry the horizon into the new area. Check the join at 100% zoom."
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">← Home</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">Tutorials</a>
+            </div>
+            <div class="lang-switch"><a href="https://webpseditor.com/zh/tutorials/extend-background-content-fill" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span></div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% Local Browser Processing · Zero Uploads · Zero Privacy Risk</span>
+        </div>
+
+        <article>
+            <h1>Extend a Photo’s Background Instead of Cropping It</h1>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Intermediate</span> • <span>7 min read</span> • <span>Updated: 13 Nov 2026</span></div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">Same photo, new aspect ratio</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Canvas Size grows the sheet, Content Fill invents the missing edges.</div>
+                </div>
+                <a href="../../editor.html" class="cta-btn" target="_blank">Open Web PSEditor & Extend →</a>
+            </div>
+
+            <p>You have a vertical shot and need it horizontal — a banner, a thumbnail, a slide. Cropping to 16:9 cuts the subject's head off. Stretching makes everyone wide. There is a third option: keep the subject where it is, grow the canvas sideways, and rebuild the missing strips from the pixels that are already there.</p>
+            <p><strong>Tools → Content Fill</strong> does that rebuild. It requires one condition the editor enforces: the image layer must be smaller than the canvas, which is exactly the state you are in after growing the canvas.</p>
+
+            <h2>Step 1: Grow the Canvas, Keep the Pixels</h2>
+            <div class="step-card">
+                <div class="step-title">Image → Canvas Size</div>
+                <p>Untick <strong>In proportion</strong> so the layers do not scale. Set the new width for the target ratio: a 1200 × 1500 photo (4:5) becomes 1920 × 1500 for a 16:9-ish banner; 1080 × 1350 becomes 1080 × 1350 → 1920 × 1350 if you want a wide social crop. The extra space appears on the right, so the subject stays anchored left.</p>
+            </div>
+            <p>Confirm the image layer is still selected and that it no longer fills the canvas. If Content Fill is invoked while the layer covers everything, it refuses with a message that the image already takes the whole area — that refusal is the tool telling you the canvas has not been grown yet.</p>
+
+            <h2>Step 2: Pick a Fill Mode</h2>
+            <table class="tool-table">
+                <tr><th>Mode</th><th>What it does</th><th>Best for</th></tr>
+                <tr><td>Expand edges</td><td>Stretches the pixels along the layer border outward</td><td>Plain backgrounds: sky, wall, studio grey, gradient</td></tr>
+                <tr><td>Cloned edges</td><td>Samples small patches from the edge and repeats them</td><td>Textured backgrounds: grass, gravel, foliage, fabric</td></tr>
+                <tr><td>Resized as background</td><td>Scales a blurred copy behind the original</td><td>Busy backgrounds where any invented detail would look wrong</td></tr>
+            </table>
+            <p>All three have a live preview, so switch between them and watch the seam before committing. The seam is what matters: a mode that looks great in the middle of the empty strip but leaves a visible vertical line at the layer boundary is the wrong mode for this photo.</p>
+
+            <h2>Step 3: Tune the Numbers</h2>
+            <ul>
+                <li><strong>Blur power</strong> (1–20, default 5) softens the generated area. Higher hides repetition; too high and the extension looks out of focus compared with the real photo.</li>
+                <li><strong>Horizontal blur</strong> and <strong>Vertical blur</strong> (0–30 each, default 5) control smoothing along each axis. When extending sideways, vertical blur does most of the visible work — it blends the repeated patches into each other.</li>
+                <li><strong>Clone count</strong> (10–50, default 15) applies to the cloned-edges mode: how many sample patches get reused. More patches means more variety and less obvious repetition, at the cost of a busier texture.</li>
+            </ul>
+            <p>Judgement is easiest at 100% zoom on the seam itself, then at fit-to-window to check that the eye is not drawn to the join. If you can see where the original ends without looking for it, raise Blur power by 2–3 and lower Clone count.</p>
+
+            <h2>Step 4: Fix What the Fill Cannot Know</h2>
+            <p>Content Fill only uses pixels near the edge. It cannot continue a horizon line, a road, a wall corner or a pattern that changes direction. Those need manual repair:</p>
+            <div class="step-card">
+                <div class="step-title">Clone tool for structure</div>
+                <p>Right-click to set a source point, then paint with the <strong>Clone</strong> tool to continue a horizon or a straight edge into the new area. Work in short strokes and reset the source often; one long stroke drags a visible band of the same pixels across the image.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Gradient or fill for flat areas</div>
+                <p>A solid studio background only needs the <strong>Fill</strong> tool with the sampled colour. A gradient needs the <strong>Gradient</strong> tool dragged in the same direction as the original light falloff. Both are faster and cleaner than any automatic extension.</p>
+            </div>
+
+            <h2>Where It Breaks Down</h2>
+            <ul>
+                <li><strong>High-frequency detail.</strong> Brickwork, text on a sign, a crowd — repeated patches look like a copy-paste pattern at a glance.</li>
+                <li><strong>Strong perspective.</strong> A wall receding to a vanishing point has edges that converge; extending it sideways produces parallel lines instead.</li>
+                <li><strong>Shadows with direction.</strong> A duplicated shadow strip creates a second, impossible light source.</li>
+                <li><strong>Faces.</strong> Never extend into a region where a face or a hand is cut off at the edge; the fill will sample skin and smear it.</li>
+            </ul>
+
+            <h2>Ratio Cheat Sheet</h2>
+            <p>Starting from a 3:2 photo at 1800 × 1200: 16:9 needs 2133 × 1200, 4:5 needs 960 × 1200, 1:1 needs 1200 × 1200. Starting from a 4:5 photo at 1200 × 1500: 1:1 needs 1500 × 1500, 16:9 needs 2667 × 1500. Grow first, fill second, and never resize the layer in between.</p>
+
+            <div class="tip-box">💡 <strong>Grow the canvas with In proportion off, then choose the mode by background type: flat → expand edges, texture → cloned edges, busy → resized as background. Fix horizons and straight lines with the Clone tool afterwards.</strong></div>
+
+            <h2>Quick Answers</h2>
+            <div class="faq-item">
+                <h3>Content Fill says the image already takes the whole area. What now?</h3>
+                <p>That means the canvas has not been grown yet — the tool only fills the gap between the layer edge and the canvas edge. Use Image → Canvas Size with In proportion unticked to add the space first, keep the image layer selected, then run Content Fill.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Which mode should I pick?</h3>
+                <p>Expand edges for flat backgrounds such as sky, studio grey or a wall. Cloned edges for texture such as grass, gravel or fabric, where repeating small patches reads as natural. Resized as background when the surroundings are busy and any invented detail would look wrong.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I extend a photo that has a horizon in it?</h3>
+                <p>Yes, but the automatic fill will not continue the line — it only samples near the edge. Fill first, then use the Clone tool with short strokes and a frequently reset source point to carry the horizon into the new area. Check the join at 100% zoom.</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/resize-vs-canvas-size-vs-trim">Resize vs Canvas Size vs Trim: Which One?</a>
+                <a href="../tutorials/social-media-image-sizes">Social Media Image Sizes Cheat Sheet</a>
+                <a href="../tutorials/remove-object-clone-tool">Remove a Small Object With the Clone Tool</a>
+                <a href="../tutorials/white-background-product-photo">Put a Product Photo on a Pure White Canvas</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Take a vertical photo, grow the canvas to 16:9, then compare expand-edges against resized-as-background on the seam.</p>
+                </div>
+                <div>
+                    <a href="../../editor.html" class="practice-btn">
+                        <span>Try It in Web PSEditor</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

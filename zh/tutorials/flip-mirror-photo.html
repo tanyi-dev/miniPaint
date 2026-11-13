@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>翻转与镜像照片（翻转到底翻的是什么） - Web PSEditor</title>
+    <meta name="description" content="【图片】→【翻转】只作用于当前图层，不是整张画布。镜像自拍、修正扫反的底片，以及文字会怎样。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/flip-mirror-photo" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/flip-mirror-photo" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/flip-mirror-photo" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/flip-mirror-photo" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "翻转与镜像：图层级，不是画布级",
+      "description": "【图片】→【翻转】只作用于当前图层，不是整张画布。镜像自拍、修正扫反的底片，以及文字会怎样。",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "zh",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/zh/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/zh/tutorials/flip-mirror-photo"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "为什么只翻了一部分？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "翻转作用于当前图层。照片、文字、水印、装饰形状分在多层时，只有选中的那一层被镜像。要翻的层逐个选中；需要整幅一起翻，先【图层】→【合并图像】再翻。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "翻转会掉画质吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不会。水平或垂直翻转是图层内的像素重排，不重采样，不丢信息。真正会重建像素、让画面变软的是调整大小。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "画面里有文字，怎么只翻图不翻字？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "只翻照片层，文字单独放在它上面。如果整个版式必须镜像（比如做从右往左语言的版本），就合并、翻转、再重新打一遍文字，别试图把反着的字母「修正」回来。"
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/flip-mirror-photo" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+            <h1>翻转镜像，而不破坏版式</h1>
+            <div class="meta-bar">
+                <span>难度：入门</span> &bull; <span>阅读：4 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">镜像之后，记得看一眼钟表</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">【图片】→【翻转】→【垂直/水平】原地翻转当前图层。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 翻转 &rarr;</a>
+            </div>
+
+            <p>镜像听起来是编辑器里最简单的命令。在这个编辑器里它有个具体的范围，很多人第一次用会愣住：<strong>【图片】→【翻转】</strong> 翻的是当前图层，不是整张画布。三层结构——照片、文字、水印——翻一次只转了一个。</p>
+            <p>知道之后这就是优点：可以把照片镜像，同时让标题保持可读。带品牌 logo 的自拍、标签必须清楚的商品图，正需要这样。</p>
+
+            <h2>两个方向，一条规则</h2>
+            <table class="tool-table">
+                <tr><th>命令</th><th>效果</th><th>常见用途</th></tr>
+                <tr><td>图片 → 翻转 → 水平</td><td>左右镜像</td><td>自拍校正、对齐版式、让主体朝向文案</td></tr>
+                <tr><td>图片 → 翻转 → 垂直</td><td>上下颠倒</td><td>修正扫反的底片、做镜像倒影、版式技巧</td></tr>
+            </table>
+            <p>两者都是原地操作：图层的位置和尺寸不变，只是像素排列换了。不裁掉，也不补边。</p>
+            <p>代码里还有一条硬限制：图层必须是位图。文字层、形状层、旋转过的对象要先 <strong>【图层】→【转换为位图】</strong>，否则会提示该图层必须包含图像。转换是单向的，转完文字就不再可编辑。</p>
+
+            <h2>自拍镜像的正确做法</h2>
+            <div class="step-card">
+                <div class="step-title">第一步：先看翻完会坏什么</div>
+                <p>翻之前扫一眼画面里像文字的东西：T 恤标语、路牌、杯子、胸牌。镜像之后全部左右颠倒。这些元素重要，就现在接受它，或者准备好遮掉。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">第二步：只翻照片层</div>
+                <p>选中照片图层，<strong>【图片】→【翻转】→【水平】</strong>。大多数人觉得镜像后的脸更眼熟——那是你每天早上在镜子里看到的版本；相机拍到的是别人看你的版本。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">第三步：处理反了的文字</div>
+                <p>牌子或 logo 变反了，用文字层盖过去，别硬扛——一块纯色矩形加一层文字，比反着写的字母更像有意为之。千万别翻两次说修好了，那是原地踏步。</p>
+            </div>
+
+            <h2>翻转不做的事</h2>
+            <ul>
+                <li><strong>不翻画布。</strong> 文档尺寸不变，其它图层也不动。</li>
+                <li><strong>不是旋转。</strong> 90 度转在 <strong>【图片】→【旋转】</strong> 里，带「直角」下拉（0/90/180/270）和 0–360 滑杆。</li>
+                <li><strong>不重采样。</strong> 镜像只是图层内的像素重排，是无损的，画质不掉；这点和调整大小完全不同。</li>
+                <li><strong>不翻选区和参考线。</strong> 如果指望选区跟着翻，得重画选区。</li>
+            </ul>
+
+            <h2>自拍之外的实用场景</h2>
+            <ul>
+                <li><strong>左右对称版式。</strong> 复制一个抠图、把其中一份水平翻转，就得到一对对称元素——适合前后对比、组合商品、装饰边框。</li>
+                <li><strong>视线方向。</strong> 横幅左半边朝右的主体，应该朝内看。翻一下比裁一刀更保构图。</li>
+                <li><strong>扫反的底片。</strong> 反着扫的胶片出来是镜像的。水平翻一次，再用 <strong>【图片】→【颜色校正】</strong> 修色偏。</li>
+                <li><strong>倒影。</strong> 复制主体、垂直翻转、放到下方，再降低图层不透明度——商品图能做一个假水面倒影。</li>
+            </ul>
+
+            <h2>关于文字</h2>
+            <p>如果整个版面必须镜像、而里面有文字，唯一不翻车的顺序是：先 <strong>【图层】→【合并图像】</strong> 把文字变成像素，再翻一次，然后判断能不能接受。反着的文字几乎总比换个裁法更糟，所以多数情况下正确答案是只翻照片层、文字重新打。</p>
+
+            <div class="tip-box">💡 <strong>翻转只作用于选中的图层。文字要可读，就翻照片层、文字单独留着——诀窍只有这一句。</strong></div>
+
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>为什么只翻了一部分？</h3>
+                <p>翻转作用于当前图层。照片、文字、水印、装饰形状分在多层时，只有选中的那一层被镜像。要翻的层逐个选中；需要整幅一起翻，先【图层】→【合并图像】再翻。</p>
+            </div>
+            <div class="faq-item">
+                <h3>翻转会掉画质吗？</h3>
+                <p>不会。水平或垂直翻转是图层内的像素重排，不重采样，不丢信息。真正会重建像素、让画面变软的是调整大小。</p>
+            </div>
+            <div class="faq-item">
+                <h3>画面里有文字，怎么只翻图不翻字？</h3>
+                <p>只翻照片层，文字单独放在它上面。如果整个版式必须镜像（比如做从右往左语言的版本），就合并、翻转、再重新打一遍文字，别试图把反着的字母「修正」回来。</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/crop-rotate-straighten">裁剪、旋转与扶正照片</a>
+                <a href="../tutorials/id-photo-background">证件照换底色</a>
+                <a href="../tutorials/how-to-cutout-png">抠图并导出透明 PNG</a>
+                <a href="../tutorials/resize-vs-canvas-size-vs-trim">调整大小、画布尺寸、裁剪：到底用哪个？</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">&#127919;</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">把一张自拍镜像，再在上面加一层文字，确认照片翻转了而文字仍然可读。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一试</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

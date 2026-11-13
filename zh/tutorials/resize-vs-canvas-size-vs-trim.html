@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调整大小 / 画布尺寸 / 裁剪：到底该用哪个 - Web PSEditor</title>
+    <meta name="description" content="三个看起来都在改尺寸的命令：一个重采样像素，一个加空白，一个删边。选错了就丢画质或丢画面。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/resize-vs-canvas-size-vs-trim" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/resize-vs-canvas-size-vs-trim" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/resize-vs-canvas-size-vs-trim" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/resize-vs-canvas-size-vs-trim" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "调整大小、画布尺寸与裁剪：三件不同的事",
+      "description": "三个看起来都在改尺寸的命令：一个重采样像素，一个加空白，一个删边。选错了就丢画质或丢画面。",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "zh",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/zh/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/zh/tutorials/resize-vs-canvas-size-vs-trim"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "改了画布尺寸，主体怎么跑到左上角了？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "画布尺寸从不动图层。图层的坐标从左上角算起，所以多出来的空间长在右边和下边。用【图片】→【平移】把它挪回去，或直接在画布上拖，然后把剩下的空白填上底色。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "勾了锐化的缩放，真能把细节找回来吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不能。锐化提高的是边缘的局部对比，看着更清楚，但缩小丢掉的信息回不来。小幅缩图后在 100% 缩放下看效果不错；套在本来就很锐的图形上，会出白边、发脆。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "裁剪和用选区工具裁是一回事吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不是。裁剪是自动的，只删颜色一致的边，容差由「功率」控制。选区工具是你在哪儿画就裁哪儿，边不是纯色的时候该用它。扫描件、截图用裁剪，其它情况用选区。"
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/resize-vs-canvas-size-vs-trim" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+            <h1>调整大小 / 画布尺寸 / 裁剪，别选错</h1>
+            <div class="meta-bar">
+                <span>难度：入门</span> &bull; <span>阅读：4 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">同样三个点击，三种完全不同的结果</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">调整大小改像素，画布尺寸加空白，裁剪删掉纯色边。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 试试 &rarr;</a>
+            </div>
+
+            <p><strong>【图片】</strong> 菜单里挨着放了三项，听起来都是「把图变成另一个尺寸」。它们干的是三件完全不同的事，选错那一项，就是丢清晰度或丢画面边缘的典型原因。</p>
+            <p>短版：<strong>调整大小</strong> 是重采样，像素数变了；<strong>画布尺寸</strong> 不动像素，只换底下那张纸；<strong>裁剪（Trim）</strong> 是把内容四周的纯色边删掉。下面说什么时候用哪个。</p>
+
+            <h2>一句话区别</h2>
+            <table class="tool-table">
+                <tr><th>菜单项</th><th>改的是什么</th><th>像素数</th><th>什么时候用</th></tr>
+                <tr><td>图片 → 调整大小</td><td>宽高以及里面每一个像素</td><td>会变</td><td>必须正好 1200 像素宽，或有体积上限</td></tr>
+                <tr><td>图片 → 画布尺寸</td><td>图片底下那张纸</td><td>不变</td><td>要方图、要更宽的横幅、要留白边</td></tr>
+                <tr><td>图片 → 裁剪</td><td>删掉四周的纯色</td><td>变少</td><td>扫描件、截图带着一大圈白边</td></tr>
+            </table>
+
+            <h2>调整大小：目标按像素算的时候</h2>
+            <p><strong>【图片】→【调整大小】</strong> 是三项里唯一真正重建图像的。宽度和高度可以直接填像素，也可以用宽（%）、高（%）——两组只填一组。对话框里有三个设置必须知道：</p>
+            <div class="step-card">
+                <div class="step-title">模式：Lanczos / Hermite / Basic</div>
+                <p>Lanczos 最慢，缩图时保留的细节最多；Hermite 居中；Basic 是最近邻，快，但斜边会变成肉眼可见的台阶。照片缩图用 Lanczos；像素画要保持硬边，反而应该用 Basic。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">锐化：一个勾，不是滑杆</div>
+                <p>勾上之后，缩放完会跟一道轻度的锐化。缩图一定会让画面稍微发软，这一步是用来把「看起来的清晰度」补回来的。但已经够锐的图形很容易过，判断要在 100% 缩放下看，别在适应窗口里看。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">图层：全部 / 当前</div>
+                <p><strong>全部</strong> 会把所有图层和画布一起缩放，绝大多数情况都该选它。<strong>当前</strong> 只缩选中的图层，用来单独把一张贴纸变小而不动背景。</p>
+            </div>
+            <p>要小心的是放大的方向。800 像素拉到 2400 像素，等于凭空生成从未拍到的像素，结果要么发虚，要么勾了锐化之后变得发脆。这里没有「智能超分」。要打大图，只能从更大的源文件开始。</p>
+
+            <h2>画布尺寸：加空白，一个像素不丢</h2>
+            <p>画布尺寸完全不碰图像数据，只改那张纸。图层的位置照旧从左上角算起，这个细节最容易踩：扩大画布，空间长在右边和下边，原本居中的主体会跑到左上角去。</p>
+            <div class="step-card">
+                <div class="step-title">把竖图变成方图</div>
+                <p>先在 <strong>【图片】→【信息】</strong> 读到当前尺寸（假设 1200 × 1600）。打开 <strong>【画布尺寸】</strong>，<strong>按比例</strong> 不要勾，宽填 1600、高填 1600。这时照片落在 1600 × 1600 的纸上，右边是空的。接着填上底色，或用 <strong>【图片】→【平移】</strong> 把图层挪到正中。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">按比例：勾与不勾</div>
+                <p>勾上，画布尺寸会连图层一起缩放——那其实是换了张脸的「调整大小」，图会变软。不勾，图层保持原像素，只有纸变大。要加白边，就该不勾。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">分辨率下拉</div>
+                <p>除了「自定义」，对话框里还有一批预设尺寸，配一个纵向/横向的布局开关。平台要正好 1920 × 1080 或 1080 × 1080 的时候，选预设比手打数字再赌方向靠谱。</p>
+            </div>
+
+            <h2>裁剪：删掉那一圈纯色边</h2>
+            <p>裁剪是自动裁切。它从四条边往里看，把整行整列颜色一致的边删掉——典型场景是扫描件四周的白边，或截图外面的灰底。</p>
+            <ul>
+                <li><strong>裁剪图层</strong> / <strong>裁剪边框</strong> 决定是只处理选中图层，还是处理画布的四边。</li>
+                <li><strong>功率</strong>（0–255）是容差。0 只裁纯白；调高之后接近白的像素也算，拍纸的照片白得不够纯，就得往上加。</li>
+                <li><strong>裁剪白色吗？</strong> 把操作限定在白色边。如果边是别的颜色，把这一项取消掉。</li>
+            </ul>
+            <p>裁剪在「继续」之后就定下来了，撤销还在，但导出的文件里不会再有那部分。扫描件要先裁再锐化，别把空白边也锐化一遍。</p>
+
+            <h2>五秒决策</h2>
+            <ul>
+                <li>有上传限制、或「必须正好 1200 像素」→ <strong>调整大小</strong>。</li>
+                <li>「要方图 / 要四周留白」→ <strong>画布尺寸</strong>，再填充或平移。</li>
+                <li>「外面一大圈白边想去掉」→ <strong>裁剪</strong>。</li>
+                <li>「缩小之后发虚」→ 回原文件，用 Lanczos + 勾锐化重做一次。</li>
+            </ul>
+
+            <div class="tip-box">💡 <strong>改变「有多少像素」的是调整大小；只改变「四周有多少空白」的是画布尺寸；删掉边缘的是裁剪。</strong></div>
+
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>改了画布尺寸，主体怎么跑到左上角了？</h3>
+                <p>画布尺寸从不动图层。图层的坐标从左上角算起，所以多出来的空间长在右边和下边。用【图片】→【平移】把它挪回去，或直接在画布上拖，然后把剩下的空白填上底色。</p>
+            </div>
+            <div class="faq-item">
+                <h3>勾了锐化的缩放，真能把细节找回来吗？</h3>
+                <p>不能。锐化提高的是边缘的局部对比，看着更清楚，但缩小丢掉的信息回不来。小幅缩图后在 100% 缩放下看效果不错；套在本来就很锐的图形上，会出白边、发脆。</p>
+            </div>
+            <div class="faq-item">
+                <h3>裁剪和用选区工具裁是一回事吗？</h3>
+                <p>不是。裁剪是自动的，只删颜色一致的边，容差由「功率」控制。选区工具是你在哪儿画就裁哪儿，边不是纯色的时候该用它。扫描件、截图用裁剪，其它情况用选区。</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/image-resize-and-compression">缩放、裁剪与压到指定 KB 大小</a>
+                <a href="../tutorials/crop-rotate-straighten">裁剪、旋转与扶正照片</a>
+                <a href="../tutorials/white-background-product-photo">把商品图放到纯白画布上</a>
+                <a href="../tutorials/social-media-image-sizes">社交媒体图片尺寸对照表</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">&#127919;</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">找一张照片，先看【图片】→【信息】，再用画布尺寸改成方画布、不要缩放，观察主体落在什么位置。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一试</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

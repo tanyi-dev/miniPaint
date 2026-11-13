@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip and Mirror a Photo (What Flip Really Flips) - Web PSEditor</title>
+    <meta name="description" content="Image → Flip works on the active layer only, not the whole canvas. Mirror selfies, fix scanned negatives, and understand what happens to text in the process." />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/tutorials/flip-mirror-photo" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/flip-mirror-photo" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/flip-mirror-photo" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/flip-mirror-photo" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Flip and Mirror: Layer-Level, Not Canvas-Level",
+      "description": "Image → Flip works on the active layer only, not the whole canvas. Mirror selfies, fix scanned negatives, and understand what happens to text in the process.",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/flip-mirror-photo"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why did only part of my image flip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Flip acts on the active layer. If the picture is built from several layers — photo, text, watermark, adjustment shapes — only the selected one is mirrored. Select each layer you want flipped, or flatten first (Layer → Flatten Image) if you need the whole composition mirrored as one piece."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does flipping reduce image quality?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. A horizontal or vertical flip is a pixel rearrangement inside the layer, with no resampling, so nothing is lost. Resizing is the operation that rebuilds pixels and softens detail."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I mirror a canvas that contains text without mirroring the text?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mirror only the photographic layer and keep text on its own layer above it. If the layout itself must be mirrored — a right-to-left language version, for example — flatten, flip, then retype the text from scratch rather than trying to un-mirror the letters."
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">← Home</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">Tutorials</a>
+            </div>
+            <div class="lang-switch"><a href="https://webpseditor.com/zh/tutorials/flip-mirror-photo" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span></div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% Local Browser Processing · Zero Uploads · Zero Privacy Risk</span>
+        </div>
+
+        <article>
+            <h1>Flip and Mirror an Image Without Breaking the Layout</h1>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Beginner</span> • <span>6 min read</span> • <span>Updated: 13 Nov 2026</span></div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">Mirror it, then check the clock</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Image → Flip → Vertical or Horizontal flips the active layer in place.</div>
+                </div>
+                <a href="../../editor.html" class="cta-btn" target="_blank">Open Web PSEditor & Flip →</a>
+            </div>
+
+            <p>Mirroring sounds like the simplest command in any editor. In this one it has a specific scope that surprises people: <strong>Image → Flip</strong> flips the active layer, not the canvas. If you have three layers — photo, text, watermark — flipping once only turns one of them around.</p>
+            <p>That is a feature once you know it. You can mirror a photo and leave the caption readable, which is exactly what you want for a selfie with a brand logo, or for a product shot where the label must stay legible.</p>
+
+            <h2>Two Directions, One Rule</h2>
+            <table class="tool-table">
+                <tr><th>Command</th><th>Effect</th><th>Typical use</th></tr>
+                <tr><td>Image → Flip → Horizontal</td><td>Mirror left-to-right</td><td>Selfie correction, matching a layout, making a subject face the copy</td></tr>
+                <tr><td>Image → Flip → Vertical</td><td>Turn upside down</td><td>Fixing a scanned negative, matching a reflected ceiling, design tricks</td></tr>
+            </table>
+            <p>Both operate in place: the layer keeps its position and size, and only the pixel arrangement changes. Nothing is cropped, nothing is padded.</p>
+            <p>One hard requirement from the code path: the layer must be a raster image. A text layer, a shape layer or a rotated object has to be converted first — <strong>Layer → Convert to Raster</strong> — or the command reports that the layer must contain an image. Converting is one-way; the text stops being editable.</p>
+
+            <h2>Mirroring a Selfie Properly</h2>
+            <div class="step-card">
+                <div class="step-title">Step 1: Note what the flip will break</div>
+                <p>Before flipping, look for anything that reads as text: a shirt slogan, a street sign, a mug, a name badge. After a mirror, all of it is backwards. If those elements matter, flip now and accept it, or plan to cover them.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Step 2: Flip the photo layer only</div>
+                <p>Select the photo layer, then <strong>Image → Flip → Horizontal</strong>. Faces usually look more familiar mirrored, because that is the version you see in a mirror every morning. The camera shows the version other people see.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Step 3: Fix the text that went backwards</div>
+                <p>If a sign or logo now reads in reverse, add a text layer over it instead of living with it — a small solid rectangle plus a text layer at the same spot looks more deliberate than mirrored letters. Never mirror the whole thing twice and claim it is fixed; you are back where you started.</p>
+            </div>
+
+            <h2>What Flip Does Not Do</h2>
+            <ul>
+                <li><strong>It does not flip the canvas.</strong> The document dimensions stay the same, and other layers stay as they were.</li>
+                <li><strong>It does not rotate.</strong> 90° turns live under <strong>Image → Rotate</strong>, which has a Right angle dropdown with 0, 90, 180 and 270 plus a 0–360 slider.</li>
+                <li><strong>It does not resample.</strong> A mirror is a lossless pixel rearrangement inside the layer, so quality does not drop — unlike a Resize, which rebuilds pixels.</li>
+                <li><strong>It does not flip selections or guides.</strong> If you flipped expecting a selection to follow, redraw the selection.</li>
+            </ul>
+
+            <h2>Practical Uses Beyond Selfies</h2>
+            <ul>
+                <li><strong>Two-up layouts.</strong> Duplicate a cut-out, flip one copy horizontally, and you have a symmetric pair — good for before/after, product bundles, or decorative borders.</li>
+                <li><strong>Directional flow.</strong> A subject facing right on the left half of a banner should face inward. Flip it rather than crop and lose the composition.</li>
+                <li><strong>Scanned negatives.</strong> Film scanned from the wrong side comes out mirrored. Flip horizontally once, then fix the colour cast with <strong>Image → Color Corrections</strong>.</li>
+                <li><strong>Reflections.</strong> Duplicate the subject, flip vertically, place it below, then fade it with layer opacity — a fake water reflection for product shots.</li>
+            </ul>
+
+            <h2>The Text Question</h2>
+            <p>If you need the whole composition mirrored and there is text in it, the order that avoids a mess is: flatten first (<strong>Layer → Flatten Image</strong>) so text becomes pixels, flip once, then reconsider whether the result is acceptable. Mirrored text is almost always worse than a slightly different crop, so most of the time the right answer is to flip only the photographic layer and retype the text.</p>
+
+            <div class="tip-box">💡 <strong>Flip affects the selected layer only. If text must stay readable, flip the photo layer and keep text on its own layer — that is the whole trick.</strong></div>
+
+            <h2>Quick Answers</h2>
+            <div class="faq-item">
+                <h3>Why did only part of my image flip?</h3>
+                <p>Flip acts on the active layer. If the picture is built from several layers — photo, text, watermark, adjustment shapes — only the selected one is mirrored. Select each layer you want flipped, or flatten first (Layer → Flatten Image) if you need the whole composition mirrored as one piece.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Does flipping reduce image quality?</h3>
+                <p>No. A horizontal or vertical flip is a pixel rearrangement inside the layer, with no resampling, so nothing is lost. Resizing is the operation that rebuilds pixels and softens detail.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do I mirror a canvas that contains text without mirroring the text?</h3>
+                <p>Mirror only the photographic layer and keep text on its own layer above it. If the layout itself must be mirrored — a right-to-left language version, for example — flatten, flip, then retype the text from scratch rather than trying to un-mirror the letters.</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/crop-rotate-straighten">Crop, Rotate & Straighten Photos</a>
+                <a href="../tutorials/id-photo-background">Change an ID Photo Background Colour</a>
+                <a href="../tutorials/how-to-cutout-png">Cut Out an Image & Export Transparent PNG</a>
+                <a href="../tutorials/resize-vs-canvas-size-vs-trim">Resize vs Canvas Size vs Trim: Which One?</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Mirror a selfie, then put a text layer on top and confirm the text stays readable while the photo is flipped.</p>
+                </div>
+                <div>
+                    <a href="../../editor.html" class="practice-btn">
+                        <span>Try It in Web PSEditor</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

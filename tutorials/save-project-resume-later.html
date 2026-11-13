@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save a Project vs Export an Image: The Difference - Web PSEditor</title>
+    <meta name="description" content="File → Save As writes a JSON project with all layers; File → Export writes a flat image. Quick Save (F9) lives in the browser and can vanish. Here is what to use when." />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/tutorials/save-project-resume-later" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/save-project-resume-later" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/save-project-resume-later" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/save-project-resume-later" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Save As, Export and Quick Save: Three Different Destinations",
+      "description": "File → Save As writes a JSON project with all layers; File → Export writes a flat image. Quick Save (F9) lives in the browser and can vanish. Here is what to use when.",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/save-project-resume-later"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "My saved file will not open in any image viewer. Is it corrupt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Probably not. File → Save As writes a JSON project, not an image. Check the extension — if it is .json, reopen it with File → Open → Open File inside the editor and your layers return. If you need a picture, use File → Export instead."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will Quick Save survive clearing my browser data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Quick Save stores the project in browser local storage, in a single slot. Clearing site data, using private browsing, a different browser or a different machine all lose it. Keep a JSON project file for anything you care about."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the JSON project keep my undo history?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It stores the layers, their positions, opacity and filters, plus the canvas size. Undo steps are not part of the file, so reopening a project starts a fresh history — save before a risky experiment rather than relying on undo after reopening."
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">← Home</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">Tutorials</a>
+            </div>
+            <div class="lang-switch"><a href="https://webpseditor.com/zh/tutorials/save-project-resume-later" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span></div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% Local Browser Processing · Zero Uploads · Zero Privacy Risk</span>
+        </div>
+
+        <article>
+            <h1>Save Your Project and Pick It Up Tomorrow</h1>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Beginner</span> • <span>7 min read</span> • <span>Updated: 13 Nov 2026</span></div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">Two menus, two completely different files</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Save As keeps layers in a JSON project. Export writes the picture.</div>
+                </div>
+                <a href="../../editor.html" class="cta-btn" target="_blank">Open Web PSEditor & Save →</a>
+            </div>
+
+            <p>This is the most common way to lose an afternoon: you finish the edit, use <strong>File → Save As</strong>, get a file, and later discover it will not open in an image viewer — because it is not an image. It is a project file.</p>
+            <p><strong>File → Save As</strong> writes <em>Full layers data</em>, a JSON file that records every layer, its position, its filter stack and the canvas size. <strong>File → Export</strong> writes a flat PNG, JPG, WEBP, GIF, BMP or TIFF — one merged picture, no layers, ready to upload. Same menu, two different universes.</p>
+
+            <h2>Which One You Need</h2>
+            <table class="tool-table">
+                <tr><th>You want to…</th><th>Use</th><th>You get</th></tr>
+                <tr><td>Continue editing later, layer by layer</td><td>File → Save As</td><td>A JSON project file</td></tr>
+                <tr><td>Post it, send it, upload it</td><td>File → Export</td><td>PNG / JPG / WEBP / GIF / BMP / TIFF</td></tr>
+                <tr><td>Keep a quick scratch copy in this browser</td><td>File → Quick Save (F9)</td><td>Data in browser local storage</td></tr>
+                <tr><td>Reopen that scratch copy</td><td>File → Quick Load (F10)</td><td>The last quick-saved state</td></tr>
+            </table>
+
+            <h2>Exporting an Image</h2>
+            <div class="step-card">
+                <div class="step-title">File → Export (S)</div>
+                <p>The dialog offers <strong>File name</strong>, <strong>Save as type</strong>, <strong>Quality</strong> (1–100, default 90), a <strong>Show file size</strong> checkbox and a <strong>Save layers</strong> option. For a normal picture: type JPG or PNG, leave Quality at 90, tick Show file size if there is an upload limit, and export.</p>
+            </div>
+            <p>Note that Export is also bound to <strong>S</strong>, while <strong>Shift + S</strong> opens Save As. Hitting the wrong one is easy, and the symptom is a file that "cannot be opened" by anything except this editor.</p>
+
+            <h2>Saving a Project</h2>
+            <div class="step-card">
+                <div class="step-title">File → Save As (Shift + S)</div>
+                <p>Only one type is offered here: JSON, described as <em>Full layers data</em>. Name it, save it, and you have a file you can reopen with <strong>File → Open → Open File</strong> — the open dialog accepts JSON alongside images. Every layer comes back with its position, opacity and filters intact.</p>
+            </div>
+            <p>Two limits worth knowing. First, the JSON references nothing outside itself for raster content — the layer pixels are embedded — so the file can be large (a few MB for a multi-layer project). Second, text layers come back as editable text only if their font is available in the browser; a font that is not installed will be substituted.</p>
+
+            <h2>Quick Save and Its One Risk</h2>
+            <p><strong>File → Quick Save (F9)</strong> writes the project into the browser's local storage under a single key. <strong>File → Quick Load (F10)</strong> restores it. It is genuinely useful: close the tab, reopen the editor, press F10, and the work is there.</p>
+            <p>The risk is that it is a single slot in browser storage. Clearing site data, using private browsing, switching browsers, or opening the editor on another computer all mean the quick save is not there. Treat F9 as a convenience between sessions on the same machine, never as a backup.</p>
+
+            <h2>A Workflow That Survives</h2>
+            <ul>
+                <li><strong>Save a JSON project first</strong>, named with the date, before you start experimenting. Undo history is not saved in it, but the layers are.</li>
+                <li><strong>Export an image when the edit is done</strong>, and keep both files in the same folder: <code>poster.json</code> and <code>poster.jpg</code>.</li>
+                <li><strong>Re-export from the project, never from the exported image.</strong> Editing a JPG and saving it again compounds compression each time; coming back to the layered project keeps quality at the original level.</li>
+                <li><strong>Hand over the JSON</strong> when a client wants to continue working, and the JPG when they want to look at it.</li>
+            </ul>
+
+            <h2>Recovering When Something Went Wrong</h2>
+            <p>If you saved with Save As and now cannot open the file anywhere: check the extension. A JSON file named <code>photo.png</code> will fail in every viewer and look corrupt. Rename it to <code>.json</code> and open it in the editor again — the layers should return.</p>
+            <p>If the browser was closed without any save at all, check whether a quick save exists: reopen the editor and press <strong>F10</strong>. If nothing loads, the state is gone; there is no server-side history here, which is the same property that keeps your images private.</p>
+
+            <div class="tip-box">💡 <strong>Save As = JSON project (layers). Export = image (flat). Quick Save = one browser slot, not a backup. Export the final image from the project every time.</strong></div>
+
+            <h2>Quick Answers</h2>
+            <div class="faq-item">
+                <h3>My saved file will not open in any image viewer. Is it corrupt?</h3>
+                <p>Probably not. File → Save As writes a JSON project, not an image. Check the extension — if it is .json, reopen it with File → Open → Open File inside the editor and your layers return. If you need a picture, use File → Export instead.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Will Quick Save survive clearing my browser data?</h3>
+                <p>No. Quick Save stores the project in browser local storage, in a single slot. Clearing site data, using private browsing, a different browser or a different machine all lose it. Keep a JSON project file for anything you care about.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Does the JSON project keep my undo history?</h3>
+                <p>No. It stores the layers, their positions, opacity and filters, plus the canvas size. Undo steps are not part of the file, so reopening a project starts a fresh history — save before a risky experiment rather than relying on undo after reopening.</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/png-vs-jpg-export">PNG vs JPG: Which Format Should You Export?</a>
+                <a href="../tutorials/convert-webp-to-jpg">Convert WebP to JPG in the Browser</a>
+                <a href="../tutorials/layer-blend-modes-guide">Layer Blend Modes Guide (Multiply / Screen / Overlay)</a>
+                <a href="../tutorials/image-resize-and-compression">Resize, Crop & Compress to a Target KB Size</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Make two layers, save as JSON, close the tab, reopen, load the JSON, then export a JPG and compare which file a browser can display.</p>
+                </div>
+                <div>
+                    <a href="../../editor.html" class="practice-btn">
+                        <span>Try It in Web PSEditor</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

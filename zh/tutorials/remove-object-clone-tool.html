@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用克隆工具去掉画面里的小杂物 - Web PSEditor</title>
+    <meta name="description" content="右键设源点再涂抹。克隆能真正去掉什么、为什么对缩放过的图层罢工，以及怎么避免重复纹理。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/remove-object-clone-tool" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/remove-object-clone-tool" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/remove-object-clone-tool" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/remove-object-clone-tool" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "克隆工具：去掉画面里的小物体",
+      "description": "右键设源点再涂抹。克隆能真正去掉什么、为什么对缩放过的图层罢工，以及怎么避免重复纹理。",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "zh",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/zh/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/zh/tutorials/remove-object-clone-tool"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "提示「源为空」是怎么回事？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "第一笔之前必须在你想要复制的区域 右键（触屏长按）保存源点。只按左键等于没有源，就会报这个错。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "克隆工具为什么在我这张图上用不了？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "图层很可能被缩放过或旋转过。用【图层】→【转换为位图】转换，或者撤销回原始尺寸、先克隆再缩放。工具拒绝对缩放过的图层工作，因为源坐标会映射到错误的像素。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "怎么避免一眼看出是克隆的重复纹理？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "用短笔触，每涂一段就换源点；从同类纹理的不同位置取样；操作时在 100% 与适应窗口之间来回切。大面积修补改用【工具】→【内容填充】，别靠几十笔去盖。"
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/remove-object-clone-tool" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+            <h1>让小杂物消失：克隆工具实战</h1>
+            <div class="meta-bar">
+                <span>难度：中级</span> &bull; <span>阅读：4 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">先取样，再涂抹</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">右键设定源点，克隆工具把笔刷下的像素复制过去。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 试克隆 &rarr;</a>
+            </div>
+
+            <p>墙上一根电线、产品图角落一个垃圾桶、草地上一点垃圾——裁不掉的干扰物。<strong>克隆</strong> 工具就是处理这些的：把图层上一处的像素复制到另一处。它有两个行为会绊住第一次用的人：源点必须右键设定，图层必须是没被缩放的位图。</p>
+
+            <h2>工具到底怎么工作</h2>
+            <div class="step-card">
+                <div class="step-title">右键放源点</div>
+                <p>在左侧工具栏选 <strong>克隆</strong> 工具，然后 <strong>右键</strong> 点你想复制的那块——干净墙面、纯草地、没被遮挡的天空。会有一条提示确认源坐标已保存。触屏设备长按等同右键。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">再往物体上涂</div>
+                <p>左键拖动，涂过要去掉的东西。笔刷下的像素来自刚才存的源点，偏移量等于源点和起笔点之间的距离。一次笔画里这个偏移是固定的，所以短笔触比长笔触好用。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">勤换源点</div>
+                <p>每涂一小段，就右键换一块新区域。一笔拉到底，会把一整条纹理拖过整个画面，留下明显的拖痕——这是克隆工具最常见的破绽。</p>
+            </div>
+
+            <h2>工具强制的四个条件</h2>
+            <table class="tool-table">
+                <tr><th>条件</th><th>不满足会怎样</th></tr>
+                <tr><td>图层包含位图</td><td>报错，要求先把图层转换为位图</td></tr>
+                <tr><td>图层没有被缩放</td><td>提示「对已调整大小的图像禁用克隆工具」，先栅格化</td></tr>
+                <tr><td>图层没有旋转</td><td>报错，要求把旋转过的对象栅格化</td></tr>
+                <tr><td>已保存源点坐标</td><td>提示「源为空，请右键点图或长按保存源位置」</td></tr>
+            </table>
+            <p>第二行在实际操作里最容易撞上：用 <strong>【图片】→【调整大小】</strong> 缩过图，克隆可能直接用不了，得先 <strong>【图层】→【转换为位图】</strong>。栅格化是单向的，所以打算克隆的话，把缩放放到最后。</p>
+
+            <h2>源图层：当前 / 上一层</h2>
+            <p>工具选项里有一个源图层设置。<strong>当前</strong> 从你正在画的图层取像素。<strong>上一层</strong> 从下面紧邻的那层取——适合「在副本上修图、原图保持不动」：修补画在上层，画坏了删掉这层就行，不用撤销二十笔。</p>
+
+            <h2>能修什么，不能修什么</h2>
+            <ul>
+                <li><strong>能修：</strong> 纯色墙上的一根电线、草地上一个小垃圾桶、均匀背景下的一块污渍、扫描件上的一根头发或灰点。</li>
+                <li><strong>小心能修：</strong> 合影边缘的一个人、有纹理墙面上的标牌——每一笔都要从同类纹理上重新取样。</li>
+                <li><strong>修不了：</strong> 跨过直线、人脸、文字、强渐变的东西。克隆复制的是源的结构，所以地平线会弯，渐变会出条带。</li>
+                <li><strong>别硬修：</strong> 大物体。遮住画面三分之一要几十笔，纹理重复一眼就能看出来。</li>
+            </ul>
+
+            <h2>做得干净的几个手法</h2>
+            <div class="step-card">
+                <div class="step-title">从边缘往中间做</div>
+                <p>先修物体与背景的交界，源点取在物体外侧紧邻的位置，再填中间。反过来做，会在修好的中心外面留一圈原物体的残影。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">对齐纹理方向</div>
+                <p>草地、木纹、砖墙都有方向。取同样走向的源：把竖向的砖缝克隆到横向砌法里，会出现明显的交叉格纹。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">笔刷软化要适中</div>
+                <p>硬边会留下仿制图章的接缝，极软又会把一片模糊抹进画面。中偏硬、直径明显小于物体的圆笔刷，破绽最少。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">100% 看，再退远看</div>
+                <p>盯着光标时克隆痕迹看不见，看整幅时一目了然。每涂几笔就在 100% 和适应窗口之间切换一次。</p>
+            </div>
+
+            <h2>什么时候不该用克隆</h2>
+            <p>大面积纹理——整面墙、一片天空——用 <strong>【工具】→【内容填充】</strong> 一次扩边缘，比涂五十笔更干净。人脸或人本身，该遮不该删：<strong>【特效】→【马赛克】</strong> 或 <strong>高斯模糊</strong> 才是诚实的做法，隐私打码本来也需要这个。把一个人从照片里克隆掉是编造，而且看得出来。</p>
+
+            <div class="tip-box">💡 <strong>右键设源、短笔触、不停换源点、缩放前先栅格化。大面积交给内容填充，不是仿制图章。</strong></div>
+
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>提示「源为空」是怎么回事？</h3>
+                <p>第一笔之前必须在你想要复制的区域 <strong>右键</strong>（触屏长按）保存源点。只按左键等于没有源，就会报这个错。</p>
+            </div>
+            <div class="faq-item">
+                <h3>克隆工具为什么在我这张图上用不了？</h3>
+                <p>图层很可能被缩放过或旋转过。用【图层】→【转换为位图】转换，或者撤销回原始尺寸、先克隆再缩放。工具拒绝对缩放过的图层工作，因为源坐标会映射到错误的像素。</p>
+            </div>
+            <div class="faq-item">
+                <h3>怎么避免一眼看出是克隆的重复纹理？</h3>
+                <p>用短笔触，每涂一段就换源点；从同类纹理的不同位置取样；操作时在 100% 与适应窗口之间来回切。大面积修补改用【工具】→【内容填充】，别靠几十笔去盖。</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/extend-background-content-fill">不裁剪也能扩背景（内容填充）</a>
+                <a href="../tutorials/mosaic-and-blur-redaction">马赛克与高斯模糊：遮挡敏感信息</a>
+                <a href="../tutorials/how-to-cutout-png">抠图并导出透明 PNG</a>
+                <a href="../tutorials/sharpen-blurry-photo">锐化模糊照片：顺序、数值与边界</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">&#127919;</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">在纯色背景上用五段短笔触去掉一个小物体，每段都换源点，再和一笔到底的效果对比。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一试</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

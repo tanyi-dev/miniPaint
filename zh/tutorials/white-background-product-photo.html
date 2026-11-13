@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>把商品图放到纯白背景上（电商可用） - Web PSEditor</title>
+    <meta name="description" content="给透明底产品图铺纯白方画布、视觉居中、导出可直接上架的 JPG，全程不经过任何上架工具。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/white-background-product-photo" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/white-background-product-photo" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/white-background-product-photo" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/white-background-product-photo" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "商品图纯白底：扩画布、铺白、居中",
+      "description": "给透明底产品图铺纯白方画布、视觉居中、导出可直接上架的 JPG，全程不经过任何上架工具。",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "zh",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/zh/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/zh/tutorials/white-background-product-photo"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "白底取出来是 254 不是 255，会被判不合格吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "有些平台确实会查。纯白能保住的前提是别重度压缩 JPG、别反复保存。在白底图层上用 #ffffff 填充，一次导出且质量 90 以上，再取样验证。如果平台特别严，就导 PNG 交给它自己转。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "产品四周该留多少余量？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "每边留画布的 5%–8% 比较稳：够躲开平台的自动裁切，又不至于让产品显得小。对称产品按数学居中最好看；倾斜或带阴影的产品，重的那一侧多留一点更自然。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "做方画布之前要不要先缩尺寸？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "只有产品比目标方画布还大的时候才需要。扩画布不动像素，所以先做画布尺寸，只有产品本身必须变小时才做调整大小。这样整条链路最多重采样一次。"
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/white-background-product-photo" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+            <h1>给商品图做一张纯白背景</h1>
+            <div class="meta-bar">
+                <span>难度：入门</span> &bull; <span>阅读：4 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">白底不需要影棚</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">画布尺寸定画幅，填充铺白，导出交给上架。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 做一张 &rarr;</a>
+            </div>
+
+            <p>电商平台和产品目录要的是同一件事：产品居中、纯白背景、通常是方形画幅。如果手上已经有一张透明底的抠图，你不需要影棚，只需要按顺序做三件事：把画布扩成方形、在产品背后铺白、把产品摆正中间。</p>
+            <p>本文假设产品已经从背景里分出来了。如果还没抠，先用魔术橡皮擦那套流程抠完再回来；顺序反了，抠图就白做了。</p>
+
+            <h2>第一步：先读当前尺寸</h2>
+            <p>打开抠图，看 <strong>【图片】→【信息】</strong>。你需要宽高来决定一个「不缩小产品就能装下」的方画布。产品 1400 × 1000，用 1600 × 1600 居中后每边还剩 100 像素余量；用 1200 × 1200 就得把产品缩下来，白白丢清晰度。</p>
+            <p>方画布的边长取产品长边或更大。常见上架尺寸是 1000、1200、1600、2000 像素，落在这个区间都安全。</p>
+
+            <h2>第二步：把画布扩成方形</h2>
+            <div class="step-card">
+                <div class="step-title">【图片】→【画布尺寸】</div>
+                <p>宽和高填同一个数。两个设置决定这一步成不成：</p>
+                <p><strong>按比例</strong> 必须<em>不勾</em>。勾上会把产品跟画布一起缩放，那就是调整大小，图会变软。不勾，产品保持原像素，只有纸变大。</p>
+                <p><strong>布局</strong> 保持「自定义」，除非你想用预设尺寸——「分辨率」下拉里带了一批常用预设，还有纵向/横向开关。</p>
+            </div>
+            <p>画布长在右边和下边，所以产品会落在左上角。这一步不用管，下一步会修。</p>
+
+            <h2>第三步：背后铺白</h2>
+            <div class="step-card">
+                <div class="step-title">新建一个背景层</div>
+                <p><strong>【图层】→【新建】</strong> 会在产品上方生成一个空图层。在图层面板里把它拖到下面，或用 <strong>【图层】→【移动】→【向下】</strong>，让产品在最上层。前景色设成 <code>#ffffff</code>，用 <strong>填充</strong> 工具铺满整层。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">用填充，别用画笔涂</div>
+                <p>填充工具会把点击处相连的区域一次填满。空图层上就是整张画布，点一下够。拿画笔沿边涂，是留下灰边的主要原因——画笔有软边，填充没有。</p>
+            </div>
+
+            <h2>第四步：把产品摆到正中</h2>
+            <p>选中产品图层，打开 <strong>【图片】→【平移】</strong>，按多出来的宽高各一半来位移。1000 × 1400 的产品放到 1600 × 1600 上：X 加 150，Y 加 50。直接在画布上拖也行，但平移能填精确数值——要做一批看起来成套的图，这一步非它不可。</p>
+            <p>对称的产品四边留白要均等。产品本身带阴影方向、或者一侧有把手时，视觉居中比数学居中好看：重的那一侧多留一点。</p>
+
+            <h2>第五步：可选的一层轻阴影</h2>
+            <p>纯白底上的纯平抠图容易显得「贴上去的」。<strong>【特效】→【常见滤镜】→【阴影】</strong> 会在不透明像素背后压一层影，参数是 <strong>X 偏移</strong>、<strong>Y 偏移</strong>（各 −100 到 100）、<strong>半径</strong>（0 到 100）和颜色。目录风格要克制：Y 偏移 8–15、半径 10–20、黑色但视觉上很淡。阴影重了比没有更糟，一眼就是廉价效果图。</p>
+            <p>阴影只加在产品图层上，绝不能加在白底图层，否则整张画布会多出一圈边框形状的影子。</p>
+
+            <h2>第六步：导出</h2>
+            <p><strong>【文件】→【导出】</strong>，类型选 JPG，质量 90–95。平台有限制就勾 <strong>显示文件大小</strong>；多数限制在 1MB 到 10MB 之间，1600 像素方图质量 90 通常远低于 1MB。只有平台接受透明背景才导 PNG，多数不接受。</p>
+
+            <h2>上传前的四项自检</h2>
+            <ul>
+                <li><strong>取一下背景色。</strong> 应该处处是 255,255,255。低质量 JPG 会把纯白压成 254，有些平台会自动判退。</li>
+                <li><strong>100% 看抠图边缘。</strong> 深色底上看不见的白边，换到白底上非常明显。看到白边就回去用更小的魔术橡皮擦功率重抠。</li>
+                <li><strong>确认是方的。</strong> 【图片】→【信息】里的宽高应该相等。</li>
+                <li><strong>产品不能贴边。</strong> 平台会按自己的比例再裁一次，贴边的产品会被切掉一块。</li>
+            </ul>
+
+            <div class="tip-box">💡 <strong>顺序不能乱：先方画布 → 再白底 → 再居中 → 再阴影 → 最后导 JPG。中途任何一次缩放，都是白丢清晰度。</strong></div>
+
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>白底取出来是 254 不是 255，会被判不合格吗？</h3>
+                <p>有些平台确实会查。纯白能保住的前提是别重度压缩 JPG、别反复保存。在白底图层上用 #ffffff 填充，一次导出且质量 90 以上，再取样验证。如果平台特别严，就导 PNG 交给它自己转。</p>
+            </div>
+            <div class="faq-item">
+                <h3>产品四周该留多少余量？</h3>
+                <p>每边留画布的 5%–8% 比较稳：够躲开平台的自动裁切，又不至于让产品显得小。对称产品按数学居中最好看；倾斜或带阴影的产品，重的那一侧多留一点更自然。</p>
+            </div>
+            <div class="faq-item">
+                <h3>做方画布之前要不要先缩尺寸？</h3>
+                <p>只有产品比目标方画布还大的时候才需要。扩画布不动像素，所以先做画布尺寸，只有产品本身必须变小时才做调整大小。这样整条链路最多重采样一次。</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/how-to-cutout-png">抠图并导出透明 PNG</a>
+                <a href="../tutorials/resize-vs-canvas-size-vs-trim">调整大小、画布尺寸、裁剪：到底用哪个？</a>
+                <a href="../tutorials/add-drop-shadow-image">给抠图加一圈柔和阴影</a>
+                <a href="../tutorials/png-vs-jpg-export">PNG 与 JPG 的区别：导出该选哪个？</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">&#127919;</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">拿一张透明底 PNG，扩成方画布、在下面铺白、用平移居中，最后导出一张质量 90 的 JPG。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一试</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

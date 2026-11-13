@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebP 转 JPG：浏览器内完成，无需上传 - Web PSEditor</title>
+    <meta name="description" content="把 WebP 转成 JPG 或 PNG，带质量滑杆，保存前就能看到真实文件体积，并避开透明背景的坑。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/convert-webp-to-jpg" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/convert-webp-to-jpg" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/convert-webp-to-jpg" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/convert-webp-to-jpg" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "WebP 转 JPG：要不要保留透明度",
+      "description": "把 WebP 转成 JPG 或 PNG，带质量滑杆，保存前就能看到真实文件体积，并避开透明背景的坑。",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "zh",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/zh/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/zh/tutorials/convert-webp-to-jpg"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "转完 logo 怎么变成白块或黑块了？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JPG 没有 alpha 通道，透明区会被替换成纯色——多数编辑器填白，个别查看器显示黑。要保留透明就导 PNG。如果对方只要 JPG，先把 logo 放到你选定的底色上再导，这样颜色是你定的，不是被动继承的。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "质量数值该填多少？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "照片 85–90，可能被平台二次压缩的商品图 90–95，缩略图 60–75。在导出对话框勾上「显示文件大小」，看报出来的字节数——那个数字才是能不能过上传限制的依据，不是滑杆位置。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "能一次转换整个文件夹的 WebP 吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不能。编辑器一次只开一个文件、一次只导一个。批量的话先把尺寸缩下来让每一遍变快，或者用本地桌面转换器。尽量别用需要上传文件的网页转换器。"
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/convert-webp-to-jpg" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+            <h1>WebP 转 JPG，图片不离开浏览器</h1>
+            <div class="meta-bar">
+                <span>难度：入门</span> &bull; <span>阅读：4 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">WebP 直接在编辑器里打开</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">【文件】→【打开】支持 png、jpg、webp、gif、avif，【导出】写出你要的格式。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 开始转换 &rarr;</a>
+            </div>
+
+            <p>从网页上存下一张图，扩展名是 <code>.webp</code>。然后招聘网站说格式不支持，Word 打开是一片空白，打印店要 JPG。这里的转换不是在线上传给别人处理：打开文件、选输出格式、保存，像素全程不离开本机。</p>
+            <p>决定转换成败的只有一个因素——<strong>透明度</strong>。WebP 支持 alpha 通道，JPG 不支持。抠好的透明 logo 转成 JPG，会在纯色块上回来，这个坑比格式本身坑人得多。</p>
+
+            <h2>动手前先看清楚手里是什么</h2>
+            <p>用 <strong>【文件】→【打开】→【打开文件】</strong> 载入。支持的输入包含 png、jpg、jpeg、webp、gif、avif，WebP 直接拖进来就行，不需要先转一道。</p>
+            <p>再看 <strong>【图片】→【信息】</strong> 里的宽、高和图层数。这时候只有两件事要判断：如果长边超过 2000 像素、而目标是表单上传，多半还要顺手缩尺寸，在这里一次做完比转两次强；如果图层背后是格子底、或者画面没有铺满画布，说明这个文件带 alpha，下面那段就与你有关。</p>
+
+            <h2>四步转完</h2>
+            <div class="step-card">
+                <div class="step-title">第一步：打开 WebP</div>
+                <p><strong>【文件】→【打开】→【打开文件】</strong>。看画布里的比例对不对。奇数尺寸会按原样显示，不会被悄悄补边。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">第二步：先决定要不要透明</div>
+                <p>看得到格子底 = 有 alpha。要保留就导 <strong>PNG</strong>；要压平到白底就导 <strong>JPG</strong>。没有第三条路：JPG 没有 alpha 通道，透明区会被下面的内容填掉，通常是白色，个别查看器会显示成黑色。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">第三步：导出 JPG</div>
+                <p><strong>【文件】→【导出】</strong> 打开保存对话框。填 <strong>文件名</strong>，<strong>另存为类型</strong> 选 JPG，注意 <strong>质量</strong> 滑杆（1–100，默认 90）。勾上 <strong>显示文件大小</strong>，对话框会在保存前报出精确字节数——要知道有没有过 500KB 的上限，这是唯一靠谱的办法。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">第四步：要压到指定大小怎么办</div>
+                <p>质量每次降 5，再看一次报出来的大小。照片从 95 降到 85，肉眼基本看不出差别，体积常能小三到四成。截图和线条图正好相反：JPG 会在文字边缘生出一圈振铃，这时该减小色彩深度或改导 PNG，而不是继续降质量。</p>
+            </div>
+
+            <h2>质量该设多少</h2>
+            <table class="tool-table">
+                <tr><th>内容</th><th>建议</th><th>原因</th></tr>
+                <tr><td>发给人看的照片</td><td>质量 85–90</td><td>压缩痕低于手机屏能分辨的程度</td></tr>
+                <tr><td>电商主图</td><td>质量 90–95</td><td>平台有时会二次压缩，要留余量</td></tr>
+                <tr><td>文字、截图、图表</td><td>改导 PNG</td><td>JPG 在任何质量下都会糊字边</td></tr>
+                <tr><td>缩略图、预览</td><td>质量 60–75</td><td>显示尺寸小，看不出损失</td></tr>
+            </table>
+
+            <h2>容易翻车的四处</h2>
+            <ul>
+                <li><strong>转了两遍。</strong>JPG → WebP → JPG，每过一遍掉一次细节。留原图，只从原图转一次。</li>
+                <li><strong>截屏代替导出。</strong>截预览图等于按屏幕分辨率重新渲染，界面的颜色也一起拍进去了。</li>
+                <li><strong>以为能批处理。</strong>编辑器一次打开一个文件，没有队列。十张就是十遍；想快点先把尺寸缩下来。</li>
+                <li><strong>把图交给第三方压缩工具。</strong><strong>【工具】→【外部】</strong> 里的 TINYPNG、SQUOOSH 会打开外部服务并把图片传出去。素材图无所谓，带客户脸或合同内容的图别这么干。</li>
+            </ul>
+
+            <div class="tip-box">💡 <strong>一句话原则：有抠图主体的导 PNG，满幅照片导 JPG 且质量 85–90，同一个文件绝不转第二次。</strong></div>
+
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>转完 logo 怎么变成白块或黑块了？</h3>
+                <p>JPG 没有 alpha 通道，透明区会被替换成纯色——多数编辑器填白，个别查看器显示黑。要保留透明就导 PNG。如果对方只要 JPG，先把 logo 放到你选定的底色上再导，这样颜色是你定的，不是被动继承的。</p>
+            </div>
+            <div class="faq-item">
+                <h3>质量数值该填多少？</h3>
+                <p>照片 85–90，可能被平台二次压缩的商品图 90–95，缩略图 60–75。在导出对话框勾上「显示文件大小」，看报出来的字节数——那个数字才是能不能过上传限制的依据，不是滑杆位置。</p>
+            </div>
+            <div class="faq-item">
+                <h3>能一次转换整个文件夹的 WebP 吗？</h3>
+                <p>不能。编辑器一次只开一个文件、一次只导一个。批量的话先把尺寸缩下来让每一遍变快，或者用本地桌面转换器。尽量别用需要上传文件的网页转换器。</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/png-vs-jpg-export">PNG 与 JPG 的区别：导出该选哪个？</a>
+                <a href="../tutorials/image-resize-and-compression">缩放、裁剪与压到指定 KB 大小</a>
+                <a href="../tutorials/how-to-cutout-png">抠图并导出透明 PNG</a>
+                <a href="../tutorials/resize-vs-canvas-size-vs-trim">调整大小、画布尺寸、裁剪：到底用哪个？</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">&#127919;</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">拿一张你手上的 WebP，分别导一次 JPG（质量 85）和 PNG，对比两次报出的文件大小。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一试</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

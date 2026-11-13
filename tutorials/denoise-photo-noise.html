@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Photo Noise Without Turning It to Plastic - Web PSEditor</title>
+    <meta name="description" content="Effects → Denoise has one exponent value. Learn the safe range for phone night shots, why denoise must come before sharpening, and how to keep texture." />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/tutorials/denoise-photo-noise" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/denoise-photo-noise" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/denoise-photo-noise" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/denoise-photo-noise" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Denoise: Remove Grain, Keep Texture",
+      "description": "Effects → Denoise has one exponent value. Learn the safe range for phone night shots, why denoise must come before sharpening, and how to keep texture.",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/denoise-photo-noise"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What exponent should I start with?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ten, not the default twenty. At 20 on a large file viewed at 100% the effect is already strong. Start at 10, look at the shadow areas at 100% zoom, and increase in steps of five only if grain is still obvious at the final viewing size."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does denoising make faces look like plastic?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because it smooths skin texture along with noise, and skin is mostly fine texture. Denoise a duplicated layer instead, then erase that layer over eyes, hair and cheeks so the original texture shows through. Background stays clean, faces keep their detail."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does denoising recover detail in a noisy photo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, it only removes information. Noise reduction trades texture for smoothness, so it never adds anything. That is why the order matters: denoise before sharpening, and skip it entirely when downscaling already averages the grain away."
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">← Home</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">Tutorials</a>
+            </div>
+            <div class="lang-switch"><a href="https://webpseditor.com/zh/tutorials/denoise-photo-noise" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span></div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% Local Browser Processing · Zero Uploads · Zero Privacy Risk</span>
+        </div>
+
+        <article>
+            <h1>Remove High-ISO Noise Without Wrecking Detail</h1>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Beginner</span> • <span>7 min read</span> • <span>Updated: 13 Nov 2026</span></div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">Grain or mush — the choice is one number</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Effects → Denoise, Exponent 0–50, default 20. Lower than you think.</div>
+                </div>
+                <a href="../../editor.html" class="cta-btn" target="_blank">Open Web PSEditor & Denoise →</a>
+            </div>
+
+            <p>Every phone photo taken indoors after dark has the same problem: colour speckles in the shadows and a sandy texture across flat areas. It comes from the sensor amplifying a weak signal, and it is worst exactly where photos are judged — shadows, skin, plain walls.</p>
+            <p><strong>Effects → Denoise</strong> offers a single control, <strong>Exponent</strong>, from 0 to 50 with a default of 20. Higher values smooth more. There is no separate luminance and colour control here, so the whole job is picking the point where the grain disappears before the texture does.</p>
+
+            <h2>What the Exponent Actually Trades</h2>
+            <table class="tool-table">
+                <tr><th>Exponent</th><th>Grain</th><th>Detail left</th><th>Use for</th></tr>
+                <tr><td>5–10</td><td>Reduced slightly</td><td>Almost all</td><td>Mild grain on a well-lit photo</td></tr>
+                <tr><td>10–20</td><td>Most of the visible speckle gone</td><td>Texture intact</td><td>The safe default for phone night shots</td></tr>
+                <tr><td>20–30</td><td>Clean flat areas</td><td>Fine hair and fabric start to merge</td><td>Flat backgrounds, product shots, sky</td></tr>
+                <tr><td>30–50</td><td>Plastic</td><td>Pores, stitches and eyelashes gone</td><td>Rarely. Only for a small area that must be clean</td></tr>
+            </table>
+            <p>The default of 20 is not a neutral starting point; it is already a strong setting on a 24 MP file viewed at 100%. Start at 10, compare, and only climb if the grain is still obvious at the size the image will be seen.</p>
+
+            <h2>Order: Denoise, Then Everything Else</h2>
+            <div class="step-card">
+                <div class="step-title">Denoise before sharpening</div>
+                <p>Sharpen amplifies local contrast, which includes noise. Sharpen a noisy file and the grain becomes clumps with hard edges. If you already sharpened, the damage is baked in — undo before denoising, do not try to fix it after.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Denoise before resizing down</div>
+                <p>Downscaling partially averages noise away on its own. For a 4000 px file going to 1200 px, resize first and you may not need to denoise at all. Do it in the other order and you smooth a file that was about to be smoothed anyway, losing detail for nothing.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Denoise after colour correction, not before</div>
+                <p>Correcting exposure upwards brightens the shadows and makes noise more visible, so the amount you need becomes clearer after the correction. Pull the shadows up first with <strong>Image → Color Corrections</strong>, then judge how much denoise the image actually needs.</p>
+            </div>
+
+            <h2>Keeping Texture Where It Matters</h2>
+            <p>Global denoise treats a portrait's cheek and a plain wall the same way, which is why faces end up looking like wax. There is no mask tool here, but the layer stack does the job:</p>
+            <div class="step-card">
+                <div class="step-title">Denoise a copy, then re-reveal the detail</div>
+                <p>Duplicate the layer (<strong>Layer → Duplicate</strong>), denoise the copy at the value that cleans the background, then take a soft <strong>Eraser</strong> and wipe the copy over eyes, hair, lips and any texture you want back. The untouched layer underneath shows through. Result: clean background, real skin.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Denoise the colour, not the edges</div>
+                <p>Colour speckles in shadows are more objectionable than luminance grain, and they are also easier to remove without hurting structure. If the image only has colour blotches, a moderate exponent fixes the complaint and leaves edges alone. If the grain is luminance (grey sandy texture), it is structural — go lower and accept some grain.</p>
+            </div>
+
+            <h2>Signs You Went Too Far</h2>
+            <ul>
+                <li><strong>Skin has no pores</strong> and reads like plastic, especially on foreheads and cheeks.</li>
+                <li><strong>Hair merges into a single mass</strong> with no individual strands at the edge.</li>
+                <li><strong>Fabric texture is gone</strong> — knitwear becomes a flat colour field.</li>
+                <li><strong>Edges look painted</strong>, with a slight watercolour bleed along high-contrast boundaries.</li>
+            </ul>
+            <p>All four are irreversible once exported, and all four are more noticeable than the noise they replaced. A slightly grainy photo looks like a photo; a plastic one looks like a bad filter.</p>
+
+            <h2>Noise You Should Not Remove</h2>
+            <p>Film grain in a scanned photograph is part of the image, not a defect. Denoising it flattens the tonal transitions that make the scan look photographic. The same goes for texture that carries information: sand, fabric weave, wood grain, brushed metal. If the grain is uniform across the whole frame and looks intentional, leave it.</p>
+
+            <div class="tip-box">💡 <strong>Start at Exponent 10, not 20. Denoise before sharpen and before downscaling, and denoise a copy so you can erase the effect off faces.</strong></div>
+
+            <h2>Quick Answers</h2>
+            <div class="faq-item">
+                <h3>What exponent should I start with?</h3>
+                <p>Ten, not the default twenty. At 20 on a large file viewed at 100% the effect is already strong. Start at 10, look at the shadow areas at 100% zoom, and increase in steps of five only if grain is still obvious at the final viewing size.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Why does denoising make faces look like plastic?</h3>
+                <p>Because it smooths skin texture along with noise, and skin is mostly fine texture. Denoise a duplicated layer instead, then erase that layer over eyes, hair and cheeks so the original texture shows through. Background stays clean, faces keep their detail.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Does denoising recover detail in a noisy photo?</h3>
+                <p>No, it only removes information. Noise reduction trades texture for smoothness, so it never adds anything. That is why the order matters: denoise before sharpening, and skip it entirely when downscaling already averages the grain away.</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/sharpen-blurry-photo">Sharpen a Blurry Photo: Order, Numbers, Limits</a>
+                <a href="../tutorials/photo-color-correction">Fix Photo Colours (Auto Colour Correction)</a>
+                <a href="../tutorials/image-resize-and-compression">Resize, Crop & Compress to a Target KB Size</a>
+                <a href="../tutorials/tilt-shift-miniature">Tilt-Shift Miniature Effect: Settings That Work</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Take a night phone photo, denoise at 10 and at 30 on two copies, then compare the shadow areas at 100% zoom.</p>
+                </div>
+                <div>
+                    <a href="../../editor.html" class="practice-btn">
+                        <span>Try It in Web PSEditor</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

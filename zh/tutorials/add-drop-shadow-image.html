@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给抠图加柔和投影（附可用参数） - Web PSEditor</title>
+    <meta name="description" content="阴影的偏移、半径、颜色取值区间，为什么满幅照片加了看不见，以及两遍叠加做出真实感。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/add-drop-shadow-image" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/add-drop-shadow-image" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/add-drop-shadow-image" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/add-drop-shadow-image" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "抠图与图形的投影：实用参数",
+      "description": "阴影的偏移、半径、颜色取值区间，为什么满幅照片加了看不见，以及两遍叠加做出真实感。",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "zh",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/zh/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/zh/tutorials/add-drop-shadow-image"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "加了阴影但完全没变化，为什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "要么图层铺满了整张画布，没有透明区让阴影透出来，要么阴影加在了背景层上。先把主体抠出来，或把效果加在边缘透明的图层上，再确认上面没有别的图层压着。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "半径和偏移取多少才像真的？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "白底产品图：Y 偏移 10–16、X 偏移 0–4、半径 12–20、黑色。要更真实就分两遍：紧的接触影（偏移 4、半径 6）加一层松散的环境影（偏移 20、半径 30，图层不透明度 25%–35%）。数值单位是画布像素，图大要等比例放大。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "加了阴影还能撤掉吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "滤镜是直接作用在图层的，Ctrl+Z 是最直接的回退。想留后路就先复制图层、只对副本加阴影，改主意时把副本删掉即可。"
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/add-drop-shadow-image" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+            <h1>加一层柔和投影（以及为什么你的看不见）</h1>
+            <div class="meta-bar">
+                <span>难度：入门</span> &bull; <span>阅读：4 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">投影是「落地感」最便宜的来源</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">【特效】→【常见滤镜】→【阴影】：偏移、半径、颜色，实时预览。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 加阴影 &rarr;</a>
+            </div>
+
+            <p>投影是让抠图「落地」最便宜的办法，也是最多人加了却看不见的效果——因为阴影画在不透明像素的背后，而满幅照片根本没有「背后」这块地方。</p>
+            <p>所以动滑杆之前先记住一条硬前提：<strong>图层必须有透明边</strong>。产品抠图、logo、文字层、透明贴纸，这些都可以。铺满画布的照片，无论偏移拉多大都不会出现阴影。</p>
+
+            <h2>对话框里到底改了什么</h2>
+            <p><strong>【特效】→【常见滤镜】→【阴影】</strong> 有四个控件：</p>
+            <table class="tool-table">
+                <tr><th>控件</th><th>范围 / 默认</th><th>作用</th></tr>
+                <tr><td>X 偏移</td><td>−100 到 100，默认 10</td><td>水平位移。正数把阴影往右推。</td></tr>
+                <tr><td>Y 偏移</td><td>−100 到 100，默认 10</td><td>垂直位移。正数往下——光从上方来，这是常用方向。</td></tr>
+                <tr><td>半径</td><td>0 到 100，默认 5</td><td>柔化程度。0 是硬边复制，数值高空了会糊成一团雾。</td></tr>
+                <tr><td>颜色</td><td>默认 #000000</td><td>阴影颜色。不一定非黑，见下面关于颜色的说明。</td></tr>
+            </table>
+            <p>数值单位是画布像素，同样一组数字，在 600 像素的贴纸和 3000 像素的产品图上完全是两回事。判断效果要在 100% 缩放下看，适应窗口里 20 像素的半径看着像没加。</p>
+
+            <h2>能直接抄的参数</h2>
+            <div class="step-card">
+                <div class="step-title">白底产品图</div>
+                <p>Y 偏移 10–16，X 偏移 0–4，半径 12–20，黑色。效果应该像物体底部的一层接触影。如果影往两侧散开，说明半径相对偏移太大了。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">浅底上的 logo 或文字</div>
+                <p>Y 偏移 3–6，半径 6–10。紧、轻；再大就变成 2005 年的网页按钮。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">彩色底上的贴纸</div>
+                <p>颜色不要用纯黑。暖色底上，纯黑阴影看起来像脏污。取一下背景色再加深——同一个色相的深色才像影子，不像污渍。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">点了确定之后</div>
+                <p>阴影会直接作用到图层上，不是可随时调的调整层，只能 Ctrl+Z 回去。稳妥做法是先复制图层，把阴影加在副本上，原始图层留着。</p>
+            </div>
+
+            <h2>阴影看不见的四个原因</h2>
+            <ul>
+                <li><strong>图层铺满了画布。</strong> 没有地方落影。先把主体抠出来。</li>
+                <li><strong>加在背景图层上了。</strong> 阴影画在该层不透明像素的下面，而它处处都不透明，于是整片被盖住。</li>
+                <li><strong>阴影被别的图层压住。</strong> 把带阴影的图层往上移，或把遮挡的图层往下移。</li>
+                <li><strong>偏移小于半径。</strong> 偏移 2、半径 40，阴影会均匀地向四周发散，看起来是灰色光晕而不是影子。</li>
+            </ul>
+
+            <h2>怎么做得像真的</h2>
+            <p>真实阴影不是均匀的：物体贴地处最深最实，离得越远越淡越散。一次滤镜做不到这两种，办法是同一图层复制两份、各做一遍：</p>
+            <div class="step-card">
+                <div class="step-title">第一遍：接触影</div>
+                <p>复制图层（<strong>【图层】→【复制】</strong>），阴影设 Y 偏移 4、半径 6、黑色。这是物体和地面接触处那道紧而深的边。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">第二遍：环境影</div>
+                <p>再复制一份，阴影设 Y 偏移 20、半径 30，然后在图层面板把这层的不透明度降到 25%–35%。一紧一松、一深一淡两层叠起来，才像真的落在桌面上。</p>
+            </div>
+            <p>原始抠图放在这两层上面。三层结构——物体、接触影、环境影——以后想调力度随时能调，不用重抠。</p>
+
+            <h2>该用与不该用</h2>
+            <ul>
+                <li><strong>适合：</strong> 商品主图、演示文稿、作品集缩略图、界面效果图、主体需要从杂乱背景里跳出来的封面。</li>
+                <li><strong>不适合：</strong> 印在白纸上的东西——阴影费墨，还像蹭脏了。老照片修复也别加，给扫描的人像添投影是编造，不是修复。</li>
+            </ul>
+
+            <div class="tip-box">💡 <strong>阴影的前提是透明；Y 偏移取正、半径大于偏移，原始图层留在最上面，方便事后回调。</strong></div>
+
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>加了阴影但完全没变化，为什么？</h3>
+                <p>要么图层铺满了整张画布，没有透明区让阴影透出来，要么阴影加在了背景层上。先把主体抠出来，或把效果加在边缘透明的图层上，再确认上面没有别的图层压着。</p>
+            </div>
+            <div class="faq-item">
+                <h3>半径和偏移取多少才像真的？</h3>
+                <p>白底产品图：Y 偏移 10–16、X 偏移 0–4、半径 12–20、黑色。要更真实就分两遍：紧的接触影（偏移 4、半径 6）加一层松散的环境影（偏移 20、半径 30，图层不透明度 25%–35%）。数值单位是画布像素，图大要等比例放大。</p>
+            </div>
+            <div class="faq-item">
+                <h3>加了阴影还能撤掉吗？</h3>
+                <p>滤镜是直接作用在图层的，Ctrl+Z 是最直接的回退。想留后路就先复制图层、只对副本加阴影，改主意时把副本删掉即可。</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/white-background-product-photo">把商品图放到纯白画布上</a>
+                <a href="../tutorials/how-to-cutout-png">抠图并导出透明 PNG</a>
+                <a href="../tutorials/layer-blend-modes-guide">图层混合模式指南（正片叠底/滤色/叠加）</a>
+                <a href="../tutorials/add-text-watermark">给照片加文字与水印</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">&#127919;</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">拿一张透明 PNG，复制两层，做一道紧接触影加一层松散环境影，再和只加一遍的效果对比。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一试</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

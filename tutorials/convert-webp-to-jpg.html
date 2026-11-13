@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert WebP to JPG in the Browser (No Upload) - Web PSEditor</title>
+    <meta name="description" content="Turn a WebP file into JPG or PNG with a quality slider, see the exported file size before saving, and avoid the transparent-background trap." />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/tutorials/convert-webp-to-jpg" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/convert-webp-to-jpg" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/convert-webp-to-jpg" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/convert-webp-to-jpg" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Convert WebP to JPG in the Browser: Keep Transparency or Not",
+      "description": "Turn a WebP file into JPG or PNG with a quality slider, see the exported file size before saving, and avoid the transparent-background trap.",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/convert-webp-to-jpg"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why did my logo come back on a white or black block after converting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JPG has no alpha channel, so the transparent area is replaced by a solid colour — white in most editors, black in some viewers. Keep the transparency and export PNG instead. If the destination insists on JPG, place the logo on a deliberate background colour first, so you choose the fill rather than inheriting it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What quality number should I pick?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Quality 85–90 for photographs, 90–95 for product images that a marketplace may re-compress, 60–75 for thumbnails. Tick Show file size in the Export dialog and read the reported byte count — that number, not the slider position, tells you whether you cleared the upload limit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I convert a whole folder of WebP files at once?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The editor opens one file at a time and Export writes one file. For a large batch, resize first so each pass is short, or use a desktop converter that runs locally. Avoid browser converters that upload your files."
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">← Home</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">Tutorials</a>
+            </div>
+            <div class="lang-switch"><a href="https://webpseditor.com/zh/tutorials/convert-webp-to-jpg" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span></div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% Local Browser Processing · Zero Uploads · Zero Privacy Risk</span>
+        </div>
+
+        <article>
+            <h1>Convert WebP to JPG Without Uploading Anything</h1>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Beginner</span> • <span>7 min read</span> • <span>Updated: 13 Nov 2026</span></div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">WebP opened straight in the editor</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">File → Open handles png, jpg, webp, gif and avif locally, then Export writes the format you need.</div>
+                </div>
+                <a href="../../editor.html" class="cta-btn" target="_blank">Open Web PSEditor & Convert →</a>
+            </div>
+
+            <p>You saved an image from a browser, and the file is <code>.webp</code>. Then a job portal says the format is not supported, or Word opens it as a blank box, or the print shop asks for JPG. Conversion here is not a re-upload to some online converter: open the file, choose the output type, save. The pixels never leave your machine.</p>
+            <p>The one thing that decides whether the conversion goes well is <strong>transparency</strong>. WebP supports an alpha channel; JPG does not. A logo cut out on a transparent background will come back on a solid colour block, and that surprises people far more often than the format itself.</p>
+
+            <h2>Before You Convert: Check What You Actually Have</h2>
+            <p>Open the file with <strong>File → Open → Open File</strong>. The supported input list covers png, jpg, jpeg, webp, gif and avif, so a WebP drops in without any intermediate step.</p>
+            <p>Then read the numbers in <strong>Image → Information</strong>: width, height and layer count. Two things matter at this point. If the image is larger than about 2000 px on the long edge and the destination is a form upload, you will probably resize as well, and it is faster to do that once here than to convert twice. If the layer panel shows a chequerboard behind the content, or the canvas edge is not filled edge to edge, you are holding a file with alpha and the next section applies to you.</p>
+
+            <h2>Step by Step</h2>
+            <div class="step-card">
+                <div class="step-title">Step 1: Open the WebP</div>
+                <p><strong>File → Open → Open File</strong>. On the canvas, confirm the aspect ratio looks right. A WebP with an odd pixel size will show up exactly as stored; nothing is silently padded.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Step 2: Decide on Transparency</div>
+                <p>Chequerboard visible = the file has alpha. Keep it and export <strong>PNG</strong>. Flatten it onto white and export <strong>JPG</strong>. There is no third option: JPG has no alpha channel, so the transparent area is filled with whatever sits behind it — usually white, sometimes black depending on the viewer.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Step 3: Export as JPG</div>
+                <p><strong>File → Export</strong> opens the save dialog. Set <strong>File name</strong>, set <strong>Save as type</strong> to JPG, and watch the <strong>Quality</strong> slider (1–100, default 90). Tick <strong>Show file size</strong> and the dialog reports the exact byte count before you commit, which is the only reliable way to know if you have cleared a 500 KB upload limit.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Step 4: If You Need to Hit a Size Limit</div>
+                <p>Lower Quality in steps of five and re-read the reported size. Quality 85 is usually indistinguishable from 95 on a photograph and often 30–40% smaller. For screenshots and line art the opposite is true: JPG adds ringing around text, so drop the colour depth or export PNG instead of pushing quality down.</p>
+            </div>
+
+            <h2>Quality Settings That Actually Make Sense</h2>
+            <table class="tool-table">
+                <tr><th>Content</th><th>Recommended</th><th>Why</th></tr>
+                <tr><td>Photographs for sharing</td><td>Quality 85–90</td><td>Artifacts stay below what a phone screen shows</td></tr>
+                <tr><td>Product listing images</td><td>Quality 90–95</td><td>Marketplaces sometimes re-compress; leave headroom</td></tr>
+                <tr><td>Text, screenshots, charts</td><td>PNG instead</td><td>JPG blurs edges around letters at any quality</td></tr>
+                <tr><td>Thumbnails, previews</td><td>Quality 60–75</td><td>Small display size hides the loss</td></tr>
+            </table>
+
+            <h2>Where This Goes Wrong</h2>
+            <ul>
+                <li><strong>Converting twice.</strong> JPG → WebP → JPG loses detail each pass. Keep the original file and convert once from it.</li>
+                <li><strong>Screenshotting instead of exporting.</strong> A screenshot of the preview is a re-render at screen resolution, with the interface colours baked in.</li>
+                <li><strong>Expecting a batch.</strong> The editor opens one file at a time; there is no queue. For ten files, ten passes, or resize them first so each pass is quick.</li>
+                <li><strong>Handing the file to a third-party compressor.</strong> The <strong>Tools → External</strong> entries (TINYPNG, SQUOOSH) open external services that receive your image. Fine for a stock photo, wrong for anything with a client's face or a contract in it.</li>
+            </ul>
+
+            <div class="tip-box">💡 <strong>Rule of thumb: if the picture has a cut-out subject, export PNG. If it is a full-frame photo, export JPG and use Quality 85–90. Never convert the same file twice.</strong></div>
+
+            <h2>Quick Answers</h2>
+            <div class="faq-item">
+                <h3>Why did my logo come back on a white or black block after converting?</h3>
+                <p>JPG has no alpha channel, so the transparent area is replaced by a solid colour — white in most editors, black in some viewers. Keep the transparency and export PNG instead. If the destination insists on JPG, place the logo on a deliberate background colour first, so you choose the fill rather than inheriting it.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What quality number should I pick?</h3>
+                <p>Quality 85–90 for photographs, 90–95 for product images that a marketplace may re-compress, 60–75 for thumbnails. Tick Show file size in the Export dialog and read the reported byte count — that number, not the slider position, tells you whether you cleared the upload limit.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I convert a whole folder of WebP files at once?</h3>
+                <p>No. The editor opens one file at a time and Export writes one file. For a large batch, resize first so each pass is short, or use a desktop converter that runs locally. Avoid browser converters that upload your files.</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/png-vs-jpg-export">PNG vs JPG: Which Format Should You Export?</a>
+                <a href="../tutorials/image-resize-and-compression">Resize, Crop & Compress to a Target KB Size</a>
+                <a href="../tutorials/how-to-cutout-png">Cut Out an Image & Export Transparent PNG</a>
+                <a href="../tutorials/resize-vs-canvas-size-vs-trim">Resize vs Canvas Size vs Trim: Which One?</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Open one of your WebP files, export it twice — JPG at 85 and PNG — then compare the reported file sizes.</p>
+                </div>
+                <div>
+                    <a href="../../editor.html" class="practice-btn">
+                        <span>Try It in Web PSEditor</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

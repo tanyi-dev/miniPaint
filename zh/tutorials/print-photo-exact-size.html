@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>按精确尺寸打印照片（英寸 / 厘米 / 像素） - Web PSEditor</title>
+    <meta name="description" content="算清 4×6、A4、证件照需要多少像素，一次重采样搞定，并阻止打印对话框偷偷缩小你的文件。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/print-photo-exact-size" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/print-photo-exact-size" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/print-photo-exact-size" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/print-photo-exact-size" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "精确尺寸打印：像素、DPI 与打印对话框",
+      "description": "算清 4×6、A4、证件照需要多少像素，一次重采样搞定，并阻止打印对话框偷偷缩小你的文件。",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "zh",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/zh/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/zh/tutorials/print-photo-exact-size"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "打出来比 4 × 6 小，为什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "打印对话框停在「适应页面」上，它会把图缩到纸张边距以内。把缩放改成 100% 或「实际大小」，关掉页眉页脚，并确认选的纸张就是你设计时用的那个尺寸。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "A4、300 DPI 需要多少像素？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2480 × 3508。公式是英寸 × DPI：A4 是 8.27 × 11.69 英寸，8.27 × 300 = 2480，11.69 × 300 = 3508。150 DPI 下同样一页只要 1240 × 1754，远看的图完全够。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "画布尺寸里的「分辨率」能设定打印 DPI 吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "它决定对话框用哪套单位与预设，改变的是你输入的数值怎么被解释，而不是导出文件里内嵌的物理尺寸。可靠的做法是：按目标 DPI 算出像素、直接设像素尺寸，再以 100% 和正确纸张打印。"
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/print-photo-exact-size" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+            <h1>按物理尺寸精确打印一张照片</h1>
+            <div class="meta-bar">
+                <span>难度：中级</span> &bull; <span>阅读：4 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">像素决定清晰度，对话框决定尺寸</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">按 300 DPI 算好像素，再以 100% 无边距打印。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 准备打印 &rarr;</a>
+            </div>
+
+            <p>打印出问题只有两种原因：文件像素不够那个物理尺寸，或者打印对话框悄悄帮你缩放了。两个都可预测，也都能在按打印之前解决。</p>
+            <p>算式很短：<strong>像素 = 英寸 × DPI</strong>。300 DPI 下，4 × 6 英寸是 1200 × 1800 像素，A4（8.27 × 11.69 英寸）是 2480 × 3508，35 × 45 毫米证件照是 413 × 531。150 DPI 下同样的物理尺寸只需要四分之一的像素——一米外看的海报可以，拿在手里检查的证件照不行。</p>
+
+            <h2>第一步：先定目标像素</h2>
+            <table class="tool-table">
+                <tr><th>用途</th><th>物理尺寸</th><th>300 DPI 像素</th></tr>
+                <tr><td>常规照片冲印</td><td>4 × 6 英寸 / 10 × 15 厘米</td><td>1200 × 1800</td></tr>
+                <tr><td>A4 文档插图</td><td>210 × 297 毫米</td><td>2480 × 3508</td></tr>
+                <tr><td>证件照</td><td>35 × 45 毫米</td><td>413 × 531</td></tr>
+                <tr><td>5 × 7 英寸相框</td><td>5 × 7 英寸</td><td>1500 × 2100</td></tr>
+            </table>
+            <p>打开任何对话框之前先把这两个数写下来。从打印对话框倒推，是最容易重采样三次的做法。</p>
+
+            <h2>第二步：只重采样一次</h2>
+            <div class="step-card">
+                <div class="step-title">先裁到正确比例</div>
+                <p>4 × 6 是 2:3。如果照片是 3:2 或 4:3，先决定要舍弃哪一部分再缩放：用 <strong>选区</strong> 工具画框，配合 <strong>【图片】→【裁剪】</strong>，或反选后用 <strong>【编辑】→【删除选区】</strong>。缩完再裁，之前算好的像素数就作废了。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">一次缩放，勾上锐化</div>
+                <p><strong>【图片】→【调整大小】</strong>：宽高填目标像素，模式 <strong>Lanczos</strong>，勾 <strong>锐化</strong>，图层选 <strong>全部</strong>。一次过。如果出来的数字差一点——1198 而不是 1200——回原图重缩，别事后再去改画布。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">不要为了填满而放大</div>
+                <p>源图 900 × 1350、目标 1200 × 1800，等于凭空造出三分之一的像素。能打出来，但阅读距离一看就软。更好的选择：打小一点，或者把物理尺寸降下来接受 200 DPI。</p>
+            </div>
+
+            <h2>第三步：按实际大小打印</h2>
+            <div class="step-card">
+                <div class="step-title">【文件】→【打印】</div>
+                <p>这会把画布交给浏览器的打印流程。在随后的打印对话框里：</p>
+                <ul style="margin:8px 0 0 18px;">
+                    <li>缩放设成 <strong>100%</strong> 或「实际大小」。浏览器默认是「适应页面」，它会把 4 × 6 悄悄缩成纸张边距能塞下的尺寸。</li>
+                    <li>关掉 <strong>页眉页脚</strong>——顶部打出来的网址和日期是最典型的翻车痕迹。</li>
+                    <li>要满版就把 <strong>边距</strong> 设为无；但多数家用打印机打不到纸边，仍会留一圈白。</li>
+                    <li>纸张尺寸要和你算的一致。把 4 × 6 的文件按 100% 打到 A4 上，得到的是一张大纸上的一小块 4 × 6。</li>
+                </ul>
+            </div>
+
+            <h2>颜色与纸张</h2>
+            <ul>
+                <li><strong>屏幕亮度会骗人。</strong> 在 300 尼特屏上看着刚好的照片，印出来大约暗一档。在意的话，打印前用 <strong>【图片】→【颜色校正】</strong> 稍微提亮。</li>
+                <li><strong>哑光纸吃对比。</strong> 光面纸黑得下去，哑光会压平。同一个文件，哑光上发灰、光面上正常。</li>
+                <li><strong>别拿 JPG 反复打。</strong> 质量 90 以上导一次，从那个文件打，分层工程另外留着。</li>
+                <li><strong>白边是设计决定。</strong> 需要白边就用 <strong>【图片】→【画布尺寸】</strong> 做进文件，别指望打印机边距，那玩意儿四边不均匀。</li>
+            </ul>
+
+            <h2>证件照与签证照</h2>
+            <p>这是最严的一类，因为物理尺寸会被人拿尺子量。35 × 45 毫米、300 DPI 就是 413 × 531 像素。先按要求的比例裁好头部，再缩到正好这两个数，然后在正确纸张上 100% 打印。一张纸上要排多份，用 <strong>【图片】→【画布尺寸】</strong> 把画布扩到 4 × 6，复制图层，再用 <strong>【图片】→【平移】</strong> 逐个定位——比把同一个文件打四遍更快也更准。</p>
+
+            <div class="tip-box">💡 <strong>像素 = 英寸 × DPI。先裁比例、再用 Lanczos 加锐化缩一次、100% 打印并关掉页眉页脚。「适应页面」就是毁掉精确尺寸的那个开关。</strong></div>
+
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>打出来比 4 × 6 小，为什么？</h3>
+                <p>打印对话框停在「适应页面」上，它会把图缩到纸张边距以内。把缩放改成 100% 或「实际大小」，关掉页眉页脚，并确认选的纸张就是你设计时用的那个尺寸。</p>
+            </div>
+            <div class="faq-item">
+                <h3>A4、300 DPI 需要多少像素？</h3>
+                <p>2480 × 3508。公式是英寸 × DPI：A4 是 8.27 × 11.69 英寸，8.27 × 300 = 2480，11.69 × 300 = 3508。150 DPI 下同样一页只要 1240 × 1754，远看的图完全够。</p>
+            </div>
+            <div class="faq-item">
+                <h3>画布尺寸里的「分辨率」能设定打印 DPI 吗？</h3>
+                <p>它决定对话框用哪套单位与预设，改变的是你输入的数值怎么被解释，而不是导出文件里内嵌的物理尺寸。可靠的做法是：按目标 DPI 算出像素、直接设像素尺寸，再以 100% 和正确纸张打印。</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/id-photo-background">证件照换底色</a>
+                <a href="../tutorials/resize-vs-canvas-size-vs-trim">调整大小、画布尺寸、裁剪：到底用哪个？</a>
+                <a href="../tutorials/sharpen-blurry-photo">锐化模糊照片：顺序、数值与边界</a>
+                <a href="../tutorials/png-vs-jpg-export">PNG 与 JPG 的区别：导出该选哪个？</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">&#127919;</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">做一张 1200 × 1800 的文件用于 4 × 6 冲印，然后在打印预览里确认它铺满整张纸。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一试</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tilt-Shift Miniature Effect: Settings That Work - Web PSEditor</title>
+    <meta name="description" content="Blur Radius, Gradient Radius and a blur band defined by X/Y start and end. The effect only works on photos taken from above — here are the numbers." />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/tutorials/tilt-shift-miniature" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/tilt-shift-miniature" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/tilt-shift-miniature" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/tilt-shift-miniature" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Tilt-Shift Miniature Effect: Parameters and Preconditions",
+      "description": "Blur Radius, Gradient Radius and a blur band defined by X/Y start and end. The effect only works on photos taken from above — here are the numbers.",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/tilt-shift-miniature"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why does the tilt-shift effect look fake on my photo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually because the photo was taken at eye level or the subject is too large in frame. Miniature blur works on high-angle shots with many small objects. Also check that the sharp band follows the ground plane — a horizontal strip across a tilted street produces a sharpness pattern no lens can make."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What blur radius and gradient should I use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Blur Radius 12–20 and Gradient Radius 70 or above for a 3000 px image. Below 25 keeps it reading as defocus rather than a filter; a high gradient value softens the transition so it looks like depth of field instead of a hard-edged band."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why add saturation to a blur effect?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because miniature models are painted in brighter, flatter colours than real streets, and the brain associates punchy colour with toys. A saturation of 5–8 supports that association. Without it the blurred photo just looks like a photo with a smeared background."
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">← Home</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">Tutorials</a>
+            </div>
+            <div class="lang-switch"><a href="https://webpseditor.com/zh/tutorials/tilt-shift-miniature" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span></div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% Local Browser Processing · Zero Uploads · Zero Privacy Risk</span>
+        </div>
+
+        <article>
+            <h1>Tilt-Shift Miniature Effect With Predictable Results</h1>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Intermediate</span> • <span>7 min read</span> • <span>Updated: 13 Nov 2026</span></div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">The photo decides, the sliders only finish</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Effects → Tilt Shift: a blur band, a gradient, plus saturation and sharpen.</div>
+                </div>
+                <a href="../../editor.html" class="cta-btn" target="_blank">Open Web PSEditor & Try Tilt-Shift →</a>
+            </div>
+
+            <p>The miniature look is not created by blur. It is created by a photo taken from high above, where the brain expects everything to be sharp, and then blurred except for one band. The blur is what confirms an expectation the composition already set up. Apply the same filter to a street-level portrait and you get a portrait with a smeared top and bottom, nothing more.</p>
+            <p><strong>Effects → Tilt Shift</strong> exposes the whole mechanism as seven numbers, all with a live preview. Understanding what each one does turns a random slider session into a repeatable setting.</p>
+
+            <h2>The Seven Parameters</h2>
+            <table class="tool-table">
+                <tr><th>Control</th><th>Range / default</th><th>Effect</th></tr>
+                <tr><td>Blur Radius</td><td>0–30, default 10</td><td>How strong the out-of-focus areas become</td></tr>
+                <tr><td>Gradient Radius</td><td>40–100, default 70</td><td>How wide the transition between sharp and blurred is</td></tr>
+                <tr><td>X start / Y start</td><td>0–100 each, defaults 0 / 50</td><td>One end of the sharp band, in percent of the canvas</td></tr>
+                <tr><td>X end / Y end</td><td>0–100 each, defaults 100 / 50</td><td>The other end of the band</td></tr>
+                <tr><td>Saturation</td><td>0–20, default 3</td><td>Colour boost. Miniature scenes read as more toy-like with punchy colour</td></tr>
+                <tr><td>Sharpen</td><td>0–5, default 1</td><td>Crispness inside the band, contrasting with the blur outside it</td></tr>
+            </table>
+            <p>The band is defined as a line from (X start, Y start) to (X end, Y end) in percentage coordinates. A horizontal band is (0, 50) → (100, 50). A diagonal one tilts the sharp zone, which suits roads and railway lines running across the frame.</p>
+
+            <h2>Step by Step</h2>
+            <div class="step-card">
+                <div class="step-title">1. Choose the right photo</div>
+                <p>Taken from at least several metres up, looking down at maybe 30–60°. A city square, a car park, a market, a model railway, a beach with umbrellas. If the horizon is in the frame at eye level, this effect will look like a mistake. There is no setting that fixes the wrong photo.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">2. Place the band on the subject</div>
+                <p>Set X start 0, Y start around 45–55, X end 100, Y end the same value. That gives a horizontal sharp strip through the middle. Move both Y values together — up to include more of the foreground, down to favour the distance. Keep the strip narrow enough that the eye can tell what is meant to be in focus.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">3. Set the blur, then the gradient</div>
+                <p>Start Blur Radius at 10 and Gradient Radius at 70. Then raise Blur Radius until the out-of-focus area clearly reads as unsharp — for a 3000 px image, 12–20 is usually enough, above 25 it starts to look like a filter rather than a lens. Gradient Radius controls the transition: low values give a visible line where sharp becomes blurred, high values feel like a real depth of field.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">4. Add colour, not just blur</div>
+                <p>Saturation 5–8 makes the scene toy-like. Miniatures are usually painted in brighter, flatter colours than real life, and a small boost matches that expectation. Keep Sharpen at 1–2 so the in-focus band has a slightly harder edge than the blur around it.</p>
+            </div>
+
+            <h2>Why It Sometimes Looks Wrong</h2>
+            <ul>
+                <li><strong>Real depth cues survive.</strong> Strong perspective lines, a huge foreground object, or recognisable human faces tell the brain the scale is real, and the blur then reads as a defect.</li>
+                <li><strong>The band does not follow the ground plane.</strong> A horizontal strip on a tilted street leaves the near pavement sharp and the far pavement blurred, which no lens does.</li>
+                <li><strong>Blur is uniform.</strong> Real defocus increases with distance. A single-radius blur is flat everywhere, so pushing the radius high makes the illusion collapse.</li>
+                <li><strong>The subject is too big.</strong> Miniature effect works when objects are small in frame. A single large car filling a third of the image cannot look like a toy.</li>
+            </ul>
+
+            <h2>A Two-Pass Variation</h2>
+            <p>More convincing depth comes from stacking two passes with different radii: the first at Blur Radius 6 across the whole frame, the second at Blur Radius 20 restricted to the far background by moving the band. Two blur strengths read as a gradual falloff rather than a single plane of defocus, which is closer to how a real tilt-shift lens behaves.</p>
+
+            <h2>When Not to Use It</h2>
+            <ul>
+                <li>Portraits, weddings, product shots — the effect destroys the subject.</li>
+                <li>Anything where text must stay readable outside the band. Blurred text looks like a rendering error.</li>
+                <li>Photos for print at large size: the transition between sharp and blurred areas becomes an obvious gradient band when enlarged.</li>
+            </ul>
+
+            <div class="tip-box">💡 <strong>High vantage point, narrow horizontal band, Blur Radius 12–20, Gradient Radius 70+, saturation 5–8. If the photo was taken at eye level, skip the effect.</strong></div>
+
+            <h2>Quick Answers</h2>
+            <div class="faq-item">
+                <h3>Why does the tilt-shift effect look fake on my photo?</h3>
+                <p>Usually because the photo was taken at eye level or the subject is too large in frame. Miniature blur works on high-angle shots with many small objects. Also check that the sharp band follows the ground plane — a horizontal strip across a tilted street produces a sharpness pattern no lens can make.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What blur radius and gradient should I use?</h3>
+                <p>Blur Radius 12–20 and Gradient Radius 70 or above for a 3000 px image. Below 25 keeps it reading as defocus rather than a filter; a high gradient value softens the transition so it looks like depth of field instead of a hard-edged band.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Why add saturation to a blur effect?</h3>
+                <p>Because miniature models are painted in brighter, flatter colours than real streets, and the brain associates punchy colour with toys. A saturation of 5–8 supports that association. Without it the blurred photo just looks like a photo with a smeared background.</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/mosaic-and-blur-redaction">Pixelate & Gaussian Blur for Sensitive Information</a>
+                <a href="../tutorials/photo-filters-one-click">One-Click Filters: B&W, Vintage, Cinematic</a>
+                <a href="../tutorials/denoise-photo-noise">Remove High-ISO Noise Without Wrecking Detail</a>
+                <a href="../tutorials/photo-color-correction">Fix Photo Colours (Auto Colour Correction)</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Find an overhead photo of a street or car park, then sweep the band from Y 45 to Y 60 and watch how the subject changes.</p>
+                </div>
+                <div>
+                    <a href="../../editor.html" class="practice-btn">
+                        <span>Try It in Web PSEditor</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

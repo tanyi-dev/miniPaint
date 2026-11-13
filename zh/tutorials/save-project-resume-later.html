@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>保存工程与导出图片的区别 - Web PSEditor</title>
+    <meta name="description" content="【另存为】写的是带全部图层的 JSON 工程，【导出】写的是压平的图片，【快速保存 F9】只存在浏览器里。分别什么时候用。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/save-project-resume-later" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/save-project-resume-later" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/save-project-resume-later" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/save-project-resume-later" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "另存为、导出与快速保存：三个不同的去处",
+      "description": "【另存为】写的是带全部图层的 JSON 工程，【导出】写的是压平的图片，【快速保存 F9】只存在浏览器里。分别什么时候用。",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "zh",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/zh/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/zh/tutorials/save-project-resume-later"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "存下来的文件任何看图软件都打不开，是坏了吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "多半没坏。【文件】→【另存为】写的是 JSON 工程，不是图片。先看扩展名，如果是 .json，在编辑器里用【文件】→【打开】→【打开文件】重新读入，图层会回来。要图就用【文件】→【导出】。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "清理浏览器数据之后，快速保存还在吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不在。快速保存把工程放在浏览器本地存储的一个固定位置。清站点数据、无痕模式、换浏览器、换机器，都会丢。在意的东西请另存一份 JSON 工程。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "JSON 工程会保存撤销历史吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不会。它保存图层、位置、不透明度、滤镜和画布尺寸，撤销步骤不在文件里。重新打开就是一段新的历史，所以危险操作之前先存一份，别指望重开之后还能撤销。"
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/save-project-resume-later" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+            <h1>把工程存下来，明天接着改</h1>
+            <div class="meta-bar">
+                <span>难度：入门</span> &bull; <span>阅读：4 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">两个菜单，两种完全不同的文件</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">另存为把图层存进 JSON 工程，导出才写出图片。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 保存 &rarr;</a>
+            </div>
+
+            <p>这是最典型的「丢掉一个下午」的方式：改完图，用 <strong>【文件】→【另存为】</strong> 存了文件，过两天发现任何看图软件都打不开——因为它根本不是图片，是工程文件。</p>
+            <p><strong>【文件】→【另存为】</strong> 写的是<em>完整图层数据</em>，一个 JSON，记录了每个图层、位置、滤镜栈和画布尺寸。<strong>【文件】→【导出】</strong> 写的是压平后的 PNG、JPG、WEBP、GIF、BMP 或 TIFF——一张合并好的图，没有图层，可以直接上传。同一个菜单，两个世界。</p>
+
+            <h2>你需要哪一个</h2>
+            <table class="tool-table">
+                <tr><th>你想……</th><th>用哪个</th><th>得到什么</th></tr>
+                <tr><td>以后继续按图层改</td><td>文件 → 另存为</td><td>JSON 工程文件</td></tr>
+                <tr><td>发出去、上传、发布</td><td>文件 → 导出</td><td>PNG / JPG / WEBP / GIF / BMP / TIFF</td></tr>
+                <tr><td>在当前浏览器里临时存一份</td><td>文件 → 快速保存（F9）</td><td>存在浏览器本地存储里</td></tr>
+                <tr><td>把这份临时的读回来</td><td>文件 → 快速读取（F10）</td><td>上一次快速保存的状态</td></tr>
+            </table>
+
+            <h2>导出图片</h2>
+            <div class="step-card">
+                <div class="step-title">【文件】→【导出】（S）</div>
+                <p>对话框里有 <strong>文件名</strong>、<strong>另存为类型</strong>、<strong>质量</strong>（1–100，默认 90）、<strong>显示文件大小</strong> 勾选，以及 <strong>保存图层</strong> 选项。正常出图：类型选 JPG 或 PNG，质量留 90，有上传限制就勾上显示文件大小，导出。</p>
+            </div>
+            <p>注意导出的快捷键是 <strong>S</strong>，<strong>Shift + S</strong> 打开的是另存为。按错的概率不低，症状就是「这个文件除了本编辑器谁都打不开」。</p>
+
+            <h2>保存工程</h2>
+            <div class="step-card">
+                <div class="step-title">【文件】→【另存为】（Shift + S）</div>
+                <p>这里只提供一种类型：JSON，说明是<em>完整图层数据</em>。命名保存，之后用 <strong>【文件】→【打开】→【打开文件】</strong> 就能读回来——打开对话框同时接受图片和 JSON。每个图层的位置、不透明度和滤镜都会原样回来。</p>
+            </div>
+            <p>两个限制值得知道。一，位图内容都嵌在 JSON 里，不引用外部文件，所以体积可能不小（多图层工程几 MB 很正常）。二，文字图层只有在浏览器里有那个字体时才恢复为可编辑文字，字体缺失会被替换。</p>
+
+            <h2>快速保存，以及它唯一的风险</h2>
+            <p><strong>【文件】→【快速保存】（F9）</strong> 把工程写进浏览器本地存储的一个固定位置，<strong>【文件】→【快速读取】（F10）</strong> 读回来。它确实好用：关掉标签页，重新打开编辑器，按 F10，东西还在。</p>
+            <p>风险在于它只有一份，而且存在浏览器里。清理站点数据、用无痕模式、换浏览器、换电脑，快速保存都不在了。请把 F9 当成「同一台机器上跨会话的方便」，绝不要当成备份。</p>
+
+            <h2>一条能活下来的流程</h2>
+            <ul>
+                <li><strong>动手之前先存一份 JSON 工程</strong>，文件名带上日期。撤销历史不存，但图层都在。</li>
+                <li><strong>改完了导一张图</strong>，两个文件放同一个文件夹：<code>poster.json</code> 和 <code>poster.jpg</code>。</li>
+                <li><strong>永远从工程重新导出，不要从导出的图再改。</strong> 拿 JPG 改完再存，每存一次压一次；回工程改，画质还停在原始水平。</li>
+                <li><strong>客户要接着改就给 JSON，要看看效果就给 JPG。</strong></li>
+            </ul>
+
+            <h2>出问题之后怎么救</h2>
+            <p>用另存为存过、现在哪里都打不开：先看扩展名。一个叫 <code>photo.png</code> 的 JSON，在任何看图软件里都会失败，看起来像文件损坏。改成 <code>.json</code> 再在编辑器里打开，图层应该会回来。</p>
+            <p>如果浏览器直接关掉、什么都没存，先确认有没有快速保存：重新打开编辑器按 <strong>F10</strong>。读不出来就是没了——这里没有服务端历史，而「没有服务端」正是图片不外泄的原因。</p>
+
+            <div class="tip-box">💡 <strong>另存为 = JSON 工程（带图层）；导出 = 图片（压平）；快速保存 = 浏览器里的一个格子，不是备份。最终图永远从工程导。</strong></div>
+
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>存下来的文件任何看图软件都打不开，是坏了吗？</h3>
+                <p>多半没坏。【文件】→【另存为】写的是 JSON 工程，不是图片。先看扩展名，如果是 .json，在编辑器里用【文件】→【打开】→【打开文件】重新读入，图层会回来。要图就用【文件】→【导出】。</p>
+            </div>
+            <div class="faq-item">
+                <h3>清理浏览器数据之后，快速保存还在吗？</h3>
+                <p>不在。快速保存把工程放在浏览器本地存储的一个固定位置。清站点数据、无痕模式、换浏览器、换机器，都会丢。在意的东西请另存一份 JSON 工程。</p>
+            </div>
+            <div class="faq-item">
+                <h3>JSON 工程会保存撤销历史吗？</h3>
+                <p>不会。它保存图层、位置、不透明度、滤镜和画布尺寸，撤销步骤不在文件里。重新打开就是一段新的历史，所以危险操作之前先存一份，别指望重开之后还能撤销。</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/png-vs-jpg-export">PNG 与 JPG 的区别：导出该选哪个？</a>
+                <a href="../tutorials/convert-webp-to-jpg">在浏览器里把 WebP 转成 JPG</a>
+                <a href="../tutorials/layer-blend-modes-guide">图层混合模式指南（正片叠底/滤色/叠加）</a>
+                <a href="../tutorials/image-resize-and-compression">缩放、裁剪与压到指定 KB 大小</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">&#127919;</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">做两个图层，另存为 JSON，关掉标签页再打开，载入那个 JSON，然后导出一张 JPG，对比哪个文件浏览器能直接显示。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一试</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

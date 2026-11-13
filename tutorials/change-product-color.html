@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change a Product’s Colour Without Repainting It - Web PSEditor</title>
+    <meta name="description" content="Tools → Replace Color with Target, Replacement, Power and Mode. Pick the exact hex first, keep shading intact, and know when the swap will look fake." />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/tutorials/change-product-color" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/change-product-color" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/change-product-color" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/change-product-color" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Replace Color: Swap a Product Colour and Keep the Shading",
+      "description": "Tools → Replace Color with Target, Replacement, Power and Mode. Pick the exact hex first, keep shading intact, and know when the swap will look fake.",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/change-product-color"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why does the recoloured object look dirty or muddy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because the replacement changes hue but keeps the original luminance. A dark object turned light-coloured keeps its dark shading, which reads as mud. After replacing, use Image → Color Corrections to lift brightness, or use a blended colour layer (Multiply or Color) so the shading is applied to the new hue instead of replacing it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What Power value should I use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Start at 10 and raise it in steps of five until the old colour disappears from the curved edges, then stop one step earlier. If the background or a neighbouring object starts shifting, you have gone past the right tolerance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "The background near the product still has a colour cast. How do I fix it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "That is coloured spill — light bouncing off the product onto the table. Replace Color on the product does not touch it. Select the background area separately and either desaturate it with Image → Color Corrections or shift its hue toward neutral, so the cast matches the new product colour."
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">← Home</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">Tutorials</a>
+            </div>
+            <div class="lang-switch"><a href="https://webpseditor.com/zh/tutorials/change-product-color" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span></div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% Local Browser Processing · Zero Uploads · Zero Privacy Risk</span>
+        </div>
+
+        <article>
+            <h1>Change a Product Colour in a Photo</h1>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Intermediate</span> • <span>7 min read</span> • <span>Updated: 13 Nov 2026</span></div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">Target, replacement, power</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Tools → Replace Color works on the selected layer and keeps the shadows.</div>
+                </div>
+                <a href="../../editor.html" class="cta-btn" target="_blank">Open Web PSEditor & Recolor →</a>
+            </div>
+
+            <p>You sold the same mug in five colours and only shot one. Or the sample arrived in the wrong shade. Recolouring a product photo is one of the few jobs where a browser editor genuinely earns its place, provided the object is a fairly uniform colour and the lighting is not wildly uneven.</p>
+            <p><strong>Tools → Replace Color</strong> takes a <strong>Target</strong> colour, a <strong>Replacement</strong> colour, a <strong>Power</strong> tolerance and a <strong>Mode</strong>. That is a small set of controls, and most of the quality comes from two things you do before touching them: sampling the right hex, and choosing an object that can survive the swap.</p>
+
+            <h2>Before Replacing: Get the Real Colour</h2>
+            <div class="step-card">
+                <div class="step-title">Sample with the colour picker</div>
+                <p>Use the <strong>Pick color</strong> tool (the eyedropper on the left toolbar) on a mid-tone area of the object — not a highlight, not a shadow. Highlights are washed toward white and shadows toward black; both give a hex that is not the product colour, and the replacement will then look wrong across the whole surface.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Create the replacement on a separate layer if the job matters</div>
+                <p>Duplicate the layer first (<strong>Layer → Duplicate</strong>) and run Replace Color on the copy. If the result is close but not right, you can erase parts of the copy instead of undoing the whole operation.</p>
+            </div>
+
+            <h2>The Four Controls</h2>
+            <table class="tool-table">
+                <tr><th>Control</th><th>Range / default</th><th>What it decides</th></tr>
+                <tr><td>Target</td><td>Current foreground colour</td><td>Which colour is being replaced. Set it by sampling, not by guessing a hex</td></tr>
+                <tr><td>Replacement</td><td>#ff0000 default</td><td>The new colour. Enter the exact brand hex if there is one</td></tr>
+                <tr><td>Power</td><td>0–255, default 20</td><td>Tolerance. Higher catches more shades around the target — and more of the background</td></tr>
+                <tr><td>Mode</td><td>Advanced / Simple</td><td>Advanced preserves more of the original luminance variation; Simple flattens toward the replacement</td></tr>
+            </table>
+            <p>Start with Power at 10 and climb in steps of five. A low value leaves a rim of the old colour where the object curves away from the light; a high value starts eating the background and neighbouring objects. The right number is the point just before the background shifts.</p>
+
+            <h2>Worked Example: Blue Mug to Terracotta</h2>
+            <ol>
+                <li>Sample a mid-tone of the mug's body with <strong>Pick Color</strong>. Note the hex.</li>
+                <li>Duplicate the layer. Select the copy.</li>
+                <li><strong>Tools → Replace Color</strong>: Target = the sampled hex, Replacement = the brand terracotta, Power = 10, Mode = Advanced.</li>
+                <li>Confirm, inspect at 100%. If the handle still has a blue rim, undo and retry at Power 20.</li>
+                <li>Check the reflection on the table and the background near the mug's edge — that is where an over-high Power shows itself.</li>
+            </ol>
+
+            <h2>Why a Swap Looks Fake</h2>
+            <ul>
+                <li><strong>Luminance is preserved but hue is not.</strong> A dark blue object replaced with a light yellow keeps its dark shading, which reads as a dirty yellow. For large hue jumps, brighten afterwards with <strong>Image → Color Corrections</strong>.</li>
+                <li><strong>Coloured reflections remain.</strong> A blue mug casts a blue tint onto the white table. The object changes, the spill does not, and the eye notices the contradiction immediately.</li>
+                <li><strong>Power too high.</strong> Shadows and highlights on the object sit far from the sampled hex, so they are untouched while the mid-tones change — leaving a mismatched rim.</li>
+                <li><strong>Textured surfaces.</strong> Wood, denim or brushed metal contain many shades; a single target replaces some of them and leaves streaks of the original.</li>
+                <li><strong>Patterns and logos.</strong> Anything printed on the object will either be recoloured with it or excluded, and both look wrong.</li>
+            </ul>
+
+            <h2>When to Use a Different Approach</h2>
+            <p>If the object is already isolated on a transparent or plain background, a cleaner route is: select the object, fill a new layer with the target colour, and set that layer's <strong>Composition</strong> mode to Multiply or Color. That keeps every bit of shading and gives you a single swatch to change later — the technique covered in the layer blend modes guide.</p>
+            <p>If the surface is textured, or the object has to keep a printed label, the honest answer is that no automatic replacement will look right. Reshooting in the right colour takes ten minutes; repairing a bad swap takes longer and still looks like a swap.</p>
+
+            <div class="tip-box">💡 <strong>Sample a mid-tone, start Power at 10, use Advanced mode, and fix the coloured spill on the table separately. Big hue jumps need a brightness correction afterwards.</strong></div>
+
+            <h2>Quick Answers</h2>
+            <div class="faq-item">
+                <h3>Why does the recoloured object look dirty or muddy?</h3>
+                <p>Because the replacement changes hue but keeps the original luminance. A dark object turned light-coloured keeps its dark shading, which reads as mud. After replacing, use Image → Color Corrections to lift brightness, or use a blended colour layer (Multiply or Color) so the shading is applied to the new hue instead of replacing it.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What Power value should I use?</h3>
+                <p>Start at 10 and raise it in steps of five until the old colour disappears from the curved edges, then stop one step earlier. If the background or a neighbouring object starts shifting, you have gone past the right tolerance.</p>
+            </div>
+            <div class="faq-item">
+                <h3>The background near the product still has a colour cast. How do I fix it?</h3>
+                <p>That is coloured spill — light bouncing off the product onto the table. Replace Color on the product does not touch it. Select the background area separately and either desaturate it with Image → Color Corrections or shift its hue toward neutral, so the cast matches the new product colour.</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/layer-blend-modes-guide">Layer Blend Modes Guide (Multiply / Screen / Overlay)</a>
+                <a href="../tutorials/photo-color-correction">Fix Photo Colours (Auto Colour Correction)</a>
+                <a href="../tutorials/white-background-product-photo">Put a Product Photo on a Pure White Canvas</a>
+                <a href="../tutorials/how-to-cutout-png">Cut Out an Image & Export Transparent PNG</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Recolour one uniform-coloured object twice: once at Power 10 and once at 60, and note where the background starts to drift.</p>
+                </div>
+                <div>
+                    <a href="../../editor.html" class="practice-btn">
+                        <span>Try It in Web PSEditor</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

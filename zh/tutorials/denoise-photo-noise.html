@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>去掉高 ISO 噪点，又不把画面做成塑料 - Web PSEditor</title>
+    <meta name="description" content="【特效】→【降噪】只有一个指数。手机夜景的安全区间、为什么必须在锐化之前做，以及怎么保住纹理。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/denoise-photo-noise" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/denoise-photo-noise" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/denoise-photo-noise" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/denoise-photo-noise" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "降噪：去掉颗粒，留下纹理",
+      "description": "【特效】→【降噪】只有一个指数。手机夜景的安全区间、为什么必须在锐化之前做，以及怎么保住纹理。",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "zh",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/zh/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/zh/tutorials/denoise-photo-noise"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "指数从多少开始？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "从 10 开始，别用默认的 20。大文件在 100% 缩放下，20 已经是很强的效果。先 10，看暗部，只有在最终观看尺寸下仍然明显时才以 5 为单位往上加。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "为什么降噪之后人脸像塑料？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "因为它把皮肤的细纹理和噪点一起抹了，而皮肤主要就是细纹理。改成只降噪副本，再在眼睛、头发、脸颊处把副本擦开，让原始纹理透出来。背景干净，脸还是脸。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "降噪能把模糊的细节找回来吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不能，它只做减法。降噪是拿纹理换平滑，永远不会增加信息。这也是顺序重要的原因：先降噪再锐化；如果缩小本身就能把颗粒平均掉，那就干脆别降。"
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/denoise-photo-noise" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+            <h1>去掉高 ISO 噪点，不毁细节</h1>
+            <div class="meta-bar">
+                <span>难度：入门</span> &bull; <span>阅读：4 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">颗粒还是糊成一团，只差一个数</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">【特效】→【降噪】，指数 0–50，默认 20。取值比你想象的低。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 降噪 &rarr;</a>
+            </div>
+
+            <p>天黑之后在室内拍的手机照片都有同一个毛病：暗部里有彩色斑点，平坦区域浮着一层沙粒感。原因是传感器在放大一个很弱的信号，而它最严重的位置，恰好就是判断照片好坏的地方——暗部、皮肤、纯色墙面。</p>
+            <p><strong>【特效】→【降噪】</strong> 只有一个控件：<strong>指数</strong>，0 到 50，默认 20。数值越高越平滑。这里没有单独的亮度降噪和色彩降噪，所以全部功夫都在找一个点：噪点消失之前、纹理还活着的那一刻。</p>
+
+            <h2>指数到底在换什么</h2>
+            <table class="tool-table">
+                <tr><th>指数</th><th>噪点</th><th>留下的细节</th><th>适合</th></tr>
+                <tr><td>5–10</td><td>略微减少</td><td>几乎全留</td><td>光线充足照片上的轻微颗粒</td></tr>
+                <tr><td>10–20</td><td>可见斑点基本消失</td><td>纹理完好</td><td>手机夜景的稳妥默认值</td></tr>
+                <tr><td>20–30</td><td>平坦区干净</td><td>细发丝、织物开始黏连</td><td>纯色背景、商品图、天空</td></tr>
+                <tr><td>30–50</td><td>塑料感</td><td>毛孔、针脚、睫毛没了</td><td>很少用。只给必须干净的小块区域</td></tr>
+            </table>
+            <p>默认的 20 不是「中性起点」，对一张 2400 万像素、在 100% 下看的文件来说，20 已经是很强的设置。从 10 开始对比，只有在最终观看尺寸下噪点仍然明显时才往上加。</p>
+
+            <h2>顺序：先降噪，再做其它</h2>
+            <div class="step-card">
+                <div class="step-title">降噪在锐化之前</div>
+                <p>锐化放大的是局部对比，而噪点也是局部对比。先锐化带噪点的文件，颗粒会变成有硬边的一坨一坨。已经锐化过的，伤害是焊死的——撤销回去再降噪，别想着事后补救。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">降噪在缩小之前</div>
+                <p>缩小本身就会把噪点平均掉一部分。4000 像素缩到 1200 像素，先缩可能根本不需要降噪。顺序反了，就是给一张马上要被平滑的图做平滑，白丢细节。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">降噪在调色之后</div>
+                <p>往上提曝光会让暗部变亮，噪点也随之变明显，所以「该降多少」要在调色之后才看得清。先用 <strong>【图片】→【颜色校正】</strong> 把暗部提起来，再判断这张图实际需要多少降噪。</p>
+            </div>
+
+            <h2>把纹理留在该在的地方</h2>
+            <p>全局降噪对脸颊和纯色墙面一视同仁，所以人像做完经常像蜡像。这里没有蒙版工具，但图层堆叠能做到同一件事：</p>
+            <div class="step-card">
+                <div class="step-title">降噪副本，再把细节擦回来</div>
+                <p>复制图层（<strong>【图层】→【复制】</strong>），对副本用「能把背景清干净」的数值降噪，然后用软边 <strong>橡皮擦</strong> 在眼睛、头发、嘴唇这些要留纹理的地方擦开。下面没动过的图层就露出来。结果是：背景干净，皮肤真实。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">分清彩色噪点和亮度噪点</div>
+                <p>暗部里的彩色斑块比颗粒更讨厌，但也更容易在不破坏结构的前提下清掉。只有彩色斑块时，中等指数就能解决抱怨，边缘几乎不受影响。如果是亮度颗粒（灰色沙粒感），那是结构性的——指数往下调，接受一部分颗粒。</p>
+            </div>
+
+            <h2>做过头的样子</h2>
+            <ul>
+                <li><strong>皮肤没有毛孔</strong>，额头和脸颊像塑料。</li>
+                <li><strong>头发糊成一整块</strong>，边缘看不到任何发丝。</li>
+                <li><strong>织物纹理没了</strong>，针织变成一块纯色。</li>
+                <li><strong>边缘像被画过</strong>，高反差交界处有轻微的水彩晕开感。</li>
+            </ul>
+            <p>这四条一旦导出都回不来，而且全都比它替换掉的噪点更显眼。略带颗粒的照片看着还是照片；塑料感的照片看着像加了个烂滤镜。</p>
+
+            <h2>有些噪点不该去</h2>
+            <p>扫描胶片上的颗粒是画面的一部分，不是缺陷。降掉它，扫描件会失去那种「是照片」的层次过渡。带信息的纹理同理：沙子、织物经纬、木纹、拉丝金属。如果颗粒是整幅均匀、看起来是有意为之，就别碰它。</p>
+
+            <div class="tip-box">💡 <strong>从指数 10 起步，不要 20。降噪放在锐化和缩小之前，并且只降副本，方便把脸擦回来。</strong></div>
+
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>指数从多少开始？</h3>
+                <p>从 10 开始，别用默认的 20。大文件在 100% 缩放下，20 已经是很强的效果。先 10，看暗部，只有在最终观看尺寸下仍然明显时才以 5 为单位往上加。</p>
+            </div>
+            <div class="faq-item">
+                <h3>为什么降噪之后人脸像塑料？</h3>
+                <p>因为它把皮肤的细纹理和噪点一起抹了，而皮肤主要就是细纹理。改成只降噪副本，再在眼睛、头发、脸颊处把副本擦开，让原始纹理透出来。背景干净，脸还是脸。</p>
+            </div>
+            <div class="faq-item">
+                <h3>降噪能把模糊的细节找回来吗？</h3>
+                <p>不能，它只做减法。降噪是拿纹理换平滑，永远不会增加信息。这也是顺序重要的原因：先降噪再锐化；如果缩小本身就能把颗粒平均掉，那就干脆别降。</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/sharpen-blurry-photo">锐化模糊照片：顺序、数值与边界</a>
+                <a href="../tutorials/photo-color-correction">照片调色与颜色校正</a>
+                <a href="../tutorials/image-resize-and-compression">缩放、裁剪与压到指定 KB 大小</a>
+                <a href="../tutorials/tilt-shift-miniature">视角移位微缩效果：能用的参数</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">&#127919;</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">拿一张手机夜景，分别在两份副本上用指数 10 和 30 降噪，在 100% 下对比暗部。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一试</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

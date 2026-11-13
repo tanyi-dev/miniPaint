@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给商品改颜色，而不是重新刷漆 - Web PSEditor</title>
+    <meta name="description" content="【工具】→【替换颜色】的目标、替换、功率与模式。先取准色值、留住明暗，也知道什么时候换色必然假。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/change-product-color" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/change-product-color" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/change-product-color" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/change-product-color" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "替换颜色：换色相，留住明暗",
+      "description": "【工具】→【替换颜色】的目标、替换、功率与模式。先取准色值、留住明暗，也知道什么时候换色必然假。",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "zh",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/zh/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/zh/tutorials/change-product-color"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "换完颜色看着脏、发闷，为什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "因为换色改的是色相，亮度还是原来的。深色物体换成浅色，暗部依旧是暗的，看着就脏。换完用【图片】→【颜色校正】提亮；或者改用「正片叠底 / 颜色」的混色图层，让明暗作用在新色相上，而不是被替换掉。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "功率该填多少？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "从 10 起，每次加 5，直到弯曲边缘的旧颜色消失，然后退回一档。如果背景或旁边的物体开始变色，说明已经超了。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "产品旁边的背景还带着旧颜色，怎么处理？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "那是彩色溢光——光从产品上反射到桌面。替换颜色只作用在产品上，碰不到它。单独选中背景区域，用【图片】→【颜色校正】降饱和，或把色相往中性方向推，让溢色和新颜色对得上。"
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/change-product-color" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+            <h1>在照片里改商品颜色</h1>
+            <div class="meta-bar">
+                <span>难度：中级</span> &bull; <span>阅读：4 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">目标、替换、功率</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">【工具】→【替换颜色】作用于当前图层，阴影会保留。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 改色 &rarr;</a>
+            </div>
+
+            <p>同一款杯子有五个颜色，你只拍了一个；或者样品到手的色号和定稿不一样。商品图改色是浏览器编辑器少数真正能顶上去的活儿——前提是物体本身颜色比较统一、光线没有乱到离谱。</p>
+            <p><strong>【工具】→【替换颜色】</strong> 给的是 <strong>目标</strong> 颜色、<strong>替换</strong> 颜色、<strong>功率</strong> 容差和 <strong>模式</strong>。控件不多，成片质量主要取决于动手前的两件事：取样取对、以及选一个经得起换色的物体。</p>
+
+            <h2>动手前：先把真实颜色取出来</h2>
+            <div class="step-card">
+                <div class="step-title">用拾色器取中间调</div>
+                <p>用 <strong>吸管工具</strong>点在物体的中间调区域——不要点高光，不要点阴影。高光被冲淡发白，阴影压向黑，两者给出的十六进制都不是产品色；拿它当目标，整片表面都会换歪。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">重要的图先复制一层再操作</div>
+                <p>先 <strong>【图层】→【复制】</strong>，在副本上做替换颜色。结果差一点点的时候，可以擦掉副本的一部分，而不是把整个操作撤销重来。</p>
+            </div>
+
+            <h2>四个控件分别在管什么</h2>
+            <table class="tool-table">
+                <tr><th>控件</th><th>范围 / 默认</th><th>决定什么</th></tr>
+                <tr><td>目标</td><td>当前前景色</td><td>替换哪一个颜色。靠取样设，别靠猜十六进制</td></tr>
+                <tr><td>替换</td><td>默认 #ff0000</td><td>新颜色。有品牌色号就填精确值</td></tr>
+                <tr><td>功率</td><td>0–255，默认 20</td><td>容差。越大，目标附近的色阶吃得越多——背景也一起被吃</td></tr>
+                <tr><td>模式</td><td>高级 / 简单</td><td>高级保留更多原始明暗层次；简单会更平，更贴替换色</td></tr>
+            </table>
+            <p>功率从 10 起步，每次加 5。太低，物体背光处会留一圈旧颜色；太高，背景和旁边的物体开始变色。正确的数值，就是背景刚要动的上一个数。</p>
+
+            <h2>实例：蓝杯换陶土色</h2>
+            <ol>
+                <li>用 <strong>吸管工具</strong> 取杯身中间调，记下十六进制。</li>
+                <li>复制图层，选中副本。</li>
+                <li><strong>【工具】→【替换颜色】</strong>：目标 = 刚取的色值，替换 = 品牌陶土色，功率 = 10，模式 = 高级。</li>
+                <li>确定后 100% 检查。杯把上还留着一圈蓝边，就撤销，功率改 20 再来一次。</li>
+                <li>专门看桌面反光和杯子边缘的背景——功率过高，最先在这两处露馅。</li>
+            </ol>
+
+            <h2>换完为什么看着假</h2>
+            <ul>
+                <li><strong>亮度留住了，色相没留住。</strong> 深蓝的物体换成浅黄，暗部还是那么暗，看起来就是一只脏黄杯子。色相跨度大的时候，换完要用 <strong>【图片】→【颜色校正】</strong> 提亮。</li>
+                <li><strong>彩色反光还在。</strong> 蓝杯子会在白桌上投一片蓝。物体变了、溢色没变，眼睛立刻察觉矛盾。</li>
+                <li><strong>功率过高。</strong> 物体的暗部和高光离取样色很远，于是它们没变、只有中间调变了，边缘就出现一圈不匹配的过渡。</li>
+                <li><strong>有纹理的表面。</strong> 木纹、牛仔、拉丝金属本身包含很多色阶，一个目标色只换掉其中一部分，剩下的会变成条纹。</li>
+                <li><strong>图案和 logo。</strong> 印在物体上的东西要么跟着被换色，要么被排除在外，两种都别扭。</li>
+            </ul>
+
+            <h2>什么时候该换个方法</h2>
+            <p>如果物体已经在透明底或纯色底上分出来了，更干净的做法是：选中物体，新建一层填目标色，把这层的 <strong>【图层】→【合成】</strong> 模式设为「正片叠底」或「颜色」。明暗全保留，以后换色只改一个色块——具体做法在图层混合模式那篇里。</p>
+            <p>如果表面有纹理，或者必须保住印上去的标签，老实说没有任何自动替换会好看。重新拍一张正确颜色的，十分钟；修一张换砸的，花更久，而且一眼还是假的。</p>
+
+            <div class="tip-box">💡 <strong>取中间调、功率从 10 起、模式用高级，桌上的彩色溢光要另外处理。色相跨度大，换完记得补一次亮度。</strong></div>
+
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>换完颜色看着脏、发闷，为什么？</h3>
+                <p>因为换色改的是色相，亮度还是原来的。深色物体换成浅色，暗部依旧是暗的，看着就脏。换完用【图片】→【颜色校正】提亮；或者改用「正片叠底 / 颜色」的混色图层，让明暗作用在新色相上，而不是被替换掉。</p>
+            </div>
+            <div class="faq-item">
+                <h3>功率该填多少？</h3>
+                <p>从 10 起，每次加 5，直到弯曲边缘的旧颜色消失，然后退回一档。如果背景或旁边的物体开始变色，说明已经超了。</p>
+            </div>
+            <div class="faq-item">
+                <h3>产品旁边的背景还带着旧颜色，怎么处理？</h3>
+                <p>那是彩色溢光——光从产品上反射到桌面。替换颜色只作用在产品上，碰不到它。单独选中背景区域，用【图片】→【颜色校正】降饱和，或把色相往中性方向推，让溢色和新颜色对得上。</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/layer-blend-modes-guide">图层混合模式指南（正片叠底/滤色/叠加）</a>
+                <a href="../tutorials/photo-color-correction">照片调色与颜色校正</a>
+                <a href="../tutorials/white-background-product-photo">把商品图放到纯白画布上</a>
+                <a href="../tutorials/how-to-cutout-png">抠图并导出透明 PNG</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">&#127919;</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">拿一个纯色物体换两次色：功率 10 一次、60 一次，观察背景从哪个数值开始跑色。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一试</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

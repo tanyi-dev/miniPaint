@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resize vs Canvas Size vs Trim: Which One to Use - Web PSEditor</title>
+    <meta name="description" content="Three menu items that all seem to change image size. One resamples pixels, one adds space, one cuts space away — pick the wrong one and quality or content is gone." />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/tutorials/resize-vs-canvas-size-vs-trim" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/resize-vs-canvas-size-vs-trim" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/resize-vs-canvas-size-vs-trim" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/resize-vs-canvas-size-vs-trim" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Resize, Canvas Size and Trim: Three Different Operations",
+      "description": "Three menu items that all seem to change image size. One resamples pixels, one adds space, one cuts space away — pick the wrong one and quality or content is gone.",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/tutorials/resize-vs-canvas-size-vs-trim"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why did my subject move to the top-left corner after I changed the canvas size?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Canvas Size never moves layers. They keep their coordinates measured from the top-left of the sheet, so extra space appears on the right and bottom. Move the layer with Image → Translate, or drag it on the canvas, then fill the leftover area with a background colour."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Resize with sharpen actually restore detail?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Sharpen raises local contrast at edges, which reads as crispness, but information removed by downscaling is not recovered. It works well after a moderate downscale at 100% zoom; stacked on an already sharp graphic it produces halos and crunchy edges."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Trim the same as cropping with the selection tool?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Trim is automatic and only removes uniform border colour, using the Power value as tolerance. The selection tool crops exactly where you draw, which is what you want when the edge is not uniform. Use Trim for scans and screenshots, selection for everything else."
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">← Home</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">Tutorials</a>
+            </div>
+            <div class="lang-switch"><a href="https://webpseditor.com/zh/tutorials/resize-vs-canvas-size-vs-trim" class="lang-btn" style="text-decoration:none;">中文</a>
+                <span class="lang-btn active">English</span></div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>🔒 100% Local Browser Processing · Zero Uploads · Zero Privacy Risk</span>
+        </div>
+
+        <article>
+            <h1>Resize vs Canvas Size vs Trim: Pick the Right One</h1>
+            <div class="meta-bar"><span>By <a href="../../about.html" style="color: var(--primary); text-decoration: none;">Web PSEditor</a></span> • <span>Difficulty: Beginner</span> • <span>8 min read</span> • <span>Updated: 13 Nov 2026</span></div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">Same three clicks, three very different results</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">Image → Resize changes pixels, Canvas Size adds space, Trim strips uniform borders.</div>
+                </div>
+                <a href="../../editor.html" class="cta-btn" target="_blank">Open Web PSEditor & Try It →</a>
+            </div>
+
+            <p>Three items sit next to each other under the <strong>Image</strong> menu and all of them sound like "make the picture a different size". They do three unrelated things, and choosing the wrong one is how people lose sharpness or lose the edges of a photo.</p>
+            <p>Short version: <strong>Resize</strong> resamples every pixel to a new count, <strong>Canvas Size</strong> keeps the pixels and changes the sheet they sit on, <strong>Trim</strong> deletes the uniform margin around the content. The rest of this page is when to use which.</p>
+
+            <h2>The One-Line Difference</h2>
+            <table class="tool-table">
+                <tr><th>Menu item</th><th>What changes</th><th>Pixel count</th><th>Use it when</th></tr>
+                <tr><td>Image → Resize</td><td>Width, height, and every pixel inside</td><td>Changes</td><td>The file must be 1200 px wide, or under a KB limit</td></tr>
+                <tr><td>Image → Canvas Size</td><td>The sheet behind the picture</td><td>Stays the same</td><td>You need a square, a wider banner, or extra margin</td></tr>
+                <tr><td>Image → Trim</td><td>Removes surrounding uniform colour</td><td>Drops</td><td>A scan or screenshot has a fat white border</td></tr>
+            </table>
+
+            <h2>Resize: When the Destination Counts Pixels</h2>
+            <p><strong>Image → Resize</strong> is the only one of the three that rebuilds the image at a new resolution. You can type Width and Height in pixels, or use Width (%) and Height (%) — pick one pair, not both. The dialog has three settings worth knowing:</p>
+            <div class="step-card">
+                <div class="step-title">Mode: Lanczos, Hermite, Basic</div>
+                <p>Lanczos is the slowest and keeps the most detail when shrinking. Hermite is a middle ground. Basic is nearest-neighbour — fast, and it turns diagonal edges into visible stair-steps. For downscaling a photo, Lanczos. For pixel art you want to keep crisp, Basic is actually correct.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Sharpen: a checkbox, not a slider</div>
+                <p>Tick it and the resize applies a light unsharp pass afterwards. Downscaling always softens an image slightly, so this restores apparent crispness. It is also easy to overdo on an already-sharp graphic — check at 100% zoom, not in the fitted view.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">Layers: All or Active</div>
+                <p><strong>All</strong> resizes every layer and the canvas together, which is what you want in almost every case. <strong>Active</strong> resizes only the selected layer, which is how you make one sticker smaller without touching the background.</p>
+            </div>
+            <p>Enlarging is the case to be careful with. Going from 800 px to 2400 px invents pixels that were never captured; the result looks soft or, with Sharpen on, crunchy. There is no reconstruction here. If the goal is print, start from a bigger source.</p>
+
+            <h2>Canvas Size: Add Space, Keep Every Pixel</h2>
+            <p>Canvas Size does not touch the image data at all. It changes the sheet, and the layers keep their positions measured from the top-left corner. That last detail is the one people trip over: growing the canvas adds space on the right and bottom, so a subject that was centred ends up in the upper-left.</p>
+            <div class="step-card">
+                <div class="step-title">Make a square from a portrait photo</div>
+                <p>Read the current size in <strong>Image → Information</strong> (say 1200 × 1600). Open <strong>Canvas Size</strong>, leave <strong>In proportion</strong> unticked, set Width 1600 and Height 1600. Now the photo sits in a 1600 × 1600 sheet with empty space to the right. Fill that space, or move the layer over with <strong>Image → Translate</strong> to centre it.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">In proportion, and when to leave it off</div>
+                <p>Ticked, Canvas Size scales the layers along with the sheet — that is a resize wearing a different hat, and it softens the image. Unticked, the layers stay at their pixel size and only the sheet changes. For adding margin, unticked is what you want.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">The Resolution dropdown</div>
+                <p>Besides Custom, the dialog offers preset sizes with a Portrait / Landscape layout switch. Handy when a portal asks for exactly 1920 × 1080 or 1080 × 1080: pick the preset instead of typing numbers and hoping the orientation is right.</p>
+            </div>
+
+            <h2>Trim: Delete the Uniform Margin</h2>
+            <p>Trim is automatic cropping. It looks inward from each edge and removes rows and columns that match a uniform colour — typically the white border around a scanned document, or the grey padding around a screenshot.</p>
+            <ul>
+                <li><strong>Trim layer</strong> / <strong>Trim borders</strong> decide whether it works on the selected layer or on all borders of the canvas.</li>
+                <li><strong>Power</strong> (0–255) sets how tolerant the match is. At 0 only pure white is trimmed; raise it and near-white pixels count too, which is what you need for a photo of paper where the white is not actually 255.</li>
+                <li><strong>Trim white color?</strong> restricts the operation to white margins specifically. Untick it when the border is a colour other than white.</li>
+            </ul>
+            <p>Trim is destructive in the sense that the removed area is gone once you continue — undo still works, but the exported file will not contain it. On a document scan, do Trim before any sharpening, so you are not sharpening empty margin.</p>
+
+            <h2>Choosing in Five Seconds</h2>
+            <ul>
+                <li>Upload limit or "must be exactly 1200 px" → <strong>Resize</strong>.</li>
+                <li>"I need it square / I need white space around it" → <strong>Canvas Size</strong>, then fill or translate.</li>
+                <li>"There is a big white border I want gone" → <strong>Trim</strong>.</li>
+                <li>"It looks soft after shrinking" → redo the Resize with Mode Lanczos and Sharpen ticked, from the original file.</li>
+            </ul>
+
+            <div class="tip-box">💡 <strong>If the operation changes how many pixels exist, it is Resize. If it only changes how much empty space surrounds them, it is Canvas Size. If it deletes margin, it is Trim.</strong></div>
+
+            <h2>Quick Answers</h2>
+            <div class="faq-item">
+                <h3>Why did my subject move to the top-left corner after I changed the canvas size?</h3>
+                <p>Canvas Size never moves layers. They keep their coordinates measured from the top-left of the sheet, so extra space appears on the right and bottom. Move the layer with Image → Translate, or drag it on the canvas, then fill the leftover area with a background colour.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Does Resize with sharpen actually restore detail?</h3>
+                <p>No. Sharpen raises local contrast at edges, which reads as crispness, but information removed by downscaling is not recovered. It works well after a moderate downscale at 100% zoom; stacked on an already sharp graphic it produces halos and crunchy edges.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is Trim the same as cropping with the selection tool?</h3>
+                <p>Trim is automatic and only removes uniform border colour, using the Power value as tolerance. The selection tool crops exactly where you draw, which is what you want when the edge is not uniform. Use Trim for scans and screenshots, selection for everything else.</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor is an independent project.</strong> Every step on this page is tested against the current build before it is published. If a menu or option has moved, tell us through the <a href="../../contact.html" style="color:var(--primary); text-decoration:none;">contact page</a> and we will correct it.
+            </div>
+
+            <h2>Related Tutorials</h2>
+            <div class="related">
+                <a href="../tutorials/image-resize-and-compression">Resize, Crop & Compress to a Target KB Size</a>
+                <a href="../tutorials/crop-rotate-straighten">Crop, Rotate & Straighten Photos</a>
+                <a href="../tutorials/white-background-product-photo">Put a Product Photo on a Pure White Canvas</a>
+                <a href="../tutorials/social-media-image-sizes">Social Media Image Sizes Cheat Sheet</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">🎯</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">Hands-on Practice</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">100% Local</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">Take one photo, run Image → Information, then change the canvas to a square without resizing — and watch where the subject ends up.</p>
+                </div>
+                <div>
+                    <a href="../../editor.html" class="practice-btn">
+                        <span>Try It in Web PSEditor</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

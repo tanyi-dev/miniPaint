@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视角移位微缩效果：能用的参数 - Web PSEditor</title>
+    <meta name="description" content="模糊半径、渐变半径，以及由 X/Y 起终点定义的清晰带。这个效果只对俯拍照片成立，参数怎么给。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/tilt-shift-miniature" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/tilt-shift-miniature" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/tilt-shift-miniature" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/tilt-shift-miniature" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "视角移位微缩：参数与前提",
+      "description": "模糊半径、渐变半径，以及由 X/Y 起终点定义的清晰带。这个效果只对俯拍照片成立，参数怎么给。",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "zh",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/zh/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/zh/tutorials/tilt-shift-miniature"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "视角移位做出来为什么很假？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "通常是照片平视拍的，或者主体在画面里太大。微缩模糊需要高角度、物体多而小的照片。另外检查清晰带有没有跟着地面走——在倾斜的街道上放一条水平带，会做出任何镜头都不可能产生的清晰度分布。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "模糊半径和渐变该设多少？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "3000 像素的图，模糊半径 12–20、渐变半径 70 以上。不超过 25 才像失焦而不像滤镜；渐变值大一些，过渡更软，看起来像景深而不是一条硬边带。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "模糊效果为什么要加饱和度？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "因为微缩模型的颜色比真实街道更亮更平，大脑会把鲜艳的颜色和玩具联系起来。饱和度 5–8 正好支持这个联想。不加的话，只是一张背景糊掉的照片。"
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/tilt-shift-miniature" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+            <h1>做出结果可预期的微缩效果</h1>
+            <div class="meta-bar">
+                <span>难度：中级</span> &bull; <span>阅读：4 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">照片决定成败，滑杆只负责收尾</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">【特效】→【视角移位】：一条清晰带、一层渐变，加饱和与锐化。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 试视角移位 &rarr;</a>
+            </div>
+
+            <p>微缩感不是靠模糊做出来的。它靠的是一张从高处俯拍的照片——大脑默认这种视角下一切都该是清楚的——再把除了一条带以外的区域模糊掉。模糊只是确认了构图已经埋好的预期。同一个滤镜套在平视的人像上，你只会得到一张上下糊掉的人像。</p>
+            <p><strong>【特效】→【视角移位】</strong> 把整套机制摊成七个数字，全部带实时预览。搞清楚每个数在干什么，就能从「乱拉滑杆」变成可复现的参数。</p>
+
+            <h2>七个参数</h2>
+            <table class="tool-table">
+                <tr><th>控件</th><th>范围 / 默认</th><th>作用</th></tr>
+                <tr><td>模糊半径</td><td>0–30，默认 10</td><td>失焦区糊到什么程度</td></tr>
+                <tr><td>渐变半径</td><td>40–100，默认 70</td><td>清晰与模糊之间的过渡有多宽</td></tr>
+                <tr><td>X 起点 / Y 起点</td><td>各 0–100，默认 0 / 50</td><td>清晰带的一端，按画布百分比计</td></tr>
+                <tr><td>X 终点 / Y 终点</td><td>各 0–100，默认 100 / 50</td><td>清晰带的另一端</td></tr>
+                <tr><td>饱和度</td><td>0–20，默认 3</td><td>色彩浓度。微缩场景颜色更鲜艳，玩具感更强</td></tr>
+                <tr><td>锐化</td><td>0–5，默认 1</td><td>带内的锐度，和外面的模糊形成反差</td></tr>
+            </table>
+            <p>这条带是 (X 起点, Y 起点) 到 (X 终点, Y 终点) 的一条线，坐标用百分比。水平的带就是 (0, 50) → (100, 50)。斜着设，清晰区会跟着倾斜，适合横穿画面的道路和铁轨。</p>
+
+            <h2>操作顺序</h2>
+            <div class="step-card">
+                <div class="step-title">一、先选对照片</div>
+                <p>至少从几米高处往下拍，俯角大概 30–60 度。广场、停车场、集市、铁路模型、沙滩伞阵。如果画面里有平视高度的地平线，这个效果就会像做错了。没有任何参数能救一张选错视角的照片。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">二、把带放在主体上</div>
+                <p>X 起点 0、Y 起点 45–55、X 终点 100、Y 终点取同一个值，就得到一条横穿中部的清晰带。两个 Y 一起移动：往上多留前景，往下偏重远景。带要够窄，眼睛才分得清「哪里是对上焦的」。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">三、先定模糊，再定过渡</div>
+                <p>模糊半径从 10、渐变半径从 70 起步。然后加模糊半径，直到失焦区明确地读作「没对上焦」——3000 像素的图，12–20 通常够，超过 25 就开始像滤镜而不像镜头。渐变半径决定过渡：数值小，清晰与模糊之间会出现一条看得见的线；数值大，更像真实的景深。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">四、加颜色，别只加模糊</div>
+                <p>饱和度 5–8 就有玩具感。微缩模型的颜色本来比现实更亮更平，小幅提饱和正好对上这个预期。锐化留在 1–2，让清晰带比周围稍硬一点。</p>
+            </div>
+
+            <h2>为什么有时看起来就是不对</h2>
+            <ul>
+                <li><strong>真实的尺度线索还在。</strong> 强透视、超大的前景物体、认得出的人脸，都会告诉大脑这是真实尺度，于是模糊就变成了画质缺陷。</li>
+                <li><strong>带没跟着地面走。</strong> 倾斜的街道上用水平带，近处路面清楚、远处路面模糊，没有哪支镜头会这样。</li>
+                <li><strong>模糊是均匀的。</strong> 真实失焦随距离递增。单一半径的模糊处处一样，半径一大，幻觉立刻塌。</li>
+                <li><strong>主体太大。</strong> 微缩感需要物体在画面里够小。一辆车占了三分之一画面，怎么都不可能像玩具。</li>
+            </ul>
+
+            <h2>一个更立体的变体</h2>
+            <p>分两遍做，深度感会好很多：第一遍模糊半径 6、作用整幅；第二遍半径 20，只通过移动带把远处背景框进去。两种模糊强度叠起来读作「逐渐失焦」，而不是一个平面上的失焦，更接近真实移轴镜头的表现。</p>
+
+            <h2>别用的场合</h2>
+            <ul>
+                <li>人像、婚礼、商品图——效果会直接毁掉主体。</li>
+                <li>带外还有必须可读的文字。糊掉的文字看起来像渲染错误。</li>
+                <li>要大幅打印的照片：清晰与模糊的交界放大后会变成一条明显的渐变带。</li>
+            </ul>
+
+            <div class="tip-box">💡 <strong>高处俯拍 + 窄水平带 + 模糊半径 12–20 + 渐变 70 以上 + 饱和 5–8。平视拍的照片，直接跳过这个效果。</strong></div>
+
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>视角移位做出来为什么很假？</h3>
+                <p>通常是照片平视拍的，或者主体在画面里太大。微缩模糊需要高角度、物体多而小的照片。另外检查清晰带有没有跟着地面走——在倾斜的街道上放一条水平带，会做出任何镜头都不可能产生的清晰度分布。</p>
+            </div>
+            <div class="faq-item">
+                <h3>模糊半径和渐变该设多少？</h3>
+                <p>3000 像素的图，模糊半径 12–20、渐变半径 70 以上。不超过 25 才像失焦而不像滤镜；渐变值大一些，过渡更软，看起来像景深而不是一条硬边带。</p>
+            </div>
+            <div class="faq-item">
+                <h3>模糊效果为什么要加饱和度？</h3>
+                <p>因为微缩模型的颜色比真实街道更亮更平，大脑会把鲜艳的颜色和玩具联系起来。饱和度 5–8 正好支持这个联想。不加的话，只是一张背景糊掉的照片。</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/mosaic-and-blur-redaction">马赛克与高斯模糊：遮挡敏感信息</a>
+                <a href="../tutorials/photo-filters-one-click">一键滤镜：黑白、复古与电影感</a>
+                <a href="../tutorials/denoise-photo-noise">去掉高 ISO 噪点又不毁细节</a>
+                <a href="../tutorials/photo-color-correction">照片调色与颜色校正</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">&#127919;</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">找一张俯拍的街道或停车场照片，把带从 Y 45 扫到 Y 60，观察画面重点怎么变。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一试</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

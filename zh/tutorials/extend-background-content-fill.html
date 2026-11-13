@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>不裁剪也能扩背景（内容填充） - Web PSEditor</title>
+    <meta name="description" content="先扩画布再让内容填充补边缘：三种模式、具体参数，把 4:5 变成 16:9 又不切掉主体。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/extend-background-content-fill" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/extend-background-content-fill" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/extend-background-content-fill" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/extend-background-content-fill" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "内容填充：改比例而不丢主体",
+      "description": "先扩画布再让内容填充补边缘：三种模式、具体参数，把 4:5 变成 16:9 又不切掉主体。",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "zh",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/zh/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/zh/tutorials/extend-background-content-fill"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "提示「图像已占满整个区域」怎么办？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "意思是画布还没扩。这个工具只填图层边缘和画布边缘之间的空缺。先用【图片】→【画布尺寸】、不勾按比例把空间加上，保持图像图层选中，再调用内容填充。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "三种模式该怎么选？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "纯色背景（天空、影棚灰、墙面）用扩展边缘；有纹理的（草地、碎石、织物）用克隆边缘，小块重复看着自然；四周杂乱、任何编出来的细节都会露馅时，用调整为背景。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "画面里有地平线，能扩吗？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "能，但自动填充不会把线接下去——它只取边缘附近的像素。先填，再用克隆工具以短笔触、勤换源点的方式把地平线画进新区域，接缝在 100% 下检查。"
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/extend-background-content-fill" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+            <h1>扩背景，而不是把主体裁掉</h1>
+            <div class="meta-bar">
+                <span>难度：中级</span> &bull; <span>阅读：4 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">同一张照片，换一个比例</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">画布尺寸把纸变大，内容填充把缺的那两条补出来。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 扩背景 &rarr;</a>
+            </div>
+
+            <p>手上是一张竖图，但需要横的——横幅、封面、幻灯片。裁成 16:9 会把人物头顶切掉，拉伸会把所有人拉宽。还有第三条路：主体不动，把画布往两侧扩，用画面里已经有的像素把缺的那两条补出来。</p>
+            <p><strong>【工具】→【内容填充】</strong> 就是干这个的。它有一个编辑器强制的前提：图像图层必须比画布小——而这正是你扩完画布之后的状态。</p>
+
+            <h2>第一步：扩画布，不动像素</h2>
+            <div class="step-card">
+                <div class="step-title">【图片】→【画布尺寸】</div>
+                <p><strong>按比例</strong> 不要勾，图层才不会跟着缩放。按目标比例填新宽度：1200 × 1500（4:5）要变 16:9 横幅，就填 1920 × 1500；1080 × 1350 想变成宽的社交裁切，填 1920 × 1350。多出来的空间长在右边，主体会留在左侧。</p>
+            </div>
+            <p>确认图像图层仍处于选中状态、且已经不满画布。如果图层还铺满整张画布就调用内容填充，它会直接拒绝并提示「图像已占满整个区域」——那句提示的意思就是：画布还没扩。</p>
+
+            <h2>第二步：选填充模式</h2>
+            <table class="tool-table">
+                <tr><th>模式</th><th>做什么</th><th>适合</th></tr>
+                <tr><td>扩展边缘</td><td>把图层边界上的像素向外拉伸</td><td>纯色背景：天空、墙面、影棚灰、渐变色</td></tr>
+                <tr><td>克隆边缘</td><td>从边缘取小块样本，反复拼贴</td><td>有纹理的背景：草地、碎石、树叶、织物</td></tr>
+                <tr><td>调整为背景</td><td>把一份模糊副本放大垫在下面</td><td>杂乱背景——任何「编」出来的细节都会露馅的那种</td></tr>
+            </table>
+            <p>三种都带实时预览，切换着看接缝再决定。关键就是接缝：中间好看、但图层边界处留下一条明显竖线的模式，对这张照片就是错的选择。</p>
+
+            <h2>第三步：调数值</h2>
+            <ul>
+                <li><strong>模糊强度</strong>（1–20，默认 5）柔化生成区域。调高能压住重复感，太高则扩展区会比原图明显更糊。</li>
+                <li><strong>水平模糊</strong> 与 <strong>垂直模糊</strong>（各 0–30，默认 5）控制两个轴向的平滑。往左右扩时，垂直模糊起主要作用——它把重复的补块互相揉在一起。</li>
+                <li><strong>克隆数量</strong>（10–50，默认 15）只影响克隆边缘模式：复用多少块样本。数量多，变化多、重复不明显，但纹理也更乱。</li>
+            </ul>
+            <p>判断顺序：先在 100% 下看接缝，再退回适应窗口，看眼睛会不会被接缝吸过去。如果不用刻意找就能看出原图在哪里结束，把模糊强度加 2–3、克隆数量减一点。</p>
+
+            <h2>第四步：补它猜不出来的东西</h2>
+            <p>内容填充只用边缘附近的像素，它接不上地平线、道路、墙角，也接不上会拐弯的图案。这些得手工补：</p>
+            <div class="step-card">
+                <div class="step-title">结构性内容用克隆工具</div>
+                <p>右键设一个源点，再用 <strong>克隆</strong> 工具把地平线或直线画进新区域。短笔触、勤换源点；一笔拉太长，会把同一块像素拖出一条看得见的带子。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">平坦区用填充或渐变</div>
+                <p>影棚纯色背景只需要用 <strong>填充</strong> 工具铺上取样得到的颜色。有明暗渐变，就用 <strong>渐变</strong> 工具沿原来的光衰方向拖一遍。两种都比任何自动扩展更干净。</p>
+            </div>
+
+            <h2>它会在哪些地方失效</h2>
+            <ul>
+                <li><strong>高频细节。</strong> 砖墙、招牌上的字、人群——重复拼贴一眼就能看出是复制粘贴。</li>
+                <li><strong>强透视。</strong> 向消失点收拢的墙面，横向扩展出来会变成平行线。</li>
+                <li><strong>有方向的阴影。</strong> 复制出来的阴影条会造出第二个、物理上不可能的光源。</li>
+                <li><strong>人脸。</strong> 边缘处被切断的脸或手，绝不能往外扩，填充会取到皮肤再抹开。</li>
+            </ul>
+
+            <h2>比例对照</h2>
+            <p>从 1800 × 1200（3:2）出发：16:9 需要 2133 × 1200，4:5 需要 960 × 1200，1:1 需要 1200 × 1200。从 1200 × 1500（4:5）出发：1:1 需要 1500 × 1500，16:9 需要 2667 × 1500。先扩，再填，中间不要缩放图层。</p>
+
+            <div class="tip-box">💡 <strong>画布尺寸不勾按比例扩出去，再按背景类型选模式：纯色选扩展边缘、纹理选克隆边缘、杂乱选调整为背景。地平线和直线事后用克隆工具补。</strong></div>
+
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>提示「图像已占满整个区域」怎么办？</h3>
+                <p>意思是画布还没扩。这个工具只填图层边缘和画布边缘之间的空缺。先用【图片】→【画布尺寸】、不勾按比例把空间加上，保持图像图层选中，再调用内容填充。</p>
+            </div>
+            <div class="faq-item">
+                <h3>三种模式该怎么选？</h3>
+                <p>纯色背景（天空、影棚灰、墙面）用扩展边缘；有纹理的（草地、碎石、织物）用克隆边缘，小块重复看着自然；四周杂乱、任何编出来的细节都会露馅时，用调整为背景。</p>
+            </div>
+            <div class="faq-item">
+                <h3>画面里有地平线，能扩吗？</h3>
+                <p>能，但自动填充不会把线接下去——它只取边缘附近的像素。先填，再用克隆工具以短笔触、勤换源点的方式把地平线画进新区域，接缝在 100% 下检查。</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/resize-vs-canvas-size-vs-trim">调整大小、画布尺寸、裁剪：到底用哪个？</a>
+                <a href="../tutorials/social-media-image-sizes">社交媒体图片尺寸对照表</a>
+                <a href="../tutorials/remove-object-clone-tool">用克隆工具去掉画面里的小杂物</a>
+                <a href="../tutorials/white-background-product-photo">把商品图放到纯白画布上</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">&#127919;</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">拿一张竖图，把画布扩成 16:9，对比「扩展边缘」和「调整为背景」两种模式在接缝处的差别。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一试</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>

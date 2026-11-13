@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>锐化模糊照片：顺序、数值与边界 - Web PSEditor</title>
+    <meta name="description" content="【特效】→【锐化】只有一个控件。放在降噪和缩放之后，在 100% 缩放下判断，并认清哪种模糊救不回来。" />
+    <link rel="icon" sizes="192x192" href="../../images/favicon.png">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="canonical" href="https://webpseditor.com/zh/tutorials/sharpen-blurry-photo" />
+    <link rel="alternate" hreflang="en" href="https://webpseditor.com/tutorials/sharpen-blurry-photo" />
+    <link rel="alternate" hreflang="zh-CN" href="https://webpseditor.com/zh/tutorials/sharpen-blurry-photo" />
+    <link rel="alternate" hreflang="x-default" href="https://webpseditor.com/tutorials/sharpen-blurry-photo" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "锐化模糊照片：能做与不能做",
+      "description": "【特效】→【锐化】只有一个控件。放在降噪和缩放之后，在 100% 缩放下判断，并认清哪种模糊救不回来。",
+      "datePublished": "2026-11-13",
+      "dateModified": "2026-11-13",
+      "inLanguage": "zh",
+      "author": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "url": "https://webpseditor.com/zh/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Web PSEditor",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://webpseditor.com/images/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://webpseditor.com/zh/tutorials/sharpen-blurry-photo"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "因子拉满还是很糊，为什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "锐化提高的是边缘对比，它不重建丢失的细节。如果模糊来自没对准焦或曝光期间的运动，信息根本不在文件里，任何因子都造不出来。拉满通常只会让情况更糟：给一个本来就在拖影的主体加一圈描边。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "应该先锐化还是先缩尺寸？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "先缩，更好的是在缩的时候一起做。用 Lanczos 模式加勾锐化定下最终尺寸，还觉得不够再用【特效】→【锐化】小因子补一次。先锐化再缩图，效果会被重采样平均掉，等于白做。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "高反差边缘的描边怎么避免？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "降低因子；或复制图层、只锐化副本，再把背景部分擦掉；图本身有噪点就先降噪。描边最容易长在极亮边挨着极暗边的地方——天空压屋檐、黑底白字——导出前在 100% 下专门看这几处。"
+          }
+        }
+      ]
+    }
+    </script>
+    <style>
+:root { --primary: #2563eb; --primary-hover: #1d4ed8; --text-main: #1e293b; --text-sub: #64748b; --bg-page: #f8fafc; --bg-card: #ffffff; --border: #e2e8f0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.8; color: var(--text-main); background-color: var(--bg-page); margin: 0; padding: 24px 16px 60px; }
+        .container { max-width: 860px; margin: 0 auto; background: var(--bg-card); padding: 40px 48px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .back-link { color: var(--primary); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .lang-switch { display: flex; gap: 6px; background: #f1f5f9; padding: 3px; border-radius: 6px; }
+        .lang-btn { border: none; background: transparent; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; color: var(--text-sub); cursor: pointer; }
+        .lang-btn.active { background: #ffffff; color: var(--primary); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        h1 { color: #0f172a; font-size: 26px; margin: 0 0 10px; line-height: 1.3; }
+        h2 { color: #0f172a; font-size: 20px; margin: 32px 0 12px; }
+        .meta-bar { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+        .cta-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin: 24px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .cta-btn { background: var(--primary); color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+        .cta-btn:hover { background: var(--primary-hover); }
+        .step-card { border-left: 4px solid var(--primary); background: #f8fafc; padding: 16px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .step-title { font-weight: 700; color: #0f172a; font-size: 17px; margin-bottom: 8px; }
+        figure { margin: 24px 0; }
+        figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: block; }
+        figcaption { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: 8px; }
+        .tip-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px 18px; margin: 20px 0; font-size: 14px; color: #92400e; }
+        .practice-cta-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px 28px; margin: 32px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+        .practice-btn { background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 14px rgba(37,99,235,0.25); transition: all 0.2s ease; }
+        .practice-btn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .related { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+        .related a { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: 14px; text-decoration: none; color: var(--primary); background: #f8fafc; display: block; }
+        .related a:hover { border-color: var(--primary); }
+        .faq-item { margin: 18px 0; }
+        .faq-item h3 { font-size: 16px; color: #0f172a; margin: 0 0 6px; }
+        .tool-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .tool-table th, .tool-table td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+        .tool-table th { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+        .tool-table tr:nth-child(even) td { background: #f8fafc; }
+        @media (max-width: 640px) { .container { padding: 24px 20px; } .cta-box { flex-direction: column; gap: 14px; align-items: flex-start; } .practice-cta-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } .practice-btn { width: 100%; justify-content: center; } .related { grid-template-columns: 1fr; } }
+    </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3896320982121841"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <div style="display: flex; gap: 14px; align-items: center;">
+                <a href="../../index.html" class="back-link">&larr; 网站首页</a>
+                <span style="color: #cbd5e1;">|</span>
+                <a href="../guide" class="back-link" style="color: var(--text-sub);">教程目录</a>
+            </div>
+            <div class="lang-switch">
+                <span class="lang-btn active">中文</span>
+                <a href="https://webpseditor.com/tutorials/sharpen-blurry-photo" class="lang-btn" style="text-decoration:none;">English</a>
+            </div>
+        </div>
+
+        <div class="privacy-trust-bar" style="display: inline-flex; align-items: center; gap: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;">
+            <span>&#128274; 100% 浏览器本地运算 · 零云端上传 · 零隐私泄露风险</span>
+        </div>
+
+        <article>
+            <h1>锐化模糊照片（又不做出脆边）</h1>
+            <div class="meta-bar">
+                <span>难度：入门</span> &bull; <span>阅读：4 分钟</span> &bull; <span>更新：2026-11-13</span>
+            </div>
+
+            <div class="cta-box">
+                <div>
+                    <strong style="color:#1e40af; font-size:16px;">一个滑杆，三种翻车方式</strong>
+                    <div style="font-size:13px; color:#3b82f6; margin-top:3px;">【特效】→【锐化】，因子 1–10，放在流程的正确位置。</div>
+                </div>
+                <a href="../../editor.html?lang=zh" class="cta-btn" target="_blank">打开 Web PSEditor 锐化 &rarr;</a>
+            </div>
+
+            <p>锐化不会「增加细节」。它只是把已经存在的边缘对比拉高，让眼睛觉得边界更清楚。这个定义同时说明了它能做什么，也说明了为什么过度锐化比原本的模糊更难看：推到一定程度，每条边都会长出一圈画面里从来没有的亮暗描边。</p>
+            <p>这个工具只有一个控件：<strong>【特效】→【锐化】</strong>，<strong>因子</strong>从 1 到 10（步进 0.1，默认 3）。只有一个数，所以结果几乎完全取决于你把它放在流程的哪一步、以及在什么缩放下判断。</p>
+
+            <h2>三种模糊，只有一种能救</h2>
+            <table class="tool-table">
+                <tr><th>原因</th><th>长什么样</th><th>锐化有用吗</th></tr>
+                <tr><td>轻微失焦或镜头偏软</td><td>整幅均匀发虚</td><td>有点用。因子 2–4 能把「看起来的清晰度」补回来</td></tr>
+                <tr><td>缩小之后</td><td>细纹理被压平</td><td>有用。调整大小里自带锐化勾选就是干这个的</td></tr>
+                <tr><td>运动模糊、主体没对上焦</td><td>沿一个方向拖影，或一块清楚一块糊</td><td>没用。锐化加的是对比，造不出运动方向</td></tr>
+            </table>
+            <p>主体沿一个轴糊掉了，任何因子都救不回来——你只会得到一张拖影依旧、边缘却变硬的图，比一张老老实实承认模糊的图更糟。早点认出这一点，能省下二十分钟找滑杆。</p>
+
+            <h2>顺序比数值重要</h2>
+            <div class="step-card">
+                <div class="step-title">一、有噪点先降噪</div>
+                <p>高 ISO 照片先锐化，噪点会被放大成一坨一坨。先跑 <strong>【特效】→【降噪】</strong>，指数取低（10–20），再锐化。这两个效果是互相拆台的，谁先做，谁的结果留下来。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">二、再缩尺寸，勾上锐化</div>
+                <p>图必须变小的话，用 <strong>【图片】→【调整大小】</strong>，模式 Lanczos，勾 <strong>锐化</strong>。缩小一定会让画面变软，这一道在重建像素的同一刻补回来。缩完再单独锐化效果类似，但在调整大小里一次做完，能少叠一道。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-title">三、最后锐化，且按最终尺寸</div>
+                <p>锐化要在「这张图最终被看的尺寸」上做。3000 像素下调好的因子，到 1200 像素会显得没锐；在缩略图上调好的，放到原尺寸像砂纸。顺序是：先缩到最终尺寸，再锐化，再导出，之后不要再重采样。</p>
+            </div>
+
+            <h2>因子怎么取</h2>
+            <ul>
+                <li><strong>1–2：</strong> 几乎看不出来。适合本来够锐、只是缩放时掉了一点边缘的照片。</li>
+                <li><strong>2–4：</strong> 绝大多数照片的工作区间。因子 3 的感觉是「这文件本来就这样」，而不是「这图修过」。</li>
+                <li><strong>4–6：</strong> 屏幕、缩略图、社交裁切能明显看出更锐。高反差边缘开始出现描边——天空压屋檐、纸上的文字。</li>
+                <li><strong>7–10：</strong> 只用于抢救。细节发脆、皮肤纹理变砂砾，JPEG 压缩痕也会跟着被放大。</li>
+            </ul>
+            <p>判断要在 <strong>100% 缩放</strong> 下做——<strong>【视图】→【缩放】→【原始大小】</strong>。适应窗口里因子 8 看着还不错，是因为显示时像素已经被平均过了，而这个设置恰好就是毁掉打印的那一档。</p>
+
+            <h2>只锐化需要锐化的地方</h2>
+            <p>通常只有局部需要：人物眼睛、产品边缘、标签上的字。全局锐化会连背景一起拉，而描边最容易在背景上露出来。</p>
+            <div class="step-card">
+                <div class="step-title">复制图层、锐化副本、擦掉多余部分</div>
+                <p>复制图层（<strong>【图层】→【复制】</strong>），对副本加锐化，再用 <strong>橡皮擦</strong> 配大号软笔刷，把不需要效果的地方擦掉。擦开的地方露出下面没动过的图层。等于不用蒙版也能做出一张锐化遮罩。</p>
+            </div>
+
+            <h2>锐化做不到的事</h2>
+            <ul>
+                <li><strong>补回没对准的焦。</strong> 这里没有反卷积算法，拍虚的眼睛还是虚的。</li>
+                <li><strong>修运动模糊。</strong> 拖影是信息丢失，不是对比不足。</li>
+                <li><strong>让放大过的图看起来像原生的。</strong> 放大是凭空造像素，锐化这些造出来的像素，只会让插值痕迹更明显。</li>
+                <li><strong>修 JPEG 块状痕。</strong> 锐化会把 8×8 的方格放大。先降噪，或者接受一张偏软的图。</li>
+            </ul>
+
+            <h2>一条能照抄的流程</h2>
+            <p>降噪（10–20）→ 缩到最终尺寸并勾锐化 → 因子 2–4 锐化 → 100% 检查 → 导出。任何一步之后发现比原图更难看，就撤销停下。撤销不要钱，已经发出去的脆边文件要钱。</p>
+
+            <div class="tip-box">💡 <strong>先降噪再锐化，先缩尺寸再锐化，判断看 100%，因子 3 是常驻地，不是 8。</strong></div>
+
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>因子拉满还是很糊，为什么？</h3>
+                <p>锐化提高的是边缘对比，它不重建丢失的细节。如果模糊来自没对准焦或曝光期间的运动，信息根本不在文件里，任何因子都造不出来。拉满通常只会让情况更糟：给一个本来就在拖影的主体加一圈描边。</p>
+            </div>
+            <div class="faq-item">
+                <h3>应该先锐化还是先缩尺寸？</h3>
+                <p>先缩，更好的是在缩的时候一起做。用 Lanczos 模式加勾锐化定下最终尺寸，还觉得不够再用【特效】→【锐化】小因子补一次。先锐化再缩图，效果会被重采样平均掉，等于白做。</p>
+            </div>
+            <div class="faq-item">
+                <h3>高反差边缘的描边怎么避免？</h3>
+                <p>降低因子；或复制图层、只锐化副本，再把背景部分擦掉；图本身有噪点就先降噪。描边最容易长在极亮边挨着极暗边的地方——天空压屋檐、黑底白字——导出前在 100% 下专门看这几处。</p>
+            </div>
+
+            <div style="border-top:1px solid var(--border); margin-top:32px; padding-top:16px; font-size:13px; color:var(--text-sub);">
+                <strong style="color:#0f172a;">Web PSEditor 是独立项目。</strong> 本页每一步都对当前版本实测过；如果菜单或选项位置有变动，欢迎通过<a href="../../contact.html" style="color:var(--primary); text-decoration:none;">联系页面</a>告知，我们会更正。
+            </div>
+
+            <h2>相关教程推荐</h2>
+            <div class="related">
+                <a href="../tutorials/denoise-photo-noise">去掉高 ISO 噪点又不毁细节</a>
+                <a href="../tutorials/image-resize-and-compression">缩放、裁剪与压到指定 KB 大小</a>
+                <a href="../tutorials/photo-color-correction">照片调色与颜色校正</a>
+                <a href="../tutorials/resize-vs-canvas-size-vs-trim">调整大小、画布尺寸、裁剪：到底用哪个？</a>
+            </div>
+            <div class="practice-cta-card">
+                <div style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                        <span style="font-size: 18px;">&#127919;</span>
+                        <strong style="color: #1e3a8a; font-size: 17px; font-weight: 700;">动手实操练习</strong>
+                        <span style="background: #dbeafe; color: #1d4ed8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 12px; border: 1px solid #bfdbfe;">纯本地运算</span>
+                    </div>
+                    <p style="color: #2563eb; font-size: 14px; margin: 0; line-height: 1.6;">找一张偏软的照片，在 100% 缩放下用因子 3 锐化，再复制一层推到 8，对比描边的差别。</p>
+                </div>
+                <div>
+                    <a href="../../editor.html?lang=zh" class="practice-btn">
+                        <span>在 Web PSEditor 中一试</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</body>
+</html>
